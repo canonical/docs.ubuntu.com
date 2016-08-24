@@ -19,10 +19,10 @@ To see what other `make` commands are available, run `make help`.
 Licenses
 ---
 
-License for the content: [Creative Commons Attribution Share Alike version 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-License for the code: [Lesser GPL version 3](http://opensource.org/licenses/lgpl-3.0.html) by [Canonical Ltd](http://www.canonical.com/)
+The content of this project is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying code used to format and display that content is licensed under the [LGPLv3](http://opensource.org/licenses/lgpl-3.0.html) by [Canonical Ltd](http://www.canonical.com/).
 
 ---
 
-With ♥ from Canonical.
+@nottrobin is the champion for this project.
+
+With ♥ from [Canonical](http://www.canonical.com/).
