@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+env/
+*.pyc
+
+# Django
+media/
+db.sqlite3
+
+# Sass
+.sass-cache/
+*.css
+*.css.map
+
+# Node
+.npm/
+node_modules/
+npm-debug.log*
+
+# Runtime
+pids
+*.pid
+*.seed
+
+# Common
+*.log
+logs/
+
+# Windows
+Desktop.ini
+Thumbs.db
+
+# OSX
+._*
+*.DS_Store
+
+# Linux
+*~
+.compose-project-name
+static/css
+/.compose-project-name
+django-error.log
+npm-debug.log

@@ -1,0 +1,47 @@
+#! /usr/bin/env bash
+
+##
+# ubuntudesign/devrun initialisation script
+# ===
+#
+# A docker image for running ubuntudesign website in local development
+# with a standard tool-chain in a repeatable and reliable way.
+#
+# https://hub.docker.com/r/ubuntudesign/devrun
+# https://github.com/ubuntudesign/docker-devrun
+##
+
+# strict mode (http://redsymbol.net/articles/unofficial-bash-strict-mode/)
+set -euo pipefail
+
+##
+# Check docker is installed correctly
+##
+if ! command -v docker >/dev/null 2>&1; then
+    echo "
+    Error: Docker not installed
+    ==
+
+    Please install Docker before continuing:
+    https://www.docker.com/products/overview#install_the_platform
+    "
+fi
+if grep -q '^docker:' /etc/group && ! groups | grep -q '\bdocker\b'; then
+    echo "
+    Error: `whoami` not in docker group
+    ===
+
+    Please add this user to the docker group, e.g. with:
+    $$ newgrp docker
+    "
+fi
+
+##
+# Run ubuntudesign/devrun with docker
+##
+docker run $([ -f .env ] && echo "--env-file .env") \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --tty --interactive \
+  --volume "`pwd`":"`pwd`" \
+  --workdir "`pwd`" \
+  ubuntudesign/devrun:v1.2.0-candidate $@

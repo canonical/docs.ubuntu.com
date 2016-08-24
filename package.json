@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "node-sass": "3.8.0"
+  },
+  "scripts": {
+    "watch": "node-sass static/sass --output static/css; node-sass --watch --source-map true --recursive --output static/css static/sass"
+  }
+}
