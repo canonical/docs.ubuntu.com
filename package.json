@@ -4,6 +4,6 @@
     "docs-vanilla-theme": "0.1.1-candidate"
   },
   "scripts": {
-    "watch": "node-sass --include-path ${OVERRIDES} --include-path ${APP_MODULES} static/sass --output static/css; node-sass --watch --source-map true --recursive --output static/css static/sass"
+    "watch": "node-sass --include-path ${OVERRIDES} --include-path ${APP_MODULES} static/sass --output static/css; node-sass --include-path ${OVERRIDES} --include-path ${APP_MODULES} --watch --source-map true --recursive --output static/css static/sass"
   }
 }
