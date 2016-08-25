@@ -1,12 +1,2 @@
-body {
-    padding: 1em;
-    margin: 0 auto;
-    max-width: 50em;
-    background-color: white;
-    height: 100%;
-}
-
-html {
-    background-color: lightgrey;
-    height: 100%;
-}
+@import 'docs-vanilla-theme/scss/theme';
+@include docs-vanilla-theme;
