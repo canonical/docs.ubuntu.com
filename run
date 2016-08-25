@@ -36,6 +36,12 @@ if grep -q '^docker:' /etc/group && ! groups | grep -q '\bdocker\b'; then
     "
 fi
 
+# Is this interactive?
+case $- in
+  *i*) interactive=true;;
+  *) interactive=false;;
+esac
+
 ##
 # Run ubuntudesign/devrun with docker
 ##
