@@ -23,7 +23,7 @@ if ! command -v docker >/dev/null 2>&1; then
     ==
 
     Please install Docker before continuing:
-    https://www.docker.com/products/overview#install_the_platform
+    https://www.docker.com/products/docker
     "
 fi
 if grep -q '^docker:' /etc/group && ! groups | grep -q '\bdocker\b'; then
@@ -35,7 +35,6 @@ if grep -q '^docker:' /etc/group && ! groups | grep -q '\bdocker\b'; then
     $$ newgrp docker
     "
 fi
-
 
 # Is this interactive?
 interactive=false
@@ -49,5 +48,4 @@ docker run $([ -f .env ] && echo "--env-file .env") \
   $($interactive && echo "--tty --interactive") \
   --volume "`pwd`":"`pwd`" \
   --workdir "`pwd`" \
-  ubuntudesign/devrun:v1.2.0-rc3 $@
-
+  ubuntudesign/devrun:v1.2.0 $@
