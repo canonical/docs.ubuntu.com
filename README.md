@@ -14,7 +14,7 @@ To run the site locally:
 
 Now visit <http://127.0.0.1:8007>.
 
-To see what other `make` commands are available, run `make help`.
+To see what other `./run` commands are available, run `./run usage`.
 
 Licenses
 ---
