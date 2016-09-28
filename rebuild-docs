@@ -1,0 +1,1 @@
+documentation-builder --repository git@github.com:nottrobin/maas-docs.git --branch clean-docs --media-url /static/media --output-media-path static/media --template-path config/wrapper.jinja2 --output-path templates --no-link-extensions
