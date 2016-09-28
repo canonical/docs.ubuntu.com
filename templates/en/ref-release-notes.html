@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Release Notes | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Introduction
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Install & Configure
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-network2">
+                        Configure network
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="">
+                        Nodes
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Manage MAAS
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Troubleshoot
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="ref-release-notes">Release notes</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="contributing">Help improve these docs</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="2.0.0-release-notes">2.0.0 Release notes<a class="anchor" href="#2.0.0-release-notes"></a></h1>
+<h2 id="important-changes">Important changes<a class="anchor" href="#important-changes"></a></h2>
+<h3 id="maas-2.0-supported-on-ubuntu-16.04-lts-(xenial)">MAAS 2.0 supported on Ubuntu 16.04 LTS (Xenial)<a class="anchor" href="#maas-2.0-supported-on-ubuntu-16.04-lts-(xenial)"></a></h3>
+<p>MAAS version 2.0 is supported on Ubuntu 16.04 LTS. MAAS 2.0 and greater
+will NOT be supported on Ubuntu 14.04 LTS. The latest MAAS 1.9 point
+release will continue to be supported on Ubuntu 14.04 LTS (Trusty) until
+it reaches end-of-life.</p>
+<p>Upgrades are supported for users running Ubuntu 14.04 systems running
+MAAS 1.9 or earlier. Upon upgrading to Ubuntu 16.04, the MAAS database
+and configuration will be seamlessly migrated to the supported
+MAAS version.</p>
+<p>Please see the “Other Notable Changes” section below for more details
+regarding the reasons for this change.</p>
+<h3 id="terminology-changes">Terminology Changes<a class="anchor" href="#terminology-changes"></a></h3>
+<p>Cluster controllers have been renamed to rack controllers.</p>
+<p>Starting from MAAS 2.0, MAAS cluster controllers have been deprecated,
+along with the legacy <code>nodegroups</code> API. The new API endpoint is
+<code>rackcontrollers</code>, which provides feature parity with earlier versions
+of MAAS.</p>
+<p>For more information on rack controllers, refer to the
+Major new Features section bellow or refer to rack-configuration.</p>
+<h3 id="api-1.0-has-been-deprecated,-introducing-api-2.0">API 1.0 has been deprecated, introducing API 2.0<a class="anchor" href="#api-1.0-has-been-deprecated,-introducing-api-2.0"></a></h3>
+<p>Starting from MAAS 2.0, the MAAS REST API version 1.0 has been
+deprecated. MAAS 2.0 drops support for the legacy 1.0 API, in favor of
+API version 2.0. With the introduction of the new API version, various
+endpoints have now been deprecated, and new end-points have
+been introduced. API users will need to update their client tools to
+reflect the changes.</p>
+<p>For more information on API 2.0, refer
+to API documentation &lt;region-controller-api&gt;.</p>
+<h3 id="static-ip-ranges-have-been-deprecated">Static IP ranges have been deprecated<a class="anchor" href="#static-ip-ranges-have-been-deprecated"></a></h3>
+<p>Starting from MAAS 2.0, static IP ranges (previously found on the
+cluster interface page) have been deprecated. MAAS now assumes total
+control of a subnet. MAAS will automatically assign IP addresses to
+deployed machines, as long as those IP addresses are not within a
+dynamic or a reserved IP range. Users are now only required to specify
+one or more dynamic ranges per subnet. Dynamic ranges are used for
+auto-enlistment, commissioning, and any other systems configured
+for DHCP. IP addresses in-use for purposes such as devices, default
+gateways, DNS servers, rack and region controllers, and BMCs are
+automatically avoided when assigning IP addresses. Reserved IP ranges
+may be added if MAAS should avoid certain ranges of IP addresses in
+the subnet.</p>
+<h3 id="maas-region-controller-min-has-been-renamed-to-maas-region-api">maas-region-controller-min has been renamed to maas-region-api<a class="anchor" href="#maas-region-controller-min-has-been-renamed-to-maas-region-api"></a></h3>
+<p>The <code>maas-region-controller-min</code> package has been renamed to
+<code>maas-region-api</code>. This package provides API services for MAAS
+(<code>maas-regiond</code>) and can be used to scale out the API front-end of a
+MAAS region.</p>
+<h3 id="maas-user-creation-been-moved-to-'maas'-command">MAAS user creation been moved to 'maas' command<a class="anchor" href="#maas-user-creation-been-moved-to-'maas'-command"></a></h3>
+<p>Starting from MAAS 2.0, the <code>maas</code> command now provides the ability to
+create admin users. The <code>maas-region createadmin</code> command has
+been deprecated. New administrators should now be created with
+<code>maas createadmin</code>.</p>
+<h3 id="maas-provision-command-has-been-replaced">maas-provision command has been replaced<a class="anchor" href="#maas-provision-command-has-been-replaced"></a></h3>
+<p>The MAAS rack controller command-line interface (<code>maas-provision</code>) has
+been replaced by the <code>maas-rack</code> command.</p>
+<h3 id="maas-region-admin-command-has-been-replaced-with-maas-region">maas-region-admin command has been replaced with maas-region<a class="anchor" href="#maas-region-admin-command-has-been-replaced-with-maas-region"></a></h3>
+<p>The MAAS region controller command-line interface (<code>maas-region-admin</code>)
+has been replaced by the <code>maas-region</code> command. Note that this command
+provides an interface to interact directly with Django, which should
+only be used for debugging purposes.</p>
+<h3 id="debian-installer-is-no-longer-installed-or-supported">Debian Installer is no longer installed or supported<a class="anchor" href="#debian-installer-is-no-longer-installed-or-supported"></a></h3>
+<p>Because support for the Debian Installer (DI) has been dropped (as of
+MAAS 1.9), MAAS no longer downloads DI-related files from simplestreams.
+Upon upgrading to MAAS 2.0, DI-related files will be removed from the
+MAAS region (and all rack controllers).</p>
+<h2 id="major-new-features">Major new features<a class="anchor" href="#major-new-features"></a></h2>
+<h3 id="maas-rack-controllers-and-high-availability">MAAS Rack Controllers and High Availability<a class="anchor" href="#maas-rack-controllers-and-high-availability"></a></h3>
+<p>Starting from MAAS 2.0, MAAS <strong>cluster controllers</strong> have been renamed
+to <strong>rack controllers</strong>.</p>
+<ul>
+<li>The <code>nodegroups</code> and <code>nodegroups/(group)/interfaces</code> API endpoints
+    have been deprecated. In MAAS 2.0, the <code>rackcontrollers</code> interface
+    partially replaces this functionality. For defining dynamic and
+    reserved ranges, or specifying default gateways, use the
+    <code>subnets</code> endpoint. For enabling or disabling DHCP, use the
+    <code>fabrics/(fabric)/vlans</code> endpoint.</li>
+<li>The <strong>Clusters</strong> tab is no longer available in the Web UI.
+    Controllers are now found under the <strong>Nodes</strong> tab, where each region
+    and/or rack controller can be found. Other cluster interface
+    properties have been moved to the Subnet and VLAN details pages
+    under the <strong>Networks</strong> tab.</li>
+<li>
+<p>Machines no longer belong to a specific controller. In earlier
+    versions of MAAS, machines would directly assigned to a
+    cluster controller. The cluster controller that the machine belonged
+    to would not only perform DHCP for that machine, but also all the
+    PXE booting and power management.</p>
+<p>In order to support high availability for rack controllers,
+(starting from MAAS 2.0) machines no longer belong to a specific
+rack controller. The best controller to manage a machine is now
+determined at runtime.</p>
+</li>
+<li>
+<p>DHCP is now configured per-VLAN. In earlier versions of MAAS, DHCP
+    was directly linked and configured per cluster interface. As of MAAS
+    2.0, DHCP is now configured and managed per-VLAN, which allows any
+    rack controller to potentially provide DHCP in a
+    high-availability environment.</p>
+</li>
+<li>Rack controllers have been enabled for high availability. Starting
+    from MAAS 2.0, rack controllers in the same VLAN become candidates
+    to manage DHCP, PXE/TFTP, and power control for machines on
+    the VLAN. MAAS now supports the concept of a <strong>primary</strong> and a
+    <strong>secondary</strong> rack controller. If a secondary controller determines
+    that the primary controller is unavailable, it will assume control
+    of those services.</li>
+<li>Added <code>maas-rack support-dump</code> command. For increased support
+    observability, users can now dump the contents of several internal
+    MAAS data structures by executing <code>sudo maas-rack support-dump</code>.
+    This command will dump networking diagnostics, rack configuration,
+    and image information. Information can be restricted to a particular
+    category by using the <code>--networking</code>, <code>--config</code>, or
+    <code>--images</code> options.</li>
+<li>Rack controllers can now be found under the <strong>Nodes</strong> tab in the Web
+    UI. MAAS 2.0 Adds a new <strong>Controllers</strong> section under thee
+    <strong>Nodes</strong> tab. This section will now list all rack and
+    region controllers. Under a rack controller, the user will be able
+    to see service tracking, connected VLANs, rack interfaces and other
+    relevant information.</li>
+</ul>
+<h3 id="region-controller-redundancy-(high-availability)">Region Controller Redundancy (High Availability)<a class="anchor" href="#region-controller-redundancy-(high-availability)"></a></h3>
+<p>Starting from MAAS 2.0, MAAS provides the ability to scale out (provide
+redundancy for) the MAAS region controller API, HTTP server, and DNS.
+This will allow administrators to set up multiple MAAS region
+controllers (<code>maas-region-api</code>) against a common database, providing
+redundancy of services. With further manual configuration, users will be
+able to setup the MAAS region controller in high availability mode.</p>
+<h3 id="new-networks-web-ui">New Networks Web UI<a class="anchor" href="#new-networks-web-ui"></a></h3>
+<p>MAAS 2.0 introduces a few new Web UI features that were not available in
+previous versions of MAAS.</p>
+<ul>
+<li>Added fabric and space details pages.</li>
+<li>Added the ability to add and remove fabrics, spaces, subnets and
+    VLANs. This can be done using the actions menu on the
+    <strong>Networks</strong> tab.
+    The ability to delete fabrics, spaces, subnets and VLANs is also
+    available from the details page for each respective object.</li>
+</ul>
+<h3 id="dns-management">DNS Management<a class="anchor" href="#dns-management"></a></h3>
+<p>MAAS 2.0 extends DNS management by adding the following features:</p>
+<ul>
+<li>Ability to create multiple DNS domains.</li>
+<li>Ability to add multiple records (<code>CNAME</code>, <code>TXT</code>, <code>MX</code>, <code>SRV</code>)
+    per domain. (API only)</li>
+<li>Ability to select the domain for machines and devices.</li>
+<li>Ability to assign (additional) names to IP addresses. (API only)</li>
+<li>For deployed machines, <code>A</code> records continue to be created for the IP
+    of the PXE interface.</li>
+<li>Additional PTR records are now created for all non-PXE interfaces in
+    the form: <code>&lt;interface&gt;.&lt;machine fully-qualified-domain-name&gt;</code></li>
+<li>Reverse DNS is now generated for only the subnet specified, rather
+    than the parent /24 or /16. By default,
+    <a href="https://tools.ietf.org/html/rfc2137">RFC2137</a> glue is provided for
+    networks smaller than /24. This can be disabled or changed on a
+    per-subnet basis via the API.</li>
+</ul>
+<h3 id="ip-ranges">IP Ranges<a class="anchor" href="#ip-ranges"></a></h3>
+<p>Previous versions of MAAS used the concepts of a <strong>dynamic range</strong> and
+<strong>static range</strong>, which were properties of each cluster interface. This
+has been redesigned for MAAS 2.0 as follows:</p>
+<ul>
+<li>Dynamic ranges have been migrated from earlier MAAS releases as-is.</li>
+<li>
+<p>Because static ranges have been removed from MAAS, each static range
+    has been migrated to one or more reserved ranges, which represent
+    the opposite of the previous static range. (MAAS now assumes it has
+    full control of each managed subnet, and is free to assign IP
+    addresses as it sees fit, unless told otherwise.)</p>
+<p>For example, if in an earlier MAAS release a cluster interface was
+configured on 192.168.0.1/24, with a dynamic range of 192.168.0.2
+through 192.168.0.99, and a static range of 192.168.0.100 through
+192.168.0.199, this will be migrated to:</p>
+<pre><code>IP range #1 (dynamic): 192.168.0.2 - 192.168.0.99
+IP range #2 (reserved): 192.168.0.200 - 192.168.0.254
+</code></pre>
+<p>Since 192.168.0.100 - 192.168.0.199 (the previous static range) is
+not accounted for, MAAS assumes it is free to allocate static IP
+addresses from that range.</p>
+</li>
+<li>
+<p>Scalability is now possible by means of adding a second dynamic IP
+    range to a VLAN. (To deal with IP address exhaustion, MAAS supports
+    multiple dynamic ranges on one or more subnets within a
+    DHCP-enabled VLAN.)</p>
+</li>
+<li>Reserved ranges can now be allocated to a particular MAAS user.</li>
+<li>A comment field has been added, so that users can indicate why a
+    particular range of IP addresses is reserved.</li>
+<li>IP ranges can be configured in the Web UI via the Subnet details
+    page, or using the <code>subnets</code> REST API endpoint.</li>
+</ul>
+<h3 id="api-2.0-and-maas-cli-updates">API 2.0 and MAAS CLI Updates<a class="anchor" href="#api-2.0-and-maas-cli-updates"></a></h3>
+<p>Version 1.0 of the MAAS REST API has been removed and replaced with the
+2.0 version of the REST API. As such, new endpoints and commands have
+been introduced:</p>
+<ul>
+<li>
+<p>RackControllers - This endpoint/command has the following operations
+    in addition to the base operations provided by nodes:
+    <code>import-boot-images</code> - Import the boot images on all rack controllers
+    <code>describe-power-types</code> - Query all of the rack controllers for
+    power information</p>
+</li>
+<li>
+<p>RackController - This endpoint/command has the following operations
+    in addition to the base operations provided by nodes</p>
+<ul>
+<li><code>import-boot-images</code> - Import boot images on the given rack
+    controller</li>
+<li><code>refresh</code> - refresh the hardware information for the given rack
+    controller</li>
+</ul>
+</li>
+<li>Machines - This endpoint/command replaces many of the operations
+    previously found in the nodes endpoint/command. The machines
+    endpoint/command has the following operations in addition to the
+    base operations provided by nodes.<ul>
+<li><code>power-parameters</code> - Retrieve power parameters for multiple
+    machines</li>
+<li><code>list-allocated</code> - Fetch machines that were allocated to the
+    user/oauth token.</li>
+<li><code>allocate</code> - Allocate an available machine for deployment.</li>
+<li><code>accept</code> - Accept declared machine into MAAS.</li>
+<li><code>accept-all</code> - Accept all declared machines into MAAS.</li>
+<li><code>create</code> - Create a new machine.</li>
+<li><code>add-chassis</code> - Add special hardware types.</li>
+<li><code>release</code> - Release multiple machines.</li>
+</ul>
+</li>
+<li>Machine - This endpoint/command replaces many of the operations
+    previously found in the node endpoint/command. The machine
+    endpoint/command has the following operations in addition to the
+    base operations provided by node.<ul>
+<li><code>power-parameters</code> - Obtain power parameters for the
+    given machine.</li>
+<li><code>deploy</code> - Deploy an operating system to a given machine.</li>
+<li><code>abort</code> - Abort the machines current operation.</li>
+<li><code>get-curtin-config</code> - Return the rendered curtin configuration
+    for the machine.</li>
+<li><code>power-off</code> - Power off the given machine.</li>
+<li><code>set-storage-layout</code> - Change the storage layout of the
+    given machine.</li>
+<li><code>power-on</code> - Turn on the given machine.</li>
+<li><code>release</code> - Release a given machine.</li>
+<li><code>clear-default-gateways</code> - Clear any set default gateways on
+    the machine.</li>
+<li><code>update</code> - Change machine configuration.</li>
+<li><code>query-power-state</code> - Query the power state of a machine.</li>
+<li><code>commission</code> - Begin commissioning process for a machine</li>
+</ul>
+</li>
+</ul>
+<h4 id="other-endpoints/commands-have-changed:">Other endpoints/commands have changed:<a class="anchor" href="#other-endpoints/commands-have-changed:"></a></h4>
+<ul>
+<li>All list commands/operations have been converted to read</li>
+<li>All new and add commands/operations have been converted to create</li>
+<li>Nodes - The nodes endpoint/command is now a base endpoint/command
+    for all other node types(devices, machines, and rack-controllers).
+    As such most operations have been moved to the machines
+    endpoint/command.The following operations remain as they can be used
+    on all node types.<ul>
+<li><code>is-registered</code> - Returns whether or not the given MAC address
+    is registered with this MAAS.</li>
+<li><code>set-zone</code> - Assign multiple nodes to a physical zone at once.</li>
+<li><code>read</code> - List nodes visible to the user, optionally filtered
+    by criteria.</li>
+</ul>
+</li>
+<li>Node - The node endpoint/command is now a base endpoint/command for
+    all other node types(devices, machines, and rack-controllers). As
+    such most operations have been moved to the machine
+    endpoint/command. The following operations remain as they can be
+    used on all node types.<ul>
+<li><code>read</code> - Read information about a specific node</li>
+<li><code>details</code> - Obtain various system details.</li>
+<li><code>delete</code> - Delete a specific node.</li>
+</ul>
+</li>
+<li>With the migration of nodes to machines the following items
+    previously outputted with the list command have been changed or
+    removed from the machines read command:<ul>
+<li>``status - Will now show all status types</li>
+<li><code>substatus</code>, <code>substatus_action</code>, <code>substatus_message</code>,
+    <code>substatus_name</code> - Replaced by <code>status</code>, <code>status_action</code>,
+    <code>status_message</code>, <code>status_name</code>.</li>
+<li>``boot_type - Removed, MAAS 2.0 only supports fastpath.</li>
+<li><code>pxe_mac</code> - Replaced by <code>boot_interface</code>.</li>
+<li><code>hostname</code> - Now only displays the hostname (without the domain)
+    of the machine. <code>fqdn</code> and <code>domain</code> attributes can now be
+    used instead.</li>
+</ul>
+</li>
+<li>And other endpoints/commands have been deprecated:<ul>
+<li>NodeGroups - Replacement operations are found in the
+    RackControllers, Machines, and BootResources endpoints/commands.</li>
+<li>NodeGroupInterfaces - replacement operations are found in the
+    RackController, IPRanges, Subnets, and VLANS endpoints/commands.</li>
+</ul>
+</li>
+</ul>
+<h3 id="extended-storage-support">Extended Storage Support<a class="anchor" href="#extended-storage-support"></a></h3>
+<p>MAAS 2.0 Storage Model has been extended to support:</p>
+<ul>
+<li>XFS as a filesystem.</li>
+<li>Mount options.</li>
+<li>Swap partitions. (MAAS 1.9 only supported the creation of a swap
+    file in the filesystem.)</li>
+<li><code>tmps</code>/<code>ramfs</code> support.</li>
+</ul>
+<p>All of these options are currently available over the CLI.</p>
+<h3 id="dhcp-snippets">DHCP Snippets<a class="anchor" href="#dhcp-snippets"></a></h3>
+<p>MAAS 2.0 introduces the ability to define DHCP snippets. This feature
+allows administrators to manage DHCP directly from MAAS, removing the
+need to manually modify template files. The following types of DHCP
+snippets can be defined:</p>
+<blockquote>
+<ul>
+<li><strong>Host snippets</strong> - used for configuration for a particular node
+    in MAAS.</li>
+<li><strong>Subnet snippets</strong> - used for configuration for a specific subnet
+    in MAAS.</li>
+<li><strong>Global snippets</strong> - used for configuration that will affect DHCP
+    (isc-dhcp) as a whole.</li>
+</ul>
+</blockquote>
+<p>For more information, see DHCP Snippets &lt;dhcpsnippets&gt;.</p>
+<h2 id="minor-new-features">Minor new features<a class="anchor" href="#minor-new-features"></a></h2>
+<h3 id="maas-proxy-is-now-managed">MAAS proxy is now managed<a class="anchor" href="#maas-proxy-is-now-managed"></a></h3>
+<p>Starting from MAAS 2.0, MAAS now manages the configuration for
+<code>maas-proxy</code>. This allows MAAS to lock down the proxy so that it only
+allows traffic from networks MAAS knows about. For more information,
+see MAAS Proxy &lt;proxy&gt;.</p>
+<h3 id="rsyslog-during-enlistment-and-commissioning">rsyslog during enlistment and commissioning<a class="anchor" href="#rsyslog-during-enlistment-and-commissioning"></a></h3>
+<p>MAAS 2.0 now enables <code>rsyslog</code> for the enlistment and commissioning
+environment (when using Xenial as the commissioning image). This allows
+users to see <code>cloud-init</code>'s syslog information in
+<code>/var/log/maas/rsyslog/</code>.</p>
+<h3 id="ability-to-change-a-machine’s-domain-name-from-the-ui">Ability to change a machine’s domain name from the UI<a class="anchor" href="#ability-to-change-a-machine’s-domain-name-from-the-ui"></a></h3>
+<p>MAAS 2.0 introduces the ability to change a machine’s DNS domain via the
+Web UI. It was previously supported on the API only.</p>
+<h3 id="networks-listing-page">Networks listing page<a class="anchor" href="#networks-listing-page"></a></h3>
+<p>In the <strong>Networks</strong> tab, a new networks overview has been introduced,
+which provides a high-level view of the MAAS networking mode. The
+network model can be grouped by either fabrics or spaces.</p>
+<h3 id="service-tracking">Service Tracking<a class="anchor" href="#service-tracking"></a></h3>
+<p>MAAS now tracks the status of the services required for its operation,
+such as <code>bind</code>, <code>maas-dhcpd</code>, <code>maas-dhcpd6</code>, <code>tgt</code>, and <code>maas-proxy</code>.</p>
+<h2 id="other-notable-changes">Other notable changes<a class="anchor" href="#other-notable-changes"></a></h2>
+<h3 id="maas-2.0-requires-python-3.5">MAAS 2.0 requires Python 3.5<a class="anchor" href="#maas-2.0-requires-python-3.5"></a></h3>
+<p>Starting with MAAS 2.0, MAAS has now been ported to Python 3.5 (the
+default version of Python in Ubuntu 16.04 "Xenial").</p>
+<h3 id="maas-2.0-now-fully-supports-native-django-1.8-migration-system">MAAS 2.0 now fully supports native Django 1.8 migration system<a class="anchor" href="#maas-2.0-now-fully-supports-native-django-1.8-migration-system"></a></h3>
+<p>MAAS is now based on Django 1.8. Django 1.8 has dropped support for the
+South migration system in favor of the native Django migration system,
+which breaks backwards compatibility with previous versions of Django.</p>
+<p>MAAS continues to support a full upgrade path. MAAS versions 1.5, 1.7,
+1.8, and 1.9 have been tested and confirmed to upgrade seamlessly to
+MAAS 2.0.</p>
+<h3 id="instant-dhcp-lease-notifications">Instant DHCP lease notifications<a class="anchor" href="#instant-dhcp-lease-notifications"></a></h3>
+<p>MAAS no longer scans the leases file every 5 minutes. <code>isc-dhcp-server</code>
+now directly notifies MAAS if a lease is committed, released,
+or expires.</p>
+<h3 id="host-entries-in-dhcp">Host entries in DHCP<a class="anchor" href="#host-entries-in-dhcp"></a></h3>
+<p>Host entries are now rendered in the DHCP configuration instead of
+placed in the leases file. This removes any state that previously
+existed in the DHCP lease database on the cluster controller.</p>
+<p>Starting with MAAS 2.0, if the dhcpd.leases file is lost (such as during
+a failure scenario in a high availability environment), MAAS will be
+able to reconstruct it.</p>
+<h3 id="power-control-is-no-longer-specific-to-a-rack-controller">Power control is no longer specific to a rack controller<a class="anchor" href="#power-control-is-no-longer-specific-to-a-rack-controller"></a></h3>
+<p>MAAS selects one of the available rack controllers to power control or
+query a BMC. The same rack controller that powers the BMC does not need
+to be the rack controller that the machine PXE boots from.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      var links = document.querySelectorAll('a');
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+      }
+    </script>
+  </body>
+</html>

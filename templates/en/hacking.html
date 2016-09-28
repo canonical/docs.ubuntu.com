@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title> | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Introduction
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Install & Configure
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-network2">
+                        Configure network
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="">
+                        Nodes
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Manage MAAS
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Troubleshoot
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="ref-release-notes">Release notes</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="contributing">Help improve these docs</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <p>You can grab MAAS's code manually from Launchpad but <a href="http://bazaar.canonical.com/">Bazaar</a> makes it easy to fetch the last version of the code. First of all, install Bazaar:</p>
+<pre><code>$ sudo apt-get install bzr
+</code></pre>
+<p>Then go into the directory where you want the code to reside and run:</p>
+<pre><code>$ bzr branch lp:maas maas &amp;&amp; cd maas
+</code></pre>
+<p>MAAS depends on Postgres 9.1, Apache 2, daemontools, pyinotify, and many other packages. To install everything that's needed for running and developing MAAS, run:</p>
+<pre><code>$ make install-dependencies
+</code></pre>
+<p>Careful: this will <code>apt-get install</code> many packages on your system, via <code>sudo</code>. It may prompt you for your password.</p>
+<p>This will install <code>bind9</code>. As a result you will have an extra daemon running. If you are a developer and don't intend to run BIND locally, you can disable the daemon by inserting <code>exit 1</code> at the top of <code>/etc/default/bind9</code>. The package still needs to be installed for tests though.</p>
+<p>You may also need to install <code>python-django-piston</code>, but installing it seems to cause import errors for <code>oauth</code> when running the test suite.</p>
+<p>All other development dependencies are pulled automatically from <a href="http://pypi.python.org/">PyPI</a> when <code>buildout</code> runs. See First time using buildout?_ and Running tests_.</p>
+<h2 id="first-time-using-buildout?">First time using buildout?<a class="anchor" href="#first-time-using-buildout?"></a></h2>
+<p><a href="http://www.buildout.org/">Buildout</a> is used to develop MAAS. Buildout, if configured so, can cache downloaded files and built eggs. If you've not already done something similar, the following snippet will massively improve build times:</p>
+<pre><code>[buildout]
+download-cache = /home/&lt;your-user-name&gt;/.buildout/cache
+eggs-directory = /home/&lt;your-user-name&gt;/.buildout/eggs
+</code></pre>
+<p>Put this in <code>~/.buildout/default.cfg</code> and create the <code>cache</code> directory:</p>
+<pre><code>$ mkdir /home/&lt;your-user-name&gt;/.buildout/cache
+</code></pre>
+<p>The <code>eggs</code> directory will be created automatically.</p>
+<h2 id="running-tests">Running tests<a class="anchor" href="#running-tests"></a></h2>
+<p>To run the whole suite:</p>
+<pre><code>$ make test
+</code></pre>
+<p>To run tests at a lower level of granularity:</p>
+<pre><code>$ ./bin/test.region src/maasserver/tests/test_api.py
+$ ./bin/test.region src/maasserver/tests/test_api.py:AnonymousEnlistmentAPITest
+</code></pre>
+<p>The test runner is <a href="http://readthedocs.org/docs/nose/en/latest/">nose</a>, so you can pass in options like <code>--with-coverage</code> and <code>--nocapture</code> (short option: <code>-s</code>). The latter is essential when using <code>pdb</code> so that stdout is not adulterated.</p>
+<blockquote>
+<p><strong>note</strong></p>
+<p>When running <code>make test</code> through ssh from a machine with locales that are not set up on the machine that runs the tests, some tests will fail with a <code>MismatchError</code> and an "unsupported locale setting" message. Running <code>locale-gen</code> for the missing locales or changing your locales on your workstation to ones present on the server will solve the issue.</p>
+</blockquote>
+<h3 id="running-javascript-tests">Running JavaScript tests<a class="anchor" href="#running-javascript-tests"></a></h3>
+<p>The JavaScript tests are run using <a href="http://seleniumhq.org/">Selenium</a>. Firefox is the default browser but any browser supported by Selenium can be used to run the tests. Note that you might need to download the appropriate driver and make it available in the path. You can then choose which browsers to use by setting the environment variable <code>MAAS_TEST_BROWSERS</code> to a comma-separated list of the names of the browsers to use. For instance, to run the tests with Firefox and Chrome:</p>
+<pre><code>$ export MAAS_TEST_BROWSERS="Firefox, Chrome"
+</code></pre>
+<h2 id="development-maas-server-setup">Development MAAS server setup<a class="anchor" href="#development-maas-server-setup"></a></h2>
+<p>Access to the database is configured in <code>src/maas/development.py</code>.</p>
+<p>The <code>Makefile</code> or the test suite sets up a development database cluster inside your branch. It lives in the <code>db</code> directory, which gets created on demand. You'll want to shut it down before deleting a branch; see below.</p>
+<p>First, set up the project. This fetches all the required dependencies and sets up some useful commands in <code>bin/</code>:</p>
+<pre><code>$ make
+</code></pre>
+<p>Create the database cluster and initialise the development database:</p>
+<pre><code>$ make syncdb
+</code></pre>
+<p>Optionally, populate your database with the sample data:</p>
+<pre><code>$ make sampledata
+</code></pre>
+<p>By default, the snippet <code>maas_proxy</code> includes a definition for an http proxy running on port 8000 on the same host as the MAAS server. This means you can <em>either</em> install <code>squid-deb-proxy</code>:</p>
+<pre><code>$ sudo apt-get install squid-deb-proxy
+</code></pre>
+<p><em>or</em> you can edit <code>contrib/snippets_v2/generic</code> to remove the proxy definition.</p>
+<p>Set the iSCSI config to include the MAAS configs:</p>
+<pre><code>$ sudo tee -a /etc/tgt/targets.conf &lt; contrib/tgt.conf
+</code></pre>
+<p>The http_proxy variable is only needed if you're downloading through a proxy; "sudo" wouldn't pass it on to the script without the assignment. Or if you don't have it set but do want to download through a proxy, pass your proxy's URL: "http_proxy=http://proxy.example.com/"</p>
+<p>Run the development webserver and watch all the logs go by:</p>
+<pre><code>$ make run
+</code></pre>
+<p>Point your browser to <a href="http://localhost:5240/MAAS/">http://localhost:5240/MAAS/</a></p>
+<p>If you've populated your instance with the sample data, you can login as a simple user using the test account (username: 'test', password: 'test') or the admin account (username: 'admin', password: 'test').</p>
+<p>At this point you may also want to <a href="Downloading%20PXE%20boot%20resources_">download PXE boot resources</a>.</p>
+<p>To shut down the database cluster and clean up all other generated files in your branch:</p>
+<pre><code>$ make distclean
+</code></pre>
+<h3 id="downloading-pxe-boot-resources">Downloading PXE boot resources<a class="anchor" href="#downloading-pxe-boot-resources"></a></h3>
+<p>To use PXE booting, each cluster controller needs to download several files relating to PXE booting. This process is automated, but it does not start by default.</p>
+<p>First create a superuser and start all MAAS services:</p>
+<pre><code>$ bin/maas-region-admin createadmin
+$ make run
+</code></pre>
+<p>Substitute your own email. The command will prompt for a choice of password.</p>
+<p>Next, get the superuser's API key on the <a href="http://localhost:5240/MAAS/account/prefs/">account preferences</a> page in the web UI, and use it to log into MAAS at the command-line:</p>
+<pre><code>$ bin/maas login dev http://localhost:5240/MAAS/
+</code></pre>
+<p>Start downloading PXE boot resources:</p>
+<pre><code>$  bin/maas dev node-groups import-boot-images
+</code></pre>
+<p>This sends jobs to each cluster controller, asking each to download the boot resources they require. This may download dozens or hundreds of megabytes, so it may take a while. To save bandwidth, set an HTTP proxy beforehand:</p>
+<pre><code>$ bin/maas dev maas set-config name=http_proxy value=http://...
+</code></pre>
+<h3 id="running-the-built-in-tftp-server">Running the built-in TFTP server<a class="anchor" href="#running-the-built-in-tftp-server"></a></h3>
+<p>You will need to run the built-in TFTP server on the real TFTP port (69) if you want to boot some real hardware. By default, it's set to start up on port 5244 for testing purposes. Make these changes:</p>
+<pre><code>* Edit ``etc/maas/pserv.yaml`` to change the tftp/port setting to 69
+* Install the ``authbind``package:
+
+  $ sudo apt-get install authbind
+
+* Create a file ``/etc/authbind/byport/69`` that is *executable* by the
+  user running MAAS.
+
+  $ sudo touch /etc/authbind/byport/69
+  $ sudo chmod a+x /etc/authbind/byport/69
+</code></pre>
+<p>Now when starting up the MAAS development webserver, "make run" and "make start" will detect authbind's presence and use it automatically.</p>
+<h3 id="running-the-bind-daemon-for-real">Running the BIND daemon for real<a class="anchor" href="#running-the-bind-daemon-for-real"></a></h3>
+<p>There's a BIND daemon that is started up as part of the development service but it runs on port 5246 by default. If you want to make it run as a real DNS server on the box then edit <code>services/dns/run</code> and change the port declaration there so it says:</p>
+<pre><code>port=53
+</code></pre>
+<p>Then as for TFTP above, create an authbind authorisation:</p>
+<pre><code>$ sudo touch /etc/authbind/byport/53
+$ sudo chmod a+x /etc/authbind/byport/53
+</code></pre>
+<p>and run as normal.</p>
+<h3 id="running-the-cluster-worker">Running the cluster worker<a class="anchor" href="#running-the-cluster-worker"></a></h3>
+<p>The cluster also needs authbind as it needs to bind a socket on UDP port 68 for DHCP probing:</p>
+<pre><code>$ sudo touch /etc/authbind/byport/68
+$ sudo chmod a+x /etc/authbind/byport/68
+</code></pre>
+<p>If you omit this, nothing else will break, but you will get an error in the cluster log because it can't bind to the port.</p>
+<h3 id="configuring-dhcp">Configuring DHCP<a class="anchor" href="#configuring-dhcp"></a></h3>
+<p>MAAS requires a properly configured DHCP server so it can boot machines using PXE. MAAS can work with its own instance of the ISC DHCP server, if you install the maas-dhcp package:</p>
+<pre><code>$ sudo apt-get install maas-dhcp
+</code></pre>
+<p>If you choose to run your own ISC DHCP server, there is a bit more configuration to do. First, run this tool to generate a configuration that will work with MAAS:</p>
+<pre><code>$ maas-provision generate-dhcp-config [options]
+</code></pre>
+<p>Run <code>maas-provision generate-dhcp-config -h</code> to see the options. You will need to provide various IP details such as the range of IP addresses to assign to clients. You can use the generated output to configure your system's ISC DHCP server, by inserting the configuration in the <code>/etc/dhcp/dhcpd.conf</code> file.</p>
+<p>Also, edit /etc/default/isc-dhcp-server to set the INTERFACES variable to just the network interfaces that should be serviced by this DHCP server.</p>
+<p>Now restart dhcpd:</p>
+<pre><code>$ sudo service isc-dhcp-server restart
+</code></pre>
+<p>None of this work is needed if you let MAAS run its own DHCP server by installing <code>maas-dhcp</code>.</p>
+<h2 id="development-services">Development services<a class="anchor" href="#development-services"></a></h2>
+<p>The development environment uses <em>daemontools</em> to manage the various services that are required. These are all defined in subdirectories in <code>services/</code>.</p>
+<p>There are familiar service-like commands:</p>
+<pre><code>$ make start
+$ make status
+$ make restart
+$ make stop
+</code></pre>
+<p>The latter is a dependency of <code>distclean</code> so just running <code>make distclean</code> when you've finished with your branch is enough to stop everything.</p>
+<p>Individual services can be manipulated too:</p>
+<pre><code>$ make services/clusterd/@start
+</code></pre>
+<p>The <code>@&lt;action&gt;</code> pattern works for any of the services.</p>
+<p>There's an additional special action, <code>run</code>:</p>
+<pre><code>$ make run
+</code></pre>
+<p>This starts all services up and tails their log files. When you're done, kill <code>tail</code> (e.g. Ctrl-c), and all the services will be stopped.</p>
+<p>However, when used with individual services:</p>
+<pre><code>$ make services/regiond/@run
+</code></pre>
+<p>it does something even cooler. First it shuts down the service, then it restarts it in the foreground so you can see the logs in the console. More importantly, it allows you to use <code>pdb</code>, for example.</p>
+<p>A note of caution: some of the services have slightly different behaviour when run in the foreground:</p>
+<ul>
+<li>regiond (the <em>webapp</em> service) will be run with its auto-reloading enabled.</li>
+</ul>
+<p>There's a convenience target for hacking regiond that starts everything up, but with regiond in the foreground:</p>
+<pre><code>$ make run+regiond
+</code></pre>
+<p>Apparently Django needs a lot of debugging ;)</p>
+<h2 id="adding-new-dependencies">Adding new dependencies<a class="anchor" href="#adding-new-dependencies"></a></h2>
+<p>Since MAAS is distributed mainly as an Ubuntu package, all runtime dependencies should be packaged, and we should develop with the packaged version if possible. All dependencies, from a package or not, need to be added to <code>setup.py</code> and <code>buildout.cfg</code>, and the version specified in <code>versions.cfg</code> (<code>allowed-picked-version</code> is disabled, hence <code>buildout</code> must be given precise version information).</p>
+<p>If it is a development-only dependency (i.e. only needed for the test suite, or for developers' convenience), simply running <code>buildout</code> like this will make the necessary updates to <code>versions.cfg</code>:</p>
+<pre><code>$ ./bin/buildout -v buildout:allow-picked-versions=true
+</code></pre>
+<h2 id="adding-new-source-files">Adding new source files<a class="anchor" href="#adding-new-source-files"></a></h2>
+<p>When creating a new source file, a Python module or test for example, always start with the appropriate template from the <code>templates</code> directory.</p>
+<h2 id="database-information">Database information<a class="anchor" href="#database-information"></a></h2>
+<p>MAAS uses <a href="http://south.aeracode.org">South</a> to manage changes to the database schema.</p>
+<p>Be sure to have a look at <a href="http://south.aeracode.org/docs/">South's documentation</a> before you make any change.</p>
+<h3 id="changing-the-schema">Changing the schema<a class="anchor" href="#changing-the-schema"></a></h3>
+<p>Once you've made a model change (i.e. a change to a file in <code>src/&lt;application&gt;/models/*.py</code>) you have to run South's <a href="http://south.aeracode.org/docs/commands.html#schemamigration">schemamigration</a> command to create a migration file that will be stored in <code>src/&lt;application&gt;/migrations/</code>.</p>
+<p>Note that if you want to add a new model class you'll need to import it in <code>src/&lt;application&gt;/models/__init__.py</code></p>
+<p>Once you've changed the code, run:</p>
+<pre><code>$ ./bin/maas-region-admin schemamigration maasserver --auto description_of_the_change
+</code></pre>
+<p>This will generate a migration module named <code>src/maasserver/migrations/&lt;auto_number&gt;_description_of_the_change.py</code>. Don't forget to add that file to the project with:</p>
+<pre><code>$ bzr add src/maasserver/migrations/&lt;auto_number&gt;_description_of_the_change.py
+</code></pre>
+<p>To apply that migration, run:</p>
+<pre><code>$ make syncdb
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p>In order to create or run a migration, you'll need to have the database server running. To do that, either run <code>make start</code>, which will start all of the MAAS components or <code>make services/database/@start</code>, which will start only the database server.</p>
+</blockquote>
+<h3 id="performing-data-migration">Performing data migration<a class="anchor" href="#performing-data-migration"></a></h3>
+<p>If you need to perform data migration, very much in the same way, you will need to run South's <a href="http://south.aeracode.org/docs/commands.html#datamigration">datamigration</a> command. For instance, if you want to perform changes to the <code>maasserver</code> application, run:</p>
+<pre><code>$ ./bin/maas-region-admin datamigration maasserver description_of_the_change
+</code></pre>
+<p>This will generate a migration module named <code>src/maasserver/migrations/&lt;auto_number&gt;_description_of_the_change.py</code>. You will need to edit that file and fill the <code>forwards</code> and <code>backwards</code> methods where data should be actually migrated. Again, don't forget to add that file to the project:</p>
+<pre><code>$ bzr add src/maasserver/migrations/&lt;auto_number&gt;_description_of_the_change.py
+</code></pre>
+<p>Once the methods have been written, apply that migration with:</p>
+<pre><code>$ make syncdb
+</code></pre>
+<h3 id="examining-the-database-manually">Examining the database manually<a class="anchor" href="#examining-the-database-manually"></a></h3>
+<p>If you need to get an interactive <code>psql</code> prompt, you can use <a href="https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell">dbshell</a>:</p>
+<pre><code>$ bin/maas-region-admin dbshell
+</code></pre>
+<p>If you need to do the same thing with a version of MAAS you have installed from the package, you can use:</p>
+<pre><code>$ sudo maas-region-admin dbshell --installed
+</code></pre>
+<p>You can use the <code>\dt</code> command to list the tables in the MAAS database. You can also execute arbitrary SQL. For example::</p>
+<pre><code>maasdb=# select system_id, hostname from maasserver_node;
+                 system_id                 |      hostname
+-------------------------------------------+--------------------
+ node-709703ec-c304-11e4-804c-00163e32e5b5 | gross-debt.local
+ node-7069401a-c304-11e4-a64e-00163e32e5b5 | round-attack.local
+(2 rows)
+</code></pre>
+<h2 id="documentation">Documentation<a class="anchor" href="#documentation"></a></h2>
+<p>Use <a href="http://sphinx.pocoo.org/rest.html">reST</a> with the <a href="http://sphinx.pocoo.org/rest.html#sections">convention for headings as used in the Python documentation</a>.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      var links = document.querySelectorAll('a');
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+      }
+    </script>
+  </body>
+</html>

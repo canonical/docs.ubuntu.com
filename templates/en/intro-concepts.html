@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MAAS | Concepts and Terms | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Introduction
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Install & Configure
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-network2">
+                        Configure network
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="">
+                        Nodes
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Manage MAAS
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Troubleshoot
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="ref-release-notes">Release notes</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="contributing">Help improve these docs</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="concepts-and-terms">Concepts and terms<a class="anchor" href="#concepts-and-terms"></a></h1>
+<p>Here are some common terms that are essential to grasp in order to fully enjoy
+MAAS, not to mention the rest of this documentation.</p>
+<h2 id="deploy">Deploy<a class="anchor" href="#deploy"></a></h2>
+<p>To <em>deploy</em>, in a MAAS context, is to "utilize". Something that is deployable
+is the resource that MAAS ultimately provides that leads to software getting
+installed in order to offer up services.</p>
+<p>There is an action, in the GUI, called "Deploy" that should not be confused
+with the above general notion. This action simply installs an operating system,
+typically Ubuntu.</p>
+<p>Note that Juju, often used in conjunction with MAAS, also uses the term
+"deploy" to mean "deploy a service or an application".</p>
+<h2 id="nodes">Nodes<a class="anchor" href="#nodes"></a></h2>
+<p>A <em>node</em> is a general term that refers to multiple, more specific objects.
+Basically, it is a networked object that is known to MAAS.</p>
+<p>Nodes include:</p>
+<ul>
+<li>Controllers</li>
+<li>Machines</li>
+<li>Devices</li>
+</ul>
+<h3 id="controllers">Controllers<a class="anchor" href="#controllers"></a></h3>
+<p>There are two types of controllers: a <em>region controller</em> and a <em>rack
+controller</em>.</p>
+<p>A region controller consists of i) the REST API server, ii) the PostgreSQL
+database, iii) DNS, iv) caching HTTP proxy, and v) a web UI. A region
+controller can be thought of as being responsible for a data centre.</p>
+<p>A rack controller provides i) DHCP, ii) TFTP, iii) HTTP (for images), iv)
+iSCSI, and v) power management. You need a rack controller attached to each
+"fabric". As the name implies, a common setup is to have a rack controller in
+each data centre server rack.</p>
+<p>Both the region controller and the rack controller can be scaled-out as well
+as made highly available. See <a href="manage-maas-ha">MAAS HA</a> for high
+availability.</p>
+<h3 id="machines">Machines<a class="anchor" href="#machines"></a></h3>
+<p>A <em>machine</em> is a node that can be deployed by MAAS.</p>
+<h3 id="devices">Devices<a class="anchor" href="#devices"></a></h3>
+<p>A <em>device</em> is a non-deployable node. This entity can be used to track
+routers, for example.</p>
+<p>Devices can be assigned IP addresses (static or dynamic) and DNS names.</p>
+<p>They can also be assigned a parent node and will be automatically deleted
+(along with all the IP address reservations associated with it) when the
+parent node is deleted or released. This is designed to model and manage the
+virtual machines or containers running inside a MAAS-deployed node.</p>
+<h2 id="zones-(physical-zones)">Zones (physical zones)<a class="anchor" href="#zones-(physical-zones)"></a></h2>
+<p>A <em>physical zone</em>, or just <em>zone</em>, is an organizational unit that contains
+nodes. Zones are most useful when they represent portions of your
+infrastructure but they can also be used to simply keep track of where systems
+are located. In an HA context, they can be regarded as availability zones
+(AZs).</p>
+<p>Each node is in one and only one zone and MAAS gets installed with a default
+zone in which all nodes get placed.</p>
+<p>Zones can assist with fault-tolerance and performance of services running on
+the associated machines.</p>
+<h2 id="regions">Regions<a class="anchor" href="#regions"></a></h2>
+<p>A <em>region</em> is an organizational unit one level above a zone. It contains all
+information of all machines running in any possible zones. In particular, the
+PostgreSQL database runs at this level and maintains state for all these
+machines.</p>
+<h2 id="series">Series<a class="anchor" href="#series"></a></h2>
+<p>A <em>series</em> is essentially an operating system version. For Ubuntu, a series
+takes into account HWE kernels. In practical terms, a series manifests itself
+in the form of install <em>images</em> that are used to provision MAAS machines.
+Various series are selected by the MAAS administrator.</p>
+<h2 id="images">Images<a class="anchor" href="#images"></a></h2>
+<p>An <em>image</em> is used to provision a MAAS machine. MAAS images are imported based
+on what series have been selected. This is typically done once the install of
+MAAS is complete. MAAS only becomes functional once images have been imported.</p>
+<h2 id="fabrics">Fabrics<a class="anchor" href="#fabrics"></a></h2>
+<p>A <em>fabric</em> is a set of interconnected VLANs that are capable of mutual
+communication. A fabric is a logical grouping of unique VLANs. A default fabric
+('fabric-0') is created for each detected subnet when MAAS is installed.</p>
+<h2 id="spaces">Spaces<a class="anchor" href="#spaces"></a></h2>
+<p>A <em>space</em> is a logical grouping of subnets that are able to communicate
+with each other. Subnets within each space need not belong to the same fabric.
+A default space ('space-0') is created when MAAS is installed and includes all
+detected subnets.</p>
+<h2 id="tags">Tags<a class="anchor" href="#tags"></a></h2>
+<p>A <em>tag</em> (not to be confused with VLAN tags) is user-created and associated with
+nodes based on their physical properties. These can then be used to identify
+nodes with particular abilities which can be useful during the deployment of
+services.</p>
+<h2 id="subnets">Subnets<a class="anchor" href="#subnets"></a></h2>
+<p>A <em>subnet</em> is a "layer 3" network. It is defined by a network address and a
+network mask length (in bits) and is usually written in "CIDR" format. MAAS
+supports IPv4 and IPv6 subnets. Examples:</p>
+<pre><code class="no-highlight">10.0.0.0/8
+172.16.0.0/12
+192.168.0.0/16
+2001:db8:4d41:4153::/64
+</code></pre>
+
+<p>In MAAS, a subnet is always associated with a single space.</p>
+<h3 id="ip-ranges">IP ranges<a class="anchor" href="#ip-ranges"></a></h3>
+<p>MAAS assumes it can allocate all unreserved IPs in a subnet. For example, if a node's
+interface is configured as <code>Auto Assign</code>, MAAS will automatically
+assign IP addresses out of the unreserved pool. </p>
+<p>IP addresses can be reserved by adding one or more <em>reserved ranges</em> to your
+subnet configuration, and there are two types of possible ranges that can be
+defined:</p>
+<ul>
+<li>
+<p><strong>Reserve range</strong> Defines a set of static IP addresses that you
+can use for other devices on your network (e.g. managed switches or
+routers).</p>
+</li>
+<li>
+<p><strong>Reserve dynamic range</strong> Defines a set of IP addresses that you plan to
+hand out using a DHCP server. If you enable DHCP on your subnet's VLAN, MAAS
+will provide a DHCP for IP addresses in this range, otherwise you are
+responsible for proving an external DHCP server for this range.</p>
+</li>
+</ul>
+<p class="note"><strong> Note</strong>: If you have nodes that require DHCP to network boot (e.g. PXE
+clients), or nodes with an interfaces IP address type of 'DHCP', an active DHCP
+configuration is required.</p>
+<h2 id="vlans">VLANs<a class="anchor" href="#vlans"></a></h2>
+<p>VLANs (Virtual LANs) are a common way to create logically separate networks
+using the same physical infrastructure.</p>
+<p>Managed switches can assign VLANs to each port in either a "tagged" or an
+"untagged" manner. A VLAN is said to be "untagged" on a particular port when it
+is the default VLAN for that port, and requires no special configuration in
+order to access it.</p>
+<p>"Tagged" VLANs can also be used with nodes in MAAS. That is, if a switch port
+is configured such that "tagged" VLAN frames can be sent and received by a MAAS
+node, that MAAS node can be configured to automatically bring up VLAN
+interfaces, so that the deployed node can make use of them.</p>
+<p>A "Default VLAN" is created for every fabric, to which every new VLAN-aware
+object in the fabric will be associated with by default (unless specified
+otherwise).</p>
+<h2 id="interfaces">Interfaces<a class="anchor" href="#interfaces"></a></h2>
+<h3 id="physical">Physical<a class="anchor" href="#physical"></a></h3>
+<p>After a node is commissioned, MAAS discovers its <em>physical interfaces</em>.</p>
+<p>A device is always created with at least one physical interface.</p>
+<p>Prior to deployment, a MAAS administrator can specify additional interfaces to
+be configured on the node, including one or more of the below types.</p>
+<h3 id="bond">Bond<a class="anchor" href="#bond"></a></h3>
+<p>A <em>bond interface</em> is capable of aggregating two or more physical interfaces into
+a single logical interface. Bonds can be used in conjunction with a managed
+switch (using Link Aggregation and Control Protocol, or LACP), or independently
+(software bonds).</p>
+<h3 id="vlan">VLAN<a class="anchor" href="#vlan"></a></h3>
+<p>A <em>VLAN interface</em> can be used to connect to a tagged VLAN, if the switch port
+the node is connected to is authorized to access it.</p>
+<h3 id="unknown">Unknown<a class="anchor" href="#unknown"></a></h3>
+<p><em>Unknown interfaces</em> are sometimes discovered by MAAS. For example, a new DHCP
+lease that is not associated with any known node or device. Such an interface
+cannot be user-created.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      var links = document.querySelectorAll('a');
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MAAS | Networks | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Introduction
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Install & Configure
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-network2">
+                        Configure network
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="">
+                        Nodes
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Manage MAAS
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Troubleshoot
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="ref-release-notes">Release notes</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="contributing">Help improve these docs</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="maas-networks">MAAS networks<a class="anchor" href="#maas-networks"></a></h1>
+<p>A rack controller can manage nodes on one or more networks. The rack controller
+must have direct interfaces connected to these networks, and each node must be
+managed through one of them.</p>
+<p>But nodes may also be connected to additional networks, for your production
+workload, for internet access, for internal communication, or perhaps for
+system-level or application-level management tasks. MAAS does not need to
+manage these networks, but it can be useful for MAAS to be aware of them. If
+MAAS is aware of these networks, you can allocate nodes with specific network
+requirements. For example, when requesting a node, you could specify:</p>
+<ul>
+<li>"Must be connected to the staging network" (for a test application).</li>
+<li>"Needs to share a network with a given other node" (for fast
+  communication).</li>
+<li>"Should not be connected to the DMZ network" (for security).</li>
+<li>"Can't be on the Houston network" (for resilience).</li>
+<li>"Has to be connected to a particular VLAN" (for software-defined
+  networking).</li>
+</ul>
+<p>To avoid confusion, MAAS imposes three rules on the networks you define. Apart
+from these, MAAS places no restrictions on the number or nature of your
+networks, or on which nodes are connected to which networks. The rules are:</p>
+<ol>
+<li>Each node must be on a network that is directly connected to an interface on
+   the node's rack controller. It is recommended that you let the rack controller
+   manage DHCP and DNS on this network. See cluster-configuration for the details.</li>
+<li>All networks must have different, non-overlapping IP ranges. Any possible IP
+   address in the MAAS should belong to only one network.</li>
+<li>If you use virtual networks, each must have a different VLAN tag in the
+   range 0x001 to 0xffe (1 to 4094) inclusive. Non-virtual networks have no tag,
+   and you can have as many of these as you want.</li>
+</ol>
+<p>Networks are defined globally, not within clusters. They can span clusters, or
+be confined to clusters, or connect selected nodes from different clusters, as
+suits your needs. For now, if you want to make use of these placement
+constraints when allocating nodes, you need to define your networks explicitly.
+Future versions of MAAS may detect some of your networks and define them
+automatically.</p>
+<p>The networks on which MAAS manages nodes are special, however: they cannot
+connect to different clusters. These are the networks that connect to
+interfaces on the rack controller. You may define these networks, but you
+don't have to. You need a cluster interface for MAAS to manage nodes (or even
+just serve DHCP) on the network to which it is connected. Networks, on the
+other hand, only need to be defined in order to enable network placement
+constraints when allocating nodes, as in the examples above.</p>
+<h2 id="defining-networks">Defining networks<a class="anchor" href="#defining-networks"></a></h2>
+<p>There are two ways to define networks: through the web UI or through the
+API/CLI.</p>
+<p>To define a network in the user interface, click on <code>Networks</code> in the top bar.
+This will take you to the listing of known networks. Click the <code>Add network</code>
+button to start entering your network's information.</p>
+<p><img alt="image" src="/static/media/add-network.png" /></p>
+<p>Assign each network a short name for easy reference, and optionally, a more
+detailed description. Fill out the other fields as detailed below. Click <code>Add
+network</code> to bring your network definition into effect.</p>
+<p>Networks are defined as a pair of a base IP address and a netmask. For a 24-bit
+network <code>10.122.1.0/24</code>, for example, the IP address would be <code>10.122.1.0</code> and
+the netmask would be <code>255.255.255.0</code>.</p>
+<p>The bits that correspond to zeroes in the netmask are not part of the network
+address, so if you entered <code>10.122.1.9</code> as the network's IP address, it would
+still come out as <code>10.122.1.0</code>.</p>
+<p>MAAS also supports virtual networks, or VLANs. Multiple VLANs can share the
+same underlying physical network. A "tag" on each network packet tells the
+infrastructure on which of the VLANs the packet is travelling. Each VLAN is
+effectively a separate network.</p>
+<p>The VLAN tag is a number between 1 and 4094 inclusive, as dictated by the
+underlying technical standard. Leave this blank if the network is not a VLAN,
+or if it is untagged. The number zero is a reserved value that means "no VLAN,"
+as you would get with conventional networks, and so MAAS treats it as a blank
+field.</p>
+<h2 id="connecting-nodes-to-networks">Connecting nodes to networks<a class="anchor" href="#connecting-nodes-to-networks"></a></h2>
+<p>In order for network placement constraints to take effect, you must also tell
+MAAS which nodes are connected to each network.</p>
+<p>Nodes connect to networks through their network interface cards. Each of these
+NICs has a MAC address, and so, a connection between a node and a network is
+associated with one of the node's MAC addresses. The network interface and its
+MAC address must be registered with MAAS before it can be attached to a
+network. A node's network interfaces are normally registered automatically when
+the node is enlisted \&lt;auto-enlist>, but in some situations you may need to do
+this manually in the web user interface.</p>
+<p>To inform MAAS about nodes' connections to a network through the user
+interface, you must either specify them when creating the network, or edit the
+network's details. You can get to a network's edit page either by browsing to
+its details page and clicking the "Edit" link in the right-hand bar, or by
+clicking on the "pencil" icon for the network's entry in the networks listing
+under the "Networks" section in the top bar.</p>
+<p>On the network add/edit pages, you will see a selection box where you can
+select which network interfaces are connected to that network, as well as the
+nodes to which they belong.</p>
+<p><img alt="image" src="/static/media/connect-nodes-to-network.png" /></p>
+<p>The box lets you select multiple network interfaces, even if they belong to the
+same node. Click "Save network" to make your changes permanent.</p>
+<h2 id="placement-constraints">Placement constraints<a class="anchor" href="#placement-constraints"></a></h2>
+<p>When you allocate a node through the API/CLI, or search for nodes in the web
+UI, you can specify two kinds of constraints for the node's network placement:</p>
+<ol>
+<li><code>networks</code> specifies that the node you want must be connected to <em>all</em> of
+   the given networks.</li>
+<li><code>not_networks</code> says that a node must <em>not</em> be connected to <em>any</em> of the
+   given networks.</li>
+</ol>
+<p>Constraints can identify a network in any of several ways. You may combine
+these freely. Each is a way of referring to a specific network, just expressed
+in different ways.</p>
+<ul>
+<li>"<code>network-name</code>": The name of a network as it was defined in the MAAS. The
+  example is for the case where you have defined a network with the name,
+<code>network-name</code>.</li>
+<li>"<code>ip:10.122.1.0</code>": An IP address in the network. This can be the network's
+  base address, or its broadcast address, or any other IP address that falls
+within the network. So <code>ip:10.122.1.0</code> identifies the same network as, for
+example, <code>ip:10.122.1.99</code>.</li>
+<li>"<code>vlan:13</code>": a VLAN tag. This can only be used for VLANs, so the tag must
+  be nonzero. The tag is a number between 1 to 4094 inclusive.</li>
+<li>"<code>vlan:0x0d</code>": a VLAN tag in hexadecimal notation. The valid range is from
+  <code>0x1</code> to <code>0xffe</code> inclusive. The notation is case-insensitive and leading
+  zeroes are ignored. So, <code>vlan:0x0d</code>, <code>vlan:0Xd</code>, <code>vlan:0xD</code>, and <code>vlan:0X0d</code>
+  are all equivalent to <code>vlan:13</code>.</li>
+</ul>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      var links = document.querySelectorAll('a');
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+      }
+    </script>
+  </body>
+</html>

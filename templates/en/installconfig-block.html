@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Block Devices | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Introduction
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Install & Configure
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-network2">
+                        Configure network
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="">
+                        Nodes
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Manage MAAS
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Troubleshoot
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="ref-release-notes">Release notes</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="contributing">Help improve these docs</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="block-devices">Block Devices<a class="anchor" href="#block-devices"></a></h1>
+<p>Once the initial storage layout has been configure on a node you can perform
+many operations to view and adjust the entire storage layout for the node. In
+MAAS there are two different types of block devices.</p>
+<p><strong>Physical</strong></p>
+<p>A physical block device is a physically attached block device such as a 100GB
+hard drive connected to a server.</p>
+<p><strong>Virtual</strong></p>
+<p>A virtual block device is a block device that is exposed by the Linux kernel
+when an operation is performed. Almost all the operations on a physical block
+device can be performed on a virtual block device, such as a RAID device exposed
+as md0.</p>
+<h3 id="list-block-devices">List Block Devices<a class="anchor" href="#list-block-devices"></a></h3>
+<p>To view all block devices on a node use the read operation. This list both
+physical and virtual block devices, as you can see in the output from the
+following command:</p>
+<pre><code class="bash">maas admin block-devices read &lt;node-id&gt;
+</code></pre>
+
+<p>Output:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+[
+    {
+        &quot;id&quot;: 10,
+        &quot;path&quot;: &quot;/dev/disk/by-dname/vda&quot;,
+        &quot;serial&quot;: &quot;&quot;,
+        &quot;block_size&quot;: 4096,
+        &quot;available_size&quot;: 0,
+        &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/&quot;,
+        &quot;filesystem&quot;: null,
+        &quot;id_path&quot;: &quot;/dev/vda&quot;,
+        &quot;size&quot;: 5368709120,
+        &quot;partition_table_type&quot;: &quot;MBR&quot;,
+        &quot;model&quot;: &quot;&quot;,
+        &quot;type&quot;: &quot;physical&quot;,
+        &quot;uuid&quot;: null,
+        &quot;used_size&quot;: 5365563392,
+        &quot;used_for&quot;: &quot;MBR partitioned with 1 partition&quot;,
+        &quot;partitions&quot;: [
+            {
+                &quot;bootable&quot;: false,
+                &quot;id&quot;: 9,
+                &quot;resource_uri&quot;:&quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/partition/9&quot;,
+                &quot;path&quot;: &quot;/dev/disk/by-dname/vda-part1&quot;,
+                &quot;uuid&quot;: &quot;aae082cd-8be0-4a64-ab49-e998abd6ea43&quot;,
+                &quot;used_for&quot;: &quot;LVM volume for vgroot&quot;,
+                &quot;size&quot;: 5360320512,
+                &quot;type&quot;: &quot;partition&quot;,
+                &quot;filesystem&quot;: {
+                    &quot;uuid&quot;: &quot;a56ebfa6-8ef4-48b5-b6bc-9f9d27065d24&quot;,
+                    &quot;mount_options&quot;: null,
+                    &quot;label&quot;: null,
+                    &quot;fstype&quot;: &quot;lvm-pv&quot;,
+                    &quot;mount_point&quot;: null
+                }
+            }
+        ],
+        &quot;tags&quot;: [
+            &quot;rotary&quot;
+        ],
+        &quot;name&quot;: &quot;vda&quot;
+    },
+    {
+        &quot;id&quot;: 11,
+        &quot;path&quot;: &quot;/dev/disk/by-dname/lvroot&quot;,
+        &quot;serial&quot;: null,
+        &quot;block_size&quot;: 4096,
+        &quot;available_size&quot;: 0,
+        &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/11/&quot;,
+        &quot;filesystem&quot;: {
+            &quot;uuid&quot;: &quot;7181a0c0-9e16-4276-8a55-c77364d137ca&quot;,
+            &quot;mount_options&quot;: null,
+            &quot;label&quot;: &quot;root&quot;,
+            &quot;fstype&quot;: &quot;ext4&quot;,
+            &quot;mount_point&quot;: &quot;/&quot;
+        },
+        &quot;id_path&quot;: null,
+        &quot;size&quot;: 3221225472,
+        &quot;partition_table_type&quot;: null,
+        &quot;model&quot;: null,
+        &quot;type&quot;: &quot;virtual&quot;,
+        &quot;uuid&quot;: &quot;fc8ba89e-9149-412c-bcea-e596eb7c0d14&quot;,
+        &quot;used_size&quot;: 3221225472,
+        &quot;used_for&quot;: &quot;ext4 formatted filesystem mounted at /&quot;,
+        &quot;partitions&quot;: [],
+        &quot;tags&quot;: [],
+        &quot;name&quot;: &quot;vgroot-lvroot&quot;
+    }
+]
+</code></pre>
+
+<h3 id="read-block-device">Read Block Device<a class="anchor" href="#read-block-device"></a></h3>
+<p>If you want to read just one block device instead of listing all block devices
+the read operation on the block device endpoint provides that information. To
+display the details on device '11' from the previous output, for example, we
+could enter:</p>
+<pre><code class="bash">maas admin block-device read &lt;node-id&gt; 11
+</code></pre>
+
+<p>The above command generates the following output:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;available_size&quot;: 0,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vgroot-lvroot&quot;,
+    &quot;name&quot;: &quot;vgroot-lvroot&quot;,
+    &quot;used_for&quot;: &quot;ext4 formatted filesystem mounted at /&quot;,
+    &quot;type&quot;: &quot;virtual&quot;,
+    &quot;used_size&quot;: 3221225472,
+    &quot;filesystem&quot;: {
+        &quot;uuid&quot;: &quot;7181a0c0-9e16-4276-8a55-c77364d137ca&quot;,
+        &quot;mount_point&quot;: &quot;/&quot;,
+        &quot;mount_options&quot;: null,
+        &quot;fstype&quot;: &quot;ext4&quot;,
+        &quot;label&quot;: &quot;root&quot;
+    },
+    &quot;id_path&quot;: null,
+    &quot;id&quot;: 11,
+    &quot;partition_table_type&quot;: null,
+    &quot;block_size&quot;: 4096,
+    &quot;tags&quot;: [],
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/11/&quot;,
+    &quot;uuid&quot;: &quot;fc8ba89e-9149-412c-bcea-e596eb7c0d14&quot;,
+    &quot;serial&quot;: null,
+    &quot;partitions&quot;: [],
+    &quot;size&quot;: 3221225472,
+    &quot;model&quot;: null
+}
+
+</code></pre>
+
+<p>It is also possible to use the name of the block device, such as 'sda' or
+'vda', instead of its 'id':</p>
+<pre><code class="bash">s admin block-device read &lt;node-id&gt; vda
+</code></pre>
+
+<p class="note"><strong> Note</strong>: MAAS allows the name of a block device to be changed. If the
+block device name has changed then the API call needs to use the new name.
+Using the ID is safer as it never changes.</p>
+<h3 id="create-block-device">Create Block Device<a class="anchor" href="#create-block-device"></a></h3>
+<p>MAAS gathers the required information itself on block devices when re-
+commissioning a machine. If this doesn't provide the required information,
+it is also possible - though not recommended - for an administrator to use the
+API to manually add a physical block device to a node. </p>
+<pre><code class="bash">maas admin block-devices create &lt;node-id&gt; name=vdb model=&quot;QEMU&quot; serial=&quot;QM00001&quot; size=21474836480 block_size=4096
+</code></pre>
+
+<p>Depending on your configuration, output should be similar to the following:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;available_size&quot;: 21474836480,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vdb&quot;,
+    &quot;name&quot;: &quot;vdb&quot;,
+    &quot;used_for&quot;: &quot;Unused&quot;,
+    &quot;type&quot;: &quot;physical&quot;,
+    &quot;used_size&quot;: 0,
+    &quot;filesystem&quot;: null,
+    &quot;id_path&quot;: &quot;&quot;,
+    &quot;id&quot;: 12,
+    &quot;partition_table_type&quot;: null,
+    &quot;block_size&quot;: 4096,
+    &quot;tags&quot;: [],
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/12/&quot;,
+    &quot;uuid&quot;: null,
+    &quot;serial&quot;: &quot;QM00001&quot;,
+    &quot;partitions&quot;: [],
+    &quot;size&quot;: 21474836480,
+    &quot;model&quot;: &quot;QEMU&quot;
+}
+</code></pre>
+
+<p class="note"><strong> Note</strong>: The serial number is what MAAS will use when a node is deployed to
+find the specific block device. It's important that this be correct. In a rare
+chance that your block device does not provide a model or serial number you can
+provide an id_path. The id_path should be a path that is always the same, no
+matter the kernel version.</p>
+<h3 id="update-block-device">Update Block Device<a class="anchor" href="#update-block-device"></a></h3>
+<p>An administrator can also update the details held on a physical block device,
+such as its name, from the API:</p>
+<pre><code class="bash">maas admin block-device update &lt;node-id&gt; 12 name=newroot
+</code></pre>
+
+<p>Output from this command will show that the 'name' has changed:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;block_size&quot;: 4096,
+    &quot;size&quot;: 21474836480,
+    &quot;filesystem&quot;: null,
+    &quot;model&quot;: &quot;QEMU&quot;,
+    &quot;name&quot;: &quot;newroot&quot;,
+    &quot;partitions&quot;: [],
+    &quot;tags&quot;: [],
+    &quot;used_size&quot;: 0,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/newroot&quot;,
+    &quot;id_path&quot;: &quot;&quot;,
+    &quot;uuid&quot;: null,
+    &quot;available_size&quot;: 21474836480,
+    &quot;id&quot;: 12,
+    &quot;used_for&quot;: &quot;Unused&quot;,
+    &quot;type&quot;: &quot;physical&quot;,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/12/&quot;,
+    &quot;partition_table_type&quot;: null,
+    &quot;serial&quot;: &quot;QM00001&quot;
+}
+</code></pre>
+
+<h3 id="delete-block-device">Delete Block Device<a class="anchor" href="#delete-block-device"></a></h3>
+<p>Physical and virtual block devices can be deleted by an administrator, while
+ordinary users can only delete virtual block devices:</p>
+<pre><code class="bash">maas admin block-device delete &lt;node-id&gt; 12
+</code></pre>
+
+<h3 id="format-block-device">Format Block Device<a class="anchor" href="#format-block-device"></a></h3>
+<p>An entire block device can be formatted by defining a filesystem with the
+'format' API call:</p>
+<pre><code class="bash">maas admin block-device format &lt;node-id&gt; 11 fstype=ext4
+</code></pre>
+
+<p>Successful output from this command will look similar to this:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;block_size&quot;: 4096,
+    &quot;size&quot;: 3221225472,
+    &quot;filesystem&quot;: {
+        &quot;label&quot;: &quot;&quot;,
+        &quot;fstype&quot;: &quot;ext4&quot;,
+        &quot;mount_options&quot;: null,
+        &quot;uuid&quot;: &quot;75e42f49-9a45-466c-8425-87a40e4f4148&quot;,
+        &quot;mount_point&quot;: null
+    },
+    &quot;model&quot;: null,
+    &quot;name&quot;: &quot;vgroot-lvroot&quot;,
+    &quot;partitions&quot;: [],
+    &quot;tags&quot;: [],
+    &quot;used_size&quot;: 3221225472,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vgroot-lvroot&quot;,
+    &quot;id_path&quot;: null,
+    &quot;uuid&quot;: &quot;fc8ba89e-9149-412c-bcea-e596eb7c0d14&quot;,
+    &quot;available_size&quot;: 0,
+    &quot;id&quot;: 11,
+    &quot;used_for&quot;: &quot;Unmounted ext4 formatted filesystem&quot;,
+    &quot;type&quot;: &quot;virtual&quot;,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/11/&quot;,
+    &quot;partition_table_type&quot;: null,
+    &quot;serial&quot;: null
+}
+</code></pre>
+
+<p class="note"><strong> Note</strong>: You cannot format a block device that contains partitions or is used
+to make another virtual block device.</p>
+<h3 id="unformat-block-device">Unformat Block Device<a class="anchor" href="#unformat-block-device"></a></h3>
+<p>You can remove the filesystem from a block device with the 'unformat' API call:</p>
+<pre><code class="bash">maas admin block-device unformat &lt;node-id&gt; 11
+</code></pre>
+
+<p>The output from this command should show the filesystem is now 'null':</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;available_size&quot;: 3221225472,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vgroot-lvroot&quot;,
+    &quot;name&quot;: &quot;vgroot-lvroot&quot;,
+    &quot;used_for&quot;: &quot;Unused&quot;,
+    &quot;type&quot;: &quot;virtual&quot;,
+    &quot;used_size&quot;: 0,
+    &quot;filesystem&quot;: null,
+    &quot;id_path&quot;: null,
+    &quot;id&quot;: 11,
+    &quot;partition_table_type&quot;: null,
+    &quot;block_size&quot;: 4096,
+    &quot;tags&quot;: [],
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/11/&quot;,
+    &quot;uuid&quot;: &quot;fc8ba89e-9149-412c-bcea-e596eb7c0d14&quot;,
+    &quot;serial&quot;: null,
+    &quot;partitions&quot;: [],
+    &quot;size&quot;: 3221225472,
+    &quot;model&quot;: null
+}
+</code></pre>
+
+<h3 id="mount-block-device">Mount Block Device<a class="anchor" href="#mount-block-device"></a></h3>
+<p>If a block device has a filesystem, you can use the 'maas' command to mount a block devices at a given mount
+point:</p>
+<pre><code class="bash">maas admin block-device mount &lt;node-id&gt; 11 mount_point=/srv
+</code></pre>
+
+<p>The mount point is included in the successful output from the command:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;available_size&quot;: 0,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vgroot-lvroot&quot;,
+    &quot;name&quot;: &quot;vgroot-lvroot&quot;,
+    &quot;used_for&quot;: &quot;ext4 formatted filesystem mounted at /srv&quot;,
+    &quot;type&quot;: &quot;virtual&quot;,
+    &quot;used_size&quot;: 3221225472,
+    &quot;filesystem&quot;: {
+        &quot;uuid&quot;: &quot;6f5965ad-49f7-42da-95ff-8000b739c39f&quot;,
+        &quot;mount_point&quot;: &quot;/srv&quot;,
+        &quot;mount_options&quot;: &quot;&quot;,
+        &quot;fstype&quot;: &quot;ext4&quot;,
+        &quot;label&quot;: &quot;&quot;
+    },
+    &quot;id_path&quot;: null,
+    &quot;id&quot;: 11,
+    &quot;partition_table_type&quot;: null,
+    &quot;block_size&quot;: 4096,
+    &quot;tags&quot;: [],
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/11/&quot;,
+    &quot;uuid&quot;: &quot;fc8ba89e-9149-412c-bcea-e596eb7c0d14&quot;,
+    &quot;serial&quot;: null,
+    &quot;partitions&quot;: [],
+    &quot;size&quot;: 3221225472,
+    &quot;model&quot;: null
+}
+
+</code></pre>
+
+<h3 id="unmount-block-device">Unmount Block Device<a class="anchor" href="#unmount-block-device"></a></h3>
+<p>To remove the mount point from the block device, use the 'unmount' call:</p>
+<pre><code class="bash">maas admin block-device unmount &lt;node-id&gt; 11 mount_point=/srv
+
+</code></pre>
+
+<p>The previous command will include a nullified 'mount_point' in its output:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;available_size&quot;: 0,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vgroot-lvroot&quot;,
+    &quot;name&quot;: &quot;vgroot-lvroot&quot;,
+    &quot;used_for&quot;: &quot;Unmounted ext4 formatted filesystem&quot;,
+    &quot;type&quot;: &quot;virtual&quot;,
+    &quot;used_size&quot;: 3221225472,
+    &quot;filesystem&quot;: {
+        &quot;uuid&quot;: &quot;6f5965ad-49f7-42da-95ff-8000b739c39f&quot;,
+        &quot;mount_point&quot;: null,
+        &quot;mount_options&quot;: null,
+        &quot;fstype&quot;: &quot;ext4&quot;,
+        &quot;label&quot;: &quot;&quot;
+    },
+    &quot;id_path&quot;: null,
+    &quot;id&quot;: 11,
+    &quot;partition_table_type&quot;: null,
+    &quot;block_size&quot;: 4096,
+    &quot;tags&quot;: [],
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/11/&quot;,
+    &quot;uuid&quot;: &quot;fc8ba89e-9149-412c-bcea-e596eb7c0d14&quot;,
+    &quot;serial&quot;: null,
+    &quot;partitions&quot;: [],
+    &quot;size&quot;: 3221225472,
+    &quot;model&quot;: null
+}
+</code></pre>
+
+<h3 id="set-as-boot-disk">Set as Boot Disk<a class="anchor" href="#set-as-boot-disk"></a></h3>
+<p>By default, MAAS picks the first added block device to the node as the boot
+disk. In most cases this works as expected as the BIOS usually enumerates the
+boot disk as the first block device. There are cases where this fails and the
+boot disk needs to be set to another disk. This API allow setting which block
+device on a node MAAS should use as the boot disk.:</p>
+<pre><code class="bash">maas admin block-device set-boot-disk &lt;node-id&gt; 10
+</code></pre>
+
+<p class="note"><strong> Note</strong>: Only an administrator can set which block device should be used as
+the boot disk and only a physical block device can be set as as the boot disk.
+This operation should be done before a node is acquired or the storage layout
+will be applied to the previous boot disk.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      var links = document.querySelectorAll('a');
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+      }
+    </script>
+  </body>
+</html>

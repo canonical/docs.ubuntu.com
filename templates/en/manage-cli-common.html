@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MAAS CLI | Common Tasks | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Introduction
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Install & Configure
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-network2">
+                        Configure network
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="">
+                        Nodes
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Manage MAAS
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      Troubleshoot
+                    
+                  </h4>
+                </a>
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+
+                      
+                    </li>
+                    
+                    <li>
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="ref-release-notes">Release notes</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="contributing">Help improve these docs</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                <a href="#settings">
+                  <h4 class="p-sidebar-nav__header">
+                    
+                      <a href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                    
+                  </h4>
+                </a>
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="common-cli-tasks">Common CLI Tasks<a class="anchor" href="#common-cli-tasks"></a></h1>
+<p>This is a list of common tasks to perform with the MAAS CLI. See
+<a href="manage-cli">MAAS CLI</a> on how to get started.</p>
+<h2 id="list-nodes">List nodes<a class="anchor" href="#list-nodes"></a></h2>
+<p>To list all nodes (and their characteristics) in the MAAS:</p>
+<pre><code class="bash">maas $PROFILE nodes read
+</code></pre>
+
+<p>Add a filter to get just their hostnames:</p>
+<pre><code class="bash">maas $PROFILE nodes read | grep hostname
+</code></pre>
+
+<h2 id="determine-a-system-id">Determine a system ID<a class="anchor" href="#determine-a-system-id"></a></h2>
+<p>To determine the system ID based on a node's hostname:</p>
+<pre><code class="bash">SYSTEM_ID=$(maas $PROFILE nodes read hostname=$HOSTNAME \
+    | grep system_id | cut -d '&quot;' -f 4)
+</code></pre>
+
+<h2 id="commission-a-machine">Commission a machine<a class="anchor" href="#commission-a-machine"></a></h2>
+<p>To commission a machine based on its system ID:</p>
+<pre><code class="bash">maas $PROFILE machine commission $SYSTEM_ID
+</code></pre>
+
+<h2 id="commission-all-machines">Commission all machines<a class="anchor" href="#commission-all-machines"></a></h2>
+<p>To commission all machines in the 'Ready' state:</p>
+<pre><code class="bash">maas $PROFILE machines accept-all
+</code></pre>
+
+<h2 id="assign-a-tag-to-a-node">Assign a tag to a node<a class="anchor" href="#assign-a-tag-to-a-node"></a></h2>
+<p>To assign a tag to a node:</p>
+<pre><code class="bash">maas $PROFILE tag update-nodes $TAG_NAME add=$SYSTEM_ID
+</code></pre>
+
+<p>Multiple <code>add=</code> arguments (and their values) can be used to apply a tag to
+multiple nodes. </p>
+<h2 id="reserve-ip-addresses">Reserve IP addresses<a class="anchor" href="#reserve-ip-addresses"></a></h2>
+<p>To reserve a range of dynamic IP addresses that will be used by MAAS for
+node enlistment and commissioning:</p>
+<pre><code class="bash">maas $PROFILE ipranges create type=dynamic \
+    start_ip=$IP_DYNAMIC_RANGE_LOW end_ip=$IP_DYNAMIC_RANGE_HIGH
+</code></pre>
+
+<p>See
+<a href="installconfig-rack#dynamic-ip-ranges">Rack Controller Configuration</a>
+for an explination of dynamic IP ranges.</p>
+<p>To reserve a range of IP addresses that will not be used by MAAS:</p>
+<pre><code class="bash">maas $PROFILE ipranges create type=reserved \
+    start_ip=$IP_STATIC_RANGE_LOW end_ip=$IP_STATIC_RANGE_HIGH
+</code></pre>
+
+<p>To reserve a single IP address that will not be used by MAAS:</p>
+<pre><code class="bash">maas $PROFILE ipaddresses reserve ip_address=$IP_STATIC_SINGLE
+</code></pre>
+
+<p>To remove such a single reserved IP address:</p>
+<pre><code class="bash">maas $PROFILE ipaddresses release ip=$IP_STATIC_SINGLE
+</code></pre>
+
+<h2 id="determine-a-fabric-id">Determine a fabric ID<a class="anchor" href="#determine-a-fabric-id"></a></h2>
+<p>To determine a fabric ID based on a subnet address:</p>
+<pre><code class="bash">FABRIC_ID=$(maas $PROFILE subnet read $SUBNET_CIDR \
+    | grep fabric | cut -d ' ' -f 10 | cut -d '&quot;' -f 2)
+</code></pre>
+
+<h2 id="enable-dhcp">Enable DHCP<a class="anchor" href="#enable-dhcp"></a></h2>
+<p>To enable DHCP on a VLAN on a certain fabric:</p>
+<pre><code class="bash">maas $PROFILE vlan update $FABRIC_ID $VLAN_TAG dhcp_on=True \
+    primary_rack=$PRIMARY_RACK_CONTROLLER
+</code></pre>
+
+<p>To enable DHCP HA you will need both a primary and a secondary controller:</p>
+<pre><code class="bash">maas $PROFILE vlan update $FABRIC_ID $VLAN_TAG dhcp_on=True \
+    primary_rack=$PRIMARY_RACK_CONTROLLER \
+    secondary_rack=$SECONDARY_RACK_CONTROLLER 
+</code></pre>
+
+<p>You will also need to <a href="#set-a-default-gateway">set a default gateway</a>.</p>
+<p class="note"><strong> Note</strong>: DHCP for PXE booting will need to be enabled on the 'untagged' VLAN.</p>
+<h2 id="set-a-dns-forwarder">Set a DNS forwarder<a class="anchor" href="#set-a-dns-forwarder"></a></h2>
+<p>To set a DNS forwarder:</p>
+<pre><code class="bash">maas $PROFILE maas set-config name=upstream_dns value=$MY_UPSTREAM_DNS
+</code></pre>
+
+<h2 id="configure-proxying">Configure proxying<a class="anchor" href="#configure-proxying"></a></h2>
+<p>Enabling and disabling proxying in general is done via a boolean option ('true'
+or 'false'). This is how proxying is disabled completely:</p>
+<pre><code class="bash">maas $PROFILE maas set-config name=enable_http_proxy value=false
+</code></pre>
+
+<p>To set an external proxy, ensure proxying is enabled (see above) and then
+define it:</p>
+<pre><code class="bash">maas $PROFILE maas set-config name=http_proxy value=$EXTERNAL_PROXY
+</code></pre>
+
+<p>For example,</p>
+<pre><code class="bash">maas $PROFILE maas set-config name=enable_http_proxy value=true
+maas $PROFILE maas set-config name=http_proxy value=http://squid.example.com:3128/
+</code></pre>
+
+<p>Enabling and disabling proxying per subnet is done via a boolean option ('true'
+or 'false'). This is how proxying is disabled per subnet:</p>
+<pre><code class="bash">maas $PROFILE subnet update $SUBNET_CIDR allow_proxy=false
+</code></pre>
+
+<p>For example,</p>
+<pre><code class="bash">maas $PROFILE subnet update 192.168.0.0/22 allow_proxy=false
+</code></pre>
+
+<h2 id="set-a-default-gateway">Set a default gateway<a class="anchor" href="#set-a-default-gateway"></a></h2>
+<p>To set the default gateway for a subnet:</p>
+<pre><code class="bash">maas $PROFILE subnet update $SUBNET_CIDR gateway_ip=$MY_GATEWAY
+</code></pre>
+
+<h2 id="set-a-dns-server">Set a DNS server<a class="anchor" href="#set-a-dns-server"></a></h2>
+<p>To set the DNS server for a subnet:</p>
+<pre><code class="bash">maas $PROFILE subnet update $SUBNET_CIDR dns_servers=$MY_NAMESERVER
+</code></pre>
+
+<h2 id="set-a-zone-description">Set a zone description<a class="anchor" href="#set-a-zone-description"></a></h2>
+<p>To set a description for a physical zone:</p>
+<pre><code class="bash">maas $PROFILE zone update default \
+    description=&quot;This zone was configured by a script.&quot;
+</code></pre>
+
+<h2 id="add-a-public-ssh-key">Add a public SSH key<a class="anchor" href="#add-a-public-ssh-key"></a></h2>
+<p>To add a public SSH key to a MAAS user account:</p>
+<pre><code class="bash">maas $PROFILE sshkeys create &quot;key=$SSH_KEY&quot;
+</code></pre>
+
+<h2 id="determine-a-hostname">Determine a hostname<a class="anchor" href="#determine-a-hostname"></a></h2>
+<p>To determine the hostname based on a node's MAC address:</p>
+<pre><code class="bash">HOSTNAME=$(maas $PROFILE nodes read mac_address=$MAC \
+    | grep hostname | cut -d '&quot;' -f 4)
+</code></pre>
+
+<h2 id="create-a-regular-user">Create a regular user<a class="anchor" href="#create-a-regular-user"></a></h2>
+<p>To create a regular user:</p>
+<pre><code class="bash">maas $PROFILE users create username=$USERNAME \
+    email=$EMAIL_ADDRESS password=$PASSWORD is_superuser=0
+</code></pre>
+
+<p>All the options are necessary. Note that stipulating a password on the CLI may
+be a security hazard, depending on your environment. If unsure, use the web UI.
+See <a href="manage-account">User Accounts</a> for the latter.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      var links = document.querySelectorAll('a');
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+      }
+    </script>
+  </body>
+</html>
