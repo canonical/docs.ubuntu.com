@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "node-sass": "3.8.0",
-    "docs-vanilla-theme": "0.1.1-candidate"
+    "node-sass": "3.9.0",
+    "docs-vanilla-theme": "1.1.0"
   },
   "scripts": {
     "watch": "node-sass --include-path ${OVERRIDES} --include-path ${APP_MODULES} static/sass --output static/css; node-sass --include-path ${OVERRIDES} --include-path ${APP_MODULES} --watch --source-map true --recursive --output static/css static/sass"
