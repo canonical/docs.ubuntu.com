@@ -1,2 +1,33 @@
 @import 'docs-vanilla-theme/scss/theme';
 @include docs-vanilla-theme;
+
+.p-sidebar-nav__list .p-sidebar-nav__list .p-sidebar-nav__link {
+  padding: 0;
+}
+.p-sidebar-nav__list .p-sidebar-nav__list .p-sidebar-nav__list .p-sidebar-nav__link {
+  padding-left: 1rem;
+}
+
+.p-sidebar-nav__group {
+  margin: 0;
+  padding: 1rem;
+}
+
+.p-sidebar-nav__list {
+  &, & .p-sidebar-nav__list {
+    margin: 0;
+  }
+}
+
+.p-link--external {
+  position: static;
+
+  &:after {
+    display: inline;
+    top: auto;
+    position: static;
+    height: auto;
+    width: auto;
+    margin-left: 0.25rem;
+  }
+}
