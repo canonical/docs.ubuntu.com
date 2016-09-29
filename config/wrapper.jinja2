@@ -30,9 +30,7 @@
               {% for item in navigation %}
               <li class="p-sidebar-nav__group">
                 {% if item.location %}
-                <h4 class="p-sidebar-nav__header">
-                  <a href="{{ item.location | replace('.html', '') }}">{{ item.title }}</a>
-                </h4>
+                <a class="p-sidebar-nav__link" href="{{ item.location | replace('.html', '') }}">{{ item.title }}</a>
                 {% else %}
                 <h4 class="p-sidebar-nav__header">{{ item.title }}</h4>
                 {% endif %}
