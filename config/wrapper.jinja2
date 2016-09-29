@@ -29,15 +29,13 @@
             <ul class="p-sidebar-nav__list">
               {% for item in navigation %}
               <li class="p-sidebar-nav__group">
-                <a href="#settings">
-                  <h4 class="p-sidebar-nav__header">
-                    {% if item.location %}
-                      <a href="{{ item.location | replace('.html', '') }}">{{ item.title }}</a>
-                    {% else %}
-                      {{ item.title }}
-                    {% endif %}
-                  </h4>
-                </a>
+                {% if item.location %}
+                <h4 class="p-sidebar-nav__header">
+                  <a href="{{ item.location | replace('.html', '') }}">{{ item.title }}</a>
+                </h4>
+                {% else %}
+                <h4 class="p-sidebar-nav__header">{{ item.title }}</h4>
+                {% endif %}
 
                 {% if item.children %}
                 <section id="settings" class="p-sidebar-nav__section">
