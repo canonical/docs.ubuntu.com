@@ -40,9 +40,13 @@
                   <ul class="p-sidebar-nav__list">
                     {% for child in item.children %}
                     <li>
+                      {% if child.location %}
                       <a class="p-sidebar-nav__link" href="{{ child.location | replace('.html', '') }}">
                         {{ child.title }}
                       </a>
+                      {% else %}
+                      <span class="p-sidebar-nav__link">{{ child.title }}</span>
+                      {% endif %}
 
                       {% if child.children %}
                       <section id="settings" class="p-sidebar-nav__section">
@@ -82,11 +86,21 @@
       </div>
     </footer>
     <script>
+      /* Add classes to links */
       var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
       for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
         var link = links[linkIndex];
+
+        /* Add external classes to external links */
         if (link.hostname && link.hostname != location.hostname) {
           link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
         }
       }
     </script>

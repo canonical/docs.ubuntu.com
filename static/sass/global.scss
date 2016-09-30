@@ -2,10 +2,10 @@
 @include docs-vanilla-theme;
 
 .p-sidebar-nav__list .p-sidebar-nav__list .p-sidebar-nav__link {
-  padding: 0;
+  padding-left: 1rem;
 }
 .p-sidebar-nav__list .p-sidebar-nav__list .p-sidebar-nav__list .p-sidebar-nav__link {
-  padding-left: 1rem;
+  padding-left: 2rem;
 }
 
 .p-sidebar-nav__group {
