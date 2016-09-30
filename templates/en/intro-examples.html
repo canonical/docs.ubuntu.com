@@ -38,33 +38,41 @@
                   <ul class="p-sidebar-nav__list">
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="index">
                         About MAAS
                       </a>
+                      
 
                       
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="intro-management">
                         Management summary
                       </a>
+                      
 
                       
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="intro-concepts">
                         Concepts and terms
                       </a>
+                      
 
                       
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="intro-architecture">
                         Architectural overview
                       </a>
+                      
 
                       
                     </li>
@@ -84,9 +92,11 @@
                   <ul class="p-sidebar-nav__list">
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="installconfig-install">
                         Installation
                       </a>
+                      
 
                       
                       <section id="settings" class="p-sidebar-nav__section">
@@ -122,25 +132,31 @@
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="installconfig-gui">
                         Access the GUI
                       </a>
+                      
 
                       
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="installconfig-zones">
                         Configure zones
                       </a>
+                      
 
                       
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="installconfig-network2">
                         Configure network
                       </a>
+                      
 
                       
                       <section id="settings" class="p-sidebar-nav__section">
@@ -176,9 +192,9 @@
                     </li>
                     
                     <li>
-                      <a class="p-sidebar-nav__link" href="">
-                        Nodes
-                      </a>
+                      
+                      <span class="p-sidebar-nav__link">Nodes</span>
+                      
 
                       
                       <section id="settings" class="p-sidebar-nav__section">
@@ -220,9 +236,11 @@
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="installconfig-images">
                         Images
                       </a>
+                      
 
                       
                       <section id="settings" class="p-sidebar-nav__section">
@@ -260,9 +278,11 @@
                   <ul class="p-sidebar-nav__list">
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="manage-account">
                         User Accounts
                       </a>
+                      
 
                       
                       <section id="settings" class="p-sidebar-nav__section">
@@ -298,9 +318,11 @@
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="manage-maas-ha">
                         High Availability (HA)
                       </a>
+                      
 
                       
                       <section id="settings" class="p-sidebar-nav__section">
@@ -330,17 +352,21 @@
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="manage-power">
                         Power Driver Capabilities
                       </a>
+                      
 
                       
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="manage-cli">
                         MAAS CLI
                       </a>
+                      
 
                       
                       <section id="settings" class="p-sidebar-nav__section">
@@ -390,17 +416,21 @@
                   <ul class="p-sidebar-nav__list">
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="troubleshoot-faq">
                         FAQ
                       </a>
+                      
 
                       
                     </li>
                     
                     <li>
+                      
                       <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
                         Getting help
                       </a>
+                      
 
                       
                     </li>
@@ -468,11 +498,21 @@
       </div>
     </footer>
     <script>
+      /* Add classes to links */
       var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
       for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
         var link = links[linkIndex];
+
+        /* Add external classes to external links */
         if (link.hostname && link.hostname != location.hostname) {
           link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
         }
       }
     </script>
