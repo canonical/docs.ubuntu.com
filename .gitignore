@@ -4,7 +4,6 @@ env/
 *.pyc
 
 # Django
-media/
 db.sqlite3
 
 # Sass
