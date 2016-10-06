@@ -34,6 +34,12 @@ Thumbs.db
 
 # Linux
 *~
+
+# Environment
+.python-version
+.envrc
+
+# Project
 .compose-project-name
 static/css
 /.compose-project-name
