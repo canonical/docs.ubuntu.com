@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Storage | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Introduction</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Install & Configure</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Configure network</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Nodes</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Manage MAAS</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Troubleshoot</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="ref-release-notes">Release notes</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="contributing">Help improve these docs</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="storage">Storage<a class="anchor" href="#storage"></a></h1>
+<p>MAAS has the ability to configure any storage layout during node deployment.
+MAAS doesn't just do simple partitioning - it supports complex storage layouts,
+including setting up and configuring Bcache, RAID, and LVM. It also offers
+fine-grained control over the creation, deletion, formatting and mounting of
+both <a href="installconfig-block">block devices</a> and
+<a href="installconfig-partitions">partitions</a>. This gives users unlimited
+possibilities on the storage configurations they want to deploy.</p>
+<h2 id="layouts">Layouts<a class="anchor" href="#layouts"></a></h2>
+<p>When a node is acquired by a user it gets a default storage layout. This
+layout provides the basic storage configuration to allow a node to deploy
+successfully. The default storage layout can also be adjusted allowing an
+administrator to make the decision on which layout will be the default.</p>
+<p>The users deploying nodes are not limited by the default. They can set an
+explicit storage layout when they acquire a node or after they have acquired a
+node with the set-storage-layout API. The user acquiring a node or performing
+the set-storage-layout API calls can also customize the layout generation.
+Each layout has a set of options that can be set to adjust the generated
+layout.</p>
+<h3 id="lvm-layout">LVM Layout<a class="anchor" href="#lvm-layout"></a></h3>
+<p>The 'LVM Layout' creates a volume group vgroot on a partition that spans the
+entire boot disk.  A logical volume lvroot is created for the full size of the
+volume group. The lvroot is formatted with ext4 and set as the / mount point:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Size</th>
+<th>Type</th>
+<th>Filesystem Type</th>
+<th>Mount point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">sda</td>
+<td>100G</td>
+<td>disk</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">sda1</td>
+<td>512M</td>
+<td>part</td>
+<td>fat32</td>
+<td>/boot/efi</td>
+</tr>
+<tr>
+<td align="left">sda2</td>
+<td>99.5G</td>
+<td>part</td>
+<td>lvm-pv(vgroot)</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">vgroot</td>
+<td>99.5G</td>
+<td>lvm</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">lvroot</td>
+<td>99.5G</td>
+<td>lvm</td>
+<td>ext4</td>
+<td>/</td>
+</tr>
+</tbody>
+</table>
+<p>The following options are supported for this layout. :</p>
+<p><code>boot_size</code>: Size of the boot partition on the boot disk. Default is 0, meaning not to
+create the boot partition. The '/boot' will be placed on the root filesystem.</p>
+<p><code>root_device</code>: The block device to place the root partition on. Default is the boot disk.</p>
+<p><code>root_size</code>: Size of the root partition. Default is 100%, meaning the entire size of the
+root device.</p>
+<p><code>vg_name</code>: Name of the created volume group. Default is <code>vgroot</code>.</p>
+<p><code>lv_name</code>: Name of the created logical volume. Default is <code>lvroot</code>.</p>
+<p><code>lv_size</code>: Size of the created logical volume. Default is 100%, meaning the entire size of
+the volume group.</p>
+<h3 id="flat-layout">Flat Layout<a class="anchor" href="#flat-layout"></a></h3>
+<p>With a 'Flat Layout', MAAS creates a partition that spans the entire boot disk. The partition is
+formatted with ext4 and set as the / mount point:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Size</th>
+<th>Type</th>
+<th>Filesystem Type</th>
+<th>Mount point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">sda</td>
+<td>100G</td>
+<td>disk</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">sda1</td>
+<td>512M</td>
+<td>part</td>
+<td>fat32</td>
+<td>/boot/efi</td>
+</tr>
+<tr>
+<td align="left">sda2</td>
+<td>99.5G</td>
+<td>part</td>
+<td>ext4</td>
+<td>/</td>
+</tr>
+</tbody>
+</table>
+<p>The following options are supported for this layout. :</p>
+<p><code>boot_size</code>: Size of the boot partition on the boot disk. Default is 0,
+    meaning not to create the boot partition. The '/boot' will be placed on
+the root filesystem.</p>
+<p><code>root_device</code>: The block device to place the root partition on. Default is the
+boot disk.</p>
+<p><code>root_size</code>: Size of the root partition. Default is 100%, meaning the entire
+size of the root device.</p>
+<h3 id="bcache-layout">Bcache Layout<a class="anchor" href="#bcache-layout"></a></h3>
+<p>A 'Bcache Layout' will create a partition that spans the entire boot disk as
+the backing device. It uses the smallest block device tagged with 'ssd' as the
+cache device. The Bcache device is formatted with ext4 and set as the / mount
+point.  If no block devices exists on the node that are tagged with 'ssd' then
+the Bcache device will not be created and the 'Flat Layout' will be used
+instead:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Size</th>
+<th>Type</th>
+<th>Filesystem Type</th>
+<th>Mount point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">sda</td>
+<td>100G</td>
+<td>disk</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">sda1</td>
+<td>512M</td>
+<td>part</td>
+<td>fat32</td>
+<td>/boot/efi</td>
+</tr>
+<tr>
+<td align="left">sda2</td>
+<td>99.5G</td>
+<td>part</td>
+<td>bc-backing</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">sdb (ssd)</td>
+<td>50G</td>
+<td>disk</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">sdb1</td>
+<td>50G</td>
+<td>part</td>
+<td>bc-cache</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">bcache0</td>
+<td>99.5G</td>
+<td>disk</td>
+<td>ext4</td>
+<td>/</td>
+</tr>
+</tbody>
+</table>
+<p>The following options are supported for this layout. :</p>
+<p><code>boot_size</code>: Size of the boot partition on the boot disk. Default is 0, meaning
+not to create the boot partition. The '/boot' will be placed on the root
+filesystem.</p>
+<p><code>root_device</code>: The block device to place the root partition on. Default is the
+boot disk.</p>
+<p><code>root_size</code>: Size of the root partition. Default is 100%, meaning the entire
+size of the root device.</p>
+<p><code>cache_device</code>: The block device to use as the cache device. Default is the
+smallest block device tagged ssd.</p>
+<p><code>cache_mode</code>: The cache mode to set the created Bcache device to. Default is
+<code>writethrough</code>.</p>
+<p><code>cache_size</code>: The size of the partition on the cache device. Default is 100%,
+meaning the entire size of the cache device.</p>
+<p><code>cache_no_part</code>: Whether or not to create a partition on the cache device.
+Default is false, meaning to create a partition using the given <code>cache_size</code>.
+If set to true no partition will be created and the raw cache device will be
+used as the cache.</p>
+<p class="note"><strong> Note</strong>: The /boot/efi partition on all layouts will only be created on nodes
+that deploy with UEFI.</p>
+<h2 id="setting-the-layout">Setting the Layout<a class="anchor" href="#setting-the-layout"></a></h2>
+<p>It's also possible to change the storage layout either globally, on acquire, or
+after acquire.</p>
+<h3 id="globally">Globally<a class="anchor" href="#globally"></a></h3>
+<p>The global default storage layout can be set using either the API or the web
+interface. From the web interface, for example, look for 'Default Storage Layout' on the
+settings page:</p>
+<p><img alt="default storage" src="/static/media/storage_global_layout.png" /></p>
+<p>To change the default storage layout from the command line, you would enter the
+following:</p>
+<pre><code class="bash">maas admin maas set-config name=default_storage_layout value=flat
+</code></pre>
+
+<p>If this command is successful, you will see the following output:</p>
+<pre><code class="bash">Success.
+Machine-readable output follows:
+OK
+</code></pre>
+
+<p>For the default storage layout to apply, a node will need will need to be in
+the 'Ready' state, before being acquired. </p>
+<h3 id="per-node">Per node<a class="anchor" href="#per-node"></a></h3>
+<p>If a node is already acquired and you want to adjust the storage layout the
+<code>set_storage_layout API</code> call can be used:</p>
+<pre><code class="bash">maas admin machine set-storage-layout &lt;node-id&gt; storage_layout=lvm lv_size=&lt;size&gt;
+</code></pre>
+
+<p class="note"><strong> Warning</strong>: This will completely remove any previous storage configuration on all
+block devices.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>

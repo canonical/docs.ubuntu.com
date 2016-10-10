@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contributing to MAAS docs | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Introduction</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Install & Configure</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Configure network</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Nodes</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Manage MAAS</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Troubleshoot</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="ref-release-notes">Release notes</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="contributing">Help improve these docs</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="contributing-to-maas-documentation">Contributing to MAAS documentation<a class="anchor" href="#contributing-to-maas-documentation"></a></h1>
+<p>MAAS documentation is hosted on <a href="http://github.com">GitHub</a> and published on
+<a href="http://maas.io/docs">maas.io</a>. Its source documents are easy to
+understand and edit due to the format used: standard
+<a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/">GitHub Flavored Markdown</a>.
+Conventions have been added to support doc features such as <em>foldouts</em> and
+<em>admonishments</em> (explained below).</p>
+<p>Here are a few <a href="http://askubuntu.com/editing-help">cheat</a>
+<a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">sheets</a> for
+writing in GFM.</p>
+<h2 id="documentation-bugs">Documentation bugs<a class="anchor" href="#documentation-bugs"></a></h2>
+<p>Bugs for documentation issues are submitted here:</p>
+<p>https://github.com/CanonicalLtd/maas-docs/issues/new</p>
+<p>and listed here:</p>
+<p>https://github.com/CanonicalLtd/maas-docs/issues</p>
+<h2 id="how-to-contribute-text">How to contribute text<a class="anchor" href="#how-to-contribute-text"></a></h2>
+<p>Here are the basic steps necessary to get a change published on the website:</p>
+<ul>
+<li><a href="https://help.github.com/articles/fork-a-repo">Fork the repository</a> from
+  <a href="http://github.com/CanonicalLtd/maas-docs">github.com/CanonicalLtd/maas-docs</a></li>
+<li>Make a local branch from your fork (and enter that branch)</li>
+<li>Edit the source documents</li>
+<li>Push your branch back to your fork on GitHub</li>
+<li><a href="https://help.github.com/articles/creating-a-pull-request">Submit a Pull Request</a></li>
+</ul>
+<p>The source documents are located in the <code>src</code> directory. From there each
+language is separated into its own directory by language code. For instance,
+English is under <code>src/en</code>.</p>
+<p>Once submitted, a Docs team member will review your work, suggest improvements,
+and eventually merge it with the master branch. Don't forget to review your
+work before submission!</p>
+<h3 id="metadata">Metadata<a class="anchor" href="#metadata"></a></h3>
+<p>Each file has the potential to include metadata for various purposes. At the
+moment this is used to provide a title element, and also to implement a limited
+form of todo list items. Metadata is written as <em>key : value</em> pairs AT THE VERY
+TOP of the document. E.g.</p>
+<pre><code>Title: Contributing to MAAS docs
+TODO: add section on metadata
+      spellcheck everything
+
+# Title of document
+
+Well written text goes here blah blah
+</code></pre>
+
+<p>As you can see, the TODO metadata can have more than one item, as long as
+additional items are indented by at least 4 spaces directly after the previous
+one. The Metadata section ends immediately there is a blank line, and the
+normal document text can begin.</p>
+<h3 id="sections">Sections<a class="anchor" href="#sections"></a></h3>
+<p>All the text is organised into sections. These are auto-generated, there is
+nothing extra you need to do:</p>
+<pre><code># &lt;h1&gt; equivalent
+## &lt;h2&gt; equivalent
+### &lt;h3&gt; equivalent
+</code></pre>
+<h3 id="code-blocks">Code blocks<a class="anchor" href="#code-blocks"></a></h3>
+<p>Create a code block using the code-fencing markup of three backticks,
+preferably followed by the type of code:</p>
+<pre><code>```bash
+maas do something
+maas do something else
+```
+</code></pre>
+<p>The most common "types" used in this documentation are: <code>bash</code>, <code>yaml</code>, <code>json</code>,
+and <code>no-highlight</code>.</p>
+<h3 id="inline-code">Inline code<a class="anchor" href="#inline-code"></a></h3>
+<p>Use a backtick to <code>inline commands and other literals</code>:</p>
+<h3 id="notes,-warnings,-callouts,-and-admonishments">Notes, warnings, callouts, and admonishments<a class="anchor" href="#notes,-warnings,-callouts,-and-admonishments"></a></h3>
+<p>Callouts are used to notify the user of additional information or warn them of
+potential pitfalls. This will create a notification resembling the following in
+the docs:</p>
+<p><img alt="callout" src="/static/media/note.png" /></p>
+<p>To implement this callout, use the following syntax:</p>
+<pre><code class="no-highlight">!!! Note: If you want to get more information on what is actually happening, or
+to help resolve problems, you can add the `--show-log` switch to the juju
+command to get verbose output.
+</code></pre>
+
+<h3 id="foldouts">Foldouts<a class="anchor" href="#foldouts"></a></h3>
+<p>When a page contains a high volume of information that would otherwise require
+a table of contents, or similar method of quick navigation, a <em>foldout</em> can be
+used. This will create a collapsed header which, when clicked, will expand to
+display all the content below it.</p>
+<pre><code>^# Header
+  Content can be multi-paragraphed and will be sent through the Markdown parser
+
+  as long as content is continually indented under the header.
+</code></pre>
+
+<h2 id="adding-pages">Adding pages<a class="anchor" href="#adding-pages"></a></h2>
+<p>Adding a page (file) to the documentation requires the altering of
+<code>src/navigation.tpl</code>. Doing so will insert an entry into the left navigation
+pane which will allow a visitor to discover the new page.</p>
+<p>Add the page with the following format:</p>
+<pre><code>&lt;li class="sub"&gt;&lt;a href="charms-scaling.html"&gt;Scaling Services&lt;/a&gt;&lt;/li&gt;;
+</code></pre>
+<p>in the appropriate section. Please make sure you submit a Pull Request with a
+description of the new page and why it is needed!</p>
+<h2 id="adding-screenshots">Adding screenshots<a class="anchor" href="#adding-screenshots"></a></h2>
+<p>When adding screenshots place them in <code>media</code>. To reference them in
+your page use the syntax <code>![description](/static/media/picture.png)</code></p>
+<h1 id="testing-or-deploying-locally">Testing or deploying locally<a class="anchor" href="#testing-or-deploying-locally"></a></h1>
+<p>First you need to generate the docs from the Markdown. In the root directory
+first get the dependencies and make the docs:</p>
+<pre><code class="bash">make sysdeps
+make
+</code></pre>
+
+<p class="note"><strong> Note</strong>: You only need to <code>make sysdeps</code> once, after that you'll have all the
+dependencies you'll need to build the docs going forward.</p>
+<p>The documentation makes use of Javascript for some functionality, so in order
+to test the docs properly you will need to have a web server set up. See
+<a href="https://help.ubuntu.com/lts/serverguide/httpd.html">Ubuntu and Apache</a>. The
+DocumentRoot should be the <code>htmldocs</code> directory:</p>
+<pre><code class="bash">sudo cp -R htmldocs /var/www/htmldocs
+</code></pre>
+
+<p>You can then point your web browser at your local machine (127.0.0.1/htmldocs)
+to view the files.</p>
+<p>Alternatively, you can use Python to start a simple HTTP server on the docs
+directory. Navigate to the <code>/htmldocs</code> directory of the docs and run the
+following:</p>
+<pre><code class="bash">python -m SimpleHTTPServer
+</code></pre>
+
+<h1 id="style-and-language">Style and language<a class="anchor" href="#style-and-language"></a></h1>
+<p>We are putting together a more comprehensive style guide, but for the moment the
+following are good guidelines:</p>
+<ul>
+<li>Resist being overly formal.</li>
+<li>Remember the readers are <em>users</em> not necessarily Juju developers.</li>
+<li>Spell things properly! (see below).</li>
+<li>We use British English (en-GB). See
+   <a href="contributing-en-GB">language details</a>, including a comparison with
+   American English (en-US).</li>
+<li>If including links or examples, double-check they actually work</li>
+<li>We enforce 80 columns for every text file to keep it readable. Here are
+   instructions for the
+   <a href="http://stackoverflow.com/questions/3033423/vim-command-to-restructure-force-text-to-80-columns">vim</a>
+   and <a href="http://www.emacswiki.org/emacs/EightyColumnRule">emacs</a> editors.</li>
+</ul>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>

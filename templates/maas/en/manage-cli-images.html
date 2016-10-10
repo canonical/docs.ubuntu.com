@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MAAS CLI | Image Management | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Introduction</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Install & Configure</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Configure network</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Nodes</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Manage MAAS</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Troubleshoot</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="ref-release-notes">Release notes</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="contributing">Help improve these docs</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="cli-image-management">CLI Image Management<a class="anchor" href="#cli-image-management"></a></h1>
+<p>This is a list of image management tasks to perform with the MAAS CLI. See
+<a href="manage-cli">MAAS CLI</a> on how to get started.</p>
+<p>See <a href="installconfig-images">MAAS Images</a> for an overview of images.</p>
+<h2 id="list-image-sources">List image sources<a class="anchor" href="#list-image-sources"></a></h2>
+<p>To list image sources:</p>
+<pre><code class="bash">maas $PROFILE boot-sources read
+</code></pre>
+
+<h2 id="list-image-selections">List image selections<a class="anchor" href="#list-image-selections"></a></h2>
+<p>To list image selections for a boot source:</p>
+<pre><code class="bash">maas $PROFILE boot-source-selections read $SOURCE_ID
+</code></pre>
+
+<h2 id="list-currently-available-images">List currently available images<a class="anchor" href="#list-currently-available-images"></a></h2>
+<p>To list currently available images:</p>
+<pre><code class="bash">maas $PROFILE boot-resources read
+</code></pre>
+
+<h2 id="select-images">Select images<a class="anchor" href="#select-images"></a></h2>
+<p>To select images from an image source by specifying series; architecture; and
+HWE kernel:</p>
+<pre><code class="bash">maas $PROFILE boot-source-selections create $SOURCE_ID \
+    os=&quot;ubuntu&quot; release=&quot;$SERIES&quot; arches=&quot;$ARCH&quot; \
+    subarches=&quot;$HWE_KERNEL&quot; labels=&quot;*&quot;
+</code></pre>
+
+<p>For example, to select all HWE kernels for 64-bit Trusty:</p>
+<pre><code class="bash">maas $PROFILE boot-source-selections create 1 \
+    os=&quot;ubuntu&quot; release=&quot;trusty&quot; arches=&quot;amd64&quot; \
+    subarches=&quot;*&quot; labels=&quot;*&quot;
+</code></pre>
+
+<p>Often users would simply want the latest HWE kernel available for Trusty,
+which, at time of writing, is from Xenial:</p>
+<pre><code class="bash">maas $PROFILE boot-source-selections create 1 \
+    os=&quot;ubuntu&quot; release=&quot;trusty&quot; arches=&quot;amd64&quot; \
+    subarches=&quot;hwe-x&quot; labels=&quot;*&quot;
+</code></pre>
+
+<p>After new images are selected MAAS will need to import them.</p>
+<h2 id="import-newly-selected-images">Import newly-selected images<a class="anchor" href="#import-newly-selected-images"></a></h2>
+<p>To import newly-selected images:</p>
+<pre><code class="bash">maas $PROFILE boot-resources import
+</code></pre>
+
+<p>Once newly-selected images are imported a sync mechanism is enabled (by
+default) to keep them up to date. The refresh time interval is 60 minutes.</p>
+<p>Available images resulting from this action are reflected in the web UI.</p>
+<h2 id="delete-an-image-source">Delete an image source<a class="anchor" href="#delete-an-image-source"></a></h2>
+<p>To delete an image source:</p>
+<pre><code class="bash">maas $PROFILE boot-source delete $SOURCE_ID
+</code></pre>
+
+<p>If the source that was deleted was the sole boot source then the fields
+'Sync URL' and 'Keyring Path' in the web UI will take on null values.</p>
+<h2 id="edit-an-image-source">Edit an image source<a class="anchor" href="#edit-an-image-source"></a></h2>
+<p>An existing source can be edited by changing the GPG keyring file
+(KEYRING_FILE) and/or the location (URL).</p>
+<p>Update the source:</p>
+<pre><code class="bash">maas $PROFILE boot-source update $SOURCE_ID \
+    url=$URL keyring_filename=$KEYRING_FILE
+</code></pre>
+
+<p>At this time MAAS only fully supports a source containing official MAAS images.
+This implies that an image source would only be edited if a mirror of such
+images has been set up. The location can change but the keyring remains
+constant:</p>
+<p>KEYRING_FILE=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg</p>
+<h2 id="add-an-image-source">Add an image source<a class="anchor" href="#add-an-image-source"></a></h2>
+<p class="note"><strong> Note</strong>: To avoid unnecessary complexity, you should probably delete any
+existing source before adding a new one.</p>
+<p>Presented below are two use cases for adding an image source:</p>
+<ol>
+<li>Use a local image mirror (official images)</li>
+<li>Recreate the default image source (if it was ever deleted)</li>
+</ol>
+<!--
+1. Use a custom image source (custom images)
+-->
+
+<p>The general syntax is:</p>
+<pre><code class="bash">maas $PROFILE boot-sources create \
+    url=$URL keyring_filename=$KEYRING_FILE
+</code></pre>
+
+<p>The output will include a new numeric ID that identifies the source
+(SOURCE_ID).</p>
+<p>Since MAAS can only practically work with a single image source this scenario
+implies that any existing sources have first been deleted, or will be deleted.
+In addition, as is the case with editing a source, the location (URL) is the
+only acting variable. The only supported keyring is:</p>
+<p>KEYRING_FILE=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg</p>
+<p>If the source that was added is now the sole boot source then the fields
+'Sync URL' and 'Keyring Path' in the web UI will reflect its values.</p>
+<p>Once the source is added, proceed to the
+<a href="installconfig-images-import">Select and Import</a> images step.</p>
+<h3 id="using-a-local-image-mirror">Using a local image mirror<a class="anchor" href="#using-a-local-image-mirror"></a></h3>
+<p>Once the mirror is set up according to 
+<a href="installconfig-images-mirror">Local Image Mirror</a> it is just a matter of
+specifying the mirror location (URL). Since the images come from the default
+source the default keyring should be used. If the aforementioned mirror
+document was followed, the variable values should be:</p>
+<ul>
+<li>URL=https://myserver/maas/images/ephemeral-v2/daily/</li>
+<li>KEYRING_FILE=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg</li>
+</ul>
+<p>Where <code>myserver</code> identifies your mirror server's hostname or IP address.</p>
+<h3 id="recreate-the-default-image-source">Recreate the default image source<a class="anchor" href="#recreate-the-default-image-source"></a></h3>
+<p>Recreate the default image source if it was ever deleted using the following
+variable values:</p>
+<ul>
+<li>URL=https://images.maas.io/ephemeral-v2/daily/</li>
+<li>KEYRING_FILE=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg</li>
+</ul>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>
