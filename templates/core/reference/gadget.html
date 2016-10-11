@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gadget snap syntax | Ubuntu docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <p>A gadget snap requires two files in the <code>meta</code> directory of your snap.</p>
+<ul>
+<li>a <code>gadget.yaml</code> file that describes the device partitioning and boot system</li>
+<li>a <code>snap.yaml</code> file that describes the gadget snap and how it will be presented in stores</li>
+</ul>
+<h2 id="the-gadget.yaml-file">The gadget.yaml file<a class="anchor" href="#the-gadget.yaml-file"></a></h2>
+<p>Three YAML keys are used to describe your target device:</p>
+<ul>
+<li><code>device-tree</code> (string): the Device Tree Blob path.</li>
+<li><code>device-tree-origin</code> (string): <code>kernel</code> or <code>gadget</code> (default) depending if the DTB is located in the kernel or in the gadget snap.</li>
+<li><code>volumes</code> (YAML sub-section, required): the volumes layout, where each disk image is represented as a YAML sub-section.</li>
+</ul>
+<h3 id="the-">The <code>volumes</code> sub-section<a class="anchor" href="#the-"></a></h3>
+<p>Each volume is described by:</p>
+<ul>
+<li>a name (required)</li>
+<li>a partition structure (required)</li>
+<li>a bootloader definition (<code>grub</code>, <code>u-boot</code>)</li>
+<li>a partitioning schema eg. <code>mbr</code></li>
+</ul>
+<h4 id="example:-a-raspberry-pi-3-gadget.yaml">Example: a raspberry pi 3 gadget.yaml<a class="anchor" href="#example:-a-raspberry-pi-3-gadget.yaml"></a></h4>
+<pre><code>device-tree: bcm2710-rpi-3-b.dtb
+volumes:
+  pi3:
+    schema: mbr
+    bootloader: u-boot
+    structure:
+      - type: 0C
+        filesystem: vfat
+        filesystem-label: system-boot
+        size: 128M
+        content:
+          - source: boot-assets/
+            target: /
+</code></pre>
+<p>Used with the following directory structure:</p>
+<pre><code>.
+├── boot-assets
+│   ├── (...)
+│   └── bcm2710-rpi-3-b.dtb
+├── meta
+│   ├── (...)
+│   ├── gadget.yaml
+│   └── snap.yaml
+├── (...)
+└── README
+</code></pre>
+<h2 id="examples-of-&quot;production-ready&quot;-gagdet-snaps">Examples of "production ready" gagdet snaps<a class="anchor" href="#examples-of-&quot;production-ready&quot;-gagdet-snaps"></a></h2>
+<ul>
+<li><a href="http://bazaar.launchpad.net/~snappy-dev/snappy-hub/snappy-systems/files/head:/beagleblack/">Beagleblack</a></li>
+<li><a href="http://bazaar.launchpad.net/~snappy-dev/snappy-hub/snappy-systems/files/head:/dragonboard/">Dragonboard</a></li>
+<li><a href="http://bazaar.launchpad.net/~snappy-dev/snappy-hub/snappy-systems/files/head:/generic-amd64/">amd64</a></li>
+<li><a href="http://bazaar.launchpad.net/~snappy-dev/snappy-hub/snappy-systems/files/head:/generic-i386/">i386</a></li>
+<li><a href="http://bazaar.launchpad.net/~snappy-dev/snappy-hub/snappy-systems/files/head:/pi2/">pi2</a></li>
+<li><a href="http://bazaar.launchpad.net/~snappy-dev/snappy-hub/snappy-systems/files/head:/pi3/">pi3</a></li>
+</ul>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
 ./bin/build-maas-docs
+./bin/build-ubuntu-core-docs

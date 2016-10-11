@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hooks | Ubuntu docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <p>There are a number of situations where snapd needs to notify a snap that
+something has happened. For example, when a snap is upgraded, it may need to run
+some sort of migration on the previous version's data in order to make it
+consumable by the new version. Or when an interface is connected or
+disconnected, the snap might need to obtain attributes specific to that
+connection. These types of situations are handled by hooks.</p>
+<p>A hook is defined as an executable contained within the <code>meta/hooks/</code> directory
+inside the snap. The file name of the executable is the name of the hook (e.g.
+the <code>upgrade</code> hook executable would be <code>meta/hooks/upgrade</code>).</p>
+<p>As long as the file name of the executable corresponds to a supported hook name,
+that's all one needs to do in order to utilize a hook within their snap. Note
+that hooks, like apps, are executed within a confined environment. By default
+hooks will run with no plugs; if a hook needs more privileges one can use the
+top-level attribute <code>hooks</code> in <code>snap.yaml</code> to request plugs, like so:</p>
+<pre><code>hooks: # Top-level YAML attribute, parallel to `apps`
+    upgrade: # Hook name, corresponds to executable name
+        plugs: [network] # Or any other plugs required by this hook
+</code></pre>
+<p>Note that hooks will be called with no parameters. If they need more information
+from snapd (or need to provide information to snapd) they can utilize the
+<code>snapctl</code> command (for more information on <code>snapctl</code>, see <code>snapctl -h</code>).</p>
+<h2 id="supported-hooks">Supported Hooks<a class="anchor" href="#supported-hooks"></a></h2>
+<p class="note"><strong>Note:</strong> The development of specific hooks is ongoing.</p>
+<h3 id="configure"><code>configure</code></h3>
+<p>The <code>configure</code> hook will be called whenever the user requests a configuration
+change via the <code>snap set</code> command. The hook should use <code>snapctl get</code> to retrieve
+the requested configuration from snapd, and act upon it. If it exits non-zero,
+the configuration will not be applied.</p>
+<h4 id="configure-example"><code>configure</code> example</h4>
+<p>Say the user runs:</p>
+<pre><code class="bash">$ snap set &lt;snapname&gt; username=foo password=bar
+</code></pre>
+
+<p>The <code>configure</code> hook would be located within the snap at <code>meta/hooks/configure</code>.
+An example of what it might contain is:</p>
+<pre><code class="bash">#!/bin/sh
+
+if ! username=$(snapctl get username); then
+    echo &quot;Username is required&quot;
+    exit 1
+fi
+
+if ! password=$(snapctl get password); then
+    echo &quot;Password is required&quot;
+    exit 1
+fi
+
+# Handle username and password, perhaps write to a credential file of some sort.
+echo &quot;user=$username&quot; &gt; $SNAP_DATA/credentials
+echo &quot;password=$password&quot; &gt;&gt; $SNAP_DATA/credentials
+chmod 600 $SNAP_DATA/credentials
+</code></pre>
+
+<h3 id="prepare-device-gadget-snap-specific"><code>prepare-device</code> (gadget snap specific)</h3>
+<p>The optional <code>prepare-device</code> hook will be called on the gadget if
+present at the start of the device initialization process, once the
+device has first booted and the gadget snap has been installed. The
+hook will also be called if this process is retried later from scratch
+in case of initialization failures.</p>
+<p>The device initialization process is for example responsible of
+setting the serial identification of the device through an exchange
+with a device service. The <code>prepare-device</code> hook can for example
+redirect this exchange and dynamically set options relevant to it.</p>
+<h4 id="prepare-device-example"><code>prepare-device</code> example</h4>
+<pre><code class="bash">#!/bin/sh
+
+# optionally set the url of the service
+snapctl set device-service.url=&quot;https://device-service&quot;
+# set optional extra HTTP headers for requests to the service
+snapctl set device-service.headers='{&quot;token&quot;: &quot;TOKEN&quot;}'
+
+# set an optional proposed serial identifier, depending on the service
+# this can end up being ignored;
+# this might need to be obtained dynamically
+snapctl set registration.proposed-serial=&quot;DEVICE-SERIAL&quot;
+
+# optionally pass details of the device as the body of registration request,
+# the body is text, typically YAML;
+# this might need to be obtained dynamically
+snapctl set registration.body='mac: &quot;00:00:00:00:ff:00&quot;'
+
+</code></pre>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>
