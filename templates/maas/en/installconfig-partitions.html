@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Partitions | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Introduction</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Install & Configure</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Configure network</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Nodes</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Manage MAAS</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Troubleshoot</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="ref-release-notes">Release notes</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="contributing">Help improve these docs</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="partitions">Partitions<a class="anchor" href="#partitions"></a></h1>
+<p>As with <a href="installconfig-block">block devices</a>, MAAS and its API offers
+a great deal of control over the creation, formatting, mounting and deletion of
+partitions.</p>
+<h3 id="list-partitions">List Partitions<a class="anchor" href="#list-partitions"></a></h3>
+<p>To view all the partitions on a block device, use the 'partitions read' API
+call:</p>
+<pre><code class="bash">maas admin partitions read &lt;node-id&gt; 10
+</code></pre>
+
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+[
+    {
+        &quot;bootable&quot;: false,
+        &quot;id&quot;: 9,
+        &quot;resource_uri&quot;:
+&quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/partition/9&quot;,
+        &quot;path&quot;: &quot;/dev/disk/by-dname/vda-part1&quot;,
+        &quot;uuid&quot;: &quot;aae082cd-8be0-4a64-ab49-e998abd6ea43&quot;,
+        &quot;used_for&quot;: &quot;LVM volume for vgroot&quot;,
+        &quot;size&quot;: 5360320512,
+        &quot;type&quot;: &quot;partition&quot;,
+        &quot;filesystem&quot;: {
+            &quot;uuid&quot;: &quot;a56ebfa6-8ef4-48b5-b6bc-9f9d27065d24&quot;,
+            &quot;mount_options&quot;: null,
+            &quot;label&quot;: null,
+            &quot;fstype&quot;: &quot;lvm-pv&quot;,
+            &quot;mount_point&quot;: null
+        }
+    }
+]
+</code></pre>
+
+<p>To view the metadata for a specific partition on a block device, rather than
+all partitions, use the singular 'partition' API call with an endpoint:</p>
+<pre><code class="basg">maas admin partition read &lt;node-id&gt; 10 9
+</code></pre>
+
+<h3 id="create-partition">Create Partition<a class="anchor" href="#create-partition"></a></h3>
+<p>To create a new partition on a block device, use the 'create' API call:</p>
+<pre><code class="bash">maas admin partitions create &lt;node-id&gt; 10 size=5360320512
+</code></pre>
+
+<p>In addition to bytes, as shown above, the 'size' of a partition can also be
+defined with a 'G' for gigabytes or 'M' for megabytes. The output from the
+previous command will look like this:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;bootable&quot;: false,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vda-part1&quot;,
+    &quot;filesystem&quot;: null,
+    &quot;used_for&quot;: &quot;Unused&quot;,
+    &quot;type&quot;: &quot;partition&quot;,
+    &quot;id&quot;: 10,
+    &quot;size&quot;: 5360320512,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/partition/10&quot;,
+    &quot;uuid&quot;: &quot;3d32adbf-9943-4785-ab38-963758338c6c&quot;
+}
+</code></pre>
+
+<h3 id="delete-partition">Delete Partition<a class="anchor" href="#delete-partition"></a></h3>
+<p>Partitions can be deleted from a block device with the 'delete' API call.
+Make sure you double check the partition details as the partition is deleted
+immediately, with no further confirmation:</p>
+<pre><code class="bash">maas admin partition delete &lt;node-id&gt; 10 9
+</code></pre>
+
+<p>Successful output from the 'delete' command will look like this:</p>
+<pre><code class="bash">Success.
+Machine-readable output follows:
+</code></pre>
+
+<h3 id="format-partition">Format Partition<a class="anchor" href="#format-partition"></a></h3>
+<p>Partitions can be formatted in a similar way to block devices:</p>
+<pre><code class="bash">maas admin partition format &lt;node-id&gt; 10 9 fstype=ext4
+</code></pre>
+
+<p>The output from the 'format' command will be similar to the following:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;id&quot;: 9,
+    &quot;used_for&quot;: &quot;Unmounted ext4 formatted filesystem&quot;,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/partition/9&quot;,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vda-part1&quot;,
+    &quot;uuid&quot;: &quot;aae082cd-8be0-4a64-ab49-e998abd6ea43&quot;,
+    &quot;size&quot;: 5360320512,
+    &quot;bootable&quot;: false,
+    &quot;type&quot;: &quot;partition&quot;,
+    &quot;filesystem&quot;: {
+        &quot;uuid&quot;: &quot;ea593366-be43-4ea3-b2d5-0adf82085a62&quot;,
+        &quot;mount_point&quot;: null,
+        &quot;mount_options&quot;: null,
+        &quot;fstype&quot;: &quot;ext4&quot;,
+        &quot;label&quot;: &quot;&quot;
+    }
+}
+</code></pre>
+
+<p class="note"><strong> Note</strong>: You cannot format partitions that are used to make another virtual
+block device.</p>
+<h3 id="unformat-partition">Unformat Partition<a class="anchor" href="#unformat-partition"></a></h3>
+<p>You can also remove the filesystem from a partition with the 'unformat' API
+call:</p>
+<pre><code class="bash">maas admin partition unformat &lt;node-id&gt; 10 10 fstype=ext4
+</code></pre>
+
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;bootable&quot;: false,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vda-part1&quot;,
+    &quot;filesystem&quot;: null,
+    &quot;used_for&quot;: &quot;Unused&quot;,
+    &quot;type&quot;: &quot;partition&quot;,
+    &quot;id&quot;: 10,
+    &quot;size&quot;: 5360320512,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/partition/10&quot;,
+    &quot;uuid&quot;: &quot;3d32adbf-9943-4785-ab38-963758338c6c&quot;
+}
+</code></pre>
+
+<h3 id="mount-partition">Mount Partition<a class="anchor" href="#mount-partition"></a></h3>
+<p>A formatted partition can be mounted at a given mount point with the 'mount'
+API call"</p>
+<pre><code class="bash">maas admin partition mount &lt;node-id&gt; 10 10 mount_point=/srv
+</code></pre>
+
+<p>The mount point and the filesystem is visible in the output from the command:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;bootable&quot;: false,
+    &quot;id&quot;: 10,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/partition/10&quot;,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vda-part1&quot;,
+    &quot;uuid&quot;: &quot;3d32adbf-9943-4785-ab38-963758338c6c&quot;,
+    &quot;used_for&quot;: &quot;ext4 formatted filesystem mounted at /srv&quot;,
+    &quot;size&quot;: 5360320512,
+    &quot;type&quot;: &quot;partition&quot;,
+    &quot;filesystem&quot;: {
+        &quot;uuid&quot;: &quot;1949a5fb-f7bd-4ada-8ba5-d06d3f5857a8&quot;,
+        &quot;mount_options&quot;: &quot;&quot;,
+        &quot;label&quot;: &quot;&quot;,
+        &quot;fstype&quot;: &quot;ext4&quot;,
+        &quot;mount_point&quot;: &quot;/srv&quot;
+    }
+}
+</code></pre>
+
+<h3 id="unmount-partition">Unmount Partition<a class="anchor" href="#unmount-partition"></a></h3>
+<p>A previous mounted partition can be unmounted with the 'unmount' call:</p>
+<pre><code class="bash">maas admin partition unmount 4y3h8a 10 10
+</code></pre>
+
+<p>After successfully running this command, the mount point will show as 'null' in
+the output:</p>
+<pre><code class="nohighlight">Success.
+Machine-readable output follows:
+{
+    &quot;bootable&quot;: false,
+    &quot;id&quot;: 10,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/2.0/nodes/4y3h8a/blockdevices/10/partition/10&quot;,
+    &quot;path&quot;: &quot;/dev/disk/by-dname/vda-part1&quot;,
+    &quot;uuid&quot;: &quot;3d32adbf-9943-4785-ab38-963758338c6c&quot;,
+    &quot;used_for&quot;: &quot;Unmounted ext4 formatted filesystem&quot;,
+    &quot;size&quot;: 5360320512,
+    &quot;type&quot;: &quot;partition&quot;,
+    &quot;filesystem&quot;: {
+        &quot;uuid&quot;: &quot;1949a5fb-f7bd-4ada-8ba5-d06d3f5857a8&quot;,
+        &quot;mount_options&quot;: null,
+        &quot;label&quot;: &quot;&quot;,
+        &quot;fstype&quot;: &quot;ext4&quot;,
+        &quot;mount_point&quot;: null
+    }
+}
+</code></pre>
+
+<pre><code>    "type": "partition",
+    "id": 3,
+    "size": 2000003072
+}
+</code></pre>
+<h2 id="restrictions">Restrictions<a class="anchor" href="#restrictions"></a></h2>
+<p>There are only a couple of restrictions that exists in the storage
+configuration. These restrictions are only in place because they are known to
+not allow a successful deployment.</p>
+<ul>
+<li>An EFI partition is required to be on the boot disk for UEFI.</li>
+<li>You cannot place partitions on logical volumes.</li>
+<li>You cannot use a logical volume as a Bcache backing device.</li>
+</ul>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>

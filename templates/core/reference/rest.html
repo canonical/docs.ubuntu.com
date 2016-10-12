@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ubuntu Core REST API | Ubuntu docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <p>You can interface with snapd on any ubuntu-core system using its REST API.</p>
+<h2 id="versioning">Versioning<a class="anchor" href="#versioning"></a></h2>
+<p>As the API evolves, some changes are deemed backwards-compatible (such
+as adding methods or verbs, or adding members to the returned JSON
+objects) and don't warrant an endpoint change; some changes won't be
+backwards compatible, and will be exposed under a new endpoint.</p>
+<h2 id="connecting">Connecting<a class="anchor" href="#connecting"></a></h2>
+<p>While it is expected to allow clients to connect using HTTPS over a
+TCP socket, at this point only a UNIX socket is supported. The socket
+is <code>/run/snapd.socket</code>.</p>
+<h2 id="authentication">Authentication<a class="anchor" href="#authentication"></a></h2>
+<p>The API documents three levels of access: <em>guest</em>, <em>authenticated</em> and
+<em>trusted</em>. The trusted level is allowed to modify all aspects of the
+system, the authenticated level can query most but not all aspects,
+and the guest level can only query static system-level information.</p>
+<p>Authentication over the unix socket is delegated to UNIX ACLs, and
+uses <code>SO_PEERCRED</code> to determine privilege levels. In essence this
+means that a user will be either <em>authenticated</em> or <em>trusted</em>, with
+the latter restricted to the superuser.</p>
+<h2 id="responses">Responses<a class="anchor" href="#responses"></a></h2>
+<p>All responses are <code>application/json</code> unless noted otherwise. There are
+three standard return types:</p>
+<ul>
+<li>Standard return value</li>
+<li>Background operation</li>
+<li>Error</li>
+</ul>
+<p>Status codes follow that of HTTP. Standard and background operation responses
+are capable of returning additional meta data key/values as part of the returned
+JSON object.</p>
+<h3 id="standard-return-value">Standard return value<a class="anchor" href="#standard-return-value"></a></h3>
+<p>For a standard synchronous operation, the following JSON object is
+returned:</p>
+<pre><code class="javascript">{
+ &quot;result&quot;: {},               // Extra resource/action specific data
+ &quot;status&quot;: &quot;OK&quot;,
+ &quot;status-code&quot;: 200,
+ &quot;type&quot;: &quot;sync&quot;
+}
+</code></pre>
+
+<p>The HTTP code will be 200 (<code>OK</code>), or 201 (<code>Created</code>, in which case the
+<code>Location</code> HTTP header will be set), as appropriate.</p>
+<h3 id="background-operation">Background operation<a class="anchor" href="#background-operation"></a></h3>
+<p>When a request results in a background operation, the HTTP code is set
+to 202 (<code>Accepted</code>) and the <code>Location</code> HTTP header is set to the
+operation's URL.</p>
+<p>The body is a JSON object with the following structure:</p>
+<pre><code class="javascript">{
+ &quot;result&quot;: {
+     ...
+ },
+ &quot;status&quot;: &quot;Accepted&quot;,
+ &quot;status-code&quot;: 202,
+ &quot;type&quot;: &quot;async&quot;
+ &quot;change&quot;: &quot;adWf&quot;,
+}
+</code></pre>
+
+<p>Information about the background operation progress can be retrieved
+from the referenced change.</p>
+<h3 id="error">Error<a class="anchor" href="#error"></a></h3>
+<p>There are various situations in which something may immediately go
+wrong, in those cases, the following return value is used:</p>
+<pre><code class="javascript">{
+ &quot;result&quot;: {
+   &quot;message&quot;: &quot;human-friendly description of the cause of the error&quot;,
+   &quot;kind&quot;: &quot;store-error&quot;,  // one of a list of kinds (TBD), only present iff &quot;value&quot; is present
+   &quot;value&quot;: {&quot;...&quot;: &quot;...&quot;} // kind-specific object, as required
+ },
+ &quot;status&quot;: &quot;Bad Request&quot;, // text description of status-code
+ &quot;status-code&quot;: 400,      // or 401, etc. (same as HTTP code)
+ &quot;type&quot;: &quot;error&quot;
+}
+</code></pre>
+
+<p>HTTP code must be one of of 400, 401, 403, 404, 405, 409, 412 or 500.</p>
+<p>Error <em>results</em> will also be used in the output of <code>async</code> responses.</p>
+<p>If, in implementing a client, you find yourself keying off of
+<code>message</code> to alter the behaviour of your client to e.g. better inform
+the user of the error or otherwise adapt to the error condition,
+<strong>STOP</strong> and <em>talk to us</em>; this is where <code>kind</code> comes in. New entries
+for <code>kind</code> (and associated <code>value</code> metadata) will be added as needed
+by client implementations.</p>
+<h4 id="error-kinds">Error kinds<a class="anchor" href="#error-kinds"></a></h4>
+<table>
+<thead>
+<tr>
+<th>kind</th>
+<th>value description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>license-required</code></td>
+<td>see "A note on licenses", below</td>
+</tr>
+<tr>
+<td><code>two-factor-required</code></td>
+<td>the client needs to retry the <code>login</code> command including an OTP</td>
+</tr>
+<tr>
+<td><code>two-factor-failed</code></td>
+<td>the OTP provided wasn't recognised</td>
+</tr>
+<tr>
+<td><code>login-required</code></td>
+<td>the requested operation cannot be performed without an authenticated user. This is the kind of any other 401 Unauthorized response.</td>
+</tr>
+<tr>
+<td><code>invalid-auth-data</code></td>
+<td>the authentication data provided failed to validate (e.g. a malformed email address). The <code>value</code> of the error is an object with a key per failed field and a list of the failures on each field.</td>
+</tr>
+<tr>
+<td><code>terms-not-accepted</code></td>
+<td>the user has not accepted the store's terms of service.</td>
+</tr>
+<tr>
+<td><code>no-payment-methods</code></td>
+<td>the user does not have a payment method registered to complete a purchase.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="timestamps">Timestamps<a class="anchor" href="#timestamps"></a></h3>
+<p>Timestamps are presented in RFC3339 format, with µs precision, and in
+UTC. For example, <code>2009-02-13T23:31:31.234567Z</code>.</p>
+<h2 id="_1"><code>/</code></h2>
+<p>Reserved for human-readable content describing the service.</p>
+<h2 id="v2system-info"><code>/v2/system-info</code></h2>
+<h3 id="get"><code>GET</code></h3>
+<ul>
+<li>Description: Server configuration and environment information</li>
+<li>Access: guest</li>
+<li>Operation: sync</li>
+<li>Return: Dict with the operating system's key values.</li>
+</ul>
+<h4 id="sample-result:">Sample result:<a class="anchor" href="#sample-result:"></a></h4>
+<pre><code class="javascript">{
+ &quot;series&quot;: &quot;16&quot;,
+ &quot;version&quot;: &quot;2.0.17&quot;,
+ &quot;os-release&quot;: {
+   &quot;id&quot;: &quot;ubuntu&quot;,
+   &quot;version-id&quot;: &quot;17.04&quot;,
+ },
+ &quot;on-classic&quot;: true,
+ &quot;store&quot;: &quot;store-id&quot;          // only if not default
+}
+</code></pre>
+
+<h2 id="v2login"><code>/v2/login</code></h2>
+<h3 id="post"><code>POST</code></h3>
+<ul>
+<li>Description: Log user in the store</li>
+<li>Access: trusted</li>
+<li>Operation: sync</li>
+<li>Return: Dict with the authenticated user information.</li>
+</ul>
+<h4 id="sample-input">Sample input<a class="anchor" href="#sample-input"></a></h4>
+<pre><code class="javascript">{
+  &quot;username&quot;: &quot;foo@bar.com&quot;, // username is an email
+  &quot;password&quot;: &quot;swordfish&quot;,   // the password (!)
+  &quot;otp&quot;: &quot;123456&quot;            // OTP, if the account needs it
+}
+</code></pre>
+
+<h4 id="sample-result:">Sample result:<a class="anchor" href="#sample-result:"></a></h4>
+<pre><code class="javascript">{
+ &quot;macaroon&quot;: &quot;serialized-store-macaroon&quot;,
+ &quot;discharges&quot;: [&quot;discharge-for-macaroon-authentication&quot;]
+}
+</code></pre>
+
+<p>See also the error kinds <code>two-factor-required</code> and
+<code>two-factor-failed</code>.</p>
+<h2 id="v2find"><code>/v2/find</code></h2>
+<h3 id="get_1"><code>GET</code></h3>
+<ul>
+<li>Description: Find snaps in the store</li>
+<li>Access: authenticated</li>
+<li>Operation: sync</li>
+<li>Return: list of snaps in the store that match the search term and
+  that this system can handle.</li>
+</ul>
+<h3 id="parameters:">Parameters:<a class="anchor" href="#parameters:"></a></h3>
+<h4 id="q"><code>q</code></h4>
+<p>Search for snaps that match the given string. This is a weighted broad
+search, meant as the main interface to searching for snaps.</p>
+<h4 id="name"><code>name</code></h4>
+<p>Search for snaps whose name matches the given string. Can't be used
+together with <code>q</code>. This is meant for things like autocompletion. The
+match is exact (i.e. find would return 0 or 1 results) unless the
+string ends in <code>*</code>.</p>
+<h4 id="select"><code>select</code></h4>
+<p>Alter the collection searched:</p>
+<ul>
+<li><code>refresh</code>: search refreshable snaps. Can't be used with <code>q</code>, nor <code>name</code>.</li>
+<li><code>private</code>: search private snaps (by default, find only searches
+  public snaps). Can't be used with <code>name</code>, only <code>q</code> (for now at
+  least).</li>
+</ul>
+<h4 id="sample-result:">Sample result:<a class="anchor" href="#sample-result:"></a></h4>
+<pre><code class="javascript">[{
+      &quot;channel&quot;: &quot;stable&quot;,
+      &quot;confinement&quot;: &quot;strict&quot;,
+      &quot;description&quot;: &quot;Moon-buggy is a simple character graphics game, where you drive some kind of car across the moon's surface.  Unfortunately there are dangerous craters there.  Fortunately your car can jump over them!\r\n&quot;,
+      &quot;developer&quot;: &quot;dholbach&quot;,
+      &quot;download-size&quot;: 90112,
+      &quot;icon&quot;: &quot;&quot;,
+      &quot;id&quot;: &quot;2kkitQurgOkL3foImG4wDwn9CIANuHlt&quot;,
+      &quot;name&quot;: &quot;moon-buggy&quot;,
+      &quot;private&quot;: false,
+      &quot;resource&quot;: &quot;/v2/snaps/moon-buggy&quot;,
+      &quot;revision&quot;: &quot;11&quot;,
+      &quot;status&quot;: &quot;available&quot;,
+      &quot;summary&quot;: &quot;Drive a car across the moon&quot;,
+      &quot;type&quot;: &quot;app&quot;,
+      &quot;version&quot;: &quot;1.0.51.11&quot;
+      &quot;prices&quot;: {&quot;EUR&quot;: 1.99, &quot;USD&quot;: 2.49}
+    }, {
+      &quot;description&quot;: &quot;no description&quot;,
+      &quot;developer&quot;: &quot;chipaca&quot;,
+      &quot;download-size&quot;: 1110016,
+      &quot;icon&quot;: &quot;https://myapps.developer.ubuntu.com/site_media/appmedia/2015/10/http.png&quot;,
+      &quot;name&quot;: &quot;http&quot;,
+      &quot;resource&quot;: &quot;/v2/snaps/http&quot;,
+      &quot;revision&quot;: 14,
+      &quot;screenshots&quot;: [{url: &quot;https://myapps.developer.ubuntu.com/site_media/appmedia/2015/10/screenshot.png&quot;, width: 800, height: 1280}],
+      &quot;status&quot;: &quot;available&quot;,
+      &quot;summary&quot;: &quot;HTTPie in a snap&quot;,
+      &quot;type&quot;: &quot;app&quot;,
+      &quot;version&quot;: &quot;4.6692016&quot;
+}]
+</code></pre>
+
+<h5 id="fields">Fields<a class="anchor" href="#fields"></a></h5>
+<ul>
+<li><code>channel</code>: which channel the snap is currently tracking.</li>
+<li><code>confinement</code>: the confinement requested by the snap itself; one of <code>strict</code> or <code>devmode</code>.</li>
+<li><code>description</code>: snap description.</li>
+<li><code>developer</code>: developer who created the snap.</li>
+<li><code>download-size</code>: how big the download will be.</li>
+<li><code>icon</code>: a url to the snap icon, possibly relative to this server.</li>
+<li><code>id</code>: unique ID for this snap.</li>
+<li><code>name</code>: the snap name.</li>
+<li><code>prices</code>: JSON object with properties named by ISO 4217 currency code. The values of the properties are numerics representing the cost in each currency. For free snaps, the "prices" property is omitted.</li>
+<li><code>private</code>: true if this snap is only available to its author.</li>
+<li><code>resource</code>: HTTP resource for this snap.</li>
+<li><code>revision</code>: a number representing the revision.</li>
+<li><code>screenshots</code>: JSON array of the screenshots for this snap. Each screenshot has a <code>url</code> field for the image and optionally <code>width</code> and <code>height</code> (in pixels).</li>
+<li><code>status</code>: can be either <code>available</code>, or <code>priced</code> (i.e. needs to be bought to become available).</li>
+<li><code>summary</code>: one-line summary.</li>
+<li><code>type</code>: the type of snap; one of <code>app</code>, <code>kernel</code>, <code>gadget</code>, or <code>os</code>.</li>
+<li><code>version</code>: a string representing the version.</li>
+</ul>
+<h4 id="result-meta-data:">Result meta data:<a class="anchor" href="#result-meta-data:"></a></h4>
+<pre><code class="javascript">{
+ &quot;suggested-currency&quot;: &quot;GBP&quot;
+}
+</code></pre>
+
+<h5 id="fields">Fields<a class="anchor" href="#fields"></a></h5>
+<ul>
+<li><code>suggested-currency</code>: the suggested currency to use for presentation,
+   derived by Geo IP lookup.</li>
+</ul>
+<h2 id="v2snaps"><code>/v2/snaps</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: List of snaps</li>
+<li>Access: authenticated</li>
+<li>Operation: sync</li>
+<li>Return: list of snaps installed in this Ubuntu Core system, as for <code>/v2/find</code></li>
+</ul>
+<p>Sample result:</p>
+<pre><code class="javascript">[{
+      &quot;apps&quot;: [{&quot;name&quot;: &quot;moon-buggy&quot;}]
+      &quot;channel&quot;: &quot;stable&quot;
+      &quot;confinement&quot;: &quot;strict&quot;
+      &quot;description&quot;: &quot;Moon-buggy is a simple character graphics game, where you drive some kind of car across the moon's surface.  Unfortunately there are dangerous craters there.  Fortunately your car can jump over them!\r\n&quot;,
+      &quot;developer&quot;: &quot;dholbach&quot;,
+      &quot;devmode&quot;: false,
+      &quot;icon&quot;: &quot;&quot;,
+      &quot;id&quot;: &quot;2kkitQurgOkL3foImG4wDwn9CIANuHlt&quot;,
+      &quot;install-date&quot;: &quot;2016-05-17T09:36:53+12:00&quot;,
+      &quot;installed-size&quot;: 90112,
+      &quot;name&quot;: &quot;moon-buggy&quot;,
+      &quot;private&quot;: false,
+      &quot;resource&quot;: &quot;/v2/snaps/moon-buggy&quot;,
+      &quot;revision&quot;: &quot;11&quot;,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;summary&quot;: &quot;Drive a car across the moon&quot;,
+      &quot;trymode&quot;: false,
+      &quot;type&quot;: &quot;app&quot;,
+      &quot;version&quot;: &quot;1.0.51.11&quot;
+    }, {
+      &quot;summary&quot;: &quot;The ubuntu-core OS snap&quot;,
+      &quot;description&quot;: &quot;A secure, minimal transactional OS for devices and containers.&quot;,
+      &quot;icon&quot;: &quot;&quot;,                  // core might not have an icon
+      &quot;installed-size&quot;: 67784704,
+      &quot;install-date&quot;: &quot;2016-03-08T11:29:21Z&quot;,
+      &quot;name&quot;: &quot;core&quot;,
+      &quot;developer&quot;: &quot;canonical&quot;,
+      &quot;resource&quot;: &quot;/v2/snaps/ubuntu-core&quot;,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;type&quot;: &quot;core&quot;,
+      &quot;update-available&quot;: 247,
+      &quot;version&quot;: &quot;241&quot;,
+      &quot;revision&quot;: 99,
+      &quot;channel&quot;: &quot;stable&quot;,
+}]
+</code></pre>
+
+<h4 id="fields">Fields<a class="anchor" href="#fields"></a></h4>
+<p>In addition to the fields described in <code>/v2/find</code>:</p>
+<ul>
+<li><code>apps</code>: JSON array of apps the snap provides. Each app has a <code>name</code> field to name a binary this app provides.</li>
+<li><code>devmode</code>: true if the snap is currently installed in development mode.</li>
+<li><code>installed-size</code>: how much space the snap itself (not its data) uses.</li>
+<li><code>install-date</code>: the date and time when the snap was installed.</li>
+<li><code>status</code>: can be either <code>installed</code> or <code>active</code> (i.e. is current).</li>
+<li><code>trymode</code>: true if the app was installed in try mode.</li>
+</ul>
+<p>furthermore, <code>download-size</code>, <code>screenshots</code> and <code>prices</code> cannot occur in the output of <code>/v2/snaps</code>.</p>
+<h3 id="post">POST<a class="anchor" href="#post"></a></h3>
+<ul>
+<li>Description: Install, refresh, revert, remove snaps</li>
+<li>Access: trusted</li>
+<li>Operation: async</li>
+<li>Return: background operation or standard error</li>
+</ul>
+<h4 id="input">Input<a class="anchor" href="#input"></a></h4>
+<p>This endpoint accepts an <code>application/json</code> request specifying the
+kind of operation, optional flags and a list of snaps, or a
+<code>multipart/form-data</code> request with one file named "snap".</p>
+<h4 id="sample-json-input">Sample JSON input<a class="anchor" href="#sample-json-input"></a></h4>
+<pre><code class="javascript">{
+  &quot;action&quot;: &quot;refresh&quot;,
+  &quot;snaps&quot;: [...] // for refresh an empty or absent snaps field means &quot;refresh all&quot;
+}
+</code></pre>
+
+<h2 id="v2snapsname"><code>/v2/snaps/[name]</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: Details for an installed snap</li>
+<li>Access: authenticated</li>
+<li>Operation: sync</li>
+<li>Return: snap details (as in <code>/v2/snaps</code>)</li>
+</ul>
+<h3 id="post">POST<a class="anchor" href="#post"></a></h3>
+<ul>
+<li>Description: Install, refresh, remove, revert, enable or disable</li>
+<li>Access: trusted</li>
+<li>Operation: async</li>
+<li>Return: background operation or standard error</li>
+</ul>
+<h4 id="sample-input">Sample input<a class="anchor" href="#sample-input"></a></h4>
+<pre><code class="javascript">{
+ &quot;action&quot;: &quot;install&quot;
+}
+</code></pre>
+
+<h4 id="fields-in-the-input-object">Fields in the input object<a class="anchor" href="#fields-in-the-input-object"></a></h4>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>ignored except in action</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td></td>
+<td>Required; a string, one of <code>install</code>, <code>refresh</code>, <code>remove</code>, <code>revert</code>, <code>enable</code>, or <code>disable</code>.</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td><code>install</code> <code>refresh</code></td>
+<td>From which channel to pull the new package (and track henceforth). Channels are a means to discern the maturity of a package or the software it contains, although the exact meaning is left to the application developer. One of <code>edge</code>, <code>beta</code>, <code>candidate</code>, and <code>stable</code> which is the default.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="v2snapsnameconf"><code>/v2/snaps/[name]/conf</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: Configuration details for an installed snap</li>
+<li>Access: superuser only</li>
+<li>Operation: sync</li>
+<li>Return: JSON map of configuration keys and values</li>
+</ul>
+<h4 id="parameters">Parameters<a class="anchor" href="#parameters"></a></h4>
+<h5 id="keys"><code>keys</code></h5>
+<p>Request the configuration values corresponding to the specific keys
+(comma-separated).</p>
+<h3 id="put">PUT<a class="anchor" href="#put"></a></h3>
+<ul>
+<li>Description: Set the configuration details for an installed snap</li>
+<li>Access: superuser only</li>
+<li>Operation: async</li>
+<li>Return: background operation or standard error</li>
+</ul>
+<h4 id="sample-input">Sample input<a class="anchor" href="#sample-input"></a></h4>
+<pre><code class="javascript">{
+    &quot;conf-key1&quot;: &quot;conf-value1&quot;,
+    &quot;conf-key2&quot;: &quot;conf-value2&quot;
+}
+</code></pre>
+
+<h2 id="v2iconsnameicon"><code>/v2/icons/[name]/icon</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: Get an icon from a snap installed on the system. The
+  response will be the raw contents of the icon file; the content-type
+  will be set accordingly and the Content-Disposition header will specify
+  the filename.</li>
+</ul>
+<p>This fetches the icon from the snap itself.
+* Access: guest</p>
+<p>This is <em>not</em> a standard return type.</p>
+<h2 id="v2assertions"><code>/v2/assertions</code></h2>
+<h3 id="post">POST<a class="anchor" href="#post"></a></h3>
+<ul>
+<li>Description: Tries to add an assertion to the system assertion database.</li>
+<li>Authorization: trusted</li>
+<li>Operation: sync</li>
+</ul>
+<p>The body of the request provides the assertion to add. The assertion
+may also be a newer revision of a preexisting assertion that it will replace.</p>
+<p>To succeed the assertion must be valid, its signature verified with a
+known public key and the assertion consistent with and its
+prerequisite in the database.</p>
+<h2 id="v2assertionsassertiontype"><code>/v2/assertions/[assertionType]</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: Get all the assertions in the system assertion database of the given type matching the header filters passed as query parameters</li>
+<li>Access: authenticated</li>
+<li>Operation: sync</li>
+<li>Return: stream of assertions</li>
+</ul>
+<p>The response is a stream of assertions separated by double newlines.
+The X-Ubuntu-Assertions-Count header is set to the number of
+returned assertions, 0 or more.</p>
+<h2 id="v2interfaces"><code>/v2/interfaces</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: Get all the plugs, slots and their connections.</li>
+<li>Access: authenticated</li>
+<li>Operation: sync</li>
+<li>Return: an object with two arrays of plugs, slots and their connections.</li>
+</ul>
+<p>Sample result:</p>
+<pre><code class="javascript">{
+    &quot;slots&quot;: [
+        {
+            &quot;snap&quot;:  &quot;canonical-pi2&quot;,
+            &quot;slot&quot;:  &quot;pin-13&quot;,
+            &quot;interface&quot;:  &quot;bool-file&quot;,
+            &quot;label&quot;: &quot;Pin 13&quot;,
+            &quot;connections&quot;: [
+                {&quot;snap&quot;: &quot;keyboard-lights&quot;, &quot;plug&quot;: &quot;capslock-led&quot;}
+            ]
+        }
+    ],
+    &quot;plugs&quot;: [
+        {
+            &quot;snap&quot;:  &quot;keyboard-lights&quot;,
+            &quot;plug&quot;:  &quot;capslock-led&quot;,
+            &quot;interface&quot;: &quot;bool-file&quot;,
+            &quot;label&quot;: &quot;Capslock indicator LED&quot;,
+            &quot;connections&quot;: [
+                {&quot;snap&quot;: &quot;canonical-pi2&quot;, &quot;slot&quot;: &quot;pin-13&quot;}
+            ]
+        }
+    ]
+}
+</code></pre>
+
+<h3 id="post">POST<a class="anchor" href="#post"></a></h3>
+<ul>
+<li>Description: Issue an action to the interface system</li>
+<li>Access: authenticated</li>
+<li>Operation: async</li>
+<li>Return: background operation or standard error</li>
+</ul>
+<p>Available actions are:</p>
+<ul>
+<li>connect: connect the plug to the given slot.</li>
+<li>disconnect: disconnect the given plug from the given slot.</li>
+</ul>
+<p>Sample input:</p>
+<pre><code class="javascript">{
+    &quot;action&quot;: &quot;connect&quot;,
+    &quot;slots&quot;: [{&quot;snap&quot;: &quot;canonical-pi2&quot;,   &quot;slot&quot;: &quot;pin-13&quot;}],
+    &quot;plugs&quot;: [{&quot;snap&quot;: &quot;keyboard-lights&quot;, &quot;plug&quot;: &quot;capslock-led&quot;}]
+}
+</code></pre>
+
+<h2 id="v2events"><code>/v2/events</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: Websocket upgrade</li>
+<li>Access: trusted</li>
+<li>Operation: sync</li>
+<li>Return: nothing (never ending flow of events)</li>
+</ul>
+<h3 id="parameters">Parameters<a class="anchor" href="#parameters"></a></h3>
+<p>The default is for all notifications to be received but the following filters
+are supported:</p>
+<h4 id="types">types<a class="anchor" href="#types"></a></h4>
+<p>Comma separated list of notification types, either <code>logging</code> or <code>operations</code>.</p>
+<h4 id="resource">resource<a class="anchor" href="#resource"></a></h4>
+<p>Generally the UUID of a background operation you are interested in.</p>
+<h2 id="v2buy"><code>/v2/buy</code></h2>
+<h3 id="post">POST<a class="anchor" href="#post"></a></h3>
+<ul>
+<li>Description: Buy the specified snap</li>
+<li>Access: authenticated</li>
+<li>Operation: sync</li>
+<li>Return: Dict with buy state.</li>
+</ul>
+<h4 id="sample-input-using-default-payment-method:">Sample input using default payment method:<a class="anchor" href="#sample-input-using-default-payment-method:"></a></h4>
+<pre><code class="javascript">{
+    &quot;snap-id&quot;: &quot;2kkitQurgOkL3foImG4wDwn9CIANuHlt&quot;,
+    &quot;snap-name&quot;: &quot;moon-buggy&quot;,
+    &quot;price&quot;: 2.99,
+    &quot;currency&quot;: &quot;USD&quot;
+}
+</code></pre>
+
+<h4 id="sample-result:">Sample result:<a class="anchor" href="#sample-result:"></a></h4>
+<pre><code class="javascript">{
+ &quot;state&quot;: &quot;Complete&quot;,
+}
+</code></pre>
+
+<h2 id="v2buyready"><code>/v2/buy/ready</code></h2>
+<h3 id="get">GET<a class="anchor" href="#get"></a></h3>
+<ul>
+<li>Description: Determine if the user's account ready to make purchases.</li>
+<li>Access: authenticated</li>
+<li>Operation: sync</li>
+<li>Return: true, or error.</li>
+</ul>
+<h2 id="v2create-user"><code>/v2/create-user</code></h2>
+<h3 id="post">POST<a class="anchor" href="#post"></a></h3>
+<ul>
+<li>Description: Create a local user</li>
+<li>Access: trusted</li>
+<li>Operation: sync</li>
+<li>Return: an object with the created username and the ssh keys imported.</li>
+</ul>
+<h4 id="input">Input<a class="anchor" href="#input"></a></h4>
+<p>A JSON object with the following keys:
+<em> email: the email of the user to create
+</em> sudoers: if true adds "sudo" access to the created user
+* known: use the local system-user assertions to create the user
+         (see assertions.md for details about the system-user assertion)</p>
+<p>As a special case: if email is empty and known is set to true, the
+command will create users for all system-user assertions that are
+valid for this device.</p>
+<h4 id="output">Output<a class="anchor" href="#output"></a></h4>
+<p>A JSON object with the following keys:
+<em> username: the username of the created user
+</em> ssh-keys: a list of strings with the ssh keys that got added
+* ssh-key-count: (deprecated) the number of ssh keys that got added</p>
+<p>As a special case: if the input email was empty and known set to true,
+multiple users can be created, so the return type is a list of the above
+objects.</p>
+<p>Sample input:</p>
+<pre><code class="javascript">{
+  &quot;email&quot;:&quot;michael@example.com&quot;,
+  &quot;sudoer&quot;: false
+}
+</code></pre>
+
+<p>Sample return:</p>
+<pre><code class="javascript">{
+  &quot;username&quot;:&quot;mvo&quot;,
+  &quot;ssh-keys&quot;: [&quot;key1&quot;,&quot;key2&quot;]
+  &quot;ssk-key-count&quot;: 2,
+}
+</code></pre>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>

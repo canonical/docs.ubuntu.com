@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MAAS CLI | Tags | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Introduction</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Install & Configure</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Configure network</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Nodes</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Manage MAAS</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Troubleshoot</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="ref-release-notes">Release notes</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="contributing">Help improve these docs</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="tag-management">Tag management<a class="anchor" href="#tag-management"></a></h1>
+<p>This is a list of advanced tasks to perform with the MAAS CLI. See
+<a href="manage-cli">MAAS CLI</a> on how to get started.</p>
+<h2 id="tag-creation-and-auto-assignment">Tag creation and auto-assignment<a class="anchor" href="#tag-creation-and-auto-assignment"></a></h2>
+<p>When a definition is supplied during a tag's creation the tag is automatically
+applied to all the nodes that satisfy the definition: </p>
+<pre><code class="bash">maas $PROFILE tags create name=$TAG_NAME \
+    comment='$TAG_COMMENT' definition='$TAG_DEFINITION'
+</code></pre>
+
+<p>For example,</p>
+<pre><code class="bash">maas $PROFILE tags create name='gpu' \
+    comment='GPU with clock speed &gt;1GHz for running CUDA type operations.' \
+    definition='//node[@id=&quot;display&quot;]/'clock units=&quot;Hz&quot;' &gt; 1000000000'
+</code></pre>
+
+<p>We recommend that each tag have a short name and a comment that fully describes
+it. Having both will help with usage and for recalling a tag's meaning long
+after it was created.</p>
+<h2 id="list-all-tags">List all tags<a class="anchor" href="#list-all-tags"></a></h2>
+<p>To list all tags present on the region controller:</p>
+<pre><code class="bash">maas $PROFILE tags read
+</code></pre>
+
+<h2 id="list-nodes/machines-labelled-with-a-tag">List nodes/machines labelled with a tag<a class="anchor" href="#list-nodes/machines-labelled-with-a-tag"></a></h2>
+<p>To list what nodes (or machines) a tag applies to:</p>
+<pre><code class="bash">maas $PROFILE tag nodes $TAG_NAME
+maas $PROFILE tag machines $TAG_NAME
+</code></pre>
+
+<h2 id="use-a-tag">Use a tag<a class="anchor" href="#use-a-tag"></a></h2>
+<p>Although a tag can be used in the web UI as a node search filter the primary
+benefit of tags is realized when Juju is utilized for application deployment.</p>
+<p>For example, to use the 'gpu' tag to deploy a (hypothetical) service called
+'cuda':</p>
+<pre><code class="bash">juju deploy --constraints tags=gpu cuda
+</code></pre>
+
+<p>You can also use multiple tags in addition to the normal Juju constraints:</p>
+<pre><code class="bash">juju deploy --constraints &quot;mem=1024 tags=gpu,intel&quot; cuda
+</code></pre>
+
+<h2 id="manual-tag-assignment">Manual tag assignment<a class="anchor" href="#manual-tag-assignment"></a></h2>
+<p>It is possible to assign tags to nodes manually by simply omitting the
+definition and applying the tag to a node by referencing its system id:</p>
+<pre><code class="bash">maas $PROFILE tags create name=$TAG_NAME comment='$TAG_COMMENT'
+maas $PROFILE tag update-nodes $TAG_NAME add=$SYSTEM_ID
+</code></pre>
+
+<p>To remove a tag:</p>
+<pre><code class="bash">maas $PROFILE tag update-nodes $TAG_NAME remove=$SYSTEM_ID
+</code></pre>
+
+<p>In the same operation, a tag can be added to some nodes and removed from others:</p>
+<pre><code class="bash">maas $PROFILE tag update-nodes $TAG_NAME \
+    add=$SYSTEM_ID_1 add=$SYSTEM_ID_2 remove=$SYSTEM_ID_3
+</code></pre>
+
+<h2 id="hybrid-tag-assignment">Hybrid tag assignment<a class="anchor" href="#hybrid-tag-assignment"></a></h2>
+<p>It is also possible to create a tag with a definition (thereby map to certain
+nodes), remove the definition (but retain the mapping), and then add the tag
+manually to specific nodes. This is useful for hardware which is conceptually
+similar but do not all satisfy a single tag definition. Here are the commands
+you would use to do this:</p>
+<pre><code class="bash">maas $PROFILE tags create name=$TAG_NAME \
+    comment='$TAG_COMMENT' definition='$TAG_DEFINITION'
+maas $PROFILE tag update $TAG_NAME definition=''
+maas $PROFILE tag update-nodes $TAG_NAME add=$SYSTEM_ID
+</code></pre>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>

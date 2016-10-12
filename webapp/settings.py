@@ -40,6 +40,8 @@ STATIC_URL = '/static/'
 
 WHITENOISE_ALLOW_ALL_ORIGINS = False
 
+ASSET_SERVER_URL = 'https://assets.ubuntu.com/v1/'
+
 # See https://docs.djangoproject.com/en/dev/ref/contrib/
 INSTALLED_APPS = [
     'django.contrib.staticfiles',

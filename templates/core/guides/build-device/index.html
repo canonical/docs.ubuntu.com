@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{{ title }} | Ubuntu docs</title>
+    <title> | Ubuntu docs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/css/global.css" />
   </head>
@@ -24,53 +24,13 @@
         <div class="col-3 theme__sidebar">
           <nav class="p-sidebar-nav">
             <ul class="p-sidebar-nav__list">
-              {% for item in navigation %}
-              <li class="p-sidebar-nav__group">
-                {% if item.location %}
-                <a class="p-sidebar-nav__link" href="{{ item.location | replace('.html', '') }}">{{ item.title }}</a>
-                {% else %}
-                <h4 class="p-sidebar-nav__header">{{ item.title }}</h4>
-                {% endif %}
-
-                {% if item.children %}
-                <section id="settings" class="p-sidebar-nav__section">
-                  <ul class="p-sidebar-nav__list">
-                    {% for child in item.children %}
-                    <li>
-                      {% if child.location %}
-                      <a class="p-sidebar-nav__link" href="{{ child.location | replace('.html', '') }}">
-                        {{ child.title }}
-                      </a>
-                      {% else %}
-                      <span class="p-sidebar-nav__link">{{ child.title }}</span>
-                      {% endif %}
-
-                      {% if child.children %}
-                      <section id="settings" class="p-sidebar-nav__section">
-                        <ul class="p-sidebar-nav__list">
-                          {% for grandchild in child.children %}
-                          <li>
-                            <a class="p-sidebar-nav__link" href="{{ grandchild.location | replace('.html', '') }}">
-                              {{ grandchild.title }}
-                            </a>
-                          </li>
-                          {% endfor %}
-                        </ul>
-                      </section>
-                      {% endif %}
-                    </li>
-                    {% endfor %}
-                  </ul>
-                </section>
-                {% endif %}
-              </li>
-              {% endfor %}
+              
             </ul>
           </nav>
         </div>
         <div class="col-12 theme__main">
           <main id="main-content" class="theme__inner">
-            {{ content }}
+            
           </main>
         </div>
       </div>

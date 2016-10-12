@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{{ title }} | Ubuntu docs</title>
+    <title>Create a gadget snap | Ubuntu docs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/css/global.css" />
   </head>
@@ -24,53 +24,30 @@
         <div class="col-3 theme__sidebar">
           <nav class="p-sidebar-nav">
             <ul class="p-sidebar-nav__list">
-              {% for item in navigation %}
-              <li class="p-sidebar-nav__group">
-                {% if item.location %}
-                <a class="p-sidebar-nav__link" href="{{ item.location | replace('.html', '') }}">{{ item.title }}</a>
-                {% else %}
-                <h4 class="p-sidebar-nav__header">{{ item.title }}</h4>
-                {% endif %}
-
-                {% if item.children %}
-                <section id="settings" class="p-sidebar-nav__section">
-                  <ul class="p-sidebar-nav__list">
-                    {% for child in item.children %}
-                    <li>
-                      {% if child.location %}
-                      <a class="p-sidebar-nav__link" href="{{ child.location | replace('.html', '') }}">
-                        {{ child.title }}
-                      </a>
-                      {% else %}
-                      <span class="p-sidebar-nav__link">{{ child.title }}</span>
-                      {% endif %}
-
-                      {% if child.children %}
-                      <section id="settings" class="p-sidebar-nav__section">
-                        <ul class="p-sidebar-nav__list">
-                          {% for grandchild in child.children %}
-                          <li>
-                            <a class="p-sidebar-nav__link" href="{{ grandchild.location | replace('.html', '') }}">
-                              {{ grandchild.title }}
-                            </a>
-                          </li>
-                          {% endfor %}
-                        </ul>
-                      </section>
-                      {% endif %}
-                    </li>
-                    {% endfor %}
-                  </ul>
-                </section>
-                {% endif %}
-              </li>
-              {% endfor %}
+              
             </ul>
           </nav>
         </div>
         <div class="col-12 theme__main">
           <main id="main-content" class="theme__inner">
-            {{ content }}
+            <p>The <code>gadget</code> snap package is a snap package <code>type</code> that is used to setup and
+personalize the system. It's regular snap with additional files and conventions. For example, it can contain a specific DTB for your target device or additional configurations files the device would require to be fully enabled.</p>
+<p>There can only be <em>one</em> snap package of <code>type: gadget</code> on a device and it can only be
+installed during image provision.</p>
+<h3 id="meta/gadget.yaml">meta/gadget.yaml<a class="anchor" href="#meta/gadget.yaml"></a></h3>
+<p>The gadget snap has an additional <code>meta/gadget.yaml</code> file that describes
+the gadget specific configuration. The <code>gadget.yaml</code> structure is documented in the <a href="/reference/gadget">gadget snap syntax</a> reference.</p>
+<h3 id="file-layout-conventions">File layout conventions<a class="anchor" href="#file-layout-conventions"></a></h3>
+<p>The bootloader configuration is expected to be at the toplevel of the
+gadget snap. The filename is <code>${bootloader_name}.conf</code>, e.g.
+<code>grub.conf</code> or <code>uboot.conf</code>. This file will be installed into the boot
+partition as <code>grub.cfg</code> and <code>uboot.env</code>. The bootloader configuration
+contains the boot logic.</p>
+<p>A cloud-init configuration may be provided at the toplevel of the
+gadget snap as <code>cloud.conf</code>. It will be copied into the image as
+<code>/etc/cloud/cloud.cfg</code> and will be the only file in that directory.</p>
+<h4 id="examples">Examples<a class="anchor" href="#examples"></a></h4>
+<p>Production-ready examples can be found in the <a href="/reference/gadget">gadget snap syntax</a> reference.</p>
           </main>
         </div>
       </div>

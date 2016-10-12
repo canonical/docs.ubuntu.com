@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MAAS | Physical Zones | MAAS docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          <img
+            src="/static/media/maas-logo.svg"
+            alt="MAAS logo" style="height: 28px; vertical-align: bottom; margin-right: 0.5em;" />
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Introduction</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="index">
+                        About MAAS
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-management">
+                        Management summary
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-concepts">
+                        Concepts and terms
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="intro-architecture">
+                        Architectural overview
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Install & Configure</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-install">
+                        Installation
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-server-iso">
+                              Install from Ubuntu Server ISO
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-package-install">
+                              Install from packages
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-lxd-install">
+                              Install into LXD
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-upgrade-to-2">
+                              Upgrade from 1.9 to 2.0
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-gui">
+                        Access the GUI
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-zones">
+                        Configure zones
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Configure network</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-static">
+                              Static IPs
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-ipv6">
+                              IPv6
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-proxy">
+                              Proxy
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-network-stp">
+                              STP
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <span class="p-sidebar-nav__link">Nodes</span>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-rack">
+                              Rack Controller
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-add-nodes">
+                              Add Nodes
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-tags">
+                              Tags
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-kernel">
+                              Kernel Boot Options
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-hwe-kernels">
+                              HWE kernels
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="installconfig-images">
+                        Images
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-import">
+                              Selection and Import
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="installconfig-images-mirror">
+                              Local Image Mirror
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Manage MAAS</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-account">
+                        User Accounts
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#add-a-user">
+                              Add User
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#ssh-keys">
+                              SSH Keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#api-key">
+                              API Key
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-account#change-the-password">
+                              Change the password
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-maas-ha">
+                        High Availability (HA)
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#rack-controller-ha">
+                              Rack Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#region-controller-ha">
+                              Region Controller HA
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-maas-ha#deploy-ha-with-juju">
+                              Deploy HA with Juju
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-power">
+                        Power Driver Capabilities
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="manage-cli">
+                        MAAS CLI
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-common">
+                              Common Tasks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-images">
+                              Image Management
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-dhcp-snippets">
+                              DHCP Snippets
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="manage-cli-advanced">
+                              Advanced Tasks
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <h4 class="p-sidebar-nav__header">Troubleshoot</h4>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-faq">
+                        FAQ
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="troubleshoot-getting-help">
+                        Getting help
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="ref-release-notes">Release notes</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/index#developing-maas">Developer Guide</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="http://maas.ubuntu.com/docs/api">API Documentation</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="contributing">Help improve these docs</a>
+                
+
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="https://github.com/CanonicalLtd/maas-docs/issues/new">Report a docs issue</a>
+                
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <h1 id="physical-zones">Physical zones<a class="anchor" href="#physical-zones"></a></h1>
+<p>To help you maximise fault-tolerance and performance of the services you
+deploy, MAAS administrators can define <em>physical zones</em> (or just <em>zones</em> for
+short), and assign nodes to them. When a user requests a node, they can ask for
+one that is in a specific zone, or one that is not in a specific zone.</p>
+<p>It's up to you as an administrator to decide what a physical zone should
+represent: it could be a server rack, a room, a data centre, machines attached
+to the same UPS, or a portion of your network. Zones are most useful when they
+represent portions of your infrastructure. But you could also use them simply
+to keep track of where your systems are located.</p>
+<p>Each node is in one and only one physical zone. Each MAAS instance ships with a
+default zone to which nodes are attached by default. If you do not need this
+feature, you can simply pretend it does not exist.</p>
+<p>Since you run your own MAAS, the physical zones feature gives you more
+flexibility than those of a third-party hosted cloud service. That means that
+you get to design your zones and define what they mean. Below are some examples
+of how physical zones can help you get the most out of your MAAS.</p>
+<h2 id="applications">Applications<a class="anchor" href="#applications"></a></h2>
+<p>Since you run your own MAAS, its physical zones give you more flexibility than
+those of a third-party hosted cloud service. That means that you get to design
+your zones and define what they mean. Below are some examples of how physical
+zones can help you get the most out of your MAAS.</p>
+<h3 id="fault-tolerance">Fault tolerance<a class="anchor" href="#fault-tolerance"></a></h3>
+<p>If you are concerned about availability of services you deploy through MAAS, a
+physical zone could be on one power supply, or it could be an entire data
+centre location, or an area of your network that is unlikely to suffer problems
+when another zone experiences an outage.</p>
+<p>For example, you might roll out separate instances of the same web application
+into different physical zones of the same MAAS, and either load-balance between
+them or keep one as a warm stand-by. If one zone suffers a power loss, is cut
+off from the internet, or is affected by a natural disaster, the other instance
+of your application may still be available in the other zone, and ready to take
+over.</p>
+<p>For fault tolerance, machines that work together in order to provide one
+instance of a service should generally be allocated in the same zone. The
+entire service should have a backup instance in another zone.</p>
+<h3 id="performance">Performance<a class="anchor" href="#performance"></a></h3>
+<p>Even if fault tolerance is not an issue, you may still want to divide your
+nodes into groups that communicate efficiently through a high-performance local
+network, or share efficient access to external resources.</p>
+<p>When it comes to performance, machines should generally be allocated in the
+zone closest to performance-critical resources they need.</p>
+<p>For example, for applications that are highly sensitive to network latency, it
+may make sense to divide your MAAS into smaller physical networks, and
+represent each of those networks as a physical zone. Now, you can use the
+physical zones to allocate nodes just where they get the best performance when
+communicating with specific other nodes.</p>
+<p>In another example, your application may rely on a third-party service
+available on the internet. If your MAAS is spread out across multiple data
+centre locations, you may want the application to be deployed in the location
+with the best access to that service.</p>
+<h3 id="power-management">Power management<a class="anchor" href="#power-management"></a></h3>
+<p>If you are concerned about power density and cooling, you can lay out your
+physical zones to match server racks. Instead of allocating machines that share
+a physical zone, you can spread out the load by ensuring that "hot" systems are
+in located different zones.</p>
+<h2 id="creating-a-zone">Creating a zone<a class="anchor" href="#creating-a-zone"></a></h2>
+<p>Only administrators can create and manage zones. To create a physical zone in
+the web user interface, log in as an administrator and browse to the "Zones"
+section in the top bar. This will takes you to the zones listing page. At the
+bottom of the page is a button for creating a new zone:</p>
+<p><img alt="image" src="/static/media/add-zone.png" /></p>
+<h2 id="assigning-nodes-to-a-zone">Assigning nodes to a zone<a class="anchor" href="#assigning-nodes-to-a-zone"></a></h2>
+<p>Once you have created one or more physical zones, you can set nodes' zones from
+the nodes listing page in the UI. Select the nodes for which you wish to set a
+zone, and choose "Set physical zone" from the "Bulk action" dropdown list near
+the top. A second dropdown list will appear, to let you select which zone you
+wish to set. Leave it blank to clear nodes' physical zones. Clicking "Go" will
+apply the change to the selected nodes.</p>
+<p>You can also set an individual node's zone on its "Edit node" page. Both ways
+are available in the API as well: edit an individual node through a <code>PUT</code>
+request to the node's URI, or set the zone on multiple nodes at once by calling
+the <code>set_zone</code> operation on the <code>nodes</code> endpoint.</p>
+<h2 id="allocating-a-node-in-a-zone">Allocating a node in a zone<a class="anchor" href="#allocating-a-node-in-a-zone"></a></h2>
+<p>To deploy in a particular zone, call the <code>acquire</code> method in the
+region-controller API \&lt;region-controller-api> as before, but pass the <code>zone</code>
+parameter with the name of the zone. The method will allocate a node in that
+zone, or fail with an HTTP 409 ("conflict") error if the zone has no nodes
+available that match your request.</p>
+<p>Alternatively, you may want to request a node that is <em>not</em> in a particular
+zone, or one that is not in any of several zones. To do that, specify the
+<code>not_in_zone</code> parameter to <code>acquire</code>. This parameter takes a list of zone
+names; the allocated node will not be in any of them. Again, if that leaves no
+nodes available that match your request, the call will return a "conflict"
+error.</p>
+<p>It is possible, though not usually useful, to combine the <code>zone</code> and
+<code>not_in_zone</code> parameters. If your choice for <code>zone</code> is also present in
+<code>not_in_zone</code>, no node will ever match your request. Or if it's not, then the
+<code>not_in_zone</code> values will not affect the result of the call at all.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>
