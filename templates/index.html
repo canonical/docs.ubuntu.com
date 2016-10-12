@@ -1,14 +1,14 @@
-{% include 'includes/layout.html' %}
+{% extends 'includes/layout.html' %}
 
-{% block 'content' %}
+{% block content %}
 <div class="row">
-    <div class="eight-col">
+    <div class="row col-8">
         <h1>Ubuntu documentation</h1>
         <p>
-            The home for Ubuntu documentation
+            The home of Ubuntu documentation
         </p>
     </div>
-    <div class="four-col last-col">
+    <div class="row col-4">
         <img src="{{ ASSET_SERVER_URL }}b4438cf8-image-picto-projects-we-love-195.png" />
     </div>
 </div>
@@ -76,4 +76,4 @@
         The Ubuntu documentation site is a service that makes it easy to publish product documentation from github or Launchpad that has been written in markdown format with a defined table of contents and in a simple directory structure.  It supports embedding images and versions of documents.  If you are interested in moving your documentation to this service, please get in touch.
     </p>
 </div>
-{% endblock 'content' %}
+{% endblock content %}

@@ -1,0 +1,7 @@
+@import 'vanilla-framework/scss/vanilla';
+@include vanilla;
+
+.row {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
