@@ -45,3 +45,5 @@ static/css
 /.compose-project-name
 django-error.log
 npm-debug.log
+templates/core/
+templates/maas/
