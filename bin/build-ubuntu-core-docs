@@ -4,6 +4,5 @@ documentation-builder \
     --branch master \
     --media-url /static/media/core \
     --output-media-path static/media/core \
-    --template-path config/wrapper.jinja2 \
     --output-path templates/core \
     --no-link-extensions
