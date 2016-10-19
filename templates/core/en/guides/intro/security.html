@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Snap security policy and sandboxing | Ubuntu docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/global.css" />
+  </head>
+  <body class="theme">
+    <header class="p-navigation" role="banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="/maas/en/">
+          documentation
+        </a>
+      </div>
+      <nav class="p-navigation__nav">
+        <span class="u-off-screen">
+          <a href="#main-content">Jump to main content</a>
+        </span>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="theme__wrap">
+        <div class="col-3 theme__sidebar">
+          <nav class="p-sidebar-nav">
+            <ul class="p-sidebar-nav__list">
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="guides/index">Guides</a>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="guides/intro/index">
+                        Introduction
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Feature overview
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Ubuntu core and snaps
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="guides/intro/security">
+                              Security and sandboxing
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="guides/intro/store">
+                              Store and developer accounts
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="guides/build-device/index">
+                        Build a device
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="guides/build-device/image-building">
+                              Build an ubuntu-core image
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Create a gadget snap
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Kernel porting and requirements
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="guides/build-device/config-hooks">
+                              Configuration and hooks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Assertions and signature keys
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="guides/build-device/interfaces">
+                              Interfaces and snap declarations
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Debugging
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="guides/manage-devices/index">
+                        Manage devices
+                      </a>
+                      
+
+                      
+                      <section id="settings" class="p-sidebar-nav__section">
+                        <ul class="p-sidebar-nav__list">
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              First boot experience
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Auto-updates and rollbacks
+                            </a>
+                          </li>
+                          
+                          <li>
+                            <a class="p-sidebar-nav__link" href="">
+                              Distribution and continuous integration
+                            </a>
+                          </li>
+                          
+                        </ul>
+                      </section>
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="http://snapcraft.io">
+                        Build snaps
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="reference/index">Reference</a>
+                
+
+                
+                <section id="settings" class="p-sidebar-nav__section">
+                  <ul class="p-sidebar-nav__list">
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="reference/assertions">
+                        Assertions types and syntax
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="reference/gadget">
+                        Gadget snap syntax
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="reference/interfaces">
+                        Core interfaces reference
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                    <li>
+                      
+                      <a class="p-sidebar-nav__link" href="reference/rest">
+                        Snapd rest API reference
+                      </a>
+                      
+
+                      
+                    </li>
+                    
+                  </ul>
+                </section>
+                
+              </li>
+              
+              <li class="p-sidebar-nav__group">
+                
+                <a class="p-sidebar-nav__link" href="https://github.com/CanonicalLtd/ubuntu-core-docs/issues/new">Report a docs issue</a>
+                
+
+                
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 theme__main">
+          <main id="main-content" class="theme__inner">
+            <p>Snap packages run confined under a restrictive security sandbox by default.
+The security policies and store policies work together to allow developers to
+quickly update their applications and to provide safety to end users.</p>
+<p>This document describes the sandbox and how to configure and work with the security policies for snap
+packages.</p>
+<h2 id="how-policy-is-applied">How policy is applied<a class="anchor" href="#how-policy-is-applied"></a></h2>
+<p>Application authors should not have to know about or understand the low level
+implementation details on how security policy is enforced. Instead, all snaps
+run under default security policy which can be extended through the use of
+interfaces, slots and plugs and the available interfaces available on the
+device can be seen with:</p>
+<pre><code>$ snap interfaces
+</code></pre>
+<p>The description of these interfaces is found in the <a href="reference/interfaces">interfaces reference</a>.</p>
+<p>Each command declared in <code>apps</code> by the snap is tracked by the system by
+assigning a security label to the command. This security label takes the form
+of <code>snap.&lt;name&gt;.&lt;app&gt;</code> where <code>&lt;name&gt;</code> is the name of the snap from <code>meta.md</code>
+and <code>&lt;app&gt;</code> is the command name. For example, if this is in <code>snap.yaml</code>:</p>
+<pre><code>name: foo
+...
+apps:
+  bar:
+    command: ...
+    ...
+</code></pre>
+<p>then the security label for the <code>bar</code> command is <code>snap.foo.bar</code>. This security
+label is used throughout the system including in the enforcement of security
+policy by the app launcher. All snap commands declared via <code>apps</code> in <code>meta.md</code>
+are launched by the launcher and snaps run in the global (ie, default)
+namespace (except where noted otherwise) to facilitate communications and
+sharing between snaps and because this is more familiar for developers and
+administrators. The security policy and launcher enforce application isolation
+as per the snappy FHS. Under the hood, the launcher:</p>
+<ul>
+<li>Sets up various environment variables:<ul>
+<li><code>HOME</code>: set to <code>SNAP_DATA</code> for daemons and <code>SNAP_USER_DATA</code> for user
+  commands</li>
+<li><code>SNAP</code>: read-only install directory</li>
+<li><code>SNAP_ARCH</code>: the architecture of device (eg, amd64, arm64, armhf, i386, etc)</li>
+<li><code>SNAP_DATA</code>: writable area for a particular revision of the snap</li>
+<li><code>SNAP_COMMON</code>: writable area common across all revisions of the snap</li>
+<li><code>SNAP_LIBRARY_PATH</code>: additional directories added to <code>LD_LIBRARY_PATH</code></li>
+<li><code>SNAP_NAME</code>: snap name (from <code>meta.md</code>)</li>
+<li><code>SNAP_REVISION</code>: store revision of the snap</li>
+<li><code>SNAP_USER_DATA</code>: per-user writable area for a particular revision of the snap</li>
+<li><code>SNAP_USER_COMMON</code>: per-user writable area common across all revisions of the snap</li>
+<li><code>SNAP_VERSION</code>: snap version (from <code>meta.md</code>)</li>
+<li><code>TMPDIR</code>: set to <code>/tmp</code></li>
+</ul>
+</li>
+<li>When hardware is assigned to the snap, sets up a device cgroup with default
+  devices (eg, /dev/null, /dev/urandom, etc) and any devices that are assigned
+  to this snap</li>
+<li>Sets up a private /tmp using a per-command private mount namespace and
+  mounting a per-command directory on /tmp</li>
+<li>Sets up a per-command devpts new instance</li>
+<li>Sets up the seccomp filter for the command</li>
+<li>Executes the command under the command-specific AppArmor profile under a
+  default nice value</li>
+</ul>
+<p>This combination of restrictive AppArmor profiles (which mediate file access,
+application execution, Linux capabilities(7), mount, ptrace, IPC, signals,
+coarse-grained networking), clearly defined application-specific filesystem
+areas, whitelist syscall filtering via seccomp, private /tmp, new instance
+devpts and device cgroups provides for strong application confinement and
+isolation.</p>
+<h3 id="apparmor">AppArmor<a class="anchor" href="#apparmor"></a></h3>
+<p>Upon snap package install, <code>snap.yaml</code> is examined and AppArmor profiles are
+generated for each command to have the appropriate security label and
+command-specific AppArmor rules. As mentioned, each command runs under an
+app-specific default policy that may be extended through declared interfaces
+which are expressed in the yaml as <code>plugs</code> and <code>slots</code>.</p>
+<h3 id="seccomp">Seccomp<a class="anchor" href="#seccomp"></a></h3>
+<p>Like with AppArmor, upon snap package install, <code>snap.yaml</code> is examined and
+seccomp filters are generated for each command to run under a default seccomp
+filter that may be extended through declared interfaces which are expressed in
+the yaml as <code>plugs</code> and <code>slots</code>.</p>
+<h2 id="working-with-snap-security-policy">Working with snap security policy<a class="anchor" href="#working-with-snap-security-policy"></a></h2>
+<p>The <code>snap.yaml</code> need not specify anything for default confinement and may
+optionally specify <code>plugs</code> and <code>slots</code> to declare additional interfaces to use.
+When an interface is connected, the snap's security policy will be updated to
+allow access to use the interface. See <code>meta.md</code> and <code>interface.md</code> for
+details.</p>
+<p>The default AppArmor policy is deny by default and snaps are restricted to
+their app-specific directories, libraries, etc (enforcing ro, rw, etc). The
+seccomp filter is also deny by default and the default filter allows enough
+safe syscalls so that snaps using the default security policy should work.</p>
+<p>Eg, consider the following:</p>
+<pre><code>name: foo
+version: 1.0
+apps:
+  bar:
+    command: bar
+  baz:
+    command: baz
+    daemon: simple
+    plugs: [network]
+</code></pre>
+<p>then:</p>
+<ul>
+<li>the security label for <code>bar</code> is <code>snap.foo.bar</code>. It uses only the default
+  policy</li>
+<li>the security label for <code>baz</code> is <code>snap.foo.baz</code>. It uses the <code>default</code> policy plus the <code>network</code> interface security policy as provided by the OS snap</li>
+</ul>
+<p>Security policies and store policies work together to provide flexibility,
+speed and safety. Because of this, use of some interfaces may trigger a manual
+review in the official Ubuntu store and/or may need to be connected by the user
+or gadget snap developer.</p>
+<p>The interfaces available on the system and those used by snaps can be seen with
+the <code>snap interfaces</code> command. Eg:</p>
+<pre><code>$ snap interfaces
+Slot                 Plug
+:firewall-control    -
+:home                -
+:locale-control      -
+:log-observe         snappy-debug
+:mount-observe       -
+:network             xkcd-webserver
+:network-bind        xkcd-webserver
+:network-control     -
+:network-observe     -
+:snapd-control       -
+:system-observe      -
+:timeserver-control  -
+:timezone-control    -
+</code></pre>
+<p>In the above it can be seen that the <code>snappy-debug</code> snap has the <code>log-observe</code>
+interface connected (and therefore the security policy from <code>log-observe</code> is
+added to it) and the <code>xkcd-webserver</code> has the <code>network</code> and <code>network-bind</code>
+interfaces connected. An interesting quality of interfaces is that they may
+either be either declared per-command or per-snap. If declared per-snap, all
+the commands within the snap have the interface security policy added to the
+command's security policy when the interface is connected. If declared
+per-command, only the commands within the snap that declare use of the
+interface have the interface security policy added to them.</p>
+<p>Snappy may autoconnect the requested interfaces upon install or may require the
+user to manually connect them. Interface connections and disconnections are
+performed via the <code>snap connect</code> and <code>snap disconnect</code> commands. See
+<code>interfaces.md</code> for details.</p>
+<h2 id="developer-mode">Developer mode<a class="anchor" href="#developer-mode"></a></h2>
+<p>Sometimes it is helpful when developing a snap to not have to worry about the
+security sandbox in order to focus on developing the snap. To support this,
+snappy allows installing the snap in developer mode which puts the security
+policy in complain mode (where violations against security policy are logged,
+but permitted). Eg:</p>
+<pre><code>$ sudo snap install --devmode &lt;snap&gt;
+</code></pre>
+<h3 id="jail-mode">Jail mode<a class="anchor" href="#jail-mode"></a></h3>
+<p>Even if a developer has specified a package to be only installable in <code>devmode</code>, you can force a strict confinement by using the <code>--jailmode</code> flag.</p>
+<pre><code>$ sudo snap install --jailmode &lt;snap&gt;
+</code></pre>
+<h2 id="debugging">Debugging<a class="anchor" href="#debugging"></a></h2>
+<p>To check to see if you have any policy violations:</p>
+<pre><code>$ sudo grep audit /var/log/syslog
+</code></pre>
+<p>An AppArmor violation will look something like:</p>
+<pre><code>audit: type=1400 audit(1431384420.408:319): apparmor="DENIED" operation="mkdir" profile="snap.foo.bar" name="/var/lib/foo" pid=637 comm="bar" requested_mask="c" denied_mask="c" fsuid=0 ouid=0
+</code></pre>
+<p>If there are no AppArmor denials, AppArmor shouldn't be blocking the snap.</p>
+<p>A seccomp violation will look something like:</p>
+<pre><code>audit: type=1326 audit(1430766107.122:16): auid=1000 uid=1000 gid=1000 ses=15 pid=1491 comm="env" exe="/bin/bash" sig=31 arch=40000028 syscall=983045 compat=0 ip=0xb6fb0bd6 code=0x0
+</code></pre>
+<p>The <code>syscall=983045</code> can be resolved with the <code>scmp\_sys\_resolver</code> command:</p>
+<pre><code>$ scmp_sys_resolver 983045
+set_tls
+</code></pre>
+<p>If there are no seccomp violations, seccomp isn't blocking the snap.</p>
+<p>The <code>snappy-debug</code> snap can be used to help with policy violations. To use it:</p>
+<pre><code>$ sudo snap install snappy-debug
+$ sudo /snap/bin/snappy-debug.security scanlog foo
+</code></pre>
+<p>This will:</p>
+<ul>
+<li>adjust kernel log rate limiting</li>
+<li>follow /var/log/syslog looking for policy violations for <code>foo</code></li>
+<li>resolve syscall names</li>
+<li>make reccomendations on how to fix violations</li>
+</ul>
+<p>See <code>snappy-debug.security help</code> for details.</p>
+<p>If you believe there is a bug in the security policy or want to request a new
+interface, please <a href="https://bugs.launchpad.net/snappy/+filebug">file a bug</a>,
+adding the <code>snapd-interface</code> tag.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer class="p-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      var nav = document.querySelector('.p-sidebar-nav');
+
+      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+        var link = links[linkIndex];
+
+        /* Add external classes to external links */
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+
+        /* Add "is-active" class to the current nav link */
+        if (nav.contains(link) && link.href && link.href.replace('index', '') == location.href) {
+          link.className += ' is-active';
+        }
+      }
+    </script>
+  </body>
+</html>
