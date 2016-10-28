@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-documentation-builder --repository git@github.com:CanonicalLtd/maas-docs.git --branch master --media-url /static/media --output-media-path static/media --template-path config/maas_wrapper.jinja2 --output-path templates/maas --no-link-extensions
