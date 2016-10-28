@@ -47,3 +47,4 @@ django-error.log
 npm-debug.log
 templates/core/
 templates/maas/
+/static/media/*/
