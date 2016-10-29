@@ -1,2 +1,4 @@
+maas/en: /maas/en/
 maas/?(?!.*en).*: /maas/en/
+core/en: /core/en/
 core/?(?!.*en).*: /core/en/
