@@ -4,8 +4,8 @@ maas_dir=maas-docs
 core_dir=ubuntu-core-docs
 snapcraft_dir=snapcraft-docs
 
-git-force-clone https://github.com/CanonicalLtd/maas-docs.git ${maas_dir}
-git-force-clone -b 1.0.0-structure https://github.com/nottrobin/ubuntu-core-docs.git ${core_dir}
+git-force-clone https://github.com/canonicalltd/maas-docs.git ${maas_dir}
+git-force-clone https://github.com/canonicalltd/ubuntu-core-docs.git ${core_dir}
 #git clone https://github.com/canonicalltd/snapcraft-docs.git ${snapcraft_dir}
 
 documentation-builder --base-directory ${maas_dir}  \
