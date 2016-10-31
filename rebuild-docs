@@ -1,11 +1,11 @@
 #! /usr/bin/env bash
 
-maas_dir=`mktemp -u maas-docs-XXX`
-core_dir=`mktemp -u core-docs-XXX`
-snapcraft_dir=`mktemp -u snapcraft-docs-XXX`
+maas_dir=maas-docs
+core_dir=ubuntu-core-docs
+snapcraft_dir=snapcraft-docs
 
-git clone https://github.com/CanonicalLtd/maas-docs.git ${maas_dir}
-git clone -b 1.0.0-structure https://github.com/nottrobin/ubuntu-core-docs.git ${core_dir}
+git-force-clone https://github.com/CanonicalLtd/maas-docs.git ${maas_dir}
+git-force-clone -b 1.0.0-structure https://github.com/nottrobin/ubuntu-core-docs.git ${core_dir}
 #git clone https://github.com/canonicalltd/snapcraft-docs.git ${snapcraft_dir}
 
 documentation-builder --base-directory ${maas_dir}  \
@@ -13,14 +13,16 @@ documentation-builder --base-directory ${maas_dir}  \
                       --output-path templates/maas  \
                       --output-media-path static/media/maas  \
                       --media-url '/static/media/maas'  \
-                      --no-link-extensions
+                      --no-link-extensions \
+                      --force
 
 documentation-builder --base-directory ${core_dir}  \
                       --site-root '/core/'  \
                       --output-path templates/core  \
                       --output-media-path static/media/core  \
                       --media-url '/static/media/core'  \
-                      --no-link-extensions
+                      --no-link-extensions \
+                      --force
 
 #documentation-builder --base-directory ${snapcraft_dir}  \
 #                      --site-root '/snapcraft/'  \
@@ -28,6 +30,4 @@ documentation-builder --base-directory ${core_dir}  \
 #                      --output-media-path static/media/snapcraft  \
 #                      --media-url '/static/media/snapcraft'  \
 #                      --no-link-extensions
-
-rm -rf ${maas_dir} ${core_dir} ${snapcraft_dir}
 
