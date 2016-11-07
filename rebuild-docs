@@ -13,6 +13,7 @@ documentation-builder --base-directory ${maas_dir}  \
                       --output-path templates/maas  \
                       --output-media-path static/media/maas  \
                       --media-url '/static/media/maas'  \
+                      --tag-manager-code 'GTM-K92JCQ'  \
                       --no-link-extensions \
                       --force
 
@@ -21,6 +22,7 @@ documentation-builder --base-directory ${core_dir}  \
                       --output-path templates/core  \
                       --output-media-path static/media/core  \
                       --media-url '/static/media/core'  \
+                      --tag-manager-code 'GTM-K92JCQ'  \
                       --no-link-extensions \
                       --force
 
