@@ -15,6 +15,7 @@ documentation-builder --base-directory ${maas_dir}  \
                       --media-url '/static/media/maas'  \
                       --tag-manager-code 'GTM-K92JCQ'  \
                       --no-link-extensions \
+                      --build-version-branches \
                       --force
 
 documentation-builder --base-directory ${core_dir}  \
