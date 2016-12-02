@@ -1,6 +1,6 @@
 # Redirect project section roots to English language
 core/?: /core/en/
-maas(/|/en/?)?: /maas/2.1/en/
+maas(/|/en/?|/en/2.1)?: /maas/2.1/en/
 
 # Add slash to language and version folders, and remove "index"
 (?P<project>maas|core)/(?P<version>[a-zA-Z0-9-._]+)(/index)?: /{project}/{version}/en/
