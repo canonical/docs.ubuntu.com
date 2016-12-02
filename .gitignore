@@ -50,3 +50,5 @@ templates/maas/
 /static/media/*/
 maas-docs/
 ubuntu-core-docs/
+node_modules/
+yarn.lock

@@ -6,7 +6,7 @@ maas_dir=maas-docs
 core_dir=ubuntu-core-docs
 snapcraft_dir=snapcraft-docs
 
-git-force-clone -b latest https://github.com/nottrobin/maas-docs.git ${maas_dir} || true
+git-force-clone https://github.com/canonicalltd/maas-docs.git ${maas_dir} || true
 git-force-clone https://github.com/canonicalltd/ubuntu-core-docs.git ${core_dir} || true
 #git clone https://github.com/canonicalltd/snapcraft-docs.git ${snapcraft_dir}
 
