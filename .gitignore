@@ -52,3 +52,5 @@ maas-docs/
 ubuntu-core-docs/
 node_modules/
 yarn.lock
+phone-docs
+templates/phone

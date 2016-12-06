@@ -3,11 +3,13 @@
 set -euo pipefail
 
 maas_dir=maas-docs
+phone_dir=phone-docs
 core_dir=ubuntu-core-docs
 snapcraft_dir=snapcraft-docs
 
 git-force-clone https://github.com/canonicalltd/maas-docs.git ${maas_dir} || true
 git-force-clone https://github.com/canonicalltd/ubuntu-core-docs.git ${core_dir} || true
+git-force-clone https://github.com/ubuntudesign/phone-docs.git ${phone_dir} || true
 #git clone https://github.com/canonicalltd/snapcraft-docs.git ${snapcraft_dir}
 
 documentation-builder --base-directory ${maas_dir}  \
@@ -26,6 +28,14 @@ documentation-builder --base-directory ${core_dir}  \
                       --output-media-path static/media/core  \
                       --media-url '/static/media/core'  \
                       --tag-manager-code 'GTM-K92JCQ'  \
+                      --no-link-extensions \
+                      --force
+
+documentation-builder --base-directory ${phone_dir}  \
+                      --site-root '/phone/'  \
+                      --output-path templates/phone  \
+                      --output-media-path static/media/phone  \
+                      --media-url '/static/media/phone'  \
                       --no-link-extensions \
                       --force
 
