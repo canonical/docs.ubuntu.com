@@ -4,8 +4,9 @@ phone/?: /phone/en/
 maas(/|/en/?|/2.1/?)?: /maas/2.1/en/
 
 # Add slash to language and version folders, and remove "index"
-(?P<project>maas|core|phone)/(?P<version>[a-zA-Z0-9-._]+)(/|/index)?: /{project}/{version}/en/
-(?P<project>maas|core|phone)/(?P<version>[a-zA-Z0-9-._]+/)?(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{version}{language}/
+(?P<project>maas|core|phone)/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
+(?P<project>maas|core|phone)/(?P<version>[a-zA-Z0-9-._]+)(/index)?: /{project}/{version}/en/
+(?P<project>maas|core|phone)/(?P<version>[a-zA-Z0-9-._]+)/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{version}/{language}/
 
 # Remove trailing slash or .html from document URLs
-(?P<project>maas|core|phone)/(?P<version>[a-zA-Z0-9-._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
+(?P<project>maas|core|phone)/(?P<version>[a-zA-Z0-9-._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.+)(/|/index|.html): /{project}/{version}{language}/{document}
