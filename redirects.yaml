@@ -10,3 +10,7 @@ maas(/|/en/?|/2.1/?)?: /maas/2.1/en/
 
 # Remove trailing slash or .html from document URLs
 (?P<project>maas|core|phone)/(?P<version>[a-zA-Z0-9-._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.+)(/|/index|.html): /{project}/{version}{language}/{document}
+
+# Pages redirects:
+# On 12/01/2017
+core/en/guides/build-device/assertions: /core/en/reference/assertions
