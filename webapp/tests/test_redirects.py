@@ -27,7 +27,6 @@ class RedirectCoreTestCase(RedirectTestCase):
     def test_redirect_core_simple_path(self):
         expected = '/core/en/test'
         self._assertRedirect('/core/en/test/.html', expected)
-        self._assertRedirect('/core/en/test/index', expected)
         self._assertRedirect('/core/en/test/index.html', expected)
 
 
@@ -42,7 +41,6 @@ class RedirectPhoneTestCase(RedirectTestCase):
         expected = '/phone/en/test'
         self._assertRedirect('/phone/en/test/', expected)
         self._assertRedirect('/phone/en/test/.html', expected)
-        self._assertRedirect('/phone/en/test/index', expected)
         self._assertRedirect('/phone/en/test/index.html', expected)
 
 
@@ -67,12 +65,10 @@ class RedirectMAASTestCase(RedirectTestCase):
         expected = '/maas/2.1/en/test'
         self._assertRedirect('/maas/2.1/en/test/', expected)
         self._assertRedirect('/maas/2.1/en/test/.html', expected)
-        self._assertRedirect('/maas/2.1/en/test/index', expected)
         self._assertRedirect('/maas/2.1/en/test/index.html', expected)
 
     def test_redirect_maas_simple_path_add_version(self):
         expected = '/maas/2.1/en/test'
         self._assertRedirect('/maas/en/test/', expected)
         self._assertRedirect('/maas/en/test/.html', expected)
-        self._assertRedirect('/maas/en/test/index', expected)
         self._assertRedirect('/maas/en/test/index.html', expected)
