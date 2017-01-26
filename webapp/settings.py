@@ -38,6 +38,15 @@ REMOVE_SLASH = True
 STATIC_ROOT = "static"
 STATIC_URL = '/static/'
 
+# Use the IP address for now, as Docker doesn't use the
+# VPN DNS server
+# @TODO: Once Docker sorts this out, go back to using butlerov
+# https://github.com/docker/docker/issues/23910
+
+# SEARCH_SERVER_URL = 'http://butlerov.internal/search'
+SEARCH_SERVER_URL = 'http://10.22.112.8/search'
+SEARCH_DOMAINS = ['docs.ubuntu.com']
+
 WHITENOISE_ALLOW_ALL_ORIGINS = False
 
 ASSET_SERVER_URL = 'https://assets.ubuntu.com/v1/'
