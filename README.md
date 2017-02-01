@@ -11,12 +11,23 @@ Basic usage
 To run the site locally:
 
 ``` bash
+./rebuild-docs # Gather and build documentation
 ./run # Download containers, run the dev server and watch for sass changes
 ```
 
 Now visit <http://127.0.0.1:8007>.
 
 To see what other `./run` commands are available, run `./run usage`.
+
+Run locally with functioning search
+---
+Connect to the Canonical VPN and run the site natively:
+
+```bash
+virtualenv env
+env/bin/pip install -r requirements.txt
+env/bin/python manage.py runserver 0.0.0.0:8007
+```
 
 Licenses
 ---
