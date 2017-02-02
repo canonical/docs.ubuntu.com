@@ -898,10 +898,12 @@ causing MAAS/curtin deployment failures when installing Trusty. An
 SRU in Ubuntu Trusty for these tools is already in progress.</p>
 <p>To work around the problem, a curtin custom configuration to install
 bcache-tools can be used in <cite>/etc/maas/preseeds/curtin_userdata</cite>:</p>
+{% verbatim %}
 <div class="highlight-python"><div class="highlight"><pre>{{if node.get_distro_series() in [&#39;trusty&#39;]}}
 early_commands:
   add_repo: [&quot;add-apt-repository&quot;, &quot;-y&quot;, &quot;ppa:maas-maintainers/experimental&quot;]
 {{endif}}
+{% endverbatim %}
 </pre></div>
 </div>
 <p class="last">See bug <a class="reference external" href="https://bugs.launchpad.net/bugs/1449099">1449099</a> for more information.</p>
