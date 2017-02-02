@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Networks &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS dev documentation" href="index.html" />
+    <link rel="next" title="Setting kernel boot options" href="kernel-options.html" />
+    <link rel="prev" title="Local Mirroring of Boot Images" href="sstreams-mirror.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="kernel-options.html" title="Setting kernel boot options"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="sstreams-mirror.html" title="Local Mirroring of Boot Images"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="networks">
+<span id="id1"></span><h1>Networks<a class="headerlink" href="networks.html#networks" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature is available in MAAS versions 1.5 and above, starting with
+revision 1961. If you&#8217;re writing a client application, you can check if MAAS
+supports this feature via the web API; see the documentation for the
+<code class="docutils literal"><span class="pre">networks-management</span></code> capability <a class="reference internal" href="version.html#cap-networks-management"><span>here</span></a>.</p>
+</div>
+<p>A MAAS cluster controller can manage nodes on one or more networks.  The
+cluster controller must have direct interfaces connected to these networks,
+and each node must be managed through one of them.</p>
+<p>But nodes may also be connected to additional networks, for your production
+workload, for internet access, for internal communication, or perhaps for
+system-level or application-level management tasks.  MAAS does not need to
+manage these networks, but it can be useful for MAAS to be aware of them.  If
+MAAS is aware of these networks, you can allocate nodes with specific network
+requirements.  For example, when requesting a node, you could specify:</p>
+<ul class="simple">
+<li>&#8220;Must be connected to the staging network&#8221; (for a test application).</li>
+<li>&#8220;Needs to share a network with a given other node&#8221; (for fast communication).</li>
+<li>&#8220;Should not be connected to the DMZ network&#8221; (for security).</li>
+<li>&#8220;Can&#8217;t be on the Houston network&#8221; (for resilience).</li>
+<li>&#8220;Has to be connected to a particular VLAN&#8221; (for software-defined networking).</li>
+</ul>
+<p>To avoid confusion, MAAS imposes three rules on the networks you define.  Apart
+from these, MAAS places no restrictions on the number or nature of your
+networks, or on which nodes are connected to which networks.  The rules are:</p>
+<ol class="arabic simple">
+<li>Each node must be on a network that is directly connected to an interface
+on the node&#8217;s cluster controller.  It is recommended that you let the
+cluster controller manage DHCP and DNS on this network. See
+<a class="reference internal" href="cluster-configuration.html"><em>Cluster Configuration</em></a> for the details.</li>
+<li>All networks must have different, non-overlapping IP ranges.  Any possible
+IP address in the MAAS should belong to only one network.</li>
+<li>If you use virtual networks, each must have a different VLAN tag in the
+range 0x001 to 0xffe (1 to 4094) inclusive.  Non-virtual networks have no
+tag, and you can have as many of these as you want.</li>
+</ol>
+<p>Networks are defined globally, not within clusters.  They can span clusters,
+or be confined to clusters, or connect selected nodes from different clusters,
+as suits your needs.  For now, if you want to make use of these placement
+constraints when allocating nodes, you need to define your networks explicitly.
+Future versions of MAAS may detect some of your networks and define them
+automatically.</p>
+<p>The networks on which MAAS manages nodes are special, however: they cannot
+connect to different clusters.   These are the networks that connect to
+interfaces on the cluster controller.  You may define these networks, but you
+don&#8217;t have to.  You need a cluster interface for MAAS to manage nodes (or even
+just serve DHCP) on the network to which it is connected.  Networks, on the
+other hand, only need to be defined in order to enable network placement
+constraints when allocating nodes, as in the examples above.</p>
+<div class="section" id="defining-networks">
+<h2>Defining networks<a class="headerlink" href="networks.html#defining-networks" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to define networks: through the web user interface, or
+through the API.  The command-line interface acts a front-end for the API.</p>
+<p>To define a network in the user interface, click on <code class="docutils literal"><span class="pre">Networks</span></code> in the top
+bar.  This will take you to the listing of known networks.  Click the
+<code class="docutils literal"><span class="pre">Add</span> <span class="pre">network</span></code> button to start entering your network&#8217;s information.</p>
+<img alt="_images/add-network.png" src="_images/add-network.png" />
+<p>Assign each network a short name for easy reference, and optionally, a more
+detailed description.  Fill out the other fields as detailed below.  Click
+<code class="docutils literal"><span class="pre">Add</span> <span class="pre">network</span></code> to bring your network definition into effect.</p>
+<p>Networks are defined as a pair of a base IP address and a netmask.  For a
+24-bit network <code class="docutils literal"><span class="pre">10.122.1.0/24</span></code>, for example, the IP address would be
+<code class="docutils literal"><span class="pre">10.122.1.0</span></code> and the netmask would be <code class="docutils literal"><span class="pre">255.255.255.0</span></code>.</p>
+<p>The bits that correspond to zeroes in the netmask are not part of the network
+address, so if you entered <code class="docutils literal"><span class="pre">10.122.1.9</span></code> as the network&#8217;s IP address, it would
+still come out as <code class="docutils literal"><span class="pre">10.122.1.0</span></code>.</p>
+<p>MAAS also supports virtual networks, or VLANs.  Multiple VLANs can share the
+same underlying physical network.  A &#8220;tag&#8221; on each network packet tells the
+infrastructure on which of the VLANs the packet is travelling.  Each VLAN is
+effectively a separate network.</p>
+<p>The VLAN tag is a number between 1 and 4094 inclusive, as dictated by the
+underlying technical standard.  Leave this blank if the network is not a VLAN,
+or if it is untagged.  The number zero is a reserved value that means
+&#8220;no VLAN,&#8221; as you would get with conventional networks, and so MAAS treats it
+as a blank field.</p>
+<p>You can also define a network through the
+<a class="reference internal" href="api.html#region-controller-api"><span>region-controller API</span></a>.  The values are the same
+as for the web UI.  To do this, <code class="docutils literal"><span class="pre">POST</span></code> your network definition to the
+<em>&#8220;networks&#8221;</em> endpoint.</p>
+</div>
+<div class="section" id="connecting-nodes-to-networks">
+<h2>Connecting nodes to networks<a class="headerlink" href="networks.html#connecting-nodes-to-networks" title="Permalink to this headline">¶</a></h2>
+<p>In order for network placement constraints to take effect, you must also tell
+MAAS which nodes are connected to each network.</p>
+<p>Nodes connect to networks through their network interface cards.  Each of
+these NICs has a MAC address, and so, a connection between a node and a
+network is associated with one of the node&#8217;s MAC addresses.  The network
+interface and its MAC address must be registered with MAAS before it can be
+attached to a network.  A node&#8217;s network interfaces are normally registered
+<a class="reference internal" href="nodes.html#auto-enlist"><span>automatically when the node is enlisted</span></a>, but in some
+situations you may need to do this manually in the web user interface.</p>
+<p>To inform MAAS about nodes&#8217; connections to a network through the user
+interface, you must either specify them when creating the network, or edit the
+network&#8217;s details.  You can get to a network&#8217;s edit page either by browsing to
+its details page and clicking the &#8220;Edit&#8221; link in the right-hand bar, or by
+clicking on the &#8220;pencil&#8221; icon for the network&#8217;s entry in the networks listing
+under the &#8220;Networks&#8221; section in the top bar.</p>
+<p>On the network add/edit pages, you will see a selection box where you can
+select which network interfaces are connected to that network, as well as the
+nodes to which they belong.</p>
+<img alt="_images/connect-nodes-to-network.png" src="_images/connect-nodes-to-network.png" />
+<p>The box lets you select multiple network interfaces, even if they belong to
+the same node.  Click &#8220;Save network&#8221; to make your changes permanent.</p>
+<p>You can also connect nodes to networks using the
+<a class="reference internal" href="api.html#region-controller-api"><span>region-controller API</span></a>.  A network has a <code class="docutils literal"><span class="pre">POST</span></code>
+method <code class="docutils literal"><span class="pre">connect_macs</span></code>, which lets you connect any number of network
+interfaces to the network in one call.  The network interfaces are identified
+as a list of MAC addresses.  The list may also be empty (in which case the
+call does nothing), and connecting a network and a network interface that are
+already connected is not an error.</p>
+<p>Connecting a node to a network does not affect any other connections between
+the node and other networks, or between the network and other nodes.  A
+matching <code class="docutils literal"><span class="pre">POST</span></code> method, <code class="docutils literal"><span class="pre">disconnect_macs</span></code>, removes connections between a
+network and network interfaces.  Again, empty lists are accepted and
+disconnecting a node from a network that it is not connected to is not an
+error.</p>
+<p>Future versions of MAAS may detect and register some of the networks and their
+connections to nodes automatically.</p>
+</div>
+<div class="section" id="placement-constraints">
+<h2>Placement constraints<a class="headerlink" href="networks.html#placement-constraints" title="Permalink to this headline">¶</a></h2>
+<p>When you allocate a node through the API, or search for nodes in the web UI,
+you can specify two kinds of constraints for the node&#8217;s network placement:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">networks</span></code> specifies that the node you want must be connected to <em>all</em> of
+the given networks.</li>
+<li><code class="docutils literal"><span class="pre">not_networks</span></code> says that a node must <em>not</em> be connected to <em>any</em> of the
+given networks.</li>
+</ol>
+<p>Constraints can identify a network in any of several ways.  You may combine
+these freely.  Each is a way of referring to a specific network, just expressed
+in different ways.</p>
+<ul class="simple">
+<li>&#8220;<code class="docutils literal"><span class="pre">network-name</span></code>&#8221;: The name of a network as it was defined in the MAAS.  The
+example is for the case where you have defined a network with the name,
+<code class="docutils literal"><span class="pre">network-name</span></code>.</li>
+<li>&#8220;<code class="docutils literal"><span class="pre">ip:10.122.1.0</span></code>&#8221;: An IP address in the network.  This can be the network&#8217;s
+base address, or its broadcast address, or any other IP address that falls
+within the network.  So <code class="docutils literal"><span class="pre">ip:10.122.1.0</span></code> identifies the same network as, for
+example, <code class="docutils literal"><span class="pre">ip:10.122.1.99</span></code>.</li>
+<li>&#8220;<code class="docutils literal"><span class="pre">vlan:13</span></code>&#8221;: a VLAN tag.  This can only be used for VLANs, so the tag must
+be nonzero.  The tag is a number between 1 to 4094 inclusive.</li>
+<li>&#8220;<code class="docutils literal"><span class="pre">vlan:0x0d</span></code>&#8221;: a VLAN tag in hexadecimal notation.  The valid range is from
+<code class="docutils literal"><span class="pre">0x1</span></code> to <code class="docutils literal"><span class="pre">0xffe</span></code> inclusive.  The notation is case-insensitive and leading
+zeroes are ignored.  So, <code class="docutils literal"><span class="pre">vlan:0x0d</span></code>, <code class="docutils literal"><span class="pre">vlan:0Xd</span></code>, <code class="docutils literal"><span class="pre">vlan:0xD</span></code>, and
+<code class="docutils literal"><span class="pre">vlan:0X0d</span></code> are all equivalent to <code class="docutils literal"><span class="pre">vlan:13</span></code>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="networks.html#">Networks</a><ul>
+<li><a class="reference internal" href="networks.html#defining-networks">Defining networks</a></li>
+<li><a class="reference internal" href="networks.html#connecting-nodes-to-networks">Connecting nodes to networks</a></li>
+<li><a class="reference internal" href="networks.html#placement-constraints">Placement constraints</a></li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="sstreams-mirror.html" title="previous chapter">Local Mirroring of Boot Images</a></li>
+      <li>Next: <a href="kernel-options.html" title="next chapter">Setting kernel boot options</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/networks.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="kernel-options.html" title="Setting kernel boot options"
+             >next</a></li>
+        <li class="right" >
+          <a href="sstreams-mirror.html" title="Local Mirroring of Boot Images"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

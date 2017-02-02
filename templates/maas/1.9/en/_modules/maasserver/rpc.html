@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>maasserver.rpc &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="MAAS dev documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../index.html">MAAS dev documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maasserver.rpc</h1><div class="highlight"><pre>
+<span class="c1"># Copyright 2014-2015 Canonical Ltd.  This software is licensed under the</span>
+<span class="c1"># GNU Affero General Public License version 3 (see the file LICENSE).</span>
+
+<span class="sd">&quot;&quot;&quot;Region Controller RPC.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">absolute_import</span><span class="p">,</span>
+    <span class="n">print_function</span><span class="p">,</span>
+    <span class="n">unicode_literals</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;getClientFor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;getAllClients&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">maasserver</span> <span class="kn">import</span> <span class="n">eventloop</span>
+<span class="kn">from</span> <span class="nn">provisioningserver.rpc</span> <span class="kn">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">provisioningserver.utils.twisted</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">asynchronous</span><span class="p">,</span>
+    <span class="n">deferred</span><span class="p">,</span>
+    <span class="n">FOREVER</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="nd">@asynchronous</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">FOREVER</span><span class="p">)</span>  <span class="c1"># getClientFor handles times-out itself.</span>
+<span class="nd">@deferred</span>  <span class="c1"># Always return a Deferred, no matter what.</span>
+<div class="viewcode-block" id="getClientFor"><a class="viewcode-back" href="../../development/rpc.html#maasserver.rpc.getClientFor">[docs]</a><span class="k">def</span> <span class="nf">getClientFor</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get a client with which to make RPCs to the specified cluster.</span>
+
+<span class="sd">    :param timeout: The number of seconds to wait before giving up on</span>
+<span class="sd">        getting a connection. By default, `timeout` is 0.</span>
+<span class="sd">    :raises: :py:class:`~.exceptions.NoConnectionsAvailable` when there</span>
+<span class="sd">        are no open connections to the specified cluster controller.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">eventloop</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">getServiceNamed</span><span class="p">(</span><span class="s2">&quot;rpc&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">NoConnectionsAvailable</span><span class="p">(</span>
+            <span class="s2">&quot;Unable to connect to cluster </span><span class="si">%s</span><span class="s2">; no connections available.&quot;</span> <span class="o">%</span>
+            <span class="n">uuid</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">service</span><span class="o">.</span><span class="n">getClientFor</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
+
+
+<span class="nd">@asynchronous</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">FOREVER</span><span class="p">)</span>  <span class="c1"># getAllClients does not defer work.</span>
+<div class="viewcode-block" id="getAllClients"><a class="viewcode-back" href="../../development/rpc.html#maasserver.rpc.getAllClients">[docs]</a><span class="k">def</span> <span class="nf">getAllClients</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get all recorded clients ready to make RPCs to clusters.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">eventloop</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">getServiceNamed</span><span class="p">(</span><span class="s2">&quot;rpc&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">service</span><span class="o">.</span><span class="n">getAllClients</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../../index.html"><img src="../../_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../index.html">MAAS dev documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

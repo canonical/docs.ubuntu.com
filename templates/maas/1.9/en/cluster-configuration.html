@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Cluster Configuration &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS dev documentation" href="index.html" />
+    <link rel="next" title="Static IPs" href="static-ips.html" />
+    <link rel="prev" title="Additional Configuration" href="configure.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="static-ips.html" title="Static IPs"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="configure.html" title="Additional Configuration"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cluster-configuration">
+<span id="id1"></span><h1>Cluster Configuration<a class="headerlink" href="cluster-configuration.html#cluster-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Before any of MAAS&#8217;s features can be used for the first time, you must have
+a cluster controller and configure it to manage at least one network of
+nodes.  Each node in the cluster should be attached to one of these networks.
+(In addition, a node can be attached to any number of networks that are not
+managed by MAAS.)</p>
+<p>Managing a network normally means that MAAS will serve DHCP from the cluster
+controller.  <strong>Do this only on a network that was set up with this in mind.</strong>
+Running your own DHCP server that competes with an existing one that&#8217;s
+already managing the network can cause serious disruption, and it can be hard
+for administrators to track the source of the problem.  Worse, the problems
+may not become immediately noticeable.  Make sure you understand the
+implications of running a DHCP server before doing this.  If MAAS detects any
+DHCP servers already running on these networks, it will show them on the
+cluster&#8217;s configuration page.</p>
+<div class="section" id="network-requirements">
+<h2>Network requirements<a class="headerlink" href="cluster-configuration.html#network-requirements" title="Permalink to this headline">¶</a></h2>
+<p>The cluster controller manages a network of nodes through one of its interfaces
+as defined in MAAS.  Cluster interfaces are discovered automatically, though
+this may not happen e.g. if the network interface was down when MAAS was
+installed.</p>
+<p>When a cluster controller manages nodes on a network through one of its
+interfaces, the nodes must be on the same subnet as the cluster interface.
+This is for two reasons:</p>
+<ol class="arabic simple">
+<li>If the cluster controller is configured to manage DHCP, the nodes must be
+able to configure their own network interfaces using MAAS&#8217;s DHCP server.
+This means that either they must be on the same subnet, or that DHCP packets
+are being specially routed between the nodes&#8217; subnet and MAAS&#8217;s DHCP server.</li>
+<li>The cluster controller must be able to find nodes&#8217; IP addresses based on
+their MAC addresses, by inspecting its ARP cache.  This implies that the
+nodes and the cluster controller must be on the same physical subnet.</li>
+</ol>
+</div>
+<div class="section" id="cluster-acceptance">
+<h2>Cluster acceptance<a class="headerlink" href="cluster-configuration.html#cluster-acceptance" title="Permalink to this headline">¶</a></h2>
+<p>If you install your first cluster controller on the same system as the region
+controller, as is the case when you install the full &#8220;maas&#8221; ubuntu package,
+it will be automatically accepted by default (but not yet configured, see
+below).  Any other cluster controllers you set up will show up in the user
+interface as &#8220;pending,&#8221; until you manually accept them into the MAAS.</p>
+<p>To accept a cluster controller, visit the &#8220;pending clusters&#8221; section of the
+Clusters page:</p>
+<img alt="_images/cluster-accept.png" src="_images/cluster-accept.png" />
+<p>You can either click on &#8220;Accept all&#8221; or click on the edit icon to edit
+the cluster.  After clicking on the edit icon, you will see this page:</p>
+<img alt="_images/cluster-edit.png" src="_images/cluster-edit.png" />
+<p>Here you can change the cluster&#8217;s name as it appears in the UI, its DNS
+zone, and its status.  Accepting the cluster changes its status from
+&#8220;pending&#8221; to &#8220;accepted.&#8221;</p>
+<p>Now that the cluster controller is accepted, you can configure one or more of
+its network interfaces to be managed by MAAS.  This will enable the cluster
+controller to manage nodes attached to those networks.  The next section
+explains how to do this and what choices are to be made.</p>
+</div>
+<div class="section" id="cluster-interface-management">
+<h2>Cluster interface management<a class="headerlink" href="cluster-configuration.html#cluster-interface-management" title="Permalink to this headline">¶</a></h2>
+<p>MAAS automatically recognises the network interfaces on each cluster
+controller.  Some (though not necessarily all) of these will be connected to
+networks where you want to manage nodes.  A connection between a cluster
+controller and a network is called a <cite>cluster interface</cite>.  Each cluster
+interface is built on exactly one network interface, though it&#8217;s possible for
+two cluster interfaces to use the same network interface card.</p>
+<p>We recommend letting your cluster controller act as a DHCP server for the
+networks it manages, by configuring the corresponding cluster interfaces in
+the MAAS user interface.</p>
+<p>As an example, we will configure the cluster controller to manage a network
+on interface <code class="docutils literal"><span class="pre">eth0</span></code>.  Click on the edit icon for the cluster interface on
+network interface <code class="docutils literal"><span class="pre">eth0</span></code>, which takes us to this page:</p>
+<img alt="_images/cluster-interface-edit.png" src="_images/cluster-interface-edit.png" />
+<p>Here you can select to what extent you want the cluster controller to manage
+the network:</p>
+<ol class="arabic simple">
+<li>DHCP only - this will run a DHCP server on your cluster</li>
+<li>DHCP and DNS - this will run a DHCP server on the cluster <em>and</em> configure
+the DNS server included with the region controller so that it can be used
+to look up hosts on this network by name.</li>
+</ol>
+<p>If you set the interface to be managed, you now need to provide all of the
+usual DHCP details in the input fields below.  Once done, click &#8220;Save
+interface&#8221;. The cluster controller will now be able to boot nodes on this
+network.</p>
+<p>There is also an option to leave the network unmanaged.  Use this for
+networks where you don&#8217;t want to manage any nodes.  Or, if you do want to
+manage nodes but don&#8217;t want the cluster controller to serve DHCP, you may be
+able to get by without it.  This is explained in <a class="reference internal" href="configure.html#manual-dhcp"><span>Manual DHCP configuration</span></a>.</p>
+<div class="section" id="static-vs-dynamic-ip-addresses">
+<span id="static-ip-address"></span><h3>Static vs Dynamic IP Addresses<a class="headerlink" href="cluster-configuration.html#static-vs-dynamic-ip-addresses" title="Permalink to this headline">¶</a></h3>
+<p>On the cluster interface edit page, there are fields to enter both a dynamic
+and a static range of IP addresses.  It is mandatory to enter the dynamic range
+if you are managing DHCP on this interface, but the static range is optional.</p>
+<p>Dynamic addresses are given to both unknown devices booting on this network,
+and Nodes that are commissioning.  Dynamic addresses are allocated by the
+DHCP server and may change at any time.</p>
+<p>Static addresses are given to Nodes when they are allocated to a user and
+started up, and returned to the pool only when the Node is de-allocated.
+Static addresses are allocated by MAAS, and are guaranteed not to change while
+allocated.  If you are managing DNS on this network, only static IP addresses
+are given DNS entries with the Node&#8217;s name.</p>
+<p>If you do not configure the static range, then nodes will only get dynamic
+IP addresses and will never get a DNS entry.</p>
+<p>IP addresses in the static range are also available for reservation by users
+using the <a class="reference internal" href="api.html"><em>MAAS API</em></a>.  This prevents MAAS from allocating the reserved
+IP to any Nodes or other devices, which allows users to assign it freely
+to their own hosts/devices on the same network, such as LXC containers.</p>
+</div>
+</div>
+<div class="section" id="multiple-networks">
+<h2>Multiple networks<a class="headerlink" href="cluster-configuration.html#multiple-networks" title="Permalink to this headline">¶</a></h2>
+<p>A single cluster controller can manage more than one network, each from a
+different cluster interface.  This may help you scale your cluster to larger
+numbers of nodes, or it may be a requirement of your network architecture.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="cluster-configuration.html#">Cluster Configuration</a><ul>
+<li><a class="reference internal" href="cluster-configuration.html#network-requirements">Network requirements</a></li>
+<li><a class="reference internal" href="cluster-configuration.html#cluster-acceptance">Cluster acceptance</a></li>
+<li><a class="reference internal" href="cluster-configuration.html#cluster-interface-management">Cluster interface management</a><ul>
+<li><a class="reference internal" href="cluster-configuration.html#static-vs-dynamic-ip-addresses">Static vs Dynamic IP Addresses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="cluster-configuration.html#multiple-networks">Multiple networks</a></li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="configure.html" title="previous chapter">Additional Configuration</a></li>
+      <li>Next: <a href="static-ips.html" title="next chapter">Static IPs</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cluster-configuration.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="static-ips.html" title="Static IPs"
+             >next</a></li>
+        <li class="right" >
+          <a href="configure.html" title="Additional Configuration"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

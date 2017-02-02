@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing Ubuntu and deploying nodes &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS dev documentation" href="index.html" />
+    <link rel="next" title="Operating Systems Support" href="os-support.html" />
+    <link rel="prev" title="Setting kernel boot options" href="kernel-options.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="os-support.html" title="Operating Systems Support"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="kernel-options.html" title="Setting kernel boot options"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installing-ubuntu-and-deploying-nodes">
+<h1>Installing Ubuntu and deploying nodes<a class="headerlink" href="installing-ubuntu.html#installing-ubuntu-and-deploying-nodes" title="Permalink to this headline">¶</a></h1>
+<p>Once a node has been accepted into MAAS and is ready for use, users can
+deploy services to that node.</p>
+<p>Prior to deployment, MAAS is responsible for:</p>
+<ol class="arabic simple">
+<li>Powering up the node.</li>
+<li>Installing Ubuntu on the node.</li>
+<li>Installing the user&#8217;s SSH keys on the node.</li>
+</ol>
+<p>Once these steps have been completed, the node is ready to have services
+deployed to it, either manually or by using a tool like <a class="reference external" href="http://juju.ubuntu.com">Juju</a>.</p>
+<p>There are two ways to install Ubuntu on a node:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="installing-ubuntu.html#curtin-installer"><span>The Curtin installer</span></a>.</li>
+<li><a class="reference internal" href="installing-ubuntu.html#debian-installer"><span>The Debian installer (Deprecated)</span></a>.</li>
+</ol>
+<div class="section" id="the-curtin-installer">
+<span id="curtin-installer"></span><h2>The Curtin Installer<a class="headerlink" href="installing-ubuntu.html#the-curtin-installer" title="Permalink to this headline">¶</a></h2>
+<p>The Curtin Installer is, as the name suggests, installs
+Ubuntu on a node more quickly than would be possible using the
+<a class="reference internal" href="installing-ubuntu.html#debian-installer"><span>Debian installer</span></a>.</p>
+<p>The Curtin installer is enabled by default and is the only one supported.</p>
+<p>The Curtin installer copies a pre-built Ubuntu image to the node, with all
+the packages installed that would be normally found in an Ubuntu
+installation. The Curtin installer is the fastest OS installer yet.</p>
+<p>For more information about the Curtin installer, see the <a class="reference external" href="https://launchpad.net/curtin">curtin project</a>
+on Launchpad.</p>
+</div>
+<div class="section" id="the-debian-installer-deprecated">
+<span id="debian-installer"></span><h2>The Debian Installer (Deprecated)<a class="headerlink" href="installing-ubuntu.html#the-debian-installer-deprecated" title="Permalink to this headline">¶</a></h2>
+<p>The Debian Installer installs Ubuntu on a node in exactly the same way
+as you would install it manually.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Starting from MAAS 1.8, the Debian Installer has been deprecated and
+it is no longer supported. While it is still available in MAAS, it is
+not recommended and is not supported.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="installing-ubuntu.html#">Installing Ubuntu and deploying nodes</a><ul>
+<li><a class="reference internal" href="installing-ubuntu.html#the-curtin-installer">The Curtin Installer</a></li>
+<li><a class="reference internal" href="installing-ubuntu.html#the-debian-installer-deprecated">The Debian Installer (Deprecated)</a></li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="kernel-options.html" title="previous chapter">Setting kernel boot options</a></li>
+      <li>Next: <a href="os-support.html" title="next chapter">Operating Systems Support</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installing-ubuntu.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="os-support.html" title="Operating Systems Support"
+             >next</a></li>
+        <li class="right" >
+          <a href="kernel-options.html" title="Setting kernel boot options"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

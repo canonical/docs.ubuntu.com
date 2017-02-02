@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Networking &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS dev documentation" href="index.html" />
+    <link rel="next" title="Devices" href="devices.html" />
+    <link rel="prev" title="Storage" href="storage.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="devices.html" title="Devices"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="storage.html" title="Storage"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="networking">
+<span id="id1"></span><h1>Networking<a class="headerlink" href="networking.html#networking" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature is available in MAAS versions 1.9 and above on Ubuntu
+deployments. If you&#8217;re writing a client application, you can check
+if MAAS supports this feature via the web API; see the documentation
+for the <code class="docutils literal"><span class="pre">network-deployment-ubuntu</span></code> capability
+<a class="reference internal" href="version.html#cap-network-deployment-ubuntu"><span>here</span></a>.</p>
+</div>
+<p>MAAS 1.9 adds support for the modeling of a wide variety of networking concepts
+and configurations.</p>
+<div class="section" id="networking-concepts">
+<h2>Networking Concepts<a class="headerlink" href="networking.html#networking-concepts" title="Permalink to this headline">¶</a></h2>
+<p>At a high level, MAAS supports the following networking concepts:</p>
+<div class="section" id="fabrics">
+<h3>Fabrics<a class="headerlink" href="networking.html#fabrics" title="Permalink to this headline">¶</a></h3>
+<p>A fabric is a set of interconnected VLANs that are capable of mutual
+communication. A fabric can be thought of as a logical grouping in which VLANs
+can be considered unique.</p>
+<p>For example, a distributed network may have a fabric in London containing
+VLAN 100, while a separate fabric in San Francisco may contain a VLAN 100,
+whose attached subnets are completely different and unrelated.</p>
+<p>A &#8220;Default Fabric&#8221; is created when MAAS is installed (or upgraded).</p>
+</div>
+<div class="section" id="subnets">
+<h3>Subnets<a class="headerlink" href="networking.html#subnets" title="Permalink to this headline">¶</a></h3>
+<p>A subnet is a &#8220;layer 3&#8221; network defined by a particular network prefix, plus
+a network mask length (in bits). This notation is also referred to as a <em>CIDR</em>.</p>
+<p>MAAS supports IPv4 and IPv6 subnets.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre>10.0.0.0/8
+172.16.0.0/12
+192.168.0.0/16
+2001:db8:4d41:4153::/64
+</pre></div>
+</div>
+<p>Subnets can be annotated with a descriptive name, their default gateway,
+and/or their DNS server(s).</p>
+<p>A subnet can be in a single space.</p>
+<p>Subnets are considered managed if a cluster interface specifies the cluster
+network range.</p>
+</div>
+<div class="section" id="vlans">
+<h3>VLANs<a class="headerlink" href="networking.html#vlans" title="Permalink to this headline">¶</a></h3>
+<p>VLANs (Virtual LANs) are a common way to create logically separate networks
+using the same physical infrastructure.</p>
+<p>Managed switches can assign VLANs to each port in either a &#8220;tagged&#8221; or an
+&#8220;untagged&#8221; manner. A VLAN is said to be &#8220;untagged&#8221; on a particular port when
+it is the default VLAN for that port, and requires no special configuration
+in order to access.</p>
+<p>&#8220;Tagged&#8221; VLANs (traditionally used by network administrators in order to
+aggregate multiple networks over inter-switch &#8220;trunk&#8221; lines) can also be used
+with nodes in MAAS. That is, if a switch port is configured such that &#8220;tagged&#8221;
+VLAN frames can be sent and received by a MAAS node, that MAAS node can be
+configured to automatically bring up VLAN interfaces, so that the deployed node
+can make use of them.</p>
+<p>A &#8220;Default VLAN&#8221; is created for every Fabric, to which every new VLAN-aware
+object in the fabric will be associated to by default (unless otherwise
+specified).</p>
+</div>
+<div class="section" id="spaces">
+<h3>Spaces<a class="headerlink" href="networking.html#spaces" title="Permalink to this headline">¶</a></h3>
+<p>A Space is a logical grouping of subnets that should be able to communicate
+with each other. Subnets within each space need not belong to the same fabric.
+For example, you may have a &#8220;DMZ&#8221; space in both your London and San Francisco
+fabrics, and a &#8220;Storage&#8221; space to indicate subnets attached to your storage
+network.</p>
+<p>A &#8220;space-0&#8221; is created when MAAS is installed (or upgraded), which
+every subnet will belong to by default (unless otherwise specified).</p>
+</div>
+<div class="section" id="interfaces">
+<h3>Interfaces<a class="headerlink" href="networking.html#interfaces" title="Permalink to this headline">¶</a></h3>
+<p><strong>Physical</strong></p>
+<p>After a node is commissioned, MAAS discovers its physical interfaces. In
+addition, devices are created with physical interfaces.</p>
+<p>Prior to deployment, a MAAS administrator can specify additional interfaces
+to be configured on the node, including one or more of the below types.</p>
+<p><strong>Bond</strong></p>
+<p>A bond interface is capable of aggregating two or more physical interfaces
+into a single logical interface. Bonds can be used in conjunction with a
+managed switch (using Link Aggregation and Control Protocol, or LACP), or
+independently (software bonds).</p>
+<p><strong>VLAN</strong></p>
+<p>A VLAN interface can be used to connect to a tagged VLAN, if the switch port
+the node is connected to is authorized to access it.</p>
+<p><strong>Unknown</strong></p>
+<p>Unknown interfaces cannot be created by users.</p>
+<p>Sometimes, <em>unknown</em> interfaces are discovered by MAAS. (For example, when
+MAAS learns of a new DHCP lease that is not associated with any known node
+or device.)</p>
+</div>
+</div>
+<div class="section" id="how-to-configure-nodes-for-networking">
+<h2>How to Configure Nodes for Networking<a class="headerlink" href="networking.html#how-to-configure-nodes-for-networking" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-bond-interface">
+<h3>Creating a Bond Interface<a class="headerlink" href="networking.html#creating-a-bond-interface" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal"><span class="pre">node-interfaces</span> <span class="pre">create-bond</span></code> API to create a bond. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas admin node-interfaces create-bond node-d83ce230-4b50-11e5-a267-00163eb185eb name=bond0 vlan=0 parents=30 parents=31 mac_address=00:50:56:2b:60:53
+Success.
+Machine-readable output follows:
+{
+    &quot;name&quot;: &quot;bond0&quot;,
+    &quot;links&quot;: [],
+    &quot;tags&quot;: [],
+    &quot;vlan&quot;: {
+        &quot;id&quot;: 0,
+        &quot;resource_uri&quot;: &quot;/MAAS/api/1.0/fabrics/0/vlans/0/&quot;,
+        &quot;name&quot;: &quot;Default VLAN&quot;,
+        &quot;vid&quot;: 0,
+        &quot;fabric&quot;: &quot;fabric-0&quot;
+    },
+    &quot;enabled&quot;: true,
+    &quot;id&quot;: 41,
+    &quot;parents&quot;: [
+        &quot;eth0&quot;,
+        &quot;eth1&quot;
+    ],
+    &quot;mac_address&quot;: &quot;00:50:56:2b:60:53&quot;,
+    &quot;type&quot;: &quot;bond&quot;,
+    &quot;children&quot;: [],
+    &quot;resource_uri&quot;: &quot;/MAAS/api/1.0/nodes/node-d83ce230-4b50-11e5-a267-00163eb185eb/interfaces/41/&quot;
+}
+</pre></div>
+</div>
+<p>Note that in the example above, the bond contains two interfaces because
+the <code class="docutils literal"><span class="pre">parents</span></code> parameter was specified twice, such as
+<code class="docutils literal"><span class="pre">parents=30</span> <span class="pre">parents=31</span></code>.</p>
+</div>
+<div class="section" id="creating-a-vlan-interface">
+<h3>Creating a VLAN Interface<a class="headerlink" href="networking.html#creating-a-vlan-interface" title="Permalink to this headline">¶</a></h3>
+<p>To create a VLAN interface, use the <code class="docutils literal"><span class="pre">node-interfaces</span> <span class="pre">create-vlan</span></code> API.</p>
+<p>Be aware that the <code class="docutils literal"><span class="pre">vlan</span></code> paremeter does not indicate a VLAN ID that
+corresponds to the VLAN tag. You must first create the VLAN, and then
+associate it with the interface. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas admin vlans create 0 name=&quot;Storage network&quot; vid=100
+Success.
+Machine-readable output follows:
+{
+    &quot;id&quot;: 1,
+    &quot;resource_uri&quot;: &quot;/MAAS/api/1.0/fabrics/0/vlans/1/&quot;,
+    &quot;name&quot;: &quot;Storage network&quot;,
+    &quot;vid&quot;: 100,
+    &quot;fabric&quot;: &quot;fabric-0&quot;
+}
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal"><span class="pre">0</span></code> in the command above indicates the <code class="docutils literal"><span class="pre">fabric_id</span></code>. If you
+have not defined any additional fabrics, the <code class="docutils literal"><span class="pre">fabric_id</span></code> of the default
+fabric will be <code class="docutils literal"><span class="pre">0</span></code>.</p>
+<p>Now that a VLAN is created, it may be associated with a new interface:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas admin node-interfaces create-vlan node-d83ce230-4b50-11e5-a267-00163eb185eb vlan=1 parent=30
+Success.
+Machine-readable output follows:
+{
+    &quot;name&quot;: &quot;eth0.100&quot;,
+    &quot;links&quot;: [],
+    &quot;tags&quot;: [],
+    &quot;vlan&quot;: {
+        &quot;id&quot;: 1,
+        &quot;resource_uri&quot;: &quot;/MAAS/api/1.0/fabrics/0/vlans/1/&quot;,
+        &quot;name&quot;: &quot;Storage network&quot;,
+        &quot;vid&quot;: 100,
+        &quot;fabric&quot;: &quot;fabric-0&quot;
+    },
+    &quot;enabled&quot;: true,
+    &quot;id&quot;: 44,
+    &quot;parents&quot;: [
+        &quot;eth0&quot;
+    ],
+    &quot;mac_address&quot;: &quot;00:50:56:2b:60:53&quot;,
+    &quot;type&quot;: &quot;vlan&quot;,
+    &quot;children&quot;: [],
+    &quot;resource_uri&quot;: &quot;/MAAS/api/1.0/nodes/node-d83ce230-4b50-11e5-a267-00163eb185eb/interfaces/44/&quot;
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting-an-interface">
+<h3>Deleting an Interface<a class="headerlink" href="networking.html#deleting-an-interface" title="Permalink to this headline">¶</a></h3>
+<p>To delete an interface, use the <code class="docutils literal"><span class="pre">node-interface</span> <span class="pre">delete</span></code> API. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas admin node-interface delete node-d83ce230-4b50-11e5-a267-00163eb185eb 41
+Success.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="networking.html#">Networking</a><ul>
+<li><a class="reference internal" href="networking.html#networking-concepts">Networking Concepts</a><ul>
+<li><a class="reference internal" href="networking.html#fabrics">Fabrics</a></li>
+<li><a class="reference internal" href="networking.html#subnets">Subnets</a></li>
+<li><a class="reference internal" href="networking.html#vlans">VLANs</a></li>
+<li><a class="reference internal" href="networking.html#spaces">Spaces</a></li>
+<li><a class="reference internal" href="networking.html#interfaces">Interfaces</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="networking.html#how-to-configure-nodes-for-networking">How to Configure Nodes for Networking</a><ul>
+<li><a class="reference internal" href="networking.html#creating-a-bond-interface">Creating a Bond Interface</a></li>
+<li><a class="reference internal" href="networking.html#creating-a-vlan-interface">Creating a VLAN Interface</a></li>
+<li><a class="reference internal" href="networking.html#deleting-an-interface">Deleting an Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="storage.html" title="previous chapter">Storage</a></li>
+      <li>Next: <a href="devices.html" title="next chapter">Devices</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/networking.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="devices.html" title="Devices"
+             >next</a></li>
+        <li class="right" >
+          <a href="storage.html" title="Storage"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>maasserver.utils.async &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="MAAS dev documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../../index.html">MAAS dev documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maasserver.utils.async</h1><div class="highlight"><pre>
+<span class="c1"># Copyright 2014-2015 Canonical Ltd.  This software is licensed under the</span>
+<span class="c1"># GNU Affero General Public License version 3 (see the file LICENSE).</span>
+
+<span class="sd">&quot;&quot;&quot;Utilities for working with asynchronous operations.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">absolute_import</span><span class="p">,</span>
+    <span class="n">print_function</span><span class="p">,</span>
+    <span class="n">unicode_literals</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;DeferredHooks&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;gather&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">from</span> <span class="nn">Queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">from</span> <span class="nn">crochet</span> <span class="kn">import</span> <span class="n">wait_for_reactor</span>
+<span class="kn">from</span> <span class="nn">maasserver.exceptions</span> <span class="kn">import</span> <span class="n">IteratorReusedError</span>
+<span class="kn">from</span> <span class="nn">provisioningserver.utils.twisted</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">asynchronous</span><span class="p">,</span>
+    <span class="n">synchronous</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span>
+<span class="kn">from</span> <span class="nn">twisted.internet.defer</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CancelledError</span><span class="p">,</span>
+    <span class="n">Deferred</span><span class="p">,</span>
+    <span class="n">maybeDeferred</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">twisted.python</span> <span class="kn">import</span> <span class="n">log</span>
+
+
+<span class="k">class</span> <span class="nc">UseOnceIterator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;An iterator that is usable only once.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new :class:`UseOnceIterator`.</span>
+
+<span class="sd">        Takes the same arguments as iter().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iterable</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_run_once</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_run_once</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IteratorReusedError</span><span class="p">(</span>
+                <span class="s2">&quot;It is not possible to reuse a UseOnceIterator.&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterable</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_run_once</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">raise</span>
+
+
+<span class="nd">@wait_for_reactor</span>
+<div class="viewcode-block" id="gather"><a class="viewcode-back" href="../../../development/rpc.html#maasserver.utils.async.gather">[docs]</a><span class="k">def</span> <span class="nf">gather</span><span class="p">(</span><span class="n">calls</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;gather(calls, timeout=10.0)</span>
+
+<span class="sd">    Issue calls into the reactor, passing results back to another thread.</span>
+
+<span class="sd">    Note that `gather` does not explicitly report to the caller that it</span>
+<span class="sd">    has timed-out; calls are silently cancelled and the generator simply</span>
+<span class="sd">    reaches its end. If this information is important to your code, put</span>
+<span class="sd">    in place some mechanism to check that all expected responses have</span>
+<span class="sd">    been received, or create a modified version of thus function with</span>
+<span class="sd">    the required behaviour.</span>
+
+<span class="sd">    :param calls: An iterable of no-argument callables to be called in</span>
+<span class="sd">        the reactor thread. Each will be called via</span>
+<span class="sd">        :py:func:`~twisted.internet.defer.maybeDeferred`.</span>
+
+<span class="sd">    :param timeout: The number of seconds before further results are</span>
+<span class="sd">        ignored. Outstanding results will be cancelled.</span>
+
+<span class="sd">    :return: A :class:`UseOnceIterator` of results. A result might be a</span>
+<span class="sd">        failure, i.e. an instance of</span>
+<span class="sd">        :py:class:`twisted.python.failure.Failure`, or a valid result;</span>
+<span class="sd">        it&#39;s up to the caller to check.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Prepare of a list of Deferreds that we&#39;re going to wait for.</span>
+    <span class="n">deferreds</span> <span class="o">=</span> <span class="p">[</span><span class="n">maybeDeferred</span><span class="p">(</span><span class="n">call</span><span class="p">)</span> <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">calls</span><span class="p">]</span>
+
+    <span class="c1"># We&#39;ll use this queue (thread-safe) to pass results back.</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># A sentinel to mark the end of the results.</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+    <span class="c1"># This function will get called if not all results are in before</span>
+    <span class="c1"># `timeout` seconds have passed. It puts `done` into the queue to</span>
+    <span class="c1"># indicate the end of results, and cancels all outstanding deferred</span>
+    <span class="c1"># calls.</span>
+    <span class="k">def</span> <span class="nf">cancel</span><span class="p">():</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">done</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">deferred</span> <span class="ow">in</span> <span class="n">deferreds</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">deferred</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">err</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">canceller</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">canceller</span> <span class="o">=</span> <span class="n">reactor</span><span class="o">.</span><span class="n">callLater</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cancel</span><span class="p">)</span>
+
+    <span class="n">countdown</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deferreds</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Callback to report the result back to the queue. If it&#39;s the last</span>
+    <span class="c1"># result to be reported, `done` is put into the queue, and the</span>
+    <span class="c1"># delayed call to `cancel` is itself cancelled.</span>
+    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">next</span><span class="p">(</span><span class="n">countdown</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">done</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">canceller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">canceller</span><span class="o">.</span><span class="n">active</span><span class="p">():</span>
+                    <span class="n">canceller</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">deferred</span> <span class="ow">in</span> <span class="n">deferreds</span><span class="p">:</span>
+        <span class="n">deferred</span><span class="o">.</span><span class="n">addBoth</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+
+    <span class="c1"># If there are no calls then there will be no results, so we put</span>
+    <span class="c1"># `done` into the queue, and cancel the nascent delayed call to</span>
+    <span class="c1"># `cancel`, if it exists.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">deferreds</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">done</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">canceller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">canceller</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+
+    <span class="c1"># Return an iterator to the invoking thread that will stop at the</span>
+    <span class="c1"># first sign of the `done` sentinel.</span>
+    <span class="k">return</span> <span class="n">UseOnceIterator</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">suppress</span><span class="p">(</span><span class="n">failure</span><span class="p">,</span> <span class="o">*</span><span class="n">exceptions</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Used as a errback, suppress the given exceptions.&quot;&quot;&quot;</span>
+    <span class="n">failure</span><span class="o">.</span><span class="n">trap</span><span class="p">(</span><span class="o">*</span><span class="n">exceptions</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">DeferredHooks</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">local</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A utility class for managing hooks that are specified as Deferreds.</span>
+
+<span class="sd">    This is meant to be used by non-Twisted code to register hooks that need</span>
+<span class="sd">    to be run at some later time *in Twisted*. This is a common pattern in</span>
+<span class="sd">    MAAS, where the web-application needs to arrange post-commit actions that</span>
+<span class="sd">    mutate remote state, via RPC for example.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DeferredHooks</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+    <span class="nd">@synchronous</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">Deferred</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">savepoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Context manager that saves the current hooks on the way in.</span>
+
+<span class="sd">        If the context exits with an exception the newly added hooks are</span>
+<span class="sd">        cancelled, and the saved hooks are restored.</span>
+
+<span class="sd">        If the context exits cleanly, the saved hooks are restored, and the</span>
+<span class="sd">        newly hooks are added to the end of the hook queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">saved</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="k">raise</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">saved</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hooks</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span> <span class="o">=</span> <span class="n">saved</span>
+
+    <span class="nd">@synchronous</span>
+    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fire all hooks in sequence, in the reactor.</span>
+
+<span class="sd">        If a hook fails, the subsequent hooks will be cancelled (by calling</span>
+<span class="sd">        ``.cancel()``), and the exception will propagate out of this method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hooks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">hook</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_fire_in_reactor</span><span class="p">(</span><span class="n">hook</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Ensure that any remaining hooks are cancelled.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@synchronous</span>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cancel all hooks in sequence, in the reactor.</span>
+
+<span class="sd">        This calls each hook&#39;s ``.cancel()`` method. If any of these raise an</span>
+<span class="sd">        exception, it will be logged; it will not prevent cancellation of</span>
+<span class="sd">        other hooks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hooks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">hook</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cancel_in_reactor</span><span class="p">(</span><span class="n">hook</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Belt-n-braces.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">_fire_in_reactor</span><span class="p">(</span><span class="n">hook</span><span class="p">):</span>
+        <span class="n">hook</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hook</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">_cancel_in_reactor</span><span class="p">(</span><span class="n">hook</span><span class="p">):</span>
+        <span class="n">hook</span><span class="o">.</span><span class="n">addErrback</span><span class="p">(</span><span class="n">suppress</span><span class="p">,</span> <span class="n">CancelledError</span><span class="p">)</span>
+        <span class="n">hook</span><span class="o">.</span><span class="n">addErrback</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">hook</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1"># The canceller has failed. We take a hint from DeferredList here,</span>
+            <span class="c1"># by logging the exception and moving on.</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">err</span><span class="p">(</span><span class="n">_why</span><span class="o">=</span><span class="s2">&quot;Failure when cancelling hook.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">hook</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../../../index.html"><img src="../../../_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../../index.html">MAAS dev documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

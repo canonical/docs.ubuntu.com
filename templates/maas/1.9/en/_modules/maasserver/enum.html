@@ -1,0 +1,737 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>maasserver.enum &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="MAAS dev documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../index.html">MAAS dev documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maasserver.enum</h1><div class="highlight"><pre>
+<span class="c1"># Copyright 2012-2015 Canonical Ltd.  This software is licensed under the</span>
+<span class="c1"># GNU Affero General Public License version 3 (see the file LICENSE).</span>
+
+<span class="sd">&quot;&quot;&quot;Enumerations meaningful to the maasserver application.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">absolute_import</span><span class="p">,</span>
+    <span class="n">print_function</span><span class="p">,</span>
+    <span class="n">unicode_literals</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;CACHE_MODE_TYPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CACHE_MODE_TYPE_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;COMPONENT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FILESYSTEM_GROUP_TYPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FILESYSTEM_GROUP_TYPE_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FILESYSTEM_TYPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FILESYSTEM_TYPE_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;INTERFACE_TYPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;INTERFACE_TYPE_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;INTERFACE_TYPE_CHOICES_DICT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IPADDRESS_TYPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODEGROUP_STATUS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODEGROUP_STATUS_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODEGROUPINTERFACE_MANAGEMENT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODEGROUPINTERFACE_MANAGEMENT_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODEGROUPINTERFACE_MANAGEMENT_CHOICES_DICT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODE_PERMISSION&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODE_BOOT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODE_STATUS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODE_STATUS_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NODE_STATUS_CHOICES_DICT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PARTITION_TABLE_TYPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PARTITION_TABLE_TYPE_CHOICES&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PRESEED_TYPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;USERDATA_TYPE&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="c1"># *** IMPORTANT ***</span>
+<span class="c1"># Note to all ye who enter here: comments beginning with #: are special</span>
+<span class="c1"># to Sphinx. They are extracted and form part of the documentation of</span>
+<span class="c1"># the field they directly precede.</span>
+
+
+<span class="k">class</span> <span class="nc">COMPONENT</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Major moving parts of the application that may have failure states.&quot;&quot;&quot;</span>
+    <span class="n">PSERV</span> <span class="o">=</span> <span class="s1">&#39;provisioning server&#39;</span>
+    <span class="n">IMPORT_PXE_FILES</span> <span class="o">=</span> <span class="s1">&#39;maas-import-pxe-files script&#39;</span>
+    <span class="n">CLUSTERS</span> <span class="o">=</span> <span class="s1">&#39;clusters&#39;</span>
+    <span class="n">REGION_IMAGE_IMPORT</span> <span class="o">=</span> <span class="s1">&#39;Image importer&#39;</span>
+
+
+<div class="viewcode-block" id="NODE_STATUS"><a class="viewcode-back" href="../../enum.html#maasserver.enum.NODE_STATUS">[docs]</a><span class="k">class</span> <span class="nc">NODE_STATUS</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of a `Node`&#39;s possible statuses.&quot;&quot;&quot;</span>
+    <span class="c1">#: A node starts out as NEW (DEFAULT is an alias for NEW).</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">#: The node has been created and has a system ID assigned to it.</span>
+    <span class="n">NEW</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#: Testing and other commissioning steps are taking place.</span>
+    <span class="n">COMMISSIONING</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1">#: The commissioning step failed.</span>
+    <span class="n">FAILED_COMMISSIONING</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1">#: The node can&#39;t be contacted.</span>
+    <span class="n">MISSING</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="c1">#: The node is in the general pool ready to be deployed.</span>
+    <span class="n">READY</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="c1">#: The node is ready for named deployment.</span>
+    <span class="n">RESERVED</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="c1">#: The node has booted into the operating system of its owner&#39;s choice</span>
+    <span class="c1">#: and is ready for use.</span>
+    <span class="n">DEPLOYED</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="c1">#: The node has been removed from service manually until an admin</span>
+    <span class="c1">#: overrides the retirement.</span>
+    <span class="n">RETIRED</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="c1">#: The node is broken: a step in the node lifecyle failed.</span>
+    <span class="c1">#: More details can be found in the node&#39;s event log.</span>
+    <span class="n">BROKEN</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="c1">#: The node is being installed.</span>
+    <span class="n">DEPLOYING</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="c1">#: The node has been allocated to a user and is ready for deployment.</span>
+    <span class="n">ALLOCATED</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="c1">#: The deployment of the node failed.</span>
+    <span class="n">FAILED_DEPLOYMENT</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="c1">#: The node is powering down after a release request.</span>
+    <span class="n">RELEASING</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="c1">#: The releasing of the node failed.</span>
+    <span class="n">FAILED_RELEASING</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="c1">#: The node is erasing its disks.</span>
+    <span class="n">DISK_ERASING</span> <span class="o">=</span> <span class="mi">14</span>
+    <span class="c1">#: The node failed to erase its disks.</span>
+    <span class="n">FAILED_DISK_ERASING</span> <span class="o">=</span> <span class="mi">15</span></div>
+
+
+<span class="c1"># Django choices for NODE_STATUS: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">NODE_STATUS_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">NEW</span><span class="p">,</span> <span class="s2">&quot;New&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">COMMISSIONING</span><span class="p">,</span> <span class="s2">&quot;Commissioning&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">FAILED_COMMISSIONING</span><span class="p">,</span> <span class="s2">&quot;Failed commissioning&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">MISSING</span><span class="p">,</span> <span class="s2">&quot;Missing&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">READY</span><span class="p">,</span> <span class="s2">&quot;Ready&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">RESERVED</span><span class="p">,</span> <span class="s2">&quot;Reserved&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">ALLOCATED</span><span class="p">,</span> <span class="s2">&quot;Allocated&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">DEPLOYING</span><span class="p">,</span> <span class="s2">&quot;Deploying&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">DEPLOYED</span><span class="p">,</span> <span class="s2">&quot;Deployed&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">RETIRED</span><span class="p">,</span> <span class="s2">&quot;Retired&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">BROKEN</span><span class="p">,</span> <span class="s2">&quot;Broken&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">FAILED_DEPLOYMENT</span><span class="p">,</span> <span class="s2">&quot;Failed deployment&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">RELEASING</span><span class="p">,</span> <span class="s2">&quot;Releasing&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">FAILED_RELEASING</span><span class="p">,</span> <span class="s2">&quot;Releasing failed&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">DISK_ERASING</span><span class="p">,</span> <span class="s2">&quot;Disk erasing&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">FAILED_DISK_ERASING</span><span class="p">,</span> <span class="s2">&quot;Failed disk erasing&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="n">NODE_STATUS_CHOICES_DICT</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">NODE_STATUS_CHOICES</span><span class="p">)</span>
+
+
+<span class="c1"># NODE_STATUS when the node is owned by an owner and its is not commissioning.</span>
+<span class="n">ALLOCATED_NODE_STATUSES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">ALLOCATED</span><span class="p">,</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">DEPLOYING</span><span class="p">,</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">DEPLOYED</span><span class="p">,</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">FAILED_DEPLOYMENT</span><span class="p">,</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">RELEASING</span><span class="p">,</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">FAILED_RELEASING</span><span class="p">,</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">DISK_ERASING</span><span class="p">,</span>
+    <span class="n">NODE_STATUS</span><span class="o">.</span><span class="n">FAILED_DISK_ERASING</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">NODE_PERMISSION</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Permissions relating to nodes.&quot;&quot;&quot;</span>
+    <span class="n">VIEW</span> <span class="o">=</span> <span class="s1">&#39;view_node&#39;</span>
+    <span class="n">EDIT</span> <span class="o">=</span> <span class="s1">&#39;edit_node&#39;</span>
+    <span class="n">ADMIN</span> <span class="o">=</span> <span class="s1">&#39;admin_node&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">NODE_BOOT</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Types of booting methods a node can use.&quot;&quot;&quot;</span>
+    <span class="n">FASTPATH</span> <span class="o">=</span> <span class="s1">&#39;fastpath&#39;</span>  <span class="c1">#: http://launchpad.net/curtin</span>
+    <span class="n">DEBIAN</span> <span class="o">=</span> <span class="s1">&#39;di&#39;</span>
+
+
+<span class="c1"># Django choices for NODE_BOOT: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">NODE_BOOT_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">NODE_BOOT</span><span class="o">.</span><span class="n">FASTPATH</span><span class="p">,</span> <span class="s2">&quot;Fastpath Installer&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODE_BOOT</span><span class="o">.</span><span class="n">DEBIAN</span><span class="p">,</span> <span class="s2">&quot;Debian Installer&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PRESEED_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Types of preseed documents that can be generated.&quot;&quot;&quot;</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">COMMISSIONING</span> <span class="o">=</span> <span class="s1">&#39;commissioning&#39;</span>
+    <span class="n">ENLIST</span> <span class="o">=</span> <span class="s1">&#39;enlist&#39;</span>
+    <span class="n">CURTIN</span> <span class="o">=</span> <span class="s1">&#39;curtin&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">USERDATA_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Types of user-data documents that can be generated.&quot;&quot;&quot;</span>
+    <span class="n">ENLIST</span> <span class="o">=</span> <span class="s1">&#39;enlist_userdata&#39;</span>
+    <span class="n">CURTIN</span> <span class="o">=</span> <span class="s1">&#39;curtin_userdata&#39;</span>
+
+
+<div class="viewcode-block" id="NODEGROUP_STATUS"><a class="viewcode-back" href="../../enum.html#maasserver.enum.NODEGROUP_STATUS">[docs]</a><span class="k">class</span> <span class="nc">NODEGROUP_STATUS</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of a `NodeGroup`&#39;s possible statuses.&quot;&quot;&quot;</span>
+    <span class="c1">#: A nodegroup starts out as ``ENABLED``.</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1">#: An ENABLED cluster is one that should be operational.</span>
+    <span class="n">ENABLED</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1">#: A DISABLED cluster should not sync images or deploy new nodes.</span>
+    <span class="n">DISABLED</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+<span class="c1"># Django choices for NODEGROUP_STATUS: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">NODEGROUP_STATUS_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">NODEGROUP_STATUS</span><span class="o">.</span><span class="n">ENABLED</span><span class="p">,</span> <span class="s2">&quot;Enabled&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODEGROUP_STATUS</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">,</span> <span class="s2">&quot;Disabled&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">NODEGROUP_STATE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of a `NodeGroup`&#39;s possible state.&quot;&quot;&quot;</span>
+    <span class="c1">#:</span>
+    <span class="n">DISCONNECTED</span> <span class="o">=</span> <span class="s2">&quot;Disconnected&quot;</span>
+    <span class="c1">#:</span>
+    <span class="n">OUT_OF_SYNC</span> <span class="o">=</span> <span class="s2">&quot;Out-of-sync&quot;</span>
+    <span class="c1">#:</span>
+    <span class="n">SYNCING</span> <span class="o">=</span> <span class="s2">&quot;Syncing&quot;</span>
+    <span class="c1">#:</span>
+    <span class="n">SYNCED</span> <span class="o">=</span> <span class="s2">&quot;Synced&quot;</span>
+
+
+<div class="viewcode-block" id="NODEGROUPINTERFACE_MANAGEMENT"><a class="viewcode-back" href="../../enum.html#maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT">[docs]</a><span class="k">class</span> <span class="nc">NODEGROUPINTERFACE_MANAGEMENT</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of a `NodeGroupInterface`&#39;s possible statuses.&quot;&quot;&quot;</span>
+    <span class="c1"># A nodegroupinterface starts out as UNMANAGED.</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#: Do not manage DHCP or DNS for this interface.</span>
+    <span class="n">UNMANAGED</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#: Manage DHCP for this interface.</span>
+    <span class="n">DHCP</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1">#: Manage DHCP and DNS for this interface.</span>
+    <span class="n">DHCP_AND_DNS</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+<span class="c1"># Django choices for NODEGROUP_STATUS: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">NODEGROUPINTERFACE_MANAGEMENT_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">NODEGROUPINTERFACE_MANAGEMENT</span><span class="o">.</span><span class="n">UNMANAGED</span><span class="p">,</span> <span class="s2">&quot;Unmanaged&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODEGROUPINTERFACE_MANAGEMENT</span><span class="o">.</span><span class="n">DHCP</span><span class="p">,</span> <span class="s2">&quot;DHCP&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">NODEGROUPINTERFACE_MANAGEMENT</span><span class="o">.</span><span class="n">DHCP_AND_DNS</span><span class="p">,</span> <span class="s2">&quot;DHCP and DNS&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="n">NODEGROUPINTERFACE_MANAGEMENT_CHOICES_DICT</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">OrderedDict</span><span class="p">(</span><span class="n">NODEGROUPINTERFACE_MANAGEMENT_CHOICES</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">IPADDRESS_FAMILY</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible IP family for `StaticIPAddress`.&quot;&quot;&quot;</span>
+    <span class="n">IPv4</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">IPv6</span> <span class="o">=</span> <span class="mi">6</span>
+
+
+<span class="k">class</span> <span class="nc">IPADDRESS_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible types of `StaticIPAddress`.&quot;&quot;&quot;</span>
+    <span class="c1"># Note: when this enum is changed, the custom SQL query</span>
+    <span class="c1"># in StaticIPAddressManager.get_hostname_ip_mapping() must also</span>
+    <span class="c1"># be changed.</span>
+
+    <span class="c1"># Automatically assigned IP address for a node or device out of the</span>
+    <span class="c1"># connected clusters managed range. MUST NOT be assigned to a Interface</span>
+    <span class="c1"># with a STICKY address of the same address family.</span>
+    <span class="n">AUTO</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># User-specified static IP address for a node or device.</span>
+    <span class="c1"># Permanent until removed by the user, or the node or device is deleted.</span>
+    <span class="n">STICKY</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># User-specified static IP address.</span>
+    <span class="c1"># Specifying a MAC address is optional. If the MAC address is not present,</span>
+    <span class="c1"># it is created in the database (thus creating a MAC address not linked</span>
+    <span class="c1"># to a node or a device).</span>
+    <span class="c1"># USER_RESERVED IP addresses that correspond to a MAC address,</span>
+    <span class="c1"># and reside within a cluster interface range, will be added to the DHCP</span>
+    <span class="c1"># leases file.</span>
+    <span class="n">USER_RESERVED</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="c1"># Assigned to tell the interface that it should DHCP from a managed</span>
+    <span class="c1"># clusters dynamic range or from an external DHCP server.</span>
+    <span class="n">DHCP</span> <span class="o">=</span> <span class="mi">5</span>
+
+    <span class="c1"># IP address was discovered on the interface during commissioning and/or</span>
+    <span class="c1"># lease parsing. Only commissioning or lease parsing creates these IP</span>
+    <span class="c1"># addresses.</span>
+    <span class="n">DISCOVERED</span> <span class="o">=</span> <span class="mi">6</span>
+
+
+<span class="n">IPADDRESS_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">IPADDRESS_TYPE</span><span class="o">.</span><span class="n">AUTO</span><span class="p">,</span> <span class="s2">&quot;Auto&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">IPADDRESS_TYPE</span><span class="o">.</span><span class="n">STICKY</span><span class="p">,</span> <span class="s2">&quot;Sticky&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">IPADDRESS_TYPE</span><span class="o">.</span><span class="n">USER_RESERVED</span><span class="p">,</span> <span class="s2">&quot;User reserved&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">IPADDRESS_TYPE</span><span class="o">.</span><span class="n">DHCP</span><span class="p">,</span> <span class="s2">&quot;DHCP&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">IPADDRESS_TYPE</span><span class="o">.</span><span class="n">DISCOVERED</span><span class="p">,</span> <span class="s2">&quot;Discovered&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="n">IPADDRESS_TYPE_CHOICES_DICT</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">IPADDRESS_TYPE_CHOICES</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">POWER_STATE</span><span class="p">:</span>
+
+    <span class="c1"># Node is on</span>
+    <span class="n">ON</span> <span class="o">=</span> <span class="s1">&#39;on&#39;</span>
+
+    <span class="c1"># Node is off</span>
+    <span class="n">OFF</span> <span class="o">=</span> <span class="s1">&#39;off&#39;</span>
+
+    <span class="c1"># Node is power state is unknown</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+
+    <span class="c1"># Error getting the nodes power state</span>
+    <span class="n">ERROR</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span>
+
+
+<span class="n">POWER_STATE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">POWER_STATE</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span> <span class="s2">&quot;On&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">POWER_STATE</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span> <span class="s2">&quot;Off&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">POWER_STATE</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">POWER_STATE</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="s2">&quot;Error&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BOOT_RESOURCE_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible types for `BootResource`.&quot;&quot;&quot;</span>
+    <span class="c1"># Downloaded from `BootSources`.</span>
+    <span class="n">SYNCED</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Generate by MAAS.</span>
+    <span class="n">GENERATED</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Uploaded by User.</span>
+    <span class="n">UPLOADED</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+<span class="c1"># Django choices for BOOT_RESOURCE_TYPE: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">BOOT_RESOURCE_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_TYPE</span><span class="o">.</span><span class="n">SYNCED</span><span class="p">,</span> <span class="s2">&quot;Synced&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_TYPE</span><span class="o">.</span><span class="n">GENERATED</span><span class="p">,</span> <span class="s2">&quot;Generated&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_TYPE</span><span class="o">.</span><span class="n">UPLOADED</span><span class="p">,</span> <span class="s2">&quot;Uploaded&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="n">BOOT_RESOURCE_TYPE_CHOICES_DICT</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">BOOT_RESOURCE_TYPE_CHOICES</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BOOT_RESOURCE_FILE_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible file types for `BootResource`.&quot;&quot;&quot;</span>
+    <span class="c1">#: Tarball of root image.</span>
+    <span class="n">ROOT_TGZ</span> <span class="o">=</span> <span class="s1">&#39;root-tgz&#39;</span>
+
+    <span class="c1">#: Tarball of dd image.</span>
+    <span class="n">ROOT_DD</span> <span class="o">=</span> <span class="s1">&#39;root-dd&#39;</span>
+
+    <span class="c1"># Following are not allowed on user upload. Only used for syncing</span>
+    <span class="c1"># from another simplestreams source. (Most likely maas.ubuntu.com)</span>
+
+    <span class="c1">#: Root Image (gets converted to root-image root-tgz, on Cluster)</span>
+    <span class="n">ROOT_IMAGE</span> <span class="o">=</span> <span class="s1">&#39;root-image.gz&#39;</span>
+
+    <span class="c1">#: Boot Kernel (ISCSI kernel)</span>
+    <span class="n">BOOT_KERNEL</span> <span class="o">=</span> <span class="s1">&#39;boot-kernel&#39;</span>
+
+    <span class="c1">#: Boot Initrd (ISCSI initrd)</span>
+    <span class="n">BOOT_INITRD</span> <span class="o">=</span> <span class="s1">&#39;boot-initrd&#39;</span>
+
+    <span class="c1">#: Boot DTB (ISCSI dtb)</span>
+    <span class="n">BOOT_DTB</span> <span class="o">=</span> <span class="s1">&#39;boot-dtb&#39;</span>
+
+    <span class="c1">#: DI Kernel (Debian Installer kernel)</span>
+    <span class="n">DI_KERNEL</span> <span class="o">=</span> <span class="s1">&#39;di-kernel&#39;</span>
+
+    <span class="c1">#: DI Initrd (Debian Installer initrd)</span>
+    <span class="n">DI_INITRD</span> <span class="o">=</span> <span class="s1">&#39;di-initrd&#39;</span>
+
+    <span class="c1">#: DI DTB (Debian Installer dtb)</span>
+    <span class="n">DI_DTB</span> <span class="o">=</span> <span class="s1">&#39;di-dtb&#39;</span>
+
+
+<span class="c1"># Django choices for BOOT_RESOURCE_FILE_TYPE: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">BOOT_RESOURCE_FILE_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">ROOT_TGZ</span><span class="p">,</span> <span class="s2">&quot;Root Image (tar.gz)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">ROOT_DD</span><span class="p">,</span> <span class="s2">&quot;Root Compressed DD (dd -&gt; tar.gz)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">ROOT_IMAGE</span><span class="p">,</span> <span class="s2">&quot;Compressed Root Image&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">BOOT_KERNEL</span><span class="p">,</span> <span class="s2">&quot;Linux ISCSI Kernel&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">BOOT_INITRD</span><span class="p">,</span> <span class="s2">&quot;Initial ISCSI Ramdisk&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">BOOT_DTB</span><span class="p">,</span> <span class="s2">&quot;ISCSI Device Tree Blob&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">DI_KERNEL</span><span class="p">,</span> <span class="s2">&quot;Linux DI Kernel&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">DI_INITRD</span><span class="p">,</span> <span class="s2">&quot;Initial DI Ramdisk&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOOT_RESOURCE_FILE_TYPE</span><span class="o">.</span><span class="n">DI_DTB</span><span class="p">,</span> <span class="s2">&quot;DI Device Tree Blob&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PARTITION_TABLE_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible partition types for `PartitionTable`.&quot;&quot;&quot;</span>
+    <span class="c1">#: GUID partition table.</span>
+    <span class="n">GPT</span> <span class="o">=</span> <span class="s1">&#39;GPT&#39;</span>
+
+    <span class="c1">#: Master boot record..</span>
+    <span class="n">MBR</span> <span class="o">=</span> <span class="s1">&#39;MBR&#39;</span>
+
+
+<span class="c1"># Django choices for PARTITION_TABLE_TYPE: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">PARTITION_TABLE_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">PARTITION_TABLE_TYPE</span><span class="o">.</span><span class="n">MBR</span><span class="p">,</span> <span class="s2">&quot;Master boot record&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">PARTITION_TABLE_TYPE</span><span class="o">.</span><span class="n">GPT</span><span class="p">,</span> <span class="s2">&quot;GUID parition table&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">FILESYSTEM_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible partition types for `Filesystem`.&quot;&quot;&quot;</span>
+    <span class="c1">#: Second extended filesystem.</span>
+    <span class="n">EXT2</span> <span class="o">=</span> <span class="s1">&#39;ext2&#39;</span>
+
+    <span class="c1">#: Fourth extended filesystem.</span>
+    <span class="n">EXT4</span> <span class="o">=</span> <span class="s1">&#39;ext4&#39;</span>
+
+    <span class="c1">#: FAT32</span>
+    <span class="n">FAT32</span> <span class="o">=</span> <span class="s1">&#39;fat32&#39;</span>
+
+    <span class="c1">#: VFAT</span>
+    <span class="n">VFAT</span> <span class="o">=</span> <span class="s1">&#39;vfat&#39;</span>
+
+    <span class="c1">#: LVM Physical Volume.</span>
+    <span class="n">LVM_PV</span> <span class="o">=</span> <span class="s1">&#39;lvm-pv&#39;</span>
+
+    <span class="c1">#: RAID.</span>
+    <span class="n">RAID</span> <span class="o">=</span> <span class="s1">&#39;raid&#39;</span>
+
+    <span class="c1">#: RAID spare.</span>
+    <span class="n">RAID_SPARE</span> <span class="o">=</span> <span class="s1">&#39;raid-spare&#39;</span>
+
+    <span class="c1">#: Bcache cache.</span>
+    <span class="n">BCACHE_CACHE</span> <span class="o">=</span> <span class="s1">&#39;bcache-cache&#39;</span>
+
+    <span class="c1">#: Bcache backing.</span>
+    <span class="n">BCACHE_BACKING</span> <span class="o">=</span> <span class="s1">&#39;bcache-backing&#39;</span>
+
+
+<span class="c1"># Django choices for FILESYSTEM_TYPE: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">FILESYSTEM_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">EXT2</span><span class="p">,</span> <span class="s2">&quot;ext2&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">EXT4</span><span class="p">,</span> <span class="s2">&quot;ext4&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">FAT32</span><span class="p">,</span> <span class="s2">&quot;fat32&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">VFAT</span><span class="p">,</span> <span class="s2">&quot;vfat&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">LVM_PV</span><span class="p">,</span> <span class="s2">&quot;lvm&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">RAID</span><span class="p">,</span> <span class="s2">&quot;raid&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">RAID_SPARE</span><span class="p">,</span> <span class="s2">&quot;raid-spare&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">BCACHE_CACHE</span><span class="p">,</span> <span class="s2">&quot;bcache-cache&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">BCACHE_BACKING</span><span class="p">,</span> <span class="s2">&quot;bcache-backing&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># Django choices for FILESYSTEM_TYPE: sequence of tuples (key, UI</span>
+<span class="c1"># representation). When a user does a format operation only these values</span>
+<span class="c1"># are allowed. The other values are reserved for internal use.</span>
+<span class="n">FILESYSTEM_FORMAT_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">EXT2</span><span class="p">,</span> <span class="s2">&quot;ext2&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">EXT4</span><span class="p">,</span> <span class="s2">&quot;ext4&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">FAT32</span><span class="p">,</span> <span class="s2">&quot;fat32&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_TYPE</span><span class="o">.</span><span class="n">VFAT</span><span class="p">,</span> <span class="s2">&quot;vfat&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="n">FILESYSTEM_FORMAT_TYPE_CHOICES_DICT</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span>
+    <span class="n">FILESYSTEM_FORMAT_TYPE_CHOICES</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">FILESYSTEM_GROUP_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible partition types for `FilesystemGroup`.&quot;&quot;&quot;</span>
+    <span class="c1">#: LVM volume group.</span>
+    <span class="n">LVM_VG</span> <span class="o">=</span> <span class="s1">&#39;lvm-vg&#39;</span>
+
+    <span class="c1">#: RAID level 0</span>
+    <span class="n">RAID_0</span> <span class="o">=</span> <span class="s1">&#39;raid-0&#39;</span>
+
+    <span class="c1">#: RAID level 1</span>
+    <span class="n">RAID_1</span> <span class="o">=</span> <span class="s1">&#39;raid-1&#39;</span>
+
+    <span class="c1">#: RAID level 5</span>
+    <span class="n">RAID_5</span> <span class="o">=</span> <span class="s1">&#39;raid-5&#39;</span>
+
+    <span class="c1">#: RAID level 6</span>
+    <span class="n">RAID_6</span> <span class="o">=</span> <span class="s1">&#39;raid-6&#39;</span>
+
+    <span class="c1">#: RAID level 10</span>
+    <span class="n">RAID_10</span> <span class="o">=</span> <span class="s1">&#39;raid-10&#39;</span>
+
+    <span class="c1">#: Bcache</span>
+    <span class="n">BCACHE</span> <span class="o">=</span> <span class="s1">&#39;bcache&#39;</span>
+
+
+<span class="n">FILESYSTEM_GROUP_RAID_TYPES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_0</span><span class="p">,</span>
+    <span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_1</span><span class="p">,</span>
+    <span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_5</span><span class="p">,</span>
+    <span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_6</span><span class="p">,</span>
+    <span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_10</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<span class="c1"># Django choices for FILESYSTEM_GROUP_RAID_TYPES: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">FILESYSTEM_GROUP_RAID_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_0</span><span class="p">,</span> <span class="s2">&quot;RAID 0&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_1</span><span class="p">,</span> <span class="s2">&quot;RAID 1&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_5</span><span class="p">,</span> <span class="s2">&quot;RAID 5&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_6</span><span class="p">,</span> <span class="s2">&quot;RAID 6&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">RAID_10</span><span class="p">,</span> <span class="s2">&quot;RAID 10&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="c1"># Django choices for FILESYSTEM_GROUP_TYPE: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">FILESYSTEM_GROUP_TYPE_CHOICES</span> <span class="o">=</span> <span class="n">FILESYSTEM_GROUP_RAID_TYPE_CHOICES</span> <span class="o">+</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">LVM_VG</span><span class="p">,</span> <span class="s2">&quot;LVM VG&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">FILESYSTEM_GROUP_TYPE</span><span class="o">.</span><span class="n">BCACHE</span><span class="p">,</span> <span class="s2">&quot;Bcache&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">CACHE_MODE_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible types of cache.&quot;&quot;&quot;</span>
+    <span class="n">WRITEBACK</span> <span class="o">=</span> <span class="s1">&#39;writeback&#39;</span>
+    <span class="n">WRITETHROUGH</span> <span class="o">=</span> <span class="s1">&#39;writethrough&#39;</span>
+    <span class="n">WRITEAROUND</span> <span class="o">=</span> <span class="s1">&#39;writearound&#39;</span>
+
+
+<span class="c1"># Django choices for CACHE_MODE_TYPE: sequence of tuples (key, UI</span>
+<span class="c1"># representation).</span>
+<span class="n">CACHE_MODE_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">CACHE_MODE_TYPE</span><span class="o">.</span><span class="n">WRITEBACK</span><span class="p">,</span> <span class="s1">&#39;Writeback&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">CACHE_MODE_TYPE</span><span class="o">.</span><span class="n">WRITETHROUGH</span><span class="p">,</span> <span class="s1">&#39;Writethrough&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">CACHE_MODE_TYPE</span><span class="o">.</span><span class="n">WRITEAROUND</span><span class="p">,</span> <span class="s1">&#39;Writearound&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">INTERFACE_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible types for `Interface`.&quot;&quot;&quot;</span>
+    <span class="c1"># Note: when these constants are changed, the custom SQL query</span>
+    <span class="c1"># in StaticIPAddressManager.get_hostname_ip_mapping() must also</span>
+    <span class="c1"># be changed.</span>
+    <span class="n">PHYSICAL</span> <span class="o">=</span> <span class="s1">&#39;physical&#39;</span>
+    <span class="n">BOND</span> <span class="o">=</span> <span class="s1">&#39;bond&#39;</span>
+    <span class="n">VLAN</span> <span class="o">=</span> <span class="s1">&#39;vlan&#39;</span>
+    <span class="n">ALIAS</span> <span class="o">=</span> <span class="s1">&#39;alias&#39;</span>
+    <span class="c1"># Interface that is created when it is not linked to a node.</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+
+
+<span class="n">INTERFACE_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">INTERFACE_TYPE</span><span class="o">.</span><span class="n">PHYSICAL</span><span class="p">,</span> <span class="s2">&quot;Physical interface&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">INTERFACE_TYPE</span><span class="o">.</span><span class="n">BOND</span><span class="p">,</span> <span class="s2">&quot;Bond&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">INTERFACE_TYPE</span><span class="o">.</span><span class="n">VLAN</span><span class="p">,</span> <span class="s2">&quot;VLAN interface&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">INTERFACE_TYPE</span><span class="o">.</span><span class="n">ALIAS</span><span class="p">,</span> <span class="s2">&quot;Alias&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">INTERFACE_TYPE</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="n">INTERFACE_TYPE_CHOICES_DICT</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">INTERFACE_TYPE_CHOICES</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">INTERFACE_LINK_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The vocabulary of possible types to link a `Subnet` to a `Interface`.&quot;&quot;&quot;</span>
+    <span class="n">AUTO</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span>
+    <span class="n">DHCP</span> <span class="o">=</span> <span class="s1">&#39;dhcp&#39;</span>
+    <span class="n">STATIC</span> <span class="o">=</span> <span class="s1">&#39;static&#39;</span>
+    <span class="n">LINK_UP</span> <span class="o">=</span> <span class="s1">&#39;link_up&#39;</span>
+
+
+<span class="n">INTERFACE_LINK_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">INTERFACE_LINK_TYPE</span><span class="o">.</span><span class="n">AUTO</span><span class="p">,</span> <span class="s2">&quot;Auto IP&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">INTERFACE_LINK_TYPE</span><span class="o">.</span><span class="n">DHCP</span><span class="p">,</span> <span class="s2">&quot;DHCP&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">INTERFACE_LINK_TYPE</span><span class="o">.</span><span class="n">STATIC</span><span class="p">,</span> <span class="s2">&quot;Static IP&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">INTERFACE_LINK_TYPE</span><span class="o">.</span><span class="n">LINK_UP</span><span class="p">,</span> <span class="s2">&quot;Link up&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BOND_MODE</span><span class="p">:</span>
+    <span class="n">BALANCE_RR</span> <span class="o">=</span> <span class="s2">&quot;balance-rr&quot;</span>
+    <span class="n">ACTIVE_BACKUP</span> <span class="o">=</span> <span class="s2">&quot;active-backup&quot;</span>
+    <span class="n">BALANCE_XOR</span> <span class="o">=</span> <span class="s2">&quot;balance-xor&quot;</span>
+    <span class="n">BROADCAST</span> <span class="o">=</span> <span class="s2">&quot;broadcast&quot;</span>
+    <span class="n">LINK_AGGREGATION</span> <span class="o">=</span> <span class="s2">&quot;802.3ad&quot;</span>
+    <span class="n">BALANCE_TLB</span> <span class="o">=</span> <span class="s2">&quot;balance-tlb&quot;</span>
+    <span class="n">BALANCE_ALB</span> <span class="o">=</span> <span class="s2">&quot;balance-alb&quot;</span>
+
+
+<span class="n">BOND_MODE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_RR</span><span class="p">,</span> <span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_RR</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_MODE</span><span class="o">.</span><span class="n">ACTIVE_BACKUP</span><span class="p">,</span> <span class="n">BOND_MODE</span><span class="o">.</span><span class="n">ACTIVE_BACKUP</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_XOR</span><span class="p">,</span> <span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_XOR</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BROADCAST</span><span class="p">,</span> <span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BROADCAST</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_MODE</span><span class="o">.</span><span class="n">LINK_AGGREGATION</span><span class="p">,</span> <span class="n">BOND_MODE</span><span class="o">.</span><span class="n">LINK_AGGREGATION</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_TLB</span><span class="p">,</span> <span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_TLB</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_ALB</span><span class="p">,</span> <span class="n">BOND_MODE</span><span class="o">.</span><span class="n">BALANCE_ALB</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BOND_LACP_RATE</span><span class="p">:</span>
+    <span class="n">SLOW</span> <span class="o">=</span> <span class="s2">&quot;slow&quot;</span>
+    <span class="n">FAST</span> <span class="o">=</span> <span class="s2">&quot;fast&quot;</span>
+
+
+<span class="n">BOND_LACP_RATE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">BOND_LACP_RATE</span><span class="o">.</span><span class="n">SLOW</span><span class="p">,</span> <span class="n">BOND_LACP_RATE</span><span class="o">.</span><span class="n">SLOW</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_LACP_RATE</span><span class="o">.</span><span class="n">FAST</span><span class="p">,</span> <span class="n">BOND_LACP_RATE</span><span class="o">.</span><span class="n">FAST</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BOND_XMIT_HASH_POLICY</span><span class="p">:</span>
+    <span class="n">LAYER2</span> <span class="o">=</span> <span class="s2">&quot;layer2&quot;</span>
+    <span class="n">LAYER2_3</span> <span class="o">=</span> <span class="s2">&quot;layer2+3&quot;</span>
+    <span class="n">LAYER3_4</span> <span class="o">=</span> <span class="s2">&quot;layer3+4&quot;</span>
+    <span class="n">ENCAP2_3</span> <span class="o">=</span> <span class="s2">&quot;encap2+3&quot;</span>
+    <span class="n">ENCAP3_4</span> <span class="o">=</span> <span class="s2">&quot;encap3+4&quot;</span>
+
+
+<span class="n">BOND_XMIT_HASH_POLICY_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">LAYER2</span><span class="p">,</span> <span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">LAYER2</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">LAYER2_3</span><span class="p">,</span> <span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">LAYER2_3</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">LAYER3_4</span><span class="p">,</span> <span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">LAYER3_4</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">ENCAP2_3</span><span class="p">,</span> <span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">ENCAP2_3</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">ENCAP3_4</span><span class="p">,</span> <span class="n">BOND_XMIT_HASH_POLICY</span><span class="o">.</span><span class="n">ENCAP3_4</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../../index.html"><img src="../../_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../index.html">MAAS dev documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

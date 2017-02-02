@@ -1,0 +1,641 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Command Line Interface &mdash; MAAS dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS dev documentation" href="index.html" />
+    <link rel="next" title="Version" href="version.html" />
+    <link rel="prev" title="API authentication" href="api_authentication.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="version.html" title="Version"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="api_authentication.html" title="API authentication"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="command-line-interface">
+<span id="cli"></span><h1>Command Line Interface<a class="headerlink" href="maascli.html#command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>As well as the web interface, many tasks can be performed by accessing
+the MAAS API directly through the <cite>maas</cite> command. This section
+details how to log in with this tool and perform some common
+operations.</p>
+<div class="section" id="logging-in">
+<span id="api-key"></span><h2>Logging in<a class="headerlink" href="maascli.html#logging-in" title="Permalink to this headline">¶</a></h2>
+<p>Before the API will accept any commands from maas, you must first
+log in. To do this, you need an API key for your MAAS account.  A key was
+generated for you as soon as your account was created, although you can still
+generate additional keys if you prefer.</p>
+<p>The key can be found in the web user interface, or if you have root privileges
+on the region controller, retrieved from the command line.</p>
+<p>To obtain the key from the web user interface, log in and click on your
+user name in the top right corner of the page, and select &#8216;Preferences&#8217; from
+the menu which appears.</p>
+<img alt="_images/maascli-prefs.png" src="_images/maascli-prefs.png" />
+<p>A new page will load...</p>
+<img alt="_images/maascli-key.png" src="_images/maascli-key.png" />
+<p>Your MAAS API keys appear at the top of the preferences form.  It&#8217;s easiest to
+just select and copy the key (it&#8217;s quite long!) and then paste it into the
+command line.</p>
+<p>To obtain the key through the command line, run this command on the region
+controller (it requires root access):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo maas-region-admin apikey --username=my-username
+</pre></div>
+</div>
+<p>(Substitute your MAAS user name for my-username).</p>
+<p>Once you have your API key, log in with:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas login &lt;profile-name&gt; &lt;hostname&gt; &lt;key&gt;
+</pre></div>
+</div>
+<p>This command logs you in, and creates a &#8220;profile&#8221; with the profile name you
+have selected.   The profile is an easy way of storing the server URL and your
+login credentials, and re-using them across command-line invocations.  Think
+of the profile as a persistent session.  You can have multiple profiles open
+at the same time, and so as part of the login command, you assign a unique
+name to the new profile.  Later invocations of the maas command line will
+refer to the profile by this name.</p>
+<p>For example, you might log in with a command line like:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas login my-maas http://10.98.0.13/MAAS/api/1.0
+AWSCRMzqMNy:jjk...5e1FenoP82Qm5te2
+</pre></div>
+</div>
+<p>This creates the profile &#8216;my-maas&#8217; and registers it with the given key
+at the specified API endpoint URL.</p>
+<p>If you omit the API key, the command will prompt you for it in the console.
+It is also possible to use a hyphen, &#8216;-&#8216; in place of the API key.  In this
+case the command will read the API key from standard input, as a single
+line, ignoring whitespace.  This mode of input can be useful if you want to
+read the API key from a file, or if you wish to avoid including the API key in
+a command line where it may be observed by other users on the system.</p>
+<p>Specifying an empty string instead of an API key will make the profile act as
+an anonymous user.  Some calls in the API are accessible without logging in,
+but most of them are not.</p>
+</div>
+<div class="section" id="maas-commands">
+<h2>maas commands<a class="headerlink" href="maascli.html#maas-commands" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">maas</span></code> command exposes the whole API, so you can do anything
+you actually <em>can</em> do with MAAS using this command. Unsurprisingly,
+this leaves us with a vast number of options, but before we delve into
+detail on the specifics, here is a sort of &#8216;cheat-sheet&#8217; for common
+tasks you might want to do using <code class="docutils literal"><span class="pre">maas</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="maascli.html#cli-dhcp"><span>Configure DHCP and DNS services</span></a></li>
+<li><a class="reference internal" href="maascli.html#cli-commission"><span>Commission all enlisted nodes</span></a></li>
+<li><a class="reference internal" href="man/maas.8.html#cli-power"><span>Setting IPMI power parameters for a node</span></a></li>
+</ul>
+</div></blockquote>
+<p>The main maas commands are:</p>
+<p><code class="samp docutils literal"><span class="pre">list</span></code></p>
+<blockquote>
+<div>lists the details [name url auth-key] of all the currently logged-in
+profiles.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">login</span> <span class="pre">&lt;profile&gt;</span> <span class="pre">&lt;url&gt;</span> <span class="pre">&lt;key&gt;</span></code></p>
+<blockquote>
+<div>Logs in to the MAAS controller API at the given URL, using the key
+provided and associates this connection with the given profile name.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">logout</span> <span class="pre">&lt;profile&gt;</span></code></p>
+<blockquote>
+<div>Logs out from the given profile, flushing the stored credentials.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">refresh</span></code></p>
+<blockquote>
+<div>Refreshes the API descriptions of all the current logged in
+profiles. This may become necessary for example when upgrading the
+maas packages to ensure the command-line options match with the API.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">&lt;profile&gt;</span> <span class="pre">[command]</span> <span class="pre">[options]</span> <span class="pre">...</span></code></p>
+<blockquote>
+<div>Using the given profile name instructs <code class="docutils literal"><span class="pre">maas</span></code> to direct the
+subsequent commands and options to the relevant MAAS, which for the
+current API are detailed below...</div></blockquote>
+<div class="section" id="account">
+<h3>account<a class="headerlink" href="maascli.html#account" title="Permalink to this headline">¶</a></h3>
+<p>This command is used for creating and destroying the
+MAAS authorisation tokens associated with a profile.</p>
+<p>Usage: maas <em>&lt;profile&gt;</em> account [-d &#8211;debug] [-h &#8211;help]
+create-authorisation-token | delete-authorisation-token [token_key=<em>&lt;value&gt;</em>]</p>
+<p><code class="samp docutils literal"><span class="pre">-d,</span> <span class="pre">--debug</span></code></p>
+<blockquote>
+<div>Displays debug information listing the API responses.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<blockquote>
+<div>Display usage information.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-k,</span> <span class="pre">--insecure</span></code></p>
+<blockquote>
+<div>Disables the SSL certificate check.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">create-authorisation-token</span></code></p>
+<blockquote>
+<div>Creates a new MAAS authorisation token for the current profile
+which can be used to authenticate connections to the API.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">delete-authorisation-token</span> <span class="pre">token_key=&lt;value&gt;</span></code></p>
+<blockquote>
+<div>Removes the given key from the list of authorisation tokens.</div></blockquote>
+</div>
+<div class="section" id="node">
+<h3>node<a class="headerlink" href="maascli.html#node" title="Permalink to this headline">¶</a></h3>
+<p>API calls which operate on individual nodes. With these commands, the
+node is always identified by its &#8220;system_id&#8221; property - a unique tag
+allocated at the time of enlistment. To discover the value of the
+system_id, you can use the <code class="docutils literal"><span class="pre">maas</span> <span class="pre">&lt;profile&gt;</span> <span class="pre">nodes</span> <span class="pre">list</span></code> command.</p>
+<p>USAGE: maas &lt;profile&gt; node [-h] release | start | stop | delete |
+read | update &lt;system_id&gt;</p>
+<p><code class="samp docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<blockquote>
+<div>Display usage information.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">release</span> <span class="pre">&lt;system_id&gt;</span></code></p>
+<blockquote>
+<div>Releases the node given by <em>&lt;system_id&gt;</em></div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">start</span> <span class="pre">&lt;system_id&gt;</span></code></p>
+<blockquote>
+<div>Powers up the node identified by <em>&lt;system_id&gt;</em> (where MAAS has
+information for power management for this node).</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">stop</span> <span class="pre">&lt;system_id&gt;</span></code></p>
+<blockquote>
+<div>Powers off the node identified by <em>&lt;system_id&gt;</em> (where MAAS has
+information for power management for this node).</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">delete</span> <span class="pre">&lt;system_id&gt;</span></code></p>
+<blockquote>
+<div>Removes the given node from the MAAS database.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">read</span> <span class="pre">&lt;system_id&gt;</span></code></p>
+<blockquote>
+<div>Returns all the current known information about the node specified
+by <em>&lt;system_id&gt;</em></div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">update</span> <span class="pre">&lt;system_id&gt;</span> <span class="pre">[parameters...]</span></code></p>
+<blockquote>
+<div><p>Used to change or set specific values for the node. The valid
+parameters are listed below:</p>
+<div class="highlight-python"><div class="highlight"><pre>hostname=&lt;value&gt;
+     The new hostname for this node.
+
+architecture=&lt;value&gt;
+     Sets the architecture type, where &lt;value&gt;
+     is a string containing a valid architecture type,
+     e.g. &quot;i386/generic&quot;
+
+distro_series=&lt;value&gt;
+     Sets the distro series of Ubuntu to use (e.g. &quot;precise&quot;).
+
+power_type=&lt;value&gt;
+     Set the given power type on the node. (e.g. &quot;ipmi&quot;)
+
+power_parameters_{param1}... =&lt;value&gt;
+     Set the given power parameters. Note that the valid options for these
+     depend on the power type chosen.
+
+power_parameters_skip_check &#39;true&#39; | &#39;false&#39;
+     Whether to sanity check the supplied parameters against this node&#39;s
+     declared power type. The default is &#39;false&#39;.
+</pre></div>
+</div>
+</div></blockquote>
+<p id="cli-power">Example: Setting the power parameters for an ipmi enabled node:</p>
+<div class="highlight-python"><div class="highlight"><pre>maas maas node update &lt;system_id&gt; \
+  power_type=&quot;ipmi&quot; \
+  power_parameters_power_address=192.168.22.33 \
+  power_parameters_power_user=root \
+  power_parameters_power_pass=ubuntu;
+</pre></div>
+</div>
+</div>
+<div class="section" id="nodes">
+<h3>nodes<a class="headerlink" href="maascli.html#nodes" title="Permalink to this headline">¶</a></h3>
+<p>Usage: maas &lt;profile&gt; nodes [-h] is-registered | list-allocated |
+acquire | list | accept | accept-all | new | check-commissioning</p>
+<p><code class="samp docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<blockquote>
+<div>Display usage information.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">accept</span> <span class="pre">&lt;system_id&gt;</span></code></p>
+<blockquote>
+<div>Accepts the node referenced by &lt;system_id&gt;.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">accept-all</span></code></p>
+<blockquote>
+<div>Accepts all currently discovered but not previously accepted nodes.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">acquire</span></code></p>
+<blockquote>
+<div>Allocates a node to the profile used to issue the command. Any
+ready node may be allocated.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">is-registered</span> <span class="pre">mac_address=&lt;address&gt;</span></code></p>
+<blockquote>
+<div>Checks to see whether the specified MAC address is registered to a
+node.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">list</span></code></p>
+<blockquote>
+<div>Returns a JSON formatted object listing all the currently known
+nodes, their system_id, status and other details.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">list-allocated</span></code></p>
+<blockquote>
+<div>Returns a JSON formatted object listing all the currently allocated
+nodes, their system_id, status and other details.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">new</span> <span class="pre">architecture=&lt;value&gt;</span> <span class="pre">mac_addresses=&lt;value&gt;</span> <span class="pre">[parameters]</span></code></p>
+<blockquote>
+<div><p>Creates a new node entry given the provided key=value information
+for the node. A minimum of the MAC address and architecture must be
+provided. Other parameters may also be supplied:</p>
+<div class="highlight-python"><div class="highlight"><pre>architecture=&quot;&lt;value&gt;&quot; - The architecture of the node, must be
+one of the recognised architecture strings (e.g. &quot;i386/generic&quot;)
+hostname=&quot;&lt;value&gt;&quot; - a name for this node. If not supplied a name
+will be generated.
+mac_addresses=&quot;&lt;value&gt;&quot; - The mac address(es)
+allocated to this node.
+power_type=&quot;&lt;value&gt;&quot; - the power type of
+the node (e.g. virsh, ipmi)
+</pre></div>
+</div>
+</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">check-commissioning</span></code></p>
+<blockquote>
+<div>Displays current status of nodes in the commissioning phase. Any
+that have not returned before the system timeout value are listed
+as &#8220;failed&#8221;.</div></blockquote>
+<p id="cli-commission">Examples:
+Accept and commission all discovered nodes:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas maas nodes accept-all
+</pre></div>
+</div>
+<p>List all known nodes:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas maas nodes list
+</pre></div>
+</div>
+<p>Filter the list using specific key/value pairs:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas maas nodes list architecture=&quot;i386/generic&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="node-groups">
+<h3>node-groups<a class="headerlink" href="maascli.html#node-groups" title="Permalink to this headline">¶</a></h3>
+<p>Usage: maas &lt;profile&gt; node-groups [-d &#8211;debug] [-h &#8211;help] [-k
+&#8211;insecure] register | list | accept | reject</p>
+<p><code class="samp docutils literal"><span class="pre">-d,</span> <span class="pre">--debug</span></code></p>
+<blockquote>
+<div>Displays debug information listing the API responses.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<blockquote>
+<div>Display usage information.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-k,</span> <span class="pre">--insecure</span></code></p>
+<blockquote>
+<div>Disables the SSL certificate check.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">register</span> <span class="pre">uuid=&lt;value&gt;</span> <span class="pre">name=&lt;value&gt;</span> <span class="pre">interfaces=&lt;json_string&gt;</span></code></p>
+<blockquote>
+<div>Registers a new node group with the given name and uuid. The
+interfaces parameter must be supplied in the form of a JSON string
+comprising the key/value data for the interface to be used, for
+example: interface=&#8217;[&#8220;ip&#8221;:&#8221;192.168.21.5&#8221;,&#8221;interface&#8221;:&#8221;eth1&#8221;, &#8220;subnet_mask&#8221;:&#8221;255.255.255.0&#8221;,&#8221;broadcast_ip&#8221;:&#8221;192.168.21.255&#8221;, &#8220;router_ip&#8221;:&#8221;192.168.21.1&#8221;, &#8220;ip_range_low&#8221;:&#8221;192.168.21.10&#8221;, &#8220;ip_range_high&#8221;:&#8221;192.168.21.50&#8221;}]&#8217;</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">list</span></code></p>
+<blockquote>
+<div>Returns a JSON list of all currently defined node groups.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">accept</span> <span class="pre">&lt;uuid&gt;</span></code></p>
+<blockquote>
+<div>Accepts a node-group or number of nodegroups indicated by the
+supplied UUID</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">reject</span> <span class="pre">&lt;uuid&gt;</span></code></p>
+<blockquote>
+<div>Rejects a node-group or number of nodegroups indicated by the
+supplied UUID</div></blockquote>
+</div>
+<div class="section" id="node-group-interface">
+<h3>node-group-interface<a class="headerlink" href="maascli.html#node-group-interface" title="Permalink to this headline">¶</a></h3>
+<p>For managing the interfaces. See also <a class="reference internal" href="maascli.html#node-group-interfaces"><span>node-group-interfaces</span></a></p>
+<p>Usage: maas <em>&lt;profile&gt;</em> node-group-interfaces [-d &#8211;debug] [-h
+&#8211;help] [-k &#8211;insecure] read | update | delete [parameters...]</p>
+<p>..program:: maas node-group-interface</p>
+<p><code class="samp docutils literal"><span class="pre">read</span> <span class="pre">&lt;uuid&gt;</span> <span class="pre">&lt;interface&gt;</span></code></p>
+<blockquote>
+<div>Returns the current settings for the given UUID and interface</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">update</span> <span class="pre">[parameters]</span></code></p>
+<blockquote>
+<div><p>Changes the settings for the interface according to the given
+parameters:</p>
+<div class="highlight-python"><div class="highlight"><pre>management=  0 | 1 | 2
+     The service to be managed on the interface ( 0= none, 1=DHCP, 2=DHCP
+     and DNS).
+
+subnet_mask=&lt;value&gt;
+     Apply the given dotted decimal value as the subnet mask.
+
+broadcast_ip=&lt;value&gt;
+     Apply the given dotted decimal value as the broadcast IP address for
+     this subnet.
+
+router_ip=&lt;value&gt;
+     Apply the given dotted decimal value as the default router address
+     for this subnet.
+
+ip_range_low=&lt;value&gt;
+     The lowest value of IP address to allocate via DHCP
+
+ip_range_high=&lt;value&gt;
+     The highest value of IP address to allocate via DHCP
+</pre></div>
+</div>
+</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">delete</span> <span class="pre">&lt;uuid&gt;</span> <span class="pre">&lt;interface&gt;</span></code></p>
+<blockquote>
+<div>Removes the entry for the given UUID and interface.</div></blockquote>
+<p id="cli-dhcp">Example:
+Configuring DHCP and DNS.</p>
+<p>To enable MAAS to manage DHCP and DNS, it needs to be supplied with the relevant
+interface information. To do this we need to first determine the UUID of the
+node group affected:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ uuid=$(maas &lt;profile&gt; node-groups list | grep uuid | cut -d\&quot; -f4)
+</pre></div>
+</div>
+<p>Once we have the UUID we can use this to update the node-group-interface for
+that nodegroup, and pass it the relevant interface details:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas &lt;profile&gt; node-group-interface update $uuid eth0 \
+        ip_range_high=192.168.123.200    \
+        ip_range_low=192.168.123.100     \
+        management=2                     \
+        broadcast_ip=192.168.123.255     \
+        router_ip=192.168.123.1          \
+</pre></div>
+</div>
+<p>Replacing the example values with those required for this network. The
+only non-obvious parameter is &#8216;management&#8217; which takes the values 0
+(no management), 1 (manage DHCP) and 2 (manage DHCP and DNS).</p>
+</div>
+<div class="section" id="node-group-interfaces">
+<span id="id1"></span><h3>node-group-interfaces<a class="headerlink" href="maascli.html#node-group-interfaces" title="Permalink to this headline">¶</a></h3>
+<p>The node-group-interfaces commands are used for configuring the
+management of DHCP and DNS services where these are managed by MAAS.</p>
+<p>Usage: maas <em>&lt;profile&gt;</em> node-group-interfaces [-d &#8211;debug] [-h
+&#8211;help] [-k &#8211;insecure] list | new [parameters...]</p>
+<p><code class="samp docutils literal"><span class="pre">-d,</span> <span class="pre">--debug</span></code></p>
+<blockquote>
+<div>Displays debug information listing the API responses.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<blockquote>
+<div>Display usage information.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-k,</span> <span class="pre">--insecure</span></code></p>
+<blockquote>
+<div>Disables the SSL certificate check.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">list</span> <span class="pre">&lt;label&gt;</span></code></p>
+<blockquote>
+<div>Lists the current stored configurations for the given identifier
+&lt;label&gt; in a key:value format which should be easy to decipher.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">new</span> <span class="pre">&lt;label&gt;</span> <span class="pre">ip=&lt;value&gt;</span> <span class="pre">interface=&lt;if_device&gt;</span> <span class="pre">[parameters...]</span></code></p>
+<blockquote>
+<div><p>Creates a new interface group. The required parameters are the IP
+address and the network interface this applies to (e.g. eth0). In
+order to do anything useful, further parameters are required:</p>
+<div class="highlight-python"><div class="highlight"><pre>management= 0 | 1 | 2
+     The service to be managed on the interface
+     ( 0= none, 1=DHCP, 2=DHCP and DNS).
+
+subnet_mask=&lt;value&gt;
+     Apply the given dotted decimal value as the subnet mask.
+
+broadcast_ip=&lt;value&gt;
+     Apply the given dotted decimal value as the
+     broadcast IP address for this subnet.
+
+router_ip=&lt;value&gt;
+     Apply the given dotted decimal value as the
+     default router address for this subnet.
+
+ip_range_low=&lt;value&gt;
+     The lowest value of IP address to allocate via DHCP, used
+     only for enlistment, commissioning and unknown devices.
+
+ip_range_high=&lt;value&gt;
+     The highest value of IP address to allocate via DHCP, used
+     only for enlistment, commissioning and unknown devices.
+
+static_ip_range_low=&lt;value&gt;
+     Lowest IP number of the range for IPs given to allocated
+     nodes and user requests for IPs.
+
+static_ip_range_low=&lt;value&gt;
+     Highest IP number of the range for IPs given to allocated
+     nodes and user requests for IPs.
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="tag">
+<h3>tag<a class="headerlink" href="maascli.html#tag" title="Permalink to this headline">¶</a></h3>
+<p>The tag command is used  to manually alter tags, tagged nodes or
+rebuild the automatic tags.</p>
+<blockquote>
+<div>For more information on how to use them effectively, please see
+<a class="reference internal" href="tags.html#deploy-tags"><span>Making use of Tags</span></a></div></blockquote>
+<p>Usage: maas &lt;profile&gt; tag read | update-nodes | rebuild
+| update | nodes | delete</p>
+<p><code class="samp docutils literal"><span class="pre">read</span> <span class="pre">&lt;tag_name&gt;</span></code></p>
+<blockquote>
+<div>Returns information on the tag specified by &lt;name&gt;</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">update-nodes</span> <span class="pre">&lt;tag_name&gt;</span> <span class="pre">[add=&lt;system_id&gt;]</span> <span class="pre">[remove=&lt;system_id&gt;]</span>
+<span class="pre">[nodegroup=&lt;system_id&gt;]</span></code></p>
+<blockquote>
+<div>Applies or removes the given tag from a list of nodes specified by
+either or both of add=&#8221;&lt;system_id&gt;&#8221; and remove=&#8221;&lt;system_id&gt;&#8221;. The
+nodegroup parameter, which restricts the operations to a particular
+nodegroup, is optional, but only the superuser can execute this
+command without it.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">rebuild</span></code></p>
+<blockquote>
+<div>Triggers a rebuild of the tag to node mapping.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">update</span> <span class="pre">&lt;tag_name&gt;</span> <span class="pre">[name=&lt;value&gt;]</span> <span class="pre">|</span> <span class="pre">[comment=&lt;value&gt;]|</span>
+<span class="pre">[definition=&lt;value&gt;]</span></code></p>
+<blockquote>
+<div>Updates the tag identified by tag_name. Any or all of name,comment
+and definition may be supplied as parameters. If no parameters are
+supplied, this command returns the current values.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">nodes</span> <span class="pre">&lt;tag_name&gt;</span></code></p>
+<blockquote>
+<div>Returns a list of nodes which are associated with the given tag.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">delete</span> <span class="pre">&lt;tag_name&gt;</span></code></p>
+<blockquote>
+<div>Deletes the given tag.</div></blockquote>
+</div>
+<div class="section" id="tags">
+<h3>tags<a class="headerlink" href="maascli.html#tags" title="Permalink to this headline">¶</a></h3>
+<p>Tags are a really useful way of identifying nodes with particular
+characteristics.</p>
+<p>For more information on how to use them effectively, please see
+<a class="reference internal" href="tags.html#deploy-tags"><span>Making use of Tags</span></a></p>
+<p>Usage: maas &lt;profile&gt; tag [-d &#8211;debug] [-h &#8211;help] [-k
+&#8211;insecure] list | create</p>
+<p><code class="samp docutils literal"><span class="pre">-d,</span> <span class="pre">--debug</span></code></p>
+<blockquote>
+<div>Displays debug information listing the API responses.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<blockquote>
+<div>Display usage information.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">-k,</span> <span class="pre">--insecure</span></code></p>
+<blockquote>
+<div>Disables the SSL certificate check.</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">list</span></code></p>
+<blockquote>
+<div>Returns a JSON object listing all the current tags known by the MAAS server</div></blockquote>
+<p><code class="samp docutils literal"><span class="pre">create</span> <span class="pre">name=&lt;value&gt;</span> <span class="pre">definition=&lt;value&gt;</span> <span class="pre">[comment=&lt;value&gt;]</span></code></p>
+<blockquote>
+<div>Creates a new tag with the given name and definition. A comment is
+optional. Names must be unique, obviously - an error will be
+returned if the given name already exists. The definition is in the
+form of an XPath expression which parses the XML returned by
+running <code class="docutils literal"><span class="pre">lshw</span></code> on the node.</div></blockquote>
+<p>Example:
+Adding a tag to all nodes which have an Intel GPU:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas maas tags new name=&#39;intel-gpu&#39; \
+    comment=&#39;Machines which have an Intel display driver&#39; \
+    definition=&#39;contains(//node[@id=&quot;display&quot;]/vendor, &quot;Intel&quot;)&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="unused-commands">
+<h3>unused commands<a class="headerlink" href="maascli.html#unused-commands" title="Permalink to this headline">¶</a></h3>
+<p>Because the <code class="docutils literal"><span class="pre">maas</span></code> command exposes all of the API, it also lists
+some command options which are not really intended for end users, such
+as the &#8220;file&#8221; and &#8220;boot-images&#8221; options.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="maascli.html#">Command Line Interface</a><ul>
+<li><a class="reference internal" href="maascli.html#logging-in">Logging in</a></li>
+<li><a class="reference internal" href="maascli.html#maas-commands">maas commands</a><ul>
+<li><a class="reference internal" href="maascli.html#account">account</a></li>
+<li><a class="reference internal" href="maascli.html#node">node</a></li>
+<li><a class="reference internal" href="maascli.html#nodes">nodes</a></li>
+<li><a class="reference internal" href="maascli.html#node-groups">node-groups</a></li>
+<li><a class="reference internal" href="maascli.html#node-group-interface">node-group-interface</a></li>
+<li><a class="reference internal" href="maascli.html#node-group-interfaces">node-group-interfaces</a></li>
+<li><a class="reference internal" href="maascli.html#tag">tag</a></li>
+<li><a class="reference internal" href="maascli.html#tags">tags</a></li>
+<li><a class="reference internal" href="maascli.html#unused-commands">unused commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/docs/_static/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api_authentication.html" title="previous chapter">API authentication</a></li>
+      <li>Next: <a href="version.html" title="next chapter">Version</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/maascli.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="version.html" title="Version"
+             >next</a></li>
+        <li class="right" >
+          <a href="api_authentication.html" title="API authentication"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="http://maas.io/docs/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS dev documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
