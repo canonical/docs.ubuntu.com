@@ -8,11 +8,11 @@
     
     <title>Installing MAAS &mdash; MAAS dev documentation</title>
     
-    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
     <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
-    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,10 +23,10 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="MAAS dev documentation" href="index.html" />
     <link rel="next" title="Additional Configuration" href="configure.html" />
@@ -151,7 +151,7 @@ proceed. The exact list will obviously depend on what you already have
 installed on your server, but expect to add about 200MB of files.</p>
 <p>The configuration for the MAAS controller will automatically run and
 pop up this config screen:</p>
-<img alt="_images/install_cluster-config.png" src="_images/install_cluster-config.png" />
+<img alt="/static/maas-1.9/install_cluster-config.png" src="_images/install_cluster-config.png" />
 <p>Here you will need to enter the hostname for where the region
 controller can be contacted. In many scenarios, you may be running the
 region controller (i.e. the web and API interface) from a different
@@ -185,7 +185,7 @@ Controller that&#8217;s on the same network as the Cluster Controller:</p>
 <div>$ sudo dpkg-reconfigure maas-cluster-controller</div></blockquote>
 <p>The configuration for the MAAS Cluster Controller will automatically
 run and pop up this config screen:</p>
-<img alt="_images/install_cluster-config.png" src="_images/install_cluster-config.png" />
+<img alt="/static/maas-1.9/install_cluster-config.png" src="_images/install_cluster-config.png" />
 <p>Once entered, the MAAS Cluster Controller configuration will request</p>
 </div>
 </div>
@@ -196,54 +196,54 @@ choose the &#8220;Multiple Server install with MAAS&#8221; option from the
 installer and have pretty much everything set up for you.  Boot from
 the Ubuntu Server media and you will be greeted with the usual
 language selection screen:</p>
-<img alt="_images/install_01.png" src="_images/install_01.png" />
+<img alt="/static/maas-1.9/install_01.png" src="_images/install_01.png" />
 <p>On the next screen, you will see there is an entry in the menu called
 &#8220;Multiple server install with MAAS&#8221;. Use the cursor keys to select
 this and then press Enter.</p>
-<img alt="_images/install_02.png" src="_images/install_02.png" />
+<img alt="/static/maas-1.9/install_02.png" src="_images/install_02.png" />
 <p>The installer then runs through the usual language and keyboard
 options. Make your selections using Tab/Cursor keys/Enter to proceed
 through the install.  The installer will then load various drivers,
 which may take a moment or two.</p>
-<img alt="_images/install_03.png" src="_images/install_03.png" />
+<img alt="/static/maas-1.9/install_03.png" src="_images/install_03.png" />
 <p>The next screen asks for the hostname for this server. Choose
 something appropriate for your network.</p>
-<img alt="_images/install_04.png" src="_images/install_04.png" />
+<img alt="/static/maas-1.9/install_04.png" src="_images/install_04.png" />
 <p>Finally we get to the MAAS part! Here there are just two options. We
 want to &#8220;Create a new MAAS on this server&#8221; so go ahead and choose that
 one.</p>
-<img alt="_images/install_05.png" src="_images/install_05.png" />
+<img alt="/static/maas-1.9/install_05.png" src="_images/install_05.png" />
 <p>The install now continues as usual. Next you will be prompted to enter
 a username. This will be the admin user for the actual server that
 MAAS will be running on (not the same as the MAAS admin user!)</p>
-<img alt="_images/install_06.png" src="_images/install_06.png" />
+<img alt="/static/maas-1.9/install_06.png" src="_images/install_06.png" />
 <p>As usual you will have the chance to encrypt your home
 directory. Continue to make selections based on whatever settings suit
 your usage.</p>
-<img alt="_images/install_07.png" src="_images/install_07.png" />
+<img alt="/static/maas-1.9/install_07.png" src="_images/install_07.png" />
 <p>After making selections and partitioning storage, the system software
 will start to be installed. This part should only take a few minutes.</p>
-<img alt="_images/install_09.png" src="_images/install_09.png" />
+<img alt="/static/maas-1.9/install_09.png" src="_images/install_09.png" />
 <p>Various packages will now be configured, including the package manager
 and update manager. It is important to set these up appropriately so
 you will receive timely updates of the MAAS server software, as well
 as other essential services that may run on this server.</p>
-<img alt="_images/install_10.png" src="_images/install_10.png" />
+<img alt="/static/maas-1.9/install_10.png" src="_images/install_10.png" />
 <p>The configuration for MAAS will ask you to configure the host address
 of the server. This should be the IP address you will use to connect
 to the server (you may have additional interfaces e.g. to run node
 subnets)</p>
-<img alt="_images/install_cluster-config.png" src="_images/install_cluster-config.png" />
+<img alt="/static/maas-1.9/install_cluster-config.png" src="_images/install_cluster-config.png" />
 <p>The next screen will confirm the web address that will be used to the
 web interface.</p>
-<img alt="_images/install_controller-config.png" src="_images/install_controller-config.png" />
+<img alt="/static/maas-1.9/install_controller-config.png" src="_images/install_controller-config.png" />
 <p>After configuring any other packages the installer will finally come
 to and end. At this point you should eject the boot media.</p>
-<img alt="_images/install_14.png" src="_images/install_14.png" />
+<img alt="/static/maas-1.9/install_14.png" src="_images/install_14.png" />
 <p>After restarting, you should be able to login to the new server with
 the information you supplied during the install. The MAAS software
 will run automatically.</p>
-<img alt="_images/install_15.png" src="_images/install_15.png" />
+<img alt="/static/maas-1.9/install_15.png" src="_images/install_15.png" />
 <p><strong>NOTE:</strong> The maas-dhcp and maas-dns packages should be installed by
 default, but on older releases of MAAS they won&#8217;t be. If you want to
 have MAAS run DHCP and DNS services, you should install these packages.
@@ -264,7 +264,7 @@ Check whether they are installed with:</p>
 If you now use a web browser to connect to the region controller, you
 should see that MAAS is running, but there will also be some errors on
 the screen:</p>
-<img alt="_images/install_web-init.png" src="_images/install_web-init.png" />
+<img alt="/static/maas-1.9/install_web-init.png" src="_images/install_web-init.png" />
 <p>The on screen messages will tell you that there are no boot images
 present, and that you can&#8217;t login because there is no admin user.</p>
 <div class="section" id="create-a-superuser-account">
@@ -286,7 +286,7 @@ may wish to create, but you need at least one.</p>
 <p>Looking at the region controller&#8217;s main web page again, you should now see
 a login screen.  Log in using the user name and password which you have just
 created.</p>
-<img alt="_images/install-login.png" src="_images/install-login.png" />
+<img alt="/static/maas-1.9/install-login.png" src="_images/install-login.png" />
 </div>
 <div class="section" id="import-the-boot-images">
 <h2>Import the boot images<a class="headerlink" href="install.html#import-the-boot-images" title="Permalink to this headline">¶</a></h2>
@@ -300,7 +300,7 @@ the import: through the web user interface, or through the remote API.</p>
 <p>To do it in the web user interface, go to the Images tab, check the boxes to
 say which images you want to import, and click the &#8220;Import images&#8221; button at
 the bottom of the Ubuntu section.</p>
-<img alt="_images/import-images.png" src="_images/import-images.png" />
+<img alt="/static/maas-1.9/import-images.png" src="_images/import-images.png" />
 <p>A message will appear to let you know that the import has started, and after a
 while, the warnings about the lack of boot images will disappear.</p>
 <p>It may take a long time, depending on the speed of your Internet connection for
@@ -379,7 +379,7 @@ enlisting nodes</em></a></p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
 <h2 style="text-align:center;">MAAS</h2>
 <p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
 <span id="version_switcher"></span>
@@ -417,7 +417,7 @@ enlisting nodes</em></a></p>
 $(document).ready(function () {
   if (true) {
     $.ajaxSetup({cache: true});
-    $.getScript('/docs/_static/versions.js', function() {
+    $.getScript('/static/maas-1.9/versions.js', function() {
       console.log( "Versions script loaded." );
       set_up_version_switcher('#version_switcher', 'docs');
     });
@@ -435,7 +435,7 @@ $(document).ready(function () {
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/install.txt"
+      <li><a href="/static/maas-1.9/install.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>

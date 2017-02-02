@@ -8,11 +8,11 @@
     
     <title>Adding nodes to the system &mdash; MAAS dev documentation</title>
     
-    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
     <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
-    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,10 +23,10 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="MAAS dev documentation" href="index.html" />
     <link rel="next" title="Using hardware-enablement kernels" href="hardware-enablement-kernels.html" />
@@ -89,7 +89,7 @@ which <a class="reference internal" href="maascli.html#api-key"><span>you can re
 <p>If you know the MAC address of a node, you can manually enter details
 about the node through the web interface. Click the <code class="docutils literal"><span class="pre">Add</span> <span class="pre">Node</span></code> button
 to be taken to the &#8220;Add Node&#8221; form:</p>
-<img alt="_images/add-node.png" src="_images/add-node.png" />
+<img alt="/static/maas-1.9/add-node.png" src="_images/add-node.png" />
 </div>
 <div class="section" id="virtual-machine-nodes">
 <h2>Virtual machine nodes<a class="headerlink" href="nodes.html#virtual-machine-nodes" title="Permalink to this headline">¶</a></h2>
@@ -111,7 +111,7 @@ to avoid failures during deployment.</p>
 <dd>This is a libvirt connection string, such as
 <code class="docutils literal"><span class="pre">qemu+ssh://ubuntu&#64;10.0.0.2/system</span></code> or <code class="docutils literal"><span class="pre">qemu:///system</span></code></dd>
 </dl>
-<img alt="_images/virsh-config.png" src="_images/virsh-config.png" />
+<img alt="/static/maas-1.9/virsh-config.png" src="_images/virsh-config.png" />
 <p>If you want to use ssh you&#8217;ll need to generate a ssh key pair for the maas
 user.  By default there is no home directory created for the maas user:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ sudo mkdir /home/maas
@@ -145,7 +145,7 @@ so virsh can use ssh without a password:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
 <h2 style="text-align:center;">MAAS</h2>
 <p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
 <span id="version_switcher"></span>
@@ -164,7 +164,7 @@ so virsh can use ssh without a password:</p>
 $(document).ready(function () {
   if (true) {
     $.ajaxSetup({cache: true});
-    $.getScript('/docs/_static/versions.js', function() {
+    $.getScript('/static/maas-1.9/versions.js', function() {
       console.log( "Versions script loaded." );
       set_up_version_switcher('#version_switcher', 'docs');
     });
@@ -182,7 +182,7 @@ $(document).ready(function () {
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/nodes.txt"
+      <li><a href="/static/maas-1.9/nodes.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>

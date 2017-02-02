@@ -8,11 +8,11 @@
     
     <title>Cluster Configuration &mdash; MAAS dev documentation</title>
     
-    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
     <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
-    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,10 +23,10 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="shortcut icon" href="_static/maas.ico"/>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="MAAS dev documentation" href="index.html" />
     <link rel="next" title="Static IPs" href="static-ips.html" />
@@ -101,10 +101,10 @@ below).  Any other cluster controllers you set up will show up in the user
 interface as &#8220;pending,&#8221; until you manually accept them into the MAAS.</p>
 <p>To accept a cluster controller, visit the &#8220;pending clusters&#8221; section of the
 Clusters page:</p>
-<img alt="_images/cluster-accept.png" src="_images/cluster-accept.png" />
+<img alt="/static/maas-1.9/cluster-accept.png" src="_images/cluster-accept.png" />
 <p>You can either click on &#8220;Accept all&#8221; or click on the edit icon to edit
 the cluster.  After clicking on the edit icon, you will see this page:</p>
-<img alt="_images/cluster-edit.png" src="_images/cluster-edit.png" />
+<img alt="/static/maas-1.9/cluster-edit.png" src="_images/cluster-edit.png" />
 <p>Here you can change the cluster&#8217;s name as it appears in the UI, its DNS
 zone, and its status.  Accepting the cluster changes its status from
 &#8220;pending&#8221; to &#8220;accepted.&#8221;</p>
@@ -127,7 +127,7 @@ the MAAS user interface.</p>
 <p>As an example, we will configure the cluster controller to manage a network
 on interface <code class="docutils literal"><span class="pre">eth0</span></code>.  Click on the edit icon for the cluster interface on
 network interface <code class="docutils literal"><span class="pre">eth0</span></code>, which takes us to this page:</p>
-<img alt="_images/cluster-interface-edit.png" src="_images/cluster-interface-edit.png" />
+<img alt="/static/maas-1.9/cluster-interface-edit.png" src="_images/cluster-interface-edit.png" />
 <p>Here you can select to what extent you want the cluster controller to manage
 the network:</p>
 <ol class="arabic simple">
@@ -179,7 +179,7 @@ numbers of nodes, or it may be a requirement of your network architecture.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="_static/maas-logo-200.png" alt="MAAS logo"/></a>
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
 <h2 style="text-align:center;">MAAS</h2>
 <p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
 <span id="version_switcher"></span>
@@ -202,7 +202,7 @@ numbers of nodes, or it may be a requirement of your network architecture.</p>
 $(document).ready(function () {
   if (true) {
     $.ajaxSetup({cache: true});
-    $.getScript('/docs/_static/versions.js', function() {
+    $.getScript('/static/maas-1.9/versions.js', function() {
       console.log( "Versions script loaded." );
       set_up_version_switcher('#version_switcher', 'docs');
     });
@@ -220,7 +220,7 @@ $(document).ready(function () {
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/cluster-configuration.txt"
+      <li><a href="/static/maas-1.9/cluster-configuration.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
