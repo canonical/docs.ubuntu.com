@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building Ubuntu packages of MAAS &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="../index.html" />
+    <link rel="next" title="How cluster registration works in MAAS" href="cluster-registration.html" />
+    <link rel="prev" title="Fixing security-related issues in MAAS" href="security.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="cluster-registration.html" title="How cluster registration works in MAAS"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="security.html" title="Fixing security-related issues in MAAS"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="building-ubuntu-packages-of-maas">
+<h1>Building Ubuntu packages of MAAS<a class="headerlink" href="building-packages.html#building-ubuntu-packages-of-maas" title="Permalink to this headline">¶</a></h1>
+<p>Using a virtual machine from a cloud provider seems to be easier and
+less hassle than using a local VM or LXC container, but the same
+recipe ought to apply.</p>
+<p>You need to build on the same OS that the package will be targeted to,
+so use a Precise instance to make packages for Precise, for example.</p>
+<ol class="arabic">
+<li><p class="first">Start up an instance, log in, and bring it up to date:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get update &amp;&amp; sudo apt-get upgrade
+</pre></div>
+</div>
+</li>
+<li><p class="first">Get the appropriate packaging branch:</p>
+<div class="highlight-python"><div class="highlight"><pre>bzr branch lp:~maas-maintainers/maas/packaging{...}
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://launchpad.net/~maas-maintainers">MAAS Maintainers</a>
+own all the <a class="reference external" href="https://code.launchpad.net/~maas-maintainers">official MAAS branches</a>.</p>
+</li>
+<li><p class="first">Move into the new branch directory.</p>
+</li>
+<li><p class="first">Check that all the build dependencies are installed. The
+dependencies are defined in <code class="docutils literal"><span class="pre">debian/control</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>fgrep -i build-depends -A 10 debian/control
+</pre></div>
+</div>
+<p>This will yield, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre>Build-Depends: debhelper (&gt;= 8.1.0~),
+               dh-apport,
+               po-debconf,
+               python (&gt;= 2.7),
+               python-distribute,
+               python-django
+Standards-Version: 3.9.3
+...
+</pre></div>
+</div>
+<p>Install these dependencies:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt get install \
+    debhelper dh-apport po-debconf python \
+    python-distribute python-django
+</pre></div>
+</div>
+</li>
+<li><p class="first">Edit <code class="docutils literal"><span class="pre">debian/changelog</span></code> so it contains:</p>
+<ul class="simple">
+<li>the right upstream revision number in the version,</li>
+<li>the series you&#8217;re building for; if <code class="docutils literal"><span class="pre">UNRELEASED</span></code> appears in the
+first entry, <code class="docutils literal"><span class="pre">s/UNRELEASED/trusty/</span></code> (or the series you want),</li>
+<li>the name and email address that correspond to the PGP key you
+want to use to sign the package; these appear near the end of the
+topmost entry.</li>
+</ul>
+</li>
+<li><p class="first">Build:</p>
+<div class="highlight-python"><div class="highlight"><pre>bzr bd -S -- -uc -us
+</pre></div>
+</div>
+<p>The latter options tell it not to sign the files. You need to do
+this because the remote machine will not have your GPG key.</p>
+</li>
+<li><p class="first">Sign the build on your local machine:</p>
+<div class="highlight-python"><div class="highlight"><pre>debsign -r user@host &#39;~/*.changes&#39;
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">user&#64;host</span></code> is an SSH string for accessing the remote
+instance. This will scp the changes and dsc locally, sign them, and
+put them back.</p>
+</li>
+<li><p class="first">On the remote instance you can optionally upload to a PPA:</p>
+<div class="highlight-python"><div class="highlight"><pre>dput -fu ppa:maas-maintainers/name-of-ppa *.changes
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="security.html" title="previous chapter">Fixing security-related issues in MAAS</a></li>
+      <li>Next: <a href="cluster-registration.html" title="next chapter">How cluster registration works in MAAS</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="/static/maas-1.9/development/building-packages.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="cluster-registration.html" title="How cluster registration works in MAAS"
+             >next</a></li>
+        <li class="right" >
+          <a href="security.html" title="Fixing security-related issues in MAAS"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

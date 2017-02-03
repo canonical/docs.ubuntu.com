@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Local Mirroring of Boot Images &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="index.html" />
+    <link rel="next" title="Networks" href="networks.html" />
+    <link rel="prev" title="Using hardware-enablement kernels" href="hardware-enablement-kernels.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="networks.html" title="Networks"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="hardware-enablement-kernels.html" title="Using hardware-enablement kernels"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="local-mirroring-of-boot-images">
+<h1>Local Mirroring of Boot Images<a class="headerlink" href="sstreams-mirror.html#local-mirroring-of-boot-images" title="Permalink to this headline">¶</a></h1>
+<p>Boot images are delivered to MAAS via the simplestreams protocol.  It is
+useful in some situations, such as testing, to mirror the images locally
+so that you don&#8217;t need to repeatedly pull them down over a slower Internet
+link.</p>
+<p>First, install the required packages on the host where you wish to store
+the mirrored images:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo apt-get install simplestreams ubuntu-cloudimage-keyring apache2
+</pre></div>
+</div>
+<p>Now you can pull the images over using the mirroring tools for simplestreams.
+This example gets the daily trusty (14.04) and precise (12.04) images for the
+amd64/generic and amd64/hwe-t architectures:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo sstream-mirror --keyring=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg http://maas.ubuntu.com/images/ephemeral-v2/daily/ /var/www/html/maas/images/ephemeral-v2/daily &#39;arch=amd64&#39; &#39;subarch~(generic|hwe-t)&#39; &#39;release~(trusty|precise)&#39; --max=1
+</pre></div>
+</div>
+<p>This may take a while as hundreds of megabytes will be downloaded.</p>
+<p>The images will be written to the local disk and you can verify their
+presence by browsing to
+<code class="docutils literal"><span class="pre">http://&lt;server&gt;/maas/images/ephemeral-v2/daily/streams/v1/index.sjson</span></code>
+(replace <code class="docutils literal"><span class="pre">&lt;server&gt;</span></code> with your own server&#8217;s name).</p>
+<p>It is a good idea to configure a <code class="docutils literal"><span class="pre">cron</span></code> job to repeat this import on a
+regular basis to keep your mirror up-to-date.</p>
+<div class="section" id="configuring-maas-to-use-the-local-mirror">
+<h2>Configuring MAAS to use the local mirror<a class="headerlink" href="sstreams-mirror.html#configuring-maas-to-use-the-local-mirror" title="Permalink to this headline">¶</a></h2>
+<p>You can do this using the API or the web UI.  To do this via the API you
+can use the <code class="docutils literal"><span class="pre">maas</span></code> (see <a class="reference internal" href="maascli.html"><em>Command Line Interface</em></a>) command, logged in as the admin
+user:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas &lt;profile&gt; boot-sources create url=http://&lt;server&gt;keyring_filename=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
+</pre></div>
+</div>
+<p>And then initiate the download with:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ maas &lt;profile&gt; boot-resources import
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="bootsources.html"><em>Boot images import configuration</em></a> for more detail.</p>
+<p>In the web UI, browse to the Settings tab as the admin user and scroll down
+to the &#8220;Boot Images&#8221; section.  There you will find input boxes for the
+Sync URL and the keyring path, which should be set as the values in the API
+example above.</p>
+<p>The import is initiated by browsing to the Images tab and following the
+instructions on that page.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="sstreams-mirror.html#">Local Mirroring of Boot Images</a><ul>
+<li><a class="reference internal" href="sstreams-mirror.html#configuring-maas-to-use-the-local-mirror">Configuring MAAS to use the local mirror</a></li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="hardware-enablement-kernels.html" title="previous chapter">Using hardware-enablement kernels</a></li>
+      <li>Next: <a href="networks.html" title="next chapter">Networks</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="/static/maas-1.9/sstreams-mirror.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="networks.html" title="Networks"
+             >next</a></li>
+        <li class="right" >
+          <a href="hardware-enablement-kernels.html" title="Using hardware-enablement kernels"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

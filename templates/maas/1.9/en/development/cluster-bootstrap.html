@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bootstrapping a cluster &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="../index.html" />
+    <link rel="next" title="Tagging" href="tagging.html" />
+    <link rel="prev" title="How cluster registration works in MAAS" href="cluster-registration.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="tagging.html" title="Tagging"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="cluster-registration.html" title="How cluster registration works in MAAS"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bootstrapping-a-cluster">
+<h1>Bootstrapping a cluster<a class="headerlink" href="cluster-bootstrap.html#bootstrapping-a-cluster" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="considerations">
+<h2>Considerations<a class="headerlink" href="cluster-bootstrap.html#considerations" title="Permalink to this headline">¶</a></h2>
+<p>A new cluster needs to register itself with the region. At the same
+moment that it&#8217;s accepted by the region, the region starts configuring
+it via RPC, so we need an RPC connection open when registering.</p>
+<p>Before a cluster is accepted, we want to restrict the available RPC
+calls to a small set, both on the region and the cluster.</p>
+<p>Before a cluster is accepted, we also do not want to start some services
+on the cluster, like lease uploads, DHCP scanning, and so forth, because
+the region will reject interaction from them.</p>
+</div>
+<div class="section" id="start-up-procedure">
+<h2>Start-up procedure<a class="headerlink" href="cluster-bootstrap.html#start-up-procedure" title="Permalink to this headline">¶</a></h2>
+<p>This procedure will be followed by existing clusters and new clusters
+alike:</p>
+<ol class="arabic simple">
+<li>Cluster starts.</li>
+<li>If shared secret not available, shutdown, <strong>DONE</strong>.</li>
+<li><code class="docutils literal"><span class="pre">ClusterClientService</span></code> starts.</li>
+<li>Services other than <code class="docutils literal"><span class="pre">log</span></code> are <strong>not</strong> started.</li>
+<li>Wait for a connection to the region to become available.</li>
+<li>Do not allow any RPC calls other than <code class="docutils literal"><span class="pre">Identify</span></code> and <code class="docutils literal"><span class="pre">Authenticate</span></code>.</li>
+<li>Call <code class="docutils literal"><span class="pre">Identify</span></code>.</li>
+<li>Call <code class="docutils literal"><span class="pre">Authenticate</span></code>.<ul>
+<li>On success, continue.</li>
+<li>On failure, shutdown, <strong>DONE</strong>.</li>
+</ul>
+</li>
+<li>Permit all other RPC calls.<ul>
+<li>This allows for side-effects from calling <code class="docutils literal"><span class="pre">Register</span></code> next, like DHCP
+configuration.</li>
+</ul>
+</li>
+<li>Call <code class="docutils literal"><span class="pre">Register</span></code>. Region accepts cluster.</li>
+<li>Start all services.</li>
+<li><strong>DONE</strong>.</li>
+</ol>
+</div>
+<div class="section" id="work-items">
+<h2>Work items<a class="headerlink" href="cluster-bootstrap.html#work-items" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><strong>DONE:</strong> Add <code class="docutils literal"><span class="pre">Authenticate</span></code> RPC call.</li>
+<li><strong>DONE:</strong> Add <code class="docutils literal"><span class="pre">Register</span></code> RPC call.</li>
+<li><strong>DONE:</strong> Command-line to install shared-secret.</li>
+<li><strong>DONE:</strong> Check for shared-secret during start-up (packaging change too?).</li>
+<li><strong>DONE:</strong> Perform <code class="docutils literal"><span class="pre">Authenticate</span></code> handshake.</li>
+<li><strong>DONE:</strong> Perform <code class="docutils literal"><span class="pre">Register</span></code> handshake.</li>
+<li><strong>DONE:</strong> Pass MAAS_URL in <code class="docutils literal"><span class="pre">Register</span></code> call. This replicates functionality
+found in <code class="docutils literal"><span class="pre">update_nodegroup_maas_url</span></code>, which is no longer used.</li>
+<li>Display secret to admins in UI, or provide tool to obtain secret
+locally on region controller&#8217;s machine.</li>
+<li>Mechanism to limit available RPC calls.</li>
+<li>Mechanism to defer start-up of &#8220;full&#8221; services.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="cluster-bootstrap.html#">Bootstrapping a cluster</a><ul>
+<li><a class="reference internal" href="cluster-bootstrap.html#considerations">Considerations</a></li>
+<li><a class="reference internal" href="cluster-bootstrap.html#start-up-procedure">Start-up procedure</a></li>
+<li><a class="reference internal" href="cluster-bootstrap.html#work-items">Work items</a></li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cluster-registration.html" title="previous chapter">How cluster registration works in MAAS</a></li>
+      <li>Next: <a href="tagging.html" title="next chapter">Tagging</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="/static/maas-1.9/development/cluster-bootstrap.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="tagging.html" title="Tagging"
+             >next</a></li>
+        <li class="right" >
+          <a href="cluster-registration.html" title="How cluster registration works in MAAS"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

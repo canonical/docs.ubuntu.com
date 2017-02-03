@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>maasserver.eventloop &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../index.html">MAAS 1.9 documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maasserver.eventloop</h1><div class="highlight"><pre>
+<span class="c1"># Copyright 2014-2015 Canonical Ltd.  This software is licensed under the</span>
+<span class="c1"># GNU Affero General Public License version 3 (see the file LICENSE).</span>
+
+<span class="sd">&quot;&quot;&quot;Event-loop support for the MAAS Region Controller.</span>
+
+<span class="sd">This helps start up a background event loop (using Twisted, via crochet)</span>
+<span class="sd">to handle communications with Cluster Controllers, and any other tasks</span>
+<span class="sd">that are not tied to an HTTP reqoest.</span>
+
+<span class="sd">.. py:data:: loop</span>
+
+<span class="sd">   The single instance of :py:class:`RegionEventLoop` that&#39;s all a</span>
+<span class="sd">   process needs.</span>
+
+<span class="sd">.. py:data:: services</span>
+
+<span class="sd">   The :py:class:`~twisted.application.service.MultiService` which forms</span>
+<span class="sd">   the root of this process&#39;s service tree.</span>
+
+<span class="sd">   This is a convenient reference to :py:attr:`.loop.services`.</span>
+
+<span class="sd">.. py:data:: start</span>
+
+<span class="sd">   Start all the services in :py:data:`services`.</span>
+
+<span class="sd">   This is a convenient reference to :py:attr:`.loop.start`.</span>
+
+<span class="sd">.. py:data:: stop</span>
+
+<span class="sd">   Stop all the services in :py:data:`services`.</span>
+
+<span class="sd">   This is a convenient reference to :py:attr:`.loop.stop`.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">absolute_import</span><span class="p">,</span>
+    <span class="n">print_function</span><span class="p">,</span>
+    <span class="n">unicode_literals</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;loop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;reset&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;services&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;start&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;stop&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">errno</span> <span class="kn">import</span> <span class="n">ENOPROTOOPT</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">getLogger</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getpid</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">error</span> <span class="k">as</span> <span class="n">socket_error</span><span class="p">,</span>
+    <span class="n">gethostname</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">maasserver.utils.orm</span> <span class="kn">import</span> <span class="n">disable_all_database_connections</span>
+<span class="kn">from</span> <span class="nn">provisioningserver.utils.twisted</span> <span class="kn">import</span> <span class="n">asynchronous</span>
+<span class="kn">from</span> <span class="nn">twisted.application.service</span> <span class="kn">import</span> <span class="n">MultiService</span>
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span>
+<span class="kn">from</span> <span class="nn">twisted.internet.endpoints</span> <span class="kn">import</span> <span class="n">AdoptedStreamServerEndpoint</span>
+
+<span class="c1"># Default port for regiond.</span>
+<span class="n">DEFAULT_PORT</span> <span class="o">=</span> <span class="mi">5240</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="n">reactor</span><span class="o">.</span><span class="n">addSystemEventTrigger</span><span class="p">(</span>
+    <span class="s2">&quot;before&quot;</span><span class="p">,</span> <span class="s2">&quot;startup&quot;</span><span class="p">,</span> <span class="n">disable_all_database_connections</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_DatabaseTaskService</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">maasserver.utils</span> <span class="kn">import</span> <span class="n">dbtasks</span>
+    <span class="k">return</span> <span class="n">dbtasks</span><span class="o">.</span><span class="n">DatabaseTasksService</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">make_RegionService</span><span class="p">():</span>
+    <span class="c1"># Import here to avoid a circular import.</span>
+    <span class="kn">from</span> <span class="nn">maasserver.rpc</span> <span class="kn">import</span> <span class="n">regionservice</span>
+    <span class="k">return</span> <span class="n">regionservice</span><span class="o">.</span><span class="n">RegionService</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">make_RegionAdvertisingService</span><span class="p">():</span>
+    <span class="c1"># Import here to avoid a circular import.</span>
+    <span class="kn">from</span> <span class="nn">maasserver.rpc</span> <span class="kn">import</span> <span class="n">regionservice</span>
+    <span class="k">return</span> <span class="n">regionservice</span><span class="o">.</span><span class="n">RegionAdvertisingService</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">make_NonceCleanupService</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">maasserver</span> <span class="kn">import</span> <span class="n">nonces_cleanup</span>
+    <span class="k">return</span> <span class="n">nonces_cleanup</span><span class="o">.</span><span class="n">NonceCleanupService</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">make_ImportResourcesService</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">maasserver</span> <span class="kn">import</span> <span class="n">bootresources</span>
+    <span class="k">return</span> <span class="n">bootresources</span><span class="o">.</span><span class="n">ImportResourcesService</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">make_ImportResourcesProgressService</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">maasserver</span> <span class="kn">import</span> <span class="n">bootresources</span>
+    <span class="k">return</span> <span class="n">bootresources</span><span class="o">.</span><span class="n">ImportResourcesProgressService</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">make_WebApplicationService</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">maasserver.webapp</span> <span class="kn">import</span> <span class="n">WebApplicationService</span>
+    <span class="n">site_port</span> <span class="o">=</span> <span class="n">DEFAULT_PORT</span>  <span class="c1"># config[&quot;port&quot;]</span>
+    <span class="c1"># Make a socket with SO_REUSEPORT set so that we can run multiple web</span>
+    <span class="c1"># applications. This is easier to do from outside of Twisted as there&#39;s</span>
+    <span class="c1"># not yet official support for setting socket options.</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEPORT</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">socket_error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Python&#39;s socket module was compiled using modern headers</span>
+        <span class="c1"># thus defining SO_REUSEPORT would cause issues as it might</span>
+        <span class="c1"># running in older kernel that does not support SO_REUSEPORT.</span>
+
+        <span class="c1"># XXX andreserl 2015-04-08 bug=1441684: We need to add a warning</span>
+        <span class="c1"># log message when we see this error, and a test for it.</span>
+        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">!=</span> <span class="n">ENOPROTOOPT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">site_port</span><span class="p">))</span>
+    <span class="c1"># Use a backlog of 50, which seems to be fairly common.</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+    <span class="c1"># Adopt this socket into Twisted&#39;s reactor.</span>
+    <span class="n">site_endpoint</span> <span class="o">=</span> <span class="n">AdoptedStreamServerEndpoint</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">family</span><span class="p">)</span>
+    <span class="n">site_endpoint</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">site_port</span>  <span class="c1"># Make it easy to get the port number.</span>
+    <span class="n">site_endpoint</span><span class="o">.</span><span class="n">socket</span> <span class="o">=</span> <span class="n">s</span>  <span class="c1"># Prevent garbage collection.</span>
+    <span class="n">site_service</span> <span class="o">=</span> <span class="n">WebApplicationService</span><span class="p">(</span><span class="n">site_endpoint</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">site_service</span>
+
+
+<span class="k">class</span> <span class="nc">RegionEventLoop</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;An event loop running in a region controller process.</span>
+
+<span class="sd">    Typically several processes will be running the web application --</span>
+<span class="sd">    chiefly Django -- across several machines, with multiple threads of</span>
+<span class="sd">    execution in each process.</span>
+
+<span class="sd">    This class represents a single event loop for each *process*,</span>
+<span class="sd">    allowing convenient control of the event loop -- a Twisted reactor</span>
+<span class="sd">    running in a thread -- and to which to attach and query services.</span>
+
+<span class="sd">    :cvar factories: A sequence of ``(name, factory)`` tuples. Used to</span>
+<span class="sd">        populate :py:attr:`.services` at start time.</span>
+
+<span class="sd">    :ivar services:</span>
+<span class="sd">        A :py:class:`~twisted.application.service.MultiService` which</span>
+<span class="sd">        forms the root of the service tree.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">factories</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s2">&quot;database-tasks&quot;</span><span class="p">,</span> <span class="n">make_DatabaseTaskService</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;rpc&quot;</span><span class="p">,</span> <span class="n">make_RegionService</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;rpc-advertise&quot;</span><span class="p">,</span> <span class="n">make_RegionAdvertisingService</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;nonce-cleanup&quot;</span><span class="p">,</span> <span class="n">make_NonceCleanupService</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;import-resources&quot;</span><span class="p">,</span> <span class="n">make_ImportResourcesService</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;import-resources-progress&quot;</span><span class="p">,</span> <span class="n">make_ImportResourcesProgressService</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;web&quot;</span><span class="p">,</span> <span class="n">make_WebApplicationService</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RegionEventLoop</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">services</span> <span class="o">=</span> <span class="n">MultiService</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">populate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Prepare all services.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">factory</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">factories</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">getServiceNamed</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">service</span> <span class="o">=</span> <span class="n">factory</span><span class="p">()</span>
+                <span class="n">service</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">service</span><span class="o">.</span><span class="n">setServiceParent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;start()</span>
+
+<span class="sd">        Start all services in the region&#39;s event-loop.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">populate</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">reactor</span><span class="o">.</span><span class="n">addSystemEventTrigger</span><span class="p">(</span>
+            <span class="s1">&#39;before&#39;</span><span class="p">,</span> <span class="s1">&#39;shutdown&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">stopService</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">startService</span><span class="p">()</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;stop()</span>
+
+<span class="sd">        Stop all services in the region&#39;s event-loop.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">handle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="bp">None</span>
+            <span class="n">reactor</span><span class="o">.</span><span class="n">removeSystemEventTrigger</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">stopService</span><span class="p">()</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;reset()</span>
+
+<span class="sd">        Stop all services, then disown them all.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">disown_all_services</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">service</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">):</span>
+                <span class="n">service</span><span class="o">.</span><span class="n">disownServiceParent</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">reset_factories</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Unshadow class attribute.</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">factories</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="c1"># It wasn&#39;t shadowed.</span>
+                <span class="k">pass</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">disown_all_services</span><span class="p">)</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">reset_factories</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A name for identifying this service in a distributed system.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:pid=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gethostname</span><span class="p">(),</span> <span class="n">getpid</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">running</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Is this running?&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">running</span><span class="p">)</span>
+
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">RegionEventLoop</span><span class="p">()</span>
+<span class="n">reset</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">reset</span>
+<span class="n">services</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">services</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">start</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">stop</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../../index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../index.html">MAAS 1.9 documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

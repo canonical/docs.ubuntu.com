@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>provisioningserver.rpc.region &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../../index.html">MAAS 1.9 documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for provisioningserver.rpc.region</h1><div class="highlight"><pre>
+<span class="c1"># Copyright 2014-2015 Canonical Ltd.  This software is licensed under the</span>
+<span class="c1"># GNU Affero General Public License version 3 (see the file LICENSE).</span>
+
+<span class="sd">&quot;&quot;&quot;RPC declarations for the region.</span>
+
+<span class="sd">These are commands that a region controller ought to respond to.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">absolute_import</span><span class="p">,</span>
+    <span class="n">print_function</span><span class="p">,</span>
+    <span class="n">unicode_literals</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Authenticate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CreateNode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CommissionNode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GetArchiveMirrors&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GetBootSources&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GetBootSourcesV2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GetClusterInterfaces&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GetProxies&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Identify&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ListNodePowerParameters&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MarkNodeFailed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MonitorExpired&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Register&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RegisterEventType&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ReloadCluster&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ReportBootImages&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ReportForeignDHCPServer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RequestNodeInfoByMACAddress&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SendEvent&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SendEventMACAddress&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UpdateLeases&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UpdateNodePowerState&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">provisioningserver.rpc.arguments</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Bytes</span><span class="p">,</span>
+    <span class="n">CompressedAmpList</span><span class="p">,</span>
+    <span class="n">ParsedURL</span><span class="p">,</span>
+    <span class="n">StructureAsJSON</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">provisioningserver.rpc.common</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Authenticate</span><span class="p">,</span>
+    <span class="n">Identify</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">provisioningserver.rpc.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CannotRegisterCluster</span><span class="p">,</span>
+    <span class="n">CommissionNodeFailed</span><span class="p">,</span>
+    <span class="n">NodeAlreadyExists</span><span class="p">,</span>
+    <span class="n">NodeStateViolation</span><span class="p">,</span>
+    <span class="n">NoSuchCluster</span><span class="p">,</span>
+    <span class="n">NoSuchEventType</span><span class="p">,</span>
+    <span class="n">NoSuchNode</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">twisted.protocols</span> <span class="kn">import</span> <span class="n">amp</span>
+
+
+<div class="viewcode-block" id="Register"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.Register">[docs]</a><span class="k">class</span> <span class="nc">Register</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Register a cluster with the region controller.</span>
+
+<span class="sd">    This is the last part of the Authenticate and Register two-step. See</span>
+<span class="sd">    cluster-bootstrap_ for an explanation.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;networks&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">([</span>
+            <span class="p">(</span><span class="n">b</span><span class="s2">&quot;interface&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+            <span class="p">(</span><span class="n">b</span><span class="s2">&quot;ip&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+            <span class="p">(</span><span class="n">b</span><span class="s2">&quot;subnet_mask&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">],</span> <span class="n">optional</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+        <span class="c1"># The URL for the region as seen by the cluster.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="n">ParsedURL</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;ip_addr_json&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">CannotRegisterCluster</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;CannotRegisterCluster&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ReportBootImages"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.ReportBootImages">[docs]</a><span class="k">class</span> <span class="nc">ReportBootImages</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Report boot images available on the invoking cluster controller.</span>
+
+<span class="sd">    :since: 1.5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># The cluster UUID.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;architecture&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;subarchitecture&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;release&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;purpose&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())])),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="GetBootSources"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.GetBootSources">[docs]</a><span class="k">class</span> <span class="nc">GetBootSources</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Report boot sources and selections for the given cluster.</span>
+
+<span class="sd">    :since: 1.6</span>
+<span class="sd">    :deprecated: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># The cluster UUID.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;keyring_data&quot;</span><span class="p">,</span> <span class="n">Bytes</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;selections&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">(</span>
+                 <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;release&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+                  <span class="p">(</span><span class="n">b</span><span class="s2">&quot;arches&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">ListOf</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())),</span>
+                  <span class="p">(</span><span class="n">b</span><span class="s2">&quot;subarches&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">ListOf</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())),</span>
+                  <span class="p">(</span><span class="n">b</span><span class="s2">&quot;labels&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">ListOf</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()))]))])),</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="GetBootSourcesV2"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.GetBootSourcesV2">[docs]</a><span class="k">class</span> <span class="nc">GetBootSourcesV2</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Report boot sources and selections for the given cluster.</span>
+
+<span class="sd">    Includes the new os field for the selections.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># The cluster UUID.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;keyring_data&quot;</span><span class="p">,</span> <span class="n">Bytes</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;selections&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">(</span>
+                 <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+                  <span class="p">(</span><span class="n">b</span><span class="s2">&quot;release&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+                  <span class="p">(</span><span class="n">b</span><span class="s2">&quot;arches&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">ListOf</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())),</span>
+                  <span class="p">(</span><span class="n">b</span><span class="s2">&quot;subarches&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">ListOf</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())),</span>
+                  <span class="p">(</span><span class="n">b</span><span class="s2">&quot;labels&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">ListOf</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()))]))])),</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="UpdateLeases"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.UpdateLeases">[docs]</a><span class="k">class</span> <span class="nc">UpdateLeases</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Report DHCP leases on the invoking cluster controller.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># The cluster UUID.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;mappings&quot;</span><span class="p">,</span> <span class="n">CompressedAmpList</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;ip&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;mac&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())]))</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">NoSuchCluster</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchCluster&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="GetArchiveMirrors"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.GetArchiveMirrors">[docs]</a><span class="k">class</span> <span class="nc">GetArchiveMirrors</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the Main and Port mirrors to use.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="n">ParsedURL</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;ports&quot;</span><span class="p">,</span> <span class="n">ParsedURL</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="GetProxies"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.GetProxies">[docs]</a><span class="k">class</span> <span class="nc">GetProxies</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the HTTP and HTTPS proxies to use.</span>
+
+<span class="sd">    :since: 1.6</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="n">ParsedURL</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;https&quot;</span><span class="p">,</span> <span class="n">ParsedURL</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="MarkNodeFailed"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.MarkNodeFailed">[docs]</a><span class="k">class</span> <span class="nc">MarkNodeFailed</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mark a node as &#39;broken&#39;.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># The node&#39;s system_id.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;system_id&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="c1"># The error description.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;error_description&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">NodeStateViolation</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NodeStateViolation&quot;</span><span class="p">,</span>
+        <span class="n">NoSuchNode</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchNode&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ListNodePowerParameters"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.ListNodePowerParameters">[docs]</a><span class="k">class</span> <span class="nc">ListNodePowerParameters</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return power parameters for the nodes in the specified cluster.</span>
+
+<span class="sd">    This will only return power parameters for nodes that have power types for</span>
+<span class="sd">    which MAAS has a query capability.</span>
+
+<span class="sd">    It will return nodes in priority order. Those nodes at the beginning of</span>
+<span class="sd">    the list should be queried first.</span>
+
+<span class="sd">    It may return an empty list. This means that all nodes have been recently</span>
+<span class="sd">    queried. Take a break before asking again.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># The cluster UUID.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;nodes&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;system_id&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;power_state&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;power_type&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="c1"># We can&#39;t define a tighter schema here because this is a highly</span>
+             <span class="c1"># variable bag of arguments from a variety of sources.</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;context&quot;</span><span class="p">,</span> <span class="n">StructureAsJSON</span><span class="p">())])),</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">NoSuchCluster</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchCluster&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="UpdateNodePowerState"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.UpdateNodePowerState">[docs]</a><span class="k">class</span> <span class="nc">UpdateNodePowerState</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Update Node Power State.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># The node&#39;s system_id.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;system_id&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="c1"># The node&#39;s power_state.</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;power_state&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span><span class="n">NoSuchNode</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchNode&quot;</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="RegisterEventType"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.RegisterEventType">[docs]</a><span class="k">class</span> <span class="nc">RegisterEventType</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Register an event type.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;level&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Integer</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="SendEvent"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.SendEvent">[docs]</a><span class="k">class</span> <span class="nc">SendEvent</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Send an event.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;system_id&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;type_name&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1"># In practice, neither NoSuchNode nor NoSuchEventType will be returned</span>
+        <span class="c1"># by the region controller as of MAAS 1.9 because the region no longer</span>
+        <span class="c1"># waits for the database work to complete.</span>
+        <span class="n">NoSuchNode</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchNode&quot;</span><span class="p">,</span>
+        <span class="n">NoSuchEventType</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchEventType&quot;</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="SendEventMACAddress"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.SendEventMACAddress">[docs]</a><span class="k">class</span> <span class="nc">SendEventMACAddress</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Send an event.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;mac_address&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;type_name&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1"># In practice, neither NoSuchNode nor NoSuchEventType will be returned</span>
+        <span class="c1"># by the region controller as of MAAS 1.9 because the region no longer</span>
+        <span class="c1"># waits for the database work to complete.</span>
+        <span class="n">NoSuchNode</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchNode&quot;</span><span class="p">,</span>
+        <span class="n">NoSuchEventType</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchEventType&quot;</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ReportForeignDHCPServer"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.ReportForeignDHCPServer">[docs]</a><span class="k">class</span> <span class="nc">ReportForeignDHCPServer</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Report a foreign DHCP server on the cluster&#39;s network.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;cluster_uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;interface_name&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;foreign_dhcp_ip&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="GetClusterInterfaces"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.GetClusterInterfaces">[docs]</a><span class="k">class</span> <span class="nc">GetClusterInterfaces</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fetch the known interfaces for a cluster from the region.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;cluster_uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;interfaces&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">AmpList</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;interface&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+             <span class="p">(</span><span class="n">b</span><span class="s2">&quot;ip&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())]))</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="CreateNode"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.CreateNode">[docs]</a><span class="k">class</span> <span class="nc">CreateNode</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a node on a given cluster.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;cluster_uuid&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;architecture&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;power_type&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;power_parameters&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;mac_addresses&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">ListOf</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;hostname&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;system_id&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">NodeAlreadyExists</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NodeAlreadyExists&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="CommissionNode"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.CommissionNode">[docs]</a><span class="k">class</span> <span class="nc">CommissionNode</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Commission node.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;system_id&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">CommissionNodeFailed</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;CommissionNodeFailed&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="MonitorExpired"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.MonitorExpired">[docs]</a><span class="k">class</span> <span class="nc">MonitorExpired</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Called by a cluster when a running monitor hits its deadline.</span>
+
+<span class="sd">    The original context parameter from the StartMonitors call is returned.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;context&quot;</span><span class="p">,</span> <span class="n">StructureAsJSON</span><span class="p">()),</span>
+        <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="ReloadCluster"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.ReloadCluster">[docs]</a><span class="k">class</span> <span class="nc">ReloadCluster</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Called by a cluster when it wants to reload its state.</span>
+
+<span class="sd">    The region may respond with many different calls to the cluster</span>
+<span class="sd">    that will give it all the information it needs to restore state (for</span>
+<span class="sd">    example when it got restarted).</span>
+
+<span class="sd">    For example, the region will restore all the timers in the cluster,</span>
+<span class="sd">    so none or many StartTimer calls may be received after the cluster</span>
+<span class="sd">    issues this command.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;cluster_uuid&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="RequestNodeInfoByMACAddress"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.RequestNodeInfoByMACAddress">[docs]</a><span class="k">class</span> <span class="nc">RequestNodeInfoByMACAddress</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Request Node information by mac address.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;mac_address&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;system_id&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Integer</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;boot_type&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;osystem&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;distro_series&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;architecture&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;purpose&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">NoSuchNode</span><span class="p">:</span> <span class="n">b</span><span class="s2">&quot;NoSuchNode&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../../../index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../../index.html">MAAS 1.9 documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

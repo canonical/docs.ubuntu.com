@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Transactions &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="../index.html" />
+    <link rel="prev" title="RPC HOWTO" href="rpc.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rpc.html" title="RPC HOWTO"
+             accesskey="P">previous</a></li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="transactions">
+<h1>Transactions<a class="headerlink" href="transactions.html#transactions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-we-roll-back-in-maas">
+<h2>How we roll(back) in MAAS<a class="headerlink" href="transactions.html#how-we-roll-back-in-maas" title="Permalink to this headline">¶</a></h2>
+<p>MAAS runs almost all transactions using <a class="reference external" href="http://www.postgresql.org/docs/9.4/static/transaction-iso.html">serializable isolation</a>. This
+is very strict and PostgreSQL can and does reject transactions because
+of conflicts with other transactions; this are business-as-usual.</p>
+<p>MAAS is prepared for this, and will retry transactions that have failed
+because of these specific types of conflicts. MAAS has two tools to deal
+with serialisation failures:</p>
+<ul class="simple">
+<li><code class="xref py py-class docutils literal"><span class="pre">WebApplicationHandler</span></code> deals with
+failures in MAAS&#8217;s Django application (the web UI and API). This is
+the shim between Twisted&#8217;s web server and Django&#8217;s WSGI application.
+It&#8217;s not designed for any other purpose.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">transactional()</span></code> is used to decorate
+functions and methods such that they&#8217;re run within transactions. This
+is general purpose, and can be used almost everywhere in the MAAS
+region controller.</li>
+</ul>
+<p>Slightly different strategies are employed in each, but they share a lot
+of their implementations.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only MAAS&#8217;s region — a.k.a. <code class="docutils literal"><span class="pre">regiond</span></code> — connects to the PostgreSQL
+database. MAAS&#8217;s clusters — <code class="docutils literal"><span class="pre">clusterd</span></code> — are not directly relevant
+here.</p>
+</div>
+</div>
+<div class="section" id="always-prefer-transactional">
+<h2>Always prefer &#64;transactional<a class="headerlink" href="transactions.html#always-prefer-transactional" title="Permalink to this headline">¶</a></h2>
+<p>MAAS&#8217;s <code class="xref py py-func docutils literal"><span class="pre">transactional()</span></code> decorator, in
+almost all situations, should be used to ensure that a piece of code
+runs within a transaction.</p>
+<p>It has very similar behaviour to Django&#8217;s <code class="docutils literal"><span class="pre">transaction.atomic</span></code> — for
+good reason; it is based around it — so has savepoint-commit/rollback
+semantics when encountered within an existing transaction. In fact, when
+called from within a web or API request — i.e. within a transaction —
+it&#8217;ll behave <em>exactly</em> like <code class="docutils literal"><span class="pre">transaction.atomic</span></code>.</p>
+<p>However, if it&#8217;s ever called from outside of a transaction, via
+<code class="docutils literal"><span class="pre">deferToThread</span></code> for example, it&#8217;ll also ensure that transactions are
+retried after serialisation failures, that post-commit hooks are run,
+and that connections are cleared up at the end.</p>
+<p>Even where we know that code cannot be reached from outside of a
+transaction, it&#8217;s a good habit to always use <code class="docutils literal"><span class="pre">transactional</span></code> in
+preference to <code class="docutils literal"><span class="pre">transaction.atomic</span></code>. It&#8217;s an easier rule to follow.
+Uses of <code class="docutils literal"><span class="pre">transaction.atomic</span></code> should also be exceptions and thus few in
+number, rendering them easy to audit.</p>
+<p>If you find that <code class="docutils literal"><span class="pre">transactional</span></code> doesn&#8217;t Do The Right Thing for you,
+treat it first as a bug to be fixed before reaching for another tool.</p>
+</div>
+<div class="section" id="except-that">
+<h2>Except that…<a class="headerlink" href="transactions.html#except-that" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">transactional</span></code> cannot be used as a context manager — and it can&#8217;t
+be adapted into one, because of its retry behaviour — so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">transaction</span><span class="o">.</span><span class="n">atomic</span><span class="p">():</span>
+    <span class="n">do_stuff</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>can be okay. <em>However</em>, this should typically be inside a function
+that is decorated with <code class="docutils literal"><span class="pre">transactional</span></code>, or in a private function
+that&#8217;s only ever called from within a transaction that&#8217;s being wrapped
+by <code class="docutils literal"><span class="pre">transactional</span></code>.</p>
+<p>In other words, you would only do this if you want to run a block of
+code with savepoint-commit/rollback behaviour, and a context manager
+is more convenient or appropriate than defining a new function
+decorated with <code class="docutils literal"><span class="pre">transactional</span></code>.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">transaction.atomic</span></code> is also okay as a context manager in <strong>tests</strong>,
+because you shouldn&#8217;t run into serialisation failures there, and you
+may want more control over how post-commit hooks are handled anyway.</p>
+<p>Don&#8217;t stress about this too much though: as long as your test inherits
+<code class="docutils literal"><span class="pre">PostCommitHooksTestMixin</span></code> <em>as most region tests already do</em> then
+your tests will fail if post-commit hooks are left dangling.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="transactions.html#">Transactions</a><ul>
+<li><a class="reference internal" href="transactions.html#how-we-roll-back-in-maas">How we roll(back) in MAAS</a></li>
+<li><a class="reference internal" href="transactions.html#always-prefer-transactional">Always prefer &#64;transactional</a></li>
+<li><a class="reference internal" href="transactions.html#except-that">Except that…</a></li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="rpc.html" title="previous chapter">RPC HOWTO</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="/static/maas-1.9/development/transactions.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rpc.html" title="RPC HOWTO"
+             >previous</a></li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

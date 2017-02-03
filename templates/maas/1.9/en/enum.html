@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MAAS Enums &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="index.html" />
+    <link rel="next" title="Fixing security-related issues in MAAS" href="development/security.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="development/security.html" title="Fixing security-related issues in MAAS"
+             accesskey="N">next</a></li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="maas-enums">
+<h1>MAAS Enums<a class="headerlink" href="enum.html#maas-enums" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="maasserver.enum.NODE_STATUS">
+<em class="property">class </em><code class="descclassname">maasserver.enum.</code><code class="descname">NODE_STATUS</code><a class="reference internal" href="_modules/maasserver/enum.html#NODE_STATUS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>The vocabulary of a <cite>Node</cite>&#8216;s possible statuses.</p>
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.DEFAULT">
+<code class="descname">DEFAULT</code><em class="property"> = 0</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>A node starts out as NEW (DEFAULT is an alias for NEW).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.NEW">
+<code class="descname">NEW</code><em class="property"> = 0</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.NEW" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node has been created and has a system ID assigned to it.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.COMMISSIONING">
+<code class="descname">COMMISSIONING</code><em class="property"> = 1</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.COMMISSIONING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Testing and other commissioning steps are taking place.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.FAILED_COMMISSIONING">
+<code class="descname">FAILED_COMMISSIONING</code><em class="property"> = 2</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.FAILED_COMMISSIONING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The commissioning step failed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.MISSING">
+<code class="descname">MISSING</code><em class="property"> = 3</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.MISSING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node can&#8217;t be contacted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.READY">
+<code class="descname">READY</code><em class="property"> = 4</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.READY" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node is in the general pool ready to be deployed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.RESERVED">
+<code class="descname">RESERVED</code><em class="property"> = 5</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.RESERVED" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node is ready for named deployment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.DEPLOYED">
+<code class="descname">DEPLOYED</code><em class="property"> = 6</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.DEPLOYED" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node has booted into the operating system of its owner&#8217;s choice
+and is ready for use.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.RETIRED">
+<code class="descname">RETIRED</code><em class="property"> = 7</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.RETIRED" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node has been removed from service manually until an admin
+overrides the retirement.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.BROKEN">
+<code class="descname">BROKEN</code><em class="property"> = 8</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.BROKEN" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node is broken: a step in the node lifecyle failed.
+More details can be found in the node&#8217;s event log.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.DEPLOYING">
+<code class="descname">DEPLOYING</code><em class="property"> = 9</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.DEPLOYING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node is being installed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.ALLOCATED">
+<code class="descname">ALLOCATED</code><em class="property"> = 10</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.ALLOCATED" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node has been allocated to a user and is ready for deployment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.FAILED_DEPLOYMENT">
+<code class="descname">FAILED_DEPLOYMENT</code><em class="property"> = 11</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.FAILED_DEPLOYMENT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The deployment of the node failed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.RELEASING">
+<code class="descname">RELEASING</code><em class="property"> = 12</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.RELEASING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node is powering down after a release request.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.FAILED_RELEASING">
+<code class="descname">FAILED_RELEASING</code><em class="property"> = 13</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.FAILED_RELEASING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The releasing of the node failed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.DISK_ERASING">
+<code class="descname">DISK_ERASING</code><em class="property"> = 14</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.DISK_ERASING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node is erasing its disks.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODE_STATUS.FAILED_DISK_ERASING">
+<code class="descname">FAILED_DISK_ERASING</code><em class="property"> = 15</em><a class="headerlink" href="enum.html#maasserver.enum.NODE_STATUS.FAILED_DISK_ERASING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node failed to erase its disks.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="maasserver.enum.NODEGROUP_STATUS">
+<em class="property">class </em><code class="descclassname">maasserver.enum.</code><code class="descname">NODEGROUP_STATUS</code><a class="reference internal" href="_modules/maasserver/enum.html#NODEGROUP_STATUS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUP_STATUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>The vocabulary of a <cite>NodeGroup</cite>&#8216;s possible statuses.</p>
+<dl class="attribute">
+<dt id="maasserver.enum.NODEGROUP_STATUS.DEFAULT">
+<code class="descname">DEFAULT</code><em class="property"> = 1</em><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUP_STATUS.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>A nodegroup starts out as <code class="docutils literal"><span class="pre">ENABLED</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODEGROUP_STATUS.ENABLED">
+<code class="descname">ENABLED</code><em class="property"> = 1</em><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUP_STATUS.ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd><p>An ENABLED cluster is one that should be operational.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODEGROUP_STATUS.DISABLED">
+<code class="descname">DISABLED</code><em class="property"> = 2</em><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUP_STATUS.DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd><p>A DISABLED cluster should not sync images or deploy new nodes.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT">
+<em class="property">class </em><code class="descclassname">maasserver.enum.</code><code class="descname">NODEGROUPINTERFACE_MANAGEMENT</code><a class="reference internal" href="_modules/maasserver/enum.html#NODEGROUPINTERFACE_MANAGEMENT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>The vocabulary of a <cite>NodeGroupInterface</cite>&#8216;s possible statuses.</p>
+<dl class="attribute">
+<dt id="maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT.UNMANAGED">
+<code class="descname">UNMANAGED</code><em class="property"> = 0</em><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT.UNMANAGED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do not manage DHCP or DNS for this interface.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT.DHCP">
+<code class="descname">DHCP</code><em class="property"> = 1</em><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT.DHCP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manage DHCP for this interface.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT.DHCP_AND_DNS">
+<code class="descname">DHCP_AND_DNS</code><em class="property"> = 2</em><a class="headerlink" href="enum.html#maasserver.enum.NODEGROUPINTERFACE_MANAGEMENT.DHCP_AND_DNS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manage DHCP and DNS for this interface.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">maasserver.enum.</code><code class="descname">NODE_STATUS</code><a class="reference internal" href="_modules/maasserver/enum.html#NODE_STATUS"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>The vocabulary of a <cite>Node</cite>&#8216;s possible statuses.</p>
+<dl class="attribute">
+<dt>
+<code class="descname">DEFAULT</code><em class="property"> = 0</em></dt>
+<dd><p>A node starts out as NEW (DEFAULT is an alias for NEW).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">NEW</code><em class="property"> = 0</em></dt>
+<dd><p>The node has been created and has a system ID assigned to it.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">COMMISSIONING</code><em class="property"> = 1</em></dt>
+<dd><p>Testing and other commissioning steps are taking place.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">FAILED_COMMISSIONING</code><em class="property"> = 2</em></dt>
+<dd><p>The commissioning step failed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">MISSING</code><em class="property"> = 3</em></dt>
+<dd><p>The node can&#8217;t be contacted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">READY</code><em class="property"> = 4</em></dt>
+<dd><p>The node is in the general pool ready to be deployed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">RESERVED</code><em class="property"> = 5</em></dt>
+<dd><p>The node is ready for named deployment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">DEPLOYED</code><em class="property"> = 6</em></dt>
+<dd><p>The node has booted into the operating system of its owner&#8217;s choice
+and is ready for use.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">RETIRED</code><em class="property"> = 7</em></dt>
+<dd><p>The node has been removed from service manually until an admin
+overrides the retirement.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">BROKEN</code><em class="property"> = 8</em></dt>
+<dd><p>The node is broken: a step in the node lifecyle failed.
+More details can be found in the node&#8217;s event log.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">DEPLOYING</code><em class="property"> = 9</em></dt>
+<dd><p>The node is being installed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">ALLOCATED</code><em class="property"> = 10</em></dt>
+<dd><p>The node has been allocated to a user and is ready for deployment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">FAILED_DEPLOYMENT</code><em class="property"> = 11</em></dt>
+<dd><p>The deployment of the node failed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">RELEASING</code><em class="property"> = 12</em></dt>
+<dd><p>The node is powering down after a release request.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">FAILED_RELEASING</code><em class="property"> = 13</em></dt>
+<dd><p>The releasing of the node failed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">DISK_ERASING</code><em class="property"> = 14</em></dt>
+<dd><p>The node is erasing its disks.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">FAILED_DISK_ERASING</code><em class="property"> = 15</em></dt>
+<dd><p>The node failed to erase its disks.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Next: <a href="development/security.html" title="next chapter">Fixing security-related issues in MAAS</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="/static/maas-1.9/enum.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="development/security.html" title="Fixing security-related issues in MAAS"
+             >next</a></li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

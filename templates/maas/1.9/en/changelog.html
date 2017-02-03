@@ -1,0 +1,1092 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Changelog &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="index.html" />
+    <link rel="next" title="Installing MAAS" href="install.html" />
+    <link rel="prev" title="Orientation" href="orientation.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="install.html" title="Installing MAAS"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="orientation.html" title="Orientation"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="changelog.html#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1.9.5<a class="headerlink" href="changelog.html#id1" title="Permalink to this headline">¶</a></h2>
+<p>LP: #1603590    [1.9] MAAS does not allow link-local address for default gateway on ipv6 subnet.</p>
+</div>
+<div class="section" id="id2">
+<h2>1.9.4<a class="headerlink" href="changelog.html#id2" title="Permalink to this headline">¶</a></h2>
+<p>LP: #1584850    [1.9] DNS record added for non-boot interface IP when no address of that family exists on the boot interface</p>
+<p>LP: #1583715    [1.9] Ensure that restricted resources also perform meaningful authentication of clients.</p>
+<p>LP: #1584211    [1.9] Exclude RAM, floppy, and loopback devices from lsblk during commissioning.</p>
+<p>LP: #1585400    [1.9] Change detect_missing_packages in moonshot power driver to look for <cite>ipmitool</cite> instead of <cite>ipmipower</cite></p>
+<p>LP: #1581318    [1.9] Append version to templateUrl in maas.js angular code.</p>
+<p>LP: #1591093    [2.0,1.9] 3rd party HP drivers (archive hostname renamed) - deployment fails</p>
+<p>LP: #1597460    [1.9] MAAS 1.9 should only download filetypes from a SimpleStream is can process</p>
+<p>LP: #1567249    [1.9] If rack and region have different versions, the error is uninformative and confusing.</p>
+<p>LP: #1582070    Update the UEFI ARM64 local boot config to chainload the locally installed EFI binary.</p>
+<p>LP: #1597787    Send size with the extended partition for MBR partition tables.</p>
+</div>
+<div class="section" id="id3">
+<h2>1.9.3<a class="headerlink" href="changelog.html#id3" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://launchpad.net/maas/+milestone/1.9.3">https://launchpad.net/maas/+milestone/1.9.3</a> for full details.</p>
+<div class="section" id="bug-fix-update">
+<h3>Bug Fix Update<a class="headerlink" href="changelog.html#bug-fix-update" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1521618    [1.9] wrong subnet in DHCP answer when multiple networks are present</p>
+<p>LP: #1536604    [1.9] IntegrityError while uploading leases - when there are reserved IP&#8217;s on the dynamic range</p>
+<p>LP: #1580712    [1.9] dhcp update error: str object has no attribute mac</p>
+<p>LP: #1575567    [1.9] Re-commissioning doesn&#8217;t detect storage changes</p>
+<p>LP: #1576194    [1.9] Enlistment via DHCP fails because DNS has bogus PTR record</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>1.9.2<a class="headerlink" href="changelog.html#id4" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://launchpad.net/maas/+milestone/1.9.2">https://launchpad.net/maas/+milestone/1.9.2</a> for full details.</p>
+<div class="section" id="id5">
+<h3>Bug Fix Update<a class="headerlink" href="changelog.html#id5" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1573219    Deleting user in UI leads to 500</p>
+<p>LP: #1508741    IPMI driver does not handle timeouts correctly</p>
+<p>LP: #1572070    MAAS 2.0 cannot link physical device interfaces to tagged vlans, breaking juju 2.0 multi-NIC containers</p>
+<p>LP: #1573046    14.04 images not available for commissioning as distrio-info &#8211;lts now reports xenial</p>
+<p>LP: #1571563    Can&#8217;t override built in partitioning</p>
+<p>LP: #1552923    API allows attaching physical, bond interface to VLAN with a known tag (Inconsistent with UI)</p>
+<p>LP: #1566336    MAAS keeps IPs assigned to eth0, even after eth0 is enslaved into a bond</p>
+<p>LP: #1543195    unable to set mtu on default VLAN</p>
+<p>LP: #1560693    Migration 0188 dist-upgrade update failure</p>
+<p>LP: #1554747    CPU Utilization of postgresql thread reaches 100% for deleting a node from MaaS</p>
+<p>LP: #1499934    Power state could not be queried (vmware)</p>
+<p>LP: #1543707    MAAS 1.9+ should not allow whitespace characters in space names</p>
+<p>LP: #1543968    MAAS 1.9.0 allows non-unique space names</p>
+<p>LP: #1567213    devices results missing interface_set</p>
+<p>LP: #1568051    ThreadPool context entry failure causes thread pool to break</p>
+<p>LP: #1212205    get_file_by_name does not check owner</p>
+<p>LP: #1298772    MAAS API vulnerable to CSRF attack</p>
+<p>LP: #1379826    uuid.uuid1() is not suitable as an unguessable identifier/token</p>
+<p>LP: #1573264    Enlistment fails: archdetect not found.</p>
+<p>LP: #1556219    Discover correct IPMI driver in Power8.</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>1.9.1<a class="headerlink" href="changelog.html#id6" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://launchpad.net/maas/+milestone/1.9.1">https://launchpad.net/maas/+milestone/1.9.1</a> for full details.</p>
+<div class="section" id="id7">
+<h3>Bug Fix Update<a class="headerlink" href="changelog.html#id7" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1523779    Fix grub-install error on deploying power8 machines.</p>
+<p>LP: #1526542    Skip block devices with duplicate serial numbers to fix multipath issue.</p>
+<p>LP: #1532262    Fix failure to power query requests for SM15K servers.</p>
+<p>LP: #1484696    Fix bug in apache2 maas config where it will reuse websocket connections to work around a bug in apache2 itself.</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>1.9.0<a class="headerlink" href="changelog.html#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="important-announcements">
+<h3>Important announcements<a class="headerlink" href="changelog.html#important-announcements" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>New Networking Concepts and API&#8217;s: Fabrics, Spaces and Subnets</strong></dt>
+<dd><p class="first">With the introduction of new MAAS networking concepts, new API&#8217;s are also
+been introduced. These are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>fabrics</li>
+<li>spaces</li>
+<li>subnets</li>
+<li>vlans</li>
+<li>fan-networks</li>
+</ul>
+</div></blockquote>
+<p class="last">MAAS 1.9.0 will continue to provide backwards compatibility with the old
+network API for reading purposes, but moving forward, users are required to
+use the new API to manipulate fabrics, spaces and subnets.</p>
+</dd>
+<dt><strong>Advanced Network and Storage Configuration only available for Ubuntu deployments</strong></dt>
+<dd>Users can now perform advanced network and storage configurations for nodes
+before deployment. The advanced configuration is only available for Ubuntu
+deployments. All other deployments using third party OS&#8217;, including CentOS,
+RHEL, Windows and Custom Images, won&#8217;t result in such configuration.</dd>
+<dt><strong>Re-commissioning required for upgraded MAAS</strong></dt>
+<dd><p class="first">Now that storage partitioning and advanced configuration is supported natively,
+VM nodes in MAAS need to be re-commissioned.</p>
+<blockquote>
+<div><ul class="simple">
+<li>If upgrading from MAAS 1.8, only VM nodes with VirtIO storage devices need
+to be re-commissioned.</li>
+<li>If upgrading from MAAS 1.7, all nodes will need to be re-commissioned in
+order for MAAS to correctly capture the storage and networking devices.</li>
+</ul>
+</div></blockquote>
+<p class="last">This does not affect nodes that are currently deployed.</p>
+</dd>
+<dt><strong>Default Storage Partitioning Layout - Flat</strong></dt>
+<dd><p class="first">With the introduction of custom storage, MAAS has also introduced the concept
+of partitioning layouts. Partitioning layouts allow the user to quickly
+auto-configure the disk partitioning scheme after first commissioning or
+re-commissioning (if selected to do so). The partitioning layouts are set
+globally on the <cite>Settings</cite> page.</p>
+<p class="last">The current default Partitioning layout is &#8216;Flat&#8217;, maintaining backwards
+compatibility with previous MAAS releases. This means MAAS will take the
+first disk it finds in the system and use it as the root and boot disk.</p>
+</dd>
+<dt><strong>Deployment with configured /etc/network/interfaces</strong></dt>
+<dd><p class="first">Starting with MAAS 1.9, all node deployments will result in writing
+<cite>/etc/network/interfaces</cite> statically, by default. This increases MAAS&#8217;
+robustness and reliability as users no longer have to depend on DHCP for
+IP address allocation solely.</p>
+<p class="last">MAAS will continue to provide IP addresses via DHCP, even though interfaces
+in <cite>/etc/network/interfaces</cite> may have been configured statically.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="major-new-features">
+<h3>Major new features<a class="headerlink" href="changelog.html#major-new-features" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Storage Partitioning and Advanced Configuration</strong></dt>
+<dd><p class="first">MAAS now supports Storage Partitioning and Advanced Configuration natively.
+This allows MAAS to deploy machines with different Storage Layouts, as
+well as different complex partitioning configurations. Storage support
+includes:</p>
+<ul class="simple">
+<li>LVM</li>
+<li>Bcache</li>
+<li>Software RAID levels 0, 1, 5, 6, 10.</li>
+<li>Advanced partitioning</li>
+</ul>
+<p class="last">Storace configuration is available both via the WebUI and API. For more
+information refer to <a class="reference internal" href="storage.html#storage"><span>Storage</span></a>.</p>
+</dd>
+<dt><strong>Advanced Networking (Fabrics, Spaces, Subnetworks) and Node Network Configuration</strong></dt>
+<dd><p class="first">MAAS now supports Advanced Network configuration, allowing users to not
+only perform advanced node network configuration, but also allowing users
+to declare and map their infrastructure in the form of Fabrics, VLANs,
+Spaces and Subnets.</p>
+<dl class="last docutils">
+<dt><strong>Fabrics, Spaces, Subnets and Fan networks</strong></dt>
+<dd><p class="first">MAAS now supports the concept of Fabrics, Spaces, Subnets and FANS,
+which introduce a whole new way of declaring and mapping your network
+and infrastructure in MAAS.</p>
+<p>The MAAS WebUI allows users to view all the declared Fabrics, Spaces,
+VLANs inside fabrics and Subnets inside Spaces. The WebUI does not yet
+support the ability to create new of these, but the API does.</p>
+<p>These new concepts replace the old <cite>Network</cite> concepts from MAAS&#8217;
+earlier versions. For more information, see <a class="reference internal" href="networking.html#networking"><span>Networking</span></a>.</p>
+<p class="last">For more information about the API, see <span class="xref std std-ref">api</span>.</p>
+</dd>
+<dt><strong>Advanced Node Networking Configuration</strong></dt>
+<dd><p class="first">MAAS can now perform the Node&#8217;s networking configuration. Doing so,
+results in <cite>/etc/network/interfaces</cite> being written. Advanced
+configuration includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Assign subnets, fabrics, and IP to interfaces.</li>
+<li>Create VLAN interfaces.</li>
+<li>Create bond interfaces.</li>
+<li>Change interface names.</li>
+</ul>
+</div></blockquote>
+<p>MAAS also allows configuration of node interfaces in different modes:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Auto Assign - Node interface will be configured statically
+and MAAS will auto assign an IP address.</li>
+<li>DHCP - The node interface will be configured to DHCP.</li>
+<li>Static - The user will be able to specify what IP address the
+interface will obtain, while MAAS will configure it statically.</li>
+<li>Unconfigured - MAAS will leave the interface with LINK UP.</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt><strong>Curtin &amp; cloud-init status updates</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0, curtin and cloud-init will now send messages
+to MAAS providing information regarding various of the actions being
+taken. This information will be displayed in MAAS in the <cite>Node Event Log</cite>.</p>
+<p class="last">Note that this information is only available when using MAAS 1.9.0 and
+the latest version fo curtin. For cloud-init messages this information
+is only available when deploying Wily+.</p>
+</dd>
+<dt><strong>Fabric and subnet creation</strong></dt>
+<dd>MAAS now auto-creates multiple fabrics per physical interface connected
+to the Cluster Controller, and will correctly create subnetworks under
+each fabric, as well as VLAN&#8217;s, if any of the Cluster Controller
+interface is a VLAN interface.</dd>
+<dt><strong>HWE Kernels</strong></dt>
+<dd><p class="first">MAAS now has a different approach to deploying Hardware Enablement
+Kernels. Start from MAAS 1.9, the HWE kernels are no longer coupled
+to subarchitectures of a machine. For each Ubuntu release, users
+will be able to select any of the available HWE kernels for such
+release, as well as set the minimum kernel the machine will be
+deployed with by default.</p>
+<p class="last">For more information, see <a class="reference internal" href="hardware-enablement-kernels.html#hardware-enablement-kernels"><span>Using hardware-enablement kernels</span></a>.</p>
+</dd>
+<dt><strong>CentOS images can be imported automatically</strong></dt>
+<dd><p class="first">CentOS Image (CentOS 6 and 7) can now be imported automatically from the
+MAAS Images page. These images are currently part of the daily streams.</p>
+<p class="last">In order to test this images, you need to use the daily image stream.
+This can be changed in the <cite>Settings</cite> page under <cite>Boot Images</cite> to
+<cite>http://maas.ubuntu.com/images/ephemeral-v2/daily/</cite>. Once changed, images
+can be imported from the MAAS Images page. The CentOS image will be
+published in the Releases stream shortly.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="minor-notable-changes">
+<h3>Minor notable changes<a class="headerlink" href="changelog.html#minor-notable-changes" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Minimal Config Files for Daemons</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9, minimal configuration files have been introduced
+for both, the MAAS Region Controller and the MAAS Cluster Controller daemons.</p>
+<ul class="last simple">
+<li>The Region Controller (<cite>maas-regiond</cite>) has now dropped the usage of
+<cite>/etc/maas/maas_local_settings.py</cite> in favor of <cite>/etc/maas/regiond.conf</cite>.
+Available configuration options are now <cite>database_host</cite>, <cite>database_name</cite>,
+<cite>database_user</cite>, <cite>database_pass</cite>, <cite>maas_url</cite>. MAAS will attempt to migrate
+any configuration on upgrade, otherwise it will use sane defaults.</li>
+<li>The Cluster Controller (<cite>maas-clusterd</cite>) has now dropped the usage of
+<cite>/etc/maas/pserv.yaml</cite> and <cite>/etc/maas/maas_cluster.conf</cite> in favor of
+<cite>/etc/maas/clusterd.conf</cite>. Available configuration options are now <cite>maas_url</cite>
+and <cite>cluster_uuid</cite> only. MAAS will attempt to migrate any configuration
+on upgrade, otherwise it will use sane defaults.</li>
+</ul>
+</dd>
+<dt><strong>Commissioning Actions</strong></dt>
+<dd><p class="first">MAAS now supports commissioning actions. These allow the user to specify
+how commissioning should behave in certain escenarios. The commissioning
+actions available are:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Enable SSH during commissioning &amp; Keep machine ON after commissioning</li>
+<li>Keep network configuration after commissioning</li>
+<li>Keep storage configuration after commissioning</li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>Warn users about missing power control tools</strong></dt>
+<dd>MAAS now warns users about the missing power control tools. Each MAAS
+power driver use a set of power tools that may or may not be installed
+by default. If these power tools are missing from the system, MAAS will
+warn users.</dd>
+<dt><strong>Python Power Drivers</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9, MAAS is moving away from using shell scripts
+templates for Power Drivers. These are being migrated to MAAS&#8217;
+internal control as power drivers. Currently supported are APC, MSCM,
+MSFT OCS, SM15k, UCSM, Virsh, VMWare and IPMI.</p>
+<p class="last">Remaining Power Drivers include AMT, Fence CDU&#8217;s, Moonshot.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="known-problems-workarounds">
+<h3>Known Problems &amp; Workarounds<a class="headerlink" href="changelog.html#known-problems-workarounds" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Garbage in the UI after upgrade</strong></dt>
+<dd><p class="first">When upgrading from any earlier release (1.5, 1.7, 1.8), the user may see
+garbage in the UI. This is because the local cache is dirty and won&#8217;t be
+refreshed automatically. MAAS 1.9.0 introduced a mechanism to refresh the
+cache automatically, but this will only take into effect upgrading from
+1.9.0 to any later release.</p>
+<p>To work around this issue, the only thing required is to refresh the
+browsers cache, by hitting F5.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1515380">1515380</a> for more information.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="major-bugs-fixed-in-this-release">
+<h3>Major bugs fixed in this release<a class="headerlink" href="changelog.html#major-bugs-fixed-in-this-release" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference external" href="https://launchpad.net/maas/+milestone/1.9.0">https://launchpad.net/maas/+milestone/1.9.0</a> for details.</p>
+</div>
+</div>
+<div class="section" id="rc4">
+<h2>1.9.0 (RC4)<a class="headerlink" href="changelog.html#rc4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3>Major bugs fixed in this release<a class="headerlink" href="changelog.html#id10" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1523674    Virsh is reporting ppc64le, not ppc64el.</p>
+<p>LP: #1524091    Don&#8217;t require DHCP to be on if it should be off.</p>
+<p>LP: #1523988    No required packages for HMC as it uses pure python paramiko ssh client.</p>
+<p>LP: #1524007    Don&#8217;t hold the cluster configuration lock while reloading boot images.</p>
+<p>LP: #1524924    Fix commissioning to correctly identify secondary subnets, VLAN&#8217;s and fabrics.</p>
+</div>
+</div>
+<div class="section" id="rc3">
+<h2>1.9.0 (RC3)<a class="headerlink" href="changelog.html#rc3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>Major bugs fixed in this release<a class="headerlink" href="changelog.html#id11" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1522898    &#8220;node-interface&#8221; API should just be &#8220;interface&#8221; - to allow devices to use it</p>
+<p>LP: #1519527    Juju 1.25.1 proposed: lxc units all have the same IP address after upgrade from 1.7/1.8.</p>
+<p>LP: #1522294    MAAS fails to parse some DHCP leases.</p>
+<p>LP: #1519090    DHCP interface automatically obtains an IP even when the subnet is unmanaged.</p>
+<p>LP: #1519077    MAAS assigns IP addresses on unmanaged subnets without consideration for some addresses known to be in use.</p>
+<p>LP: #1519396    MTU field is not exposed over the API for VLAN.</p>
+<p>LP: #1521833    Updating subnet name removes dns_server.</p>
+<p>LP: #1519919    CC looks for NICs with kernel module loaded and fall back doesn&#8217;t check persistent device names.</p>
+<p>LP: #1522225    Migration 0181 can fail on upgrade if disks across nodes have duplicate serial numbers.</p>
+<p>LP: #1519247    Migration 0146 can fail on upgrade when migrating unmanaged subnets.</p>
+<p>LP: #1519397    [UI] Once a cache_set is created the UI fails with ERROR.</p>
+<p>LP: #1519918    [UI] &#8220;failed to detect a valid IP address&#8221; when trying to view node details.</p>
+</div>
+</div>
+<div class="section" id="rc2">
+<h2>1.9.0 (RC2)<a class="headerlink" href="changelog.html#rc2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id12">
+<h3>Major bugs fixed in this release<a class="headerlink" href="changelog.html#id12" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1513085    Partitioning should align for performance.</p>
+<p>LP: #1516815    MAAS creates DNS record against Alias (eth0:1) if alias belongs to the PXE Interface.</p>
+<p>LP: #1515769    Failed to power on SM15k.</p>
+<p>LP: #1516722    Fix migration that might affect upgrade from 1.7.</p>
+<p>LP: #1516065    Failed to power control IPMI BMC that does not support setting the boot order.</p>
+<p>LP: #1517097    Constraints for acquiring interfaces argument should &#8216;AND&#8217; key-value pairs for the same label.</p>
+<p>LP: #1517687    [UI] Cannot create a partition using the whole disk.</p>
+<p>LP: #1513258    [UI] CSS Broken for Bond Network Device.</p>
+<p>LP: #1516173    [UI] Prevent being able to unmount/remove filesystems while node is on.</p>
+<p>LP: #1510457    [UI] No error message if there is no boot and/or root disk configured for a node.</p>
+</div>
+</div>
+<div class="section" id="rc1">
+<h2>1.9.0 (RC1)<a class="headerlink" href="changelog.html#rc1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id13">
+<h3>Major bugs fixed in this release<a class="headerlink" href="changelog.html#id13" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1515498    MAAS uses wrong IP for DNS record (creates against the bond).</p>
+<p>LP: #1515671    Local archive ignored for deployment. Works for commissioning and enlistment.</p>
+<p>LP: #1513485    Fix handling of multiple StaticIPAddress rows with empty IP addresses.</p>
+<p>LP: #1513485    Lease parser failure - doesn&#8217;t update IP on the PXE NIC.</p>
+<p>LP: #1514486    Cannot claim sticky IP address for device with parent.</p>
+<p>LP: #1514883    Cluster downloads boot-images from managed network (pxe) instead of network used to connect to Region.</p>
+<p>LP: #1510917    Updating/modifying/assigning vlans, spaces, fabrics, subnets doesn&#8217;t allow specifying names and lock to ID&#8217;s.</p>
+<p>LP: #1513095    MAAS should prevent deploying nodes with PXE interface &#8216;unconfigured&#8217;.</p>
+<p>LP: #1508056    MTU should be a set on the VLAN, and able to override on the interface.</p>
+<p>LP: #1439476    Internal Server Error when creating/editing cluster interface.</p>
+<p>LP: #1510224    Non-interactive way to change password.</p>
+<p>LP: #1513111    When a bond is created all IP address associated with the bond members should be removed.</p>
+<p>LP: #1487135    MAAS does not provide a dump of the config it passes to curtin for networking and storage.</p>
+<p>LP: #1512959    MAAS should not offer EXT3, rather VFAT, EXT2, EXT4.</p>
+<p>LP: #1505031    Network constraints for juju.</p>
+<p>LP: #1509535    Creating a partition or a Volume Group on the whole disk leaves free space.</p>
+<p>LP: #1511493    Should not allow partitions to be created on bcache device.</p>
+<p>LP: #1503475    Storage section should only be editable when Ready or Allocated.</p>
+<p>LP: #1512832    maasserver.api.tests.test_fannetworks.TestFanNetworksAPI.test_read fails randomly.</p>
+<p>LP: #1508754    Creating a logical volume on a partition that is too small almost works, resulting in strange error messages.</p>
+<p>LP: #1503925    [UI] Keep selected nodes selected after action.</p>
+<p>LP: #1515380    [UI] Refresh UI cache after an upgrade to avoid seeing garbage.</p>
+<p>LP: #1510106    [UI] Boot disk is not lighted nor can be changed.</p>
+<p>LP: #1510118    [UI] Can&#8217;t remove / delete a partition with a filesystem under &#8216;Available disks and partitions&#8217;.</p>
+<p>LP: #1510153    [UI] Creating a partition should allow to select filesystem and mountpoint.</p>
+<p>LP: #1510468    [UI] When selecting a device, ensure padding between buttons is 20px.</p>
+<p>LP: #1510455    [UI] Misaligned mount point column on used disks table.</p>
+<p>LP: #1510469    [UI] Align the individual storage actions with the name field, rather than the tickbox.</p>
+<p>LP: #1503479    [UI] can&#8217;t add physical interface.</p>
+<p>LP: #1503474    [UI] Containers (lxc, kvm) data missing on node details.</p>
+<p>LP: #1513271    [UI] Unable to unmount a filesystem in the UI.</p>
+<p>LP: #1503536    [UI] Animation missing on show members and select node.</p>
+<p>LP: #1510482    [UI] Add tooltips to icons.</p>
+<p>LP: #1510486    [UI] Add tooltips to inactive buttons.</p>
+</div>
+</div>
+<div class="section" id="beta2">
+<h2>1.9.0 (beta2)<a class="headerlink" href="changelog.html#beta2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h3>Major bugs fixed in this release<a class="headerlink" href="changelog.html#id14" title="Permalink to this headline">¶</a></h3>
+<p>LP: #1511257    New capabilities for subnets, vlan, spaces and fabrics.</p>
+<dl class="docutils">
+<dt>LP: #1509077    Upgrade left a PXE NIC&#8221;s on nodes without a subnet associated</dt>
+<dd>causing deploy issues.</dd>
+</dl>
+<p>LP: #1512109    DNS record doesn&#8217;t get created against the PXE interface</p>
+<p>LP: #1510334    bcache cache_mode setting not configured on servers</p>
+<p>LP: #1510210    Administrators unable to delete users using the API</p>
+<dl class="docutils">
+<dt>LP: #1509536    Can create a VolumeGroup (vg0) without having created a partition</dt>
+<dd>on the boot disk</dd>
+</dl>
+<p>LP: #1501400    set-boot-disk yields in a machine not being able to deploy</p>
+<p>LP: #1504956    Deploying Other OS&#8217; (CentOS, Windows) should not configure custom storage</p>
+<p>LP: #1509164    Add RAID 10 support</p>
+<dl class="docutils">
+<dt>LP: #1511437    MAAS should download grub from grub-efi-amd64-signed package instead</dt>
+<dd>of the archive path</dd>
+</dl>
+<p>LP: #1510120    Fails to deploy with UEFI</p>
+<dl class="docutils">
+<dt>LP: #1507586    previous owner of node can use oauth creds to retrieve current</dt>
+<dd>owner&#8217;s user-data</dd>
+</dl>
+<p>LP: #1507630    IP range validation for too small ranges</p>
+<dl class="docutils">
+<dt>LP: #1511610    TestReleaseAutoIPs.test__calls_update_host_maps_for_next_ip_managed_subnet</dt>
+<dd>can fail randomly</dd>
+</dl>
+<p>LP: #1511071    No way to disable maas-proxy</p>
+<p>LP: #1505034    [UI] HWE naming needs to be clearer</p>
+<p>LP: #1509476    [UI] Angular $digest loop issue on node details page</p>
+<p>LP: #1509473    [UI] New nodes interfaces doesn&#8217;t show which interface is the PXE interface</p>
+<p>LP: #1510471    [UI] When partitioning, there should be 20px padding between the sizing fields</p>
+<p>LP: #1510467    [UI] On the available table, add model and serial to the name column</p>
+<p>LP: #1510466    [UI] On the available table, change “available space” to “size” for consistency</p>
+<dl class="docutils">
+<dt>LP: #1510472    [UI] when formatting/mounting, the button says “Format &amp; Mount”</dt>
+<dd>this should just be “Mount”</dd>
+</dl>
+<p>LP: #1503533    [UI] Tickbox on create bond networking</p>
+<p>LP: #1510447    [UI] On the file system table, change name to “File system” (lower case S)</p>
+<dl class="docutils">
+<dt>LP: #1510474    [UI] When creating bcache and raid, remove the empty column between the</dt>
+<dd>config fields and</dd>
+</dl>
+<p>LP: #1510488    [UI] On the available table, make sure all buttons are lowercase</p>
+<p>LP: #1511174    [UI] Subnets filter doesn&#8217;t show network, it shows name instead</p>
+<p>LP: #1509417    [UI] can&#8217;t edit / add storage tags</p>
+<p>LP: #1510891    [UI] Hover state for networking doesn&#8217;t work</p>
+<p>LP: #1510458    [UI] change &#8220;edit tag&#8221; link to icon storage</p>
+<p>LP: #1510629    [UI] Can no longer see the IP address PXE interface gets on commissioning</p>
+</div>
+</div>
+<div class="section" id="beta1">
+<h2>1.9.0 (beta1)<a class="headerlink" href="changelog.html#beta1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id15">
+<h3>Major New Features<a class="headerlink" href="changelog.html#id15" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Storage Configuration: LVM and RAID UI</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0 (beta1), MAAS now exposes custom
+storage configuration in the WebUI for the following:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>LVM: Ability to easily create LVM.</li>
+<li>RAID: Ability to create RAID 0, 1, 5, 6.</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="id16">
+<h3>Minor notable changes<a class="headerlink" href="changelog.html#id16" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Fabric and subnet creation</strong></dt>
+<dd>Starting from MAAS 1.9.0 (beta1), MAAS now auto-creates multiple fabrics
+per physical interface connected to the Cluster Controller, and will
+correctly create subnetworks under each fabric, as well as VLAN&#8217;s if any
+VLAN interface on the Cluster Controller is preset.</dd>
+</dl>
+</div>
+<div class="section" id="id17">
+<h3>Known Problems &amp; Workarounds<a class="headerlink" href="changelog.html#id17" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>CentOS fails to deploy with LVM Storage layout</strong></dt>
+<dd><p class="first">CentOS fails to deploy when deploying with an LVM storage layout.
+Provided that LVM is the default storage layout, every CentOS deployment
+will fail, unless this layout is changed to &#8216;Flat&#8217; storage.</p>
+<p>To work around the problem, the default storage layout can be changed from
+<cite>LVM</cite> to <cite>Flat</cite> in MAAS&#8217; Networks page, under <cite>Storage Layout</cite> section.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1499558">1499558</a> for more information.</p>
+</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>Fail to deploy (boot) with UEFI</strong></dt>
+<dd>MAAS will successfully instal in a UEFI system, however, after deployment
+it won&#8217;t boot onto the local disk. See bug <a class="reference external" href="https://launchpad.net/bugs/1510120">1510120</a> for more information.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="alpha5">
+<h2>1.9.0 (alpha5)<a class="headerlink" href="changelog.html#alpha5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id20">
+<h3>Major New Features<a class="headerlink" href="changelog.html#id20" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Storage Configuration: Partitioning and Bcache UI</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0 (alpha5), MAAS now exposes storage custom
+storage configuration in the WebUI for the following:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Partitioning: Ability to create and delete partitions.</li>
+<li>Bcache: Ability to create cache sets and bcache devices, allowing
+multiple bcache devices to use the same cache set.</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="id21">
+<h3>Minor notable changes<a class="headerlink" href="changelog.html#id21" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Warn users about missing power control tools</strong></dt>
+<dd>MAAS now warns users about the missing power control tools. Each MAAS
+power driver use a set of power tools that may or may not be installed
+by default. If these power tools are missing from the system, MAAS will
+warn users.</dd>
+</dl>
+</div>
+<div class="section" id="id22">
+<h3>Known Problems &amp; Workarounds<a class="headerlink" href="changelog.html#id22" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>CentOS fails to deploy with LVM Storage layout</strong></dt>
+<dd><p class="first">CentOS fails to deploy when deploying with an LVM storage layout.
+Provided that LVM is the default storage layout, every CentOS deployment
+will fail, unless this layout is changed to &#8216;Flat&#8217; storage.</p>
+<p>To work around the problem, the default storage layout can be changed from
+<cite>LVM</cite> to <cite>Flat</cite> in MAAS&#8217; Networks page, under <cite>Storage Layout</cite> section.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1499558">1499558</a> for more information.</p>
+</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>Juju 1.24.6 bootstrap failure - Changing MAAS configured /etc/network/interfaces</strong></dt>
+<dd><p class="first">Juju 1.24.6 (or less), assumes that it can manage the MAAS deployed node&#8217;s
+network configuration. Juju changes /etc/network/interfaces and disables
+bringing up eth0 on boot, to create a bridge to support LXC. However,
+provided that MAAS / curtin now writes the node&#8217;s network configuration,
+Juju is unable to successfully finish the creation of the bridge, but in
+the process, it disables auto bring up of eth0.</p>
+<p>Starting from Juju 1.24.7+, Juju has grown support to correctly manage a
+/etc/network/interfaces that has been created after deployment with MAAS 1.9.0.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1494476">1494476</a> for more information.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="alpha4">
+<h2>1.9.0 (alpha4)<a class="headerlink" href="changelog.html#alpha4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id25">
+<h3>Minor notable changes<a class="headerlink" href="changelog.html#id25" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Various UI cosmetic fixes and improvements.</li>
+<li>Do not create MBR larger than 2TiB for LVM.</li>
+<li>Various concurrency fixes and improvements to robustness.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id26">
+<h3>Known Problems &amp; Workarounds<a class="headerlink" href="changelog.html#id26" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>CentOS fails to deploy with LVM Storage layout</strong></dt>
+<dd><p class="first">CentOS fails to deploy when deploying with an LVM storage layout.
+Provided that LVM is the default storage layout, every CentOS deployment
+will fail, unless this layout is changed to &#8216;Flat&#8217; storage.</p>
+<p>To work around the problem, the default storage layout can be changed from
+<cite>LVM</cite> to <cite>Flat</cite> in MAAS&#8217; Networks page, under <cite>Storage Layout</cite> section.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1499558">1499558</a> for more information.</p>
+</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>Juju 1.24+ bootstrap failure - Changing MAAS configured /etc/network/interfaces</strong></dt>
+<dd><p class="first">Juju 1.24+, by default, assumes that it can manage the MAAS deployed node&#8217;s
+network configuration. Juju changes /etc/network/interfaces and disables
+bringing up eth0 on boot, to create a bridge to support LXC. However,
+provided that MAAS / curtin now write the node&#8217;s network configuration,
+Juju is unable to successfully finish the creation of the bridge, but in
+the process, it disables auto bring up of eth0.</p>
+<p>The machine will deploy successfully, however, after a reboot eth0 will
+never be brought back up due to the changes made by Juju. This will prevent
+Juju from SSH&#8217;ing into the machine and finishing the boostrap.</p>
+<p>To prevent this from happening, <cite>disable-network-management: true</cite> needs
+to be used. Note that this will prevent the deployment of LXC containers
+as they have to DHCP.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1494476">1494476</a> for more information.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="alpha3">
+<h2>1.9.0 (alpha3)<a class="headerlink" href="changelog.html#alpha3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id29">
+<h3>Major New Features<a class="headerlink" href="changelog.html#id29" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Advanced Node Network Configuration UI</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0 (alpha3), MAAS can now do the Node&#8217;s Network
+configuration. Doing such configuration will result in having
+<cite>/etc/network/interfaces</cite> writen.</p>
+<p>Advanced configuration UI includes:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Create VLAN interfaces.</li>
+<li>Create bond interfaces.</li>
+<li>Create Alias interfaces.</li>
+<li>Change interface names.</li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>Subnetworks page UI</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0 (alpha3), MAAS can now show the new Subnets
+tab in the UI. This allow users to view:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Fabrics</li>
+<li>Spaces</li>
+<li>VLANs in fabrics.</li>
+<li>Subnets in Spaces.</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="id30">
+<h3>Known Problems &amp; Workarounds<a class="headerlink" href="changelog.html#id30" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>CentOS fails to deploy with LVM Storage layout</strong></dt>
+<dd><p class="first">CentOS fails to deploy when deploying with an LVM storage layout.
+Provided that LVM is the default storage layout, every CentOS deployment
+will fail, unless this layout is changed to &#8216;Flat&#8217; storage.</p>
+<p>To work around the problem, the default storage layout can be changed from
+<cite>LVM</cite> to <cite>Flat</cite> in MAAS&#8217; Networks page, under <cite>Storage Layout</cite> section.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1499558">1499558</a> for more information.</p>
+</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>Juju 1.24+ bootstrap failure - Changing MAAS configured /etc/network/interfaces</strong></dt>
+<dd><p class="first">Juju 1.24+, by default, assumes that it can manage the MAAS deployed node&#8217;s
+network configuration. Juju changes /etc/network/interfaces and disables
+bringing up eth0 on boot, to create a bridge to support LXC. However,
+provided that MAAS / curtin now write the node&#8217;s network configuration,
+Juju is unable to successfully finish the creation of the bridge, but in
+the process, it disables auto bring up of eth0.</p>
+<p>The machine will deploy successfully, however, after a reboot eth0 will
+never be brought back up due to the changes made by Juju. This will prevent
+Juju from SSH&#8217;ing into the machine and finishing the boostrap.</p>
+<p>To prevent this from happening, <cite>disable-network-management: true</cite> needs
+to be used. Note that this will prevent the deployment of LXC containers
+as they have to DHCP.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1494476">1494476</a> for more information.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="alpha2">
+<h2>1.9.0 (alpha2)<a class="headerlink" href="changelog.html#alpha2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id33">
+<h3>Important announcements<a class="headerlink" href="changelog.html#id33" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Installation by default configures /etc/network/interfaces</strong></dt>
+<dd>Starting from MAAS 1.9.0 (alpha2), all Ubuntu deployments will result
+with static network configurations. Users will be able to interact
+with the  API to further configure interfaces.</dd>
+<dt><strong>Introduction to Fabrics, Spaces and Subnets introduces new Network API</strong></dt>
+<dd><p class="first">With the introduction of the concepts of Fabrics, Spaces and Subnets starting
+from MAAS 1.9.0 (alpha2), MAAS also introduces new API&#8217;s for:</p>
+<blockquote>
+<div><ul class="simple">
+<li>fabrics</li>
+<li>spaces</li>
+<li>subnets</li>
+<li>vlans</li>
+<li>fan-networks</li>
+</ul>
+</div></blockquote>
+<p class="last">MAAS 1.9.0 will continue to provide backwards compatibility with the old
+network API for reading purposes, but moving forward, users are required to
+use the new API to manipulate fabrics, spaces and subnets.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id34">
+<h3>Major New Features<a class="headerlink" href="changelog.html#id34" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Advanced Node Network Configuration</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0 (alpha2), MAAS can now do the Node&#8217;s Network
+configuration. Doing such configuration will result in having
+<cite>/etc/network/interfaces</cite> writen.</p>
+<p>Advanced configuration includes:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Assign subnets, fabrics, and IP to interfaces.</li>
+<li>Create VLAN interfaces.</li>
+<li>Create bond interfaces.</li>
+<li>Change interface names.</li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>Fabrics, Spaces, Subnets and Fan networks</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0 (alpha2), MAAS now supports the concept of
+Fabrics, Spaces, Subnets and FANS.</p>
+<p>These new concepts replaces the old <cite>Network</cite> concepts from MAAS&#8217;
+earlier versions. For more information, see <a class="reference internal" href="networking.html#networking"><span>Networking</span></a>.</p>
+<p class="last">For more information about the API, see <span class="xref std std-ref">api</span>.</p>
+</dd>
+<dt><strong>Curtin &amp; cloud-init status updates</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9.0 (alpha2), curtin and cloud-init will now send
+messages to MAAS providing information regarding various of the actions
+taken. This information will be displayed in MAAS in the <cite>Node Event Log</cite>.</p>
+<p class="last">Note that this information is only available when using MAAS 1.9.0 and
+the latest version fo curtin. For cloud-init messages this information
+is only available when deploying Wily.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id35">
+<h3>Minor notable changes<a class="headerlink" href="changelog.html#id35" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Commissioning Actions</strong></dt>
+<dd><p class="first">MAAS now supports commissioning actions. These allow the user to specify
+how commissioning should behave in certain escenarios. The commissioning
+actions available are:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Enable SSH during commissioning</li>
+<li>Keep machine ON after commissioning</li>
+<li>Keep network configuration after commissioning</li>
+<li>Keep storage configuration after commissioning</li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>CentOS images can be imported automatically</strong></dt>
+<dd><p class="first">CentOS Image (CentOS 6 and 7) can now be imported automatically from the
+MAAS Images page. These images are currently part of the daily streams.</p>
+<p class="last">In order to test this images, you need to use the daily image stream.
+This can be changed in the <cite>Settings</cite> page under <cite>Boot Images</cite> to
+<cite>http://maas.ubuntu.com/images/ephemeral-v2/daily/</cite>. Once changed, images
+can be imported from the MAAS Images page.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id36">
+<h3>Known Problems &amp; Workarounds<a class="headerlink" href="changelog.html#id36" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>CentOS fails to deploy with LVM Storage layout</strong></dt>
+<dd><p class="first">CentOS fails to deploy when deploying with an LVM storage layout.
+Provided that LVM is the default storage layout, every CentOS deployment
+will fail, unless this layout is changed to &#8216;Flat&#8217; storage.</p>
+<p>To work around the problem, the default storage layout can be changed from
+<cite>LVM</cite> to <cite>Flat</cite> in MAAS&#8217; Networks page, under <cite>Storage Layout</cite> section.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1499558">1499558</a> for more information.</p>
+</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>Juju 1.24+ bootstrap failure - Changing MAAS configured /etc/network/interfaces</strong></dt>
+<dd><p class="first">Juju 1.24+, by default, assumes that it can manage the MAAS deployed node&#8217;s
+network configuration. Juju changes /etc/network/interfaces and disables
+bringing up eth0 on boot, to create a bridge to support LXC. However,
+provided that MAAS / curtin now write the node&#8217;s network configuration,
+Juju is unable to successfully finish the creation of the bridge, but in
+the process, it disables auto bring up of eth0.</p>
+<p>The machine will deploy successfully, however, after a reboot eth0 will
+never be brought back up due to the changes made by Juju. This will prevent
+Juju from SSH&#8217;ing into the machine and finishing the boostrap.</p>
+<p>To prevent this from happening, <cite>disable-network-management: true</cite> needs
+to be used. Note that this will prevent the deployment of LXC containers
+as they have to DHCP.</p>
+<p class="last">See bug <a class="reference external" href="https://launchpad.net/bugs/1494476">1494476</a> for more information.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="alpha1">
+<h2>1.9.0 (alpha1)<a class="headerlink" href="changelog.html#alpha1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id39">
+<h3>Important announcements<a class="headerlink" href="changelog.html#id39" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>LVM is now the default partitioning layout</strong></dt>
+<dd>Starting from MAAS 1.9, all of the deployments will result on having
+LVM configure for each of the machines. A Flat partitioning layout is not
+longer used by default. (This, however, can be changed in the MAAS Settings
+Page).</dd>
+<dt><strong>Re-commissioning required from VM&#8217;s with VirtIO devices</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9, storage partitioning and advance configuration is
+supported natively (see below). In order for MAAS to correctly map
+VirtIO devices in VM&#8217;s, these VM nodes need to be re-commissioned.</p>
+<p class="last">If not re-comissioned, MAAS will prevent the deployment until done so.
+Previously deployed nodes won&#8217;t be affected, but will also have to be
+re-commissioned if released.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id40">
+<h3>Major new features<a class="headerlink" href="changelog.html#id40" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Storage Partitioning and Advanced Configuration</strong></dt>
+<dd><p class="first">MAAS now natively supports Storage Partitioning and Advanced Configuration.
+This allows MAAS to deploy machines with different Storage Layouts, as
+well as different complext partitioning configurations. Storage support
+includes:</p>
+<ul class="simple">
+<li>LVM</li>
+<li>Bcache</li>
+<li>Software Raid</li>
+<li>Advanced partitioning</li>
+</ul>
+<p class="last">For more information refer to <a class="reference internal" href="storage.html#storage"><span>Storage</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id41">
+<h3>Minor notable changes<a class="headerlink" href="changelog.html#id41" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Minimal Config Files for Daemons</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9, minimal configuration files have been introduced
+for both, the MAAS Region Controller and the MAAS Cluster Controller daemons.</p>
+<ul class="last simple">
+<li>The Region Controller (<cite>maas-regiond</cite>) has now dropped the usage of
+<cite>/etc/maas/maas_local_settings.py</cite> in favor of <cite>/etc/maas/regiond.conf</cite>.
+Available configuration options are now <cite>database_host</cite>, <cite>database_name</cite>,
+<cite>database_user</cite>, <cite>database_pass</cite>, <cite>maas_url</cite>. MAAS will attempt to migrate
+any configuration on upgrade, otherwise it will use sane defaults.</li>
+<li>The Cluster Controller (<cite>maas-clusterd</cite>) has now dropped the usage of
+<cite>/etc/maas/pserv.yaml</cite> and <cite>/etc/maas/maas_cluster.conf</cite> in favor of
+<cite>/etc/maas/clusterd.conf</cite>. Available configuration options are now <cite>maas_url</cite>
+and <cite>cluster_uuid</cite> only. MAAS will attempt to migrate any configuration
+on upgrade, otherwise it will use sane defaults.</li>
+</ul>
+</dd>
+<dt><strong>HWE Kernels</strong></dt>
+<dd><p class="first">MAAS now has a different approach to deploying Hardware Enablement
+Kernels. Start from MAAS 1.9, the HWE kernels are no longer coupled
+to subarchitectures of a machine. For each Ubuntu release, users
+will be able to select any of the available HWE kernels for such
+release, as well as set the minimum kernel the machine will be
+deployed with by default.</p>
+<p class="last">For more information, see <a class="reference internal" href="hardware-enablement-kernels.html#hardware-enablement-kernels"><span>Using hardware-enablement kernels</span></a>.</p>
+</dd>
+<dt><strong>Python Power Drivers</strong></dt>
+<dd><p class="first">Starting from MAAS 1.9, MAAS is moving away from using shell scripts
+templates for Power Drivers. These are being migrated to MAAS&#8217;
+internal control as power drivers. Currently supported are APC, MSCM,
+MSFT OCS, SM15k, UCSM, Virsh, VMWare and IPMI.</p>
+<p class="last">Remaining Power Drivers include AMT, Fence CDU&#8217;s, Moonshot.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id42">
+<h3>Known Problems &amp; Workarounds<a class="headerlink" href="changelog.html#id42" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Fail to deploy Trusty due to missing bcache-tools</strong></dt>
+<dd><p class="first">In order to correctly perform storage partitioning in Trusty+, the
+new version of curtin used by MAAS requires bcache-tools to be
+installed. However, these tools are not available in Trusty, hence
+causing MAAS/curtin deployment failures when installing Trusty. An
+SRU in Ubuntu Trusty for these tools is already in progress.</p>
+<p>To work around the problem, a curtin custom configuration to install
+bcache-tools can be used in <cite>/etc/maas/preseeds/curtin_userdata</cite>:</p>
+{% verbatim %}
+<div class="highlight-python"><div class="highlight"><pre>{{if node.get_distro_series() in [&#39;trusty&#39;]}}
+early_commands:
+  add_repo: [&quot;add-apt-repository&quot;, &quot;-y&quot;, &quot;ppa:maas-maintainers/experimental&quot;]
+{{endif}}
+{% endverbatim %}
+</pre></div>
+</div>
+<p class="last">See bug <a class="reference external" href="https://bugs.launchpad.net/bugs/1449099">1449099</a> for more information.</p>
+</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>Fail to deploy LVM in Trusty</strong></dt>
+<dd>MAAS fail to deploy Ubuntu Trusty with a LVM Storage layout, as
+curtin will fail to perform the partitioning. See bug <a class="reference external" href="https://bugs.launchpad.net/bugs/1488632">1488632</a>
+for more information.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="changelog.html#">Changelog</a><ul>
+<li><a class="reference internal" href="changelog.html#id1">1.9.5</a></li>
+<li><a class="reference internal" href="changelog.html#id2">1.9.4</a></li>
+<li><a class="reference internal" href="changelog.html#id3">1.9.3</a><ul>
+<li><a class="reference internal" href="changelog.html#bug-fix-update">Bug Fix Update</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#id4">1.9.2</a><ul>
+<li><a class="reference internal" href="changelog.html#id5">Bug Fix Update</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#id6">1.9.1</a><ul>
+<li><a class="reference internal" href="changelog.html#id7">Bug Fix Update</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#id8">1.9.0</a><ul>
+<li><a class="reference internal" href="changelog.html#important-announcements">Important announcements</a></li>
+<li><a class="reference internal" href="changelog.html#major-new-features">Major new features</a></li>
+<li><a class="reference internal" href="changelog.html#minor-notable-changes">Minor notable changes</a></li>
+<li><a class="reference internal" href="changelog.html#known-problems-workarounds">Known Problems &amp; Workarounds</a></li>
+<li><a class="reference internal" href="changelog.html#major-bugs-fixed-in-this-release">Major bugs fixed in this release</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#rc4">1.9.0 (RC4)</a><ul>
+<li><a class="reference internal" href="changelog.html#id10">Major bugs fixed in this release</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#rc3">1.9.0 (RC3)</a><ul>
+<li><a class="reference internal" href="changelog.html#id11">Major bugs fixed in this release</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#rc2">1.9.0 (RC2)</a><ul>
+<li><a class="reference internal" href="changelog.html#id12">Major bugs fixed in this release</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#rc1">1.9.0 (RC1)</a><ul>
+<li><a class="reference internal" href="changelog.html#id13">Major bugs fixed in this release</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#beta2">1.9.0 (beta2)</a><ul>
+<li><a class="reference internal" href="changelog.html#id14">Major bugs fixed in this release</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#beta1">1.9.0 (beta1)</a><ul>
+<li><a class="reference internal" href="changelog.html#id15">Major New Features</a></li>
+<li><a class="reference internal" href="changelog.html#id16">Minor notable changes</a></li>
+<li><a class="reference internal" href="changelog.html#id17">Known Problems &amp; Workarounds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#alpha5">1.9.0 (alpha5)</a><ul>
+<li><a class="reference internal" href="changelog.html#id20">Major New Features</a></li>
+<li><a class="reference internal" href="changelog.html#id21">Minor notable changes</a></li>
+<li><a class="reference internal" href="changelog.html#id22">Known Problems &amp; Workarounds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#alpha4">1.9.0 (alpha4)</a><ul>
+<li><a class="reference internal" href="changelog.html#id25">Minor notable changes</a></li>
+<li><a class="reference internal" href="changelog.html#id26">Known Problems &amp; Workarounds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#alpha3">1.9.0 (alpha3)</a><ul>
+<li><a class="reference internal" href="changelog.html#id29">Major New Features</a></li>
+<li><a class="reference internal" href="changelog.html#id30">Known Problems &amp; Workarounds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#alpha2">1.9.0 (alpha2)</a><ul>
+<li><a class="reference internal" href="changelog.html#id33">Important announcements</a></li>
+<li><a class="reference internal" href="changelog.html#id34">Major New Features</a></li>
+<li><a class="reference internal" href="changelog.html#id35">Minor notable changes</a></li>
+<li><a class="reference internal" href="changelog.html#id36">Known Problems &amp; Workarounds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="changelog.html#alpha1">1.9.0 (alpha1)</a><ul>
+<li><a class="reference internal" href="changelog.html#id39">Important announcements</a></li>
+<li><a class="reference internal" href="changelog.html#id40">Major new features</a></li>
+<li><a class="reference internal" href="changelog.html#id41">Minor notable changes</a></li>
+<li><a class="reference internal" href="changelog.html#id42">Known Problems &amp; Workarounds</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="orientation.html" title="previous chapter">Orientation</a></li>
+      <li>Next: <a href="install.html" title="next chapter">Installing MAAS</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="/static/maas-1.9/changelog.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="install.html" title="Installing MAAS"
+             >next</a></li>
+        <li class="right" >
+          <a href="orientation.html" title="Orientation"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

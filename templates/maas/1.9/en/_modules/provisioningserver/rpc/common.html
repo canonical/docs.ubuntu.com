@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>provisioningserver.rpc.common &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../../index.html">MAAS 1.9 documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for provisioningserver.rpc.common</h1><div class="highlight"><pre>
+<span class="c1"># Copyright 2014-2015 Canonical Ltd.  This software is licensed under the</span>
+<span class="c1"># GNU Affero General Public License version 3 (see the file LICENSE).</span>
+
+<span class="sd">&quot;&quot;&quot;Common RPC classes and utilties.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">absolute_import</span><span class="p">,</span>
+    <span class="n">print_function</span><span class="p">,</span>
+    <span class="n">unicode_literals</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Authenticate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Client&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Identify&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RPCProtocol&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getpid</span>
+<span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="n">gethostname</span>
+
+<span class="kn">from</span> <span class="nn">provisioningserver.rpc.interfaces</span> <span class="kn">import</span> <span class="n">IConnection</span>
+<span class="kn">from</span> <span class="nn">provisioningserver.utils.twisted</span> <span class="kn">import</span> <span class="n">asynchronous</span>
+<span class="kn">from</span> <span class="nn">twisted.internet.defer</span> <span class="kn">import</span> <span class="n">Deferred</span>
+<span class="kn">from</span> <span class="nn">twisted.protocols</span> <span class="kn">import</span> <span class="n">amp</span>
+<span class="kn">from</span> <span class="nn">twisted.python</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">twisted.python.failure</span> <span class="kn">import</span> <span class="n">Failure</span>
+
+
+<div class="viewcode-block" id="Identify"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.Identify">[docs]</a><span class="k">class</span> <span class="nc">Identify</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Request the identity of the remote side, e.g. its UUID.</span>
+
+<span class="sd">    :since: 1.5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[(</span><span class="n">b</span><span class="s2">&quot;ident&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">Unicode</span><span class="p">())]</span></div>
+
+
+<div class="viewcode-block" id="Authenticate"><a class="viewcode-back" href="../../../development/rpc.html#provisioningserver.rpc.region.Authenticate">[docs]</a><span class="k">class</span> <span class="nc">Authenticate</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Authenticate the remote side.</span>
+
+<span class="sd">    The procedure is as follows:</span>
+
+<span class="sd">    - When establishing a new connection, the region and the cluster call</span>
+<span class="sd">      `Authenticate` on each other, passing a random chunk of data in</span>
+<span class="sd">      `message`. This message must be unique to avoid replay attacks.</span>
+
+<span class="sd">    - The remote side adds some salt to the message, and calculates an HMAC</span>
+<span class="sd">      digest, keyed with the shared secret.</span>
+
+<span class="sd">      The salt is intended to prevent replay attacks: it prevents an intruder</span>
+<span class="sd">      from authenticating itself by calling `Authenticate` on the caller (or</span>
+<span class="sd">      another endpoint in the same MAAS installation) and sending the same</span>
+<span class="sd">      message, receiving the digest and passing it back to the caller.</span>
+
+<span class="sd">    - The remote side returns this digest and the salt. The caller performs</span>
+<span class="sd">      the same calculation, and compares the digests.</span>
+
+<span class="sd">    - If the digests match, the connection is put into rotation.</span>
+
+<span class="sd">    - If the digests do not match, the connection is closed immediately, and</span>
+<span class="sd">      an error is logged.</span>
+
+<span class="sd">    :since: 1.7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">String</span><span class="p">()),</span>
+    <span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;digest&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">String</span><span class="p">()),</span>
+        <span class="p">(</span><span class="n">b</span><span class="s2">&quot;salt&quot;</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">String</span><span class="p">()),</span>  <span class="c1"># Is &#39;salt&#39; the right term here?</span>
+    <span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper around an :class:`amp.AMP` instance.</span>
+
+<span class="sd">    Limits the API to a subset of the behaviour of :class:`amp.AMP`&#39;s,</span>
+<span class="sd">    with alterations to make it suitable for use from a thread outside</span>
+<span class="sd">    of the reactor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conn</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Client</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">IConnection</span><span class="o">.</span><span class="n">providedBy</span><span class="p">(</span><span class="n">conn</span><span class="p">),</span> <span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> does not provide IConnection&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">conn</span><span class="p">,))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span> <span class="o">=</span> <span class="n">conn</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ident</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Something that identifies the far end of the connection.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span><span class="o">.</span><span class="n">ident</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call a remote RPC method.</span>
+
+<span class="sd">        This is how the client is normally used.</span>
+
+<span class="sd">        :note:</span>
+<span class="sd">            Though the call signature shows positional arguments, their use is</span>
+<span class="sd">            an error. They&#39;re in the signature is so this method can detect</span>
+<span class="sd">            them and provide a better error message than that from Python.</span>
+<span class="sd">            Python&#39;s error message when arguments don&#39;t match the call&#39;s</span>
+<span class="sd">            signature is not great at best, but it also makes it hard to</span>
+<span class="sd">            figure out the receiver when the `TypeError` is raised in a</span>
+<span class="sd">            different stack from the caller&#39;s, e.g. when calling into the</span>
+<span class="sd">            Twisted reactor from a thread.</span>
+
+<span class="sd">        :param cmd: The `amp.Command` child class representing the remote</span>
+<span class="sd">            method to be invoked.</span>
+<span class="sd">        :param kwargs: Any parameters to the remote method.  Only keyword</span>
+<span class="sd">            arguments are accepted.</span>
+<span class="sd">        :return: A deferred result.  Call its `wait` method (with a timeout</span>
+<span class="sd">            in seconds) to block on the call&#39;s completion.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">receiver_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> called with </span><span class="si">%d</span><span class="s2"> positional arguments, </span><span class="si">%r</span><span class="s2">, but positional &quot;</span>
+                <span class="s2">&quot;arguments are not supported. Usage: client(command, arg1=&quot;</span>
+                <span class="s2">&quot;value1, ...)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">receiver_name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">args</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span><span class="o">.</span><span class="n">callRemote</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">getHostCertificate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span><span class="o">.</span><span class="n">hostCertificate</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">getPeerCertificate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span><span class="o">.</span><span class="n">peerCertificate</span>
+
+    <span class="nd">@asynchronous</span>
+    <span class="k">def</span> <span class="nf">isSecure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span><span class="o">.</span><span class="n">peerCertificate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">_conn</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_conn</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_command_ref</span><span class="p">(</span><span class="n">box</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make a textual description of an AMP command box.</span>
+
+<span class="sd">    This is intended to help correlating exceptions between distributed parts</span>
+<span class="sd">    of MAAS. The reference takes the form::</span>
+
+<span class="sd">      $hostname:pid=$pid:cmd=$command_name:ask=$ask_sequence</span>
+
+<span class="sd">    where:</span>
+
+<span class="sd">      * ``hostname`` is the hostname of the machine on which the error</span>
+<span class="sd">        occurred.</span>
+
+<span class="sd">      * ``pid`` is the process ID of where the error originated.</span>
+
+<span class="sd">      * ``command_name`` is the AMP command name.</span>
+
+<span class="sd">      * ``ask_sequence`` is the sequence number used for RPC calls that expect</span>
+<span class="sd">        a reply; see http://amp-protocol.net/ for details.</span>
+
+<span class="sd">    An extended variant might be valuable: a ``make_box_ref`` function that</span>
+<span class="sd">    returns unambiguous references for command, answer, and errors boxes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:pid=</span><span class="si">%d</span><span class="s2">:cmd=</span><span class="si">%s</span><span class="s2">:ask=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="n">gethostname</span><span class="p">(),</span> <span class="n">getpid</span><span class="p">(),</span> <span class="n">box</span><span class="p">[</span><span class="n">amp</span><span class="o">.</span><span class="n">COMMAND</span><span class="p">],</span> <span class="n">box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">ASK</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">RPCProtocol</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">AMP</span><span class="p">,</span> <span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A specialisation of `amp.AMP`.</span>
+
+<span class="sd">    It&#39;s hard to track exactly when an `amp.AMP` protocol is connected to its</span>
+<span class="sd">    transport, or disconnected, from the &quot;outside&quot;. It&#39;s necessary to subclass</span>
+<span class="sd">    and override `connectionMade` and `connectionLost` and signal from there,</span>
+<span class="sd">    which is what this class does.</span>
+
+<span class="sd">    :ivar onConnectionMade: A `Deferred` that fires when `connectionMade` has</span>
+<span class="sd">        been called, i.e. this protocol is now connected.</span>
+<span class="sd">    :ivar onConnectionLost: A `Deferred` that fires when `connectionLost` has</span>
+<span class="sd">        been called, i.e. this protocol is no longer connected.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RPCProtocol</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onConnectionMade</span> <span class="o">=</span> <span class="n">Deferred</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onConnectionLost</span> <span class="o">=</span> <span class="n">Deferred</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">connectionMade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RPCProtocol</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">connectionMade</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onConnectionMade</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">connectionLost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RPCProtocol</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">connectionLost</span><span class="p">(</span><span class="n">reason</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onConnectionLost</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dispatchCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">box</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call up, but coerce errors into non-fatal failures.</span>
+
+<span class="sd">        This is called by `_commandReceived`, which is responsible for</span>
+<span class="sd">        capturing unhandled errors and transmitting them back to the remote</span>
+<span class="sd">        side. It does this within a :class:`amp.QuitBox` which immediately</span>
+<span class="sd">        disconnects the transport after being transmitted.</span>
+
+<span class="sd">        Here we capture all errors before `_commandReceived` sees them and</span>
+<span class="sd">        wrap them with :class:`amp.RemoteAmpError`. This prevents the</span>
+<span class="sd">        disconnecting behaviour.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">RPCProtocol</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatchCommand</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">coerce_error</span><span class="p">(</span><span class="n">failure</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">failure</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">RemoteAmpError</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">failure</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="n">box</span><span class="p">[</span><span class="n">amp</span><span class="o">.</span><span class="n">COMMAND</span><span class="p">]</span>
+                <span class="n">command_ref</span> <span class="o">=</span> <span class="n">make_command_ref</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">err</span><span class="p">(</span><span class="n">failure</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="s2">&quot;Unhandled failure dispatching AMP command. This is &quot;</span>
+                    <span class="s2">&quot;probably a bug. Please ensure that this error is handled &quot;</span>
+                    <span class="s2">&quot;within application code or declared in the signature of &quot;</span>
+                    <span class="s2">&quot;the </span><span class="si">%s</span><span class="s2"> command. [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">command_ref</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">Failure</span><span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">RemoteAmpError</span><span class="p">(</span>
+                    <span class="n">amp</span><span class="o">.</span><span class="n">UNHANDLED_ERROR_CODE</span><span class="p">,</span> <span class="n">b</span><span class="s2">&quot;Unknown Error [</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span>
+                    <span class="n">command_ref</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">),</span> <span class="n">fatal</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="n">failure</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">addErrback</span><span class="p">(</span><span class="n">coerce_error</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">unhandledError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failure</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Terminal errback, after application code has seen the failure.</span>
+
+<span class="sd">        `amp.BoxDispatcher.unhandledError` calls the `amp.IBoxSender`&#39;s</span>
+<span class="sd">        `unhandledError`. In the default implementation this disconnects the</span>
+<span class="sd">        transport.</span>
+
+<span class="sd">        Here we instead log the failure but do *not* disconnect because it&#39;s</span>
+<span class="sd">        too disruptive to the running of MAAS.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">err</span><span class="p">(</span><span class="n">failure</span><span class="p">,</span> <span class="p">(</span>
+            <span class="s2">&quot;Unhandled failure during AMP request. This is probably a bug. &quot;</span>
+            <span class="s2">&quot;Please ensure that this error is handled within application &quot;</span>
+            <span class="s2">&quot;code.&quot;</span><span class="p">))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="../../../index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="../../../index.html">MAAS 1.9 documentation</a>
+  </li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

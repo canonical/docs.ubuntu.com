@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Version &mdash; MAAS 1.9 documentation</title>
+    
+    <link rel="stylesheet" href="/static/maas-1.9/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" type="text/css" />
+    <link rel="stylesheet" href="/static/maas-1.9/css/main.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="/static/maas-1.9/jquery.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/underscore.js"></script>
+    <script type="text/javascript" src="/static/maas-1.9/doctools.js"></script>
+    <link rel="shortcut icon" href="/static/maas-1.9/maas.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="MAAS 1.9 documentation" href="index.html" />
+    <link rel="next" title="Getting help" href="getting-help.html" />
+    <link rel="prev" title="Command Line Interface" href="maascli.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="getting-help.html" title="Getting help"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="maascli.html" title="Command Line Interface"
+             accesskey="P">previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="version">
+<span id="capabilities"></span><h1>Version<a class="headerlink" href="version.html#version" title="Permalink to this headline">¶</a></h1>
+<p>MAAS publishes a special view at <code class="docutils literal"><span class="pre">.../api/1.0/version/</span></code> that returns the
+version of the MAAS server and the list of the server&#8217;s capabilities.
+When programmatically probing a MAAS installation, use only the
+<code class="docutils literal"><span class="pre">capabilities</span></code> list. Avoid using <code class="docutils literal"><span class="pre">version</span></code> and <code class="docutils literal"><span class="pre">subversion</span></code> for anything
+other than informational purposes. It&#8217;s transferred as a JSON document:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;subversion&quot;</span><span class="p">:</span> <span class="s2">&quot;bzr4001&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.8.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;capabilities&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;name-of-capability-1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name-of-capability-2&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="list-of-capabilities">
+<h2>List of capabilities<a class="headerlink" href="version.html#list-of-capabilities" title="Permalink to this headline">¶</a></h2>
+<p>Check for the following strings in the capabilities list to see what
+features the MAAS server supports. Use these in preference to gating on
+the version when creating a client application.</p>
+<dl class="docutils" id="cap-networks-management">
+<dt><code class="docutils literal"><span class="pre">networks-management</span></code></dt>
+<dd>Passive modelling of the network environment that cluster controllers
+nodes are in, including network interfaces, subnets, VLAN tags, and
+connectivity between them. See <a class="reference internal" href="networks.html#networks"><span>Networks</span></a> for more information.</dd>
+</dl>
+<dl class="docutils" id="cap-static-ipaddresses">
+<dt><code class="docutils literal"><span class="pre">static-ipaddresses</span></code></dt>
+<dd>Static IP address allocation to nodes, including user-reserved IPs and admin-
+allocated &#8216;sticky&#8217; IPs. Available since version 1.6. See <a class="reference internal" href="static-ips.html#static-ips"><span>Static IPs</span></a>
+for more information.</dd>
+</dl>
+<dl class="docutils" id="cap-ipv6-deployment-ubuntu">
+<dt><code class="docutils literal"><span class="pre">ipv6-deployment-ubuntu</span></code></dt>
+<dd>Deploy Ubuntu nodes with IPv6 networking enabled.  See <a class="reference internal" href="ipv6.html#ipv6"><span>Managing IPv6 Networks</span></a> for more
+about this feature.</dd>
+</dl>
+<dl class="docutils" id="cap-devices-management">
+<dt><code class="docutils literal"><span class="pre">devices-management</span></code></dt>
+<dd>Management of devices (non-installable nodes).  Available since version 1.8.
+See <a class="reference internal" href="devices.html#devices"><span>Devices</span></a> for more about this feature.</dd>
+</dl>
+<dl class="docutils" id="cap-storage-deployment-ubuntu">
+<dt><code class="docutils literal"><span class="pre">storage-deployment-ubuntu</span></code></dt>
+<dd>Deploy nodes with custom storage layout and configuration. Available since
+version 1.9 on Ubuntu deployments. See <a class="reference internal" href="storage.html#storage"><span>Storage</span></a> for more about this
+feature.</dd>
+</dl>
+<dl class="docutils" id="cap-network-deployment-ubuntu">
+<dt><code class="docutils literal"><span class="pre">network-deployment-ubuntu</span></code></dt>
+<dd>Deploy nodes with custom network layout and configuration. Available since
+version 1.9 on Ubuntu deployments. See <a class="reference internal" href="networking.html#networking"><span>Networking</span></a> for more about this
+feature.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<a style="border:0" title="MAAS Documentation Homepage" href="index.html"><img src="/static/maas-1.9/maas-logo-200.png" alt="MAAS logo"/></a>
+<h2 style="text-align:center;">MAAS</h2>
+<p style="font-style:italic;font-size:0.9em; text-align:center; margin-bottom:1.5em">Metal As A Service.</p>
+<span id="version_switcher"></span>
+<br/>
+<br/>
+
+  <ul>
+<li><a class="reference internal" href="version.html#">Version</a><ul>
+<li><a class="reference internal" href="version.html#list-of-capabilities">List of capabilities</a></li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">
+$(document).ready(function () {
+  if (true) {
+    $.ajaxSetup({cache: true});
+    $.getScript('/static/maas-1.9/versions.js', function() {
+      console.log( "Versions script loaded." );
+      set_up_version_switcher('#version_switcher', 'docs');
+    });
+}
+});
+</script>
+
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="maascli.html" title="previous chapter">Command Line Interface</a></li>
+      <li>Next: <a href="getting-help.html" title="next chapter">Getting help</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="/static/maas-1.9/version.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="getting-help.html" title="Getting help"
+             >next</a></li>
+        <li class="right" >
+          <a href="maascli.html" title="Command Line Interface"
+             >previous</a> |</li>
+  <li class="nav-item nav-item-0">
+    <a href="/maas/">Latest documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  </li>
+  <li class="nav-item nav-item-0">
+    <a href="index.html">MAAS 1.9 documentation</a>
+  </li>
+ 
+      </ul>
+    </div>
+<footer class="global clearfix">
+  <div class="legal clearfix">
+    <p>&copy; Copyright 2012-2015, MAAS Developers. Ubuntu and Canonical are registered trademarks of
+      <a href="http://canonical.com">Canonical Ltd</a>.
+    </p>
+    <p>
+      Revision 4595
+ (2016-08-24 14:59:26 +0000).
+      Documentation generation date: 2016-08-24 16:22:23 +0100.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
