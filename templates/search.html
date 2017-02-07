@@ -1,85 +1,86 @@
-<!doctype html>
+{% extends 'includes/layout.html' %}
 
-<html>
-  <head>
-  </head>
+{% block content %}
+<div class="p-strip--white">
+  <div class="row">
+    <div class="col-8">
+      <h1>Search this site</h1>
+      <form action="/search" class="search">
+        <label for="search-input" class="u-hidden">Search</label>
+        <input name="q" id="search-input" type="search" value="{{ query }}" placeholder="e.g. juju" class="search__field" />
+      </form>
+    </div>
+  </div>
 
-  <body>
-    <h1>Search this site</h1>
+  {% if query %}
+    {% if error %}
+      <div class="row">
+        <div class="col-8">
+          <label for="search-input" role="error" class="error-notification">
+            Failed to retrieve search results ({{ error }}). If you have time, please <a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">file a bug</a>.
+          </label>
+        </div>
+      </div>
+    {% else %}
+      {% if results.items %}
+        <h4>{{ results.total }} results for "{{ query }}"</h4>
 
-    <form action="/search" class="search">
-      <label for="search-input" class="search__label">Search</label>
-      <input name="q" id="search-input" type="search" value="{{ query }}" placeholder="e.g. juju" class="search__field" />
-      <button class="search__submit" type="submit">
-        <img class="search__image" src="{{ ASSET_SERVER_URL }}19750a6d-search-black.svg" alt="search" />
-      </button>
-    </form>
+        <section id="search-results" class="no-margin-bottom list list-spaced">
+          <p class="result-line results-top">Results {{ results.start }} to {{ results.end }}</p>
 
-    {% if query %}
-      {% if error %}
-        <label for="search-input" role="error" class="error-notification">
-          Failed to retrieve search results ({{ error }}). If you have time, please <a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">file a bug</a>.
-        </label>
+          {% for item in results.items %}
+            <article class="search-result twelve-col">
+              <h4>
+                <a href="{{ item.url }}" class="title-main">{{ item.title | safe }}</a>
+                <small class="result-url">{{ item.url }}</small>
+              </h4>
+              <p>{{ item.summary | safe }}</p>
+            </article>
+          {% endfor %}
+
+          <p class="bottom-results-total result-line">Results {{ results.start }} to {{ results.end }} of {{ results.total }}</p>
+        </section>
+
+        {% if results.last_page > 1 %}
+          <nav class="pagination" id="page-nav">
+            {% if results.current_page > 1 %}
+              <ul class="pagination__back">
+                <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset=0">&#8249;&#8249; First</a></li>
+                {% if results.current_page > 2 %}
+                  <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.previous_offset }}">&#8249; Previous</a></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+
+            {% if results.current_page != results.last_page %}
+              <ul class="pagination__forward">
+                {% if results.current_page < results.penultimate_page %}
+                  <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.next_offset }}">Next &#8250;</a></li>
+                {% endif %}
+                <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.last_page_offset }}">Last &#8250;&#8250;</a></li>
+              </ul>
+            {% endif %}
+          </nav>
+        {% endif %}
       {% else %}
-        {% if results.items %}
-          <h4>{{ results.total }} results for "{{ query }}"</h4>
+        <h2>Sorry we couldn't find "{{ query }}"</h2>
 
-          <section id="search-results" class="no-margin-bottom list list-spaced">
-            <p class="result-line results-top">Results {{ results.start }} to {{ results.end }}</p>
+        <h3>Why not try widening your search? You can do this by:</h3>
 
-            {% for item in results.items %}
-              <article class="search-result twelve-col">
-                <h4>
-                  <a href="{{ item.url }}" class="title-main">{{ item.title | safe }}</a>
-                  <small class="result-url">{{ item.url }}</small>
-                </h4>
-                <p>{{ item.summary | safe }}</p>
-              </article>
-            {% endfor %}
+        <ul>
+          <li>Adding alternative words or phrases</li>
+          <li>Using individual words instead of phrases</li>
+          <li>Trying a different spelling</li>
+        </ul>
 
-            <p class="bottom-results-total result-line">Results {{ results.start }} to {{ results.end }} of {{ results.total }}</p>
-          </section>
+        <h2>Still no luck?</h2>
 
-          {% if results.last_page > 1 %}
-            <nav class="pagination" id="page-nav">
-              {% if results.current_page > 1 %}
-                <ul class="pagination__back">
-                  <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset=0">&#8249;&#8249; First</a></li>
-                  {% if results.current_page > 2 %}
-                    <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.previous_offset }}">&#8249; Previous</a></li>
-                  {% endif %}
-                </ul>
-              {% endif %}
-
-              {% if results.current_page != results.last_page %}
-                <ul class="pagination__forward">
-                  {% if results.current_page < results.penultimate_page %}
-                    <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.next_offset }}">Next &#8250;</a></li>
-                  {% endif %}
-                  <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.last_page_offset }}">Last &#8250;&#8250;</a></li>
-                </ul>
-              {% endif %}
-            </nav>
-          {% endif %}
-        {% else %}
-          <h2>Sorry we couldn't find "{{ query }}"</h2>
-
-          <h3>Why not try widening your search? You can do this by:</h3>
-
-          <ul>
-            <li>Adding alternative words or phrases</li>
-            <li>Using individual words instead of phrases</li>
-            <li>Trying a different spelling</li>
-          </ul>
-
-          <h2>Still no luck?</h2>
-
-          <ul>
-            <li><a href="/">Visit the homepage</a></li>
-            <li><a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">Report an issue with the site</a></li>
-          </ul>
-        {% endif %} {# results.items #}
-      {% endif %}
-    {% endif %} {# query #}
-  </body>
-</html>
+        <ul>
+          <li><a href="/">Visit the homepage</a></li>
+          <li><a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">Report an issue with the site</a></li>
+        </ul>
+      {% endif %} {# results.items #}
+    {% endif %}
+  {% endif %} {# query #}
+</div>
+{% endblock content %}
