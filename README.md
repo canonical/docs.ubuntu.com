@@ -1,6 +1,8 @@
 Ubuntu documentation service
 ===
 
+[![Build Status](https://travis-ci.org/ubuntudesign/docs.ubuntu.com.svg?branch=master)](https://travis-ci.org/ubuntudesign/docs.ubuntu.com)
+
 A central platform for hosting Ubuntu's various documentation portals.
 
 Basic usage
