@@ -12,9 +12,9 @@
     </div>
   </div>
 
+  <div class="row">
   {% if query %}
     {% if error %}
-      <div class="row">
         <div class="col-8">
           <label for="search-input" role="error" class="error-notification">
             Failed to retrieve search results ({{ error }}). If you have time, please <a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">file a bug</a>.
@@ -82,5 +82,6 @@
       {% endif %} {# results.items #}
     {% endif %}
   {% endif %} {# query #}
+  </div>
 </div>
 {% endblock content %}
