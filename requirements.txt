@@ -7,3 +7,4 @@ django-template-finder-view==0.2
 django-unslashed==0.3.0
 django-yaml-redirects==0.5.4
 ubuntudesign.gsa==1.0.4
+
