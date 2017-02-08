@@ -1,15 +1,23 @@
-{% load versioned_static %}
-<!doctype html>
+{% extends 'includes/layout.html' %}
 
-<html>
-    <head>
-        <title>404 - Page not found</title>
-        
-        <link rel="stylesheet" href="{% versioned_static 'css/global.css' %}" />
-    </head>
-
-    <body>
-        <h1>404 - Page not found</h1>
-        <p>There is no page at this URL.</p>
-    </body>
-</html>
+{% block content %}
+<div class="row">
+    <div class="row col-8">
+        <h1>Ubuntu documentation</h1>
+        <h2>Page not found (404)</h2>
+        <p>There is no page at this URL. How would you like to proceed?</p>
+        <ul>
+            {% if '/maas/' in request_path %}
+                <li>Visit the <a href="/maas">the MAAS documentation homepage</a></li>
+            {% elif '/core/' in request_path %}
+                <li>Visit the <a href="/core">the Ubuntu Core documentation homepage</a></li>
+            {% endif %}
+            <li>View <a href="/">all documentation</a></li>
+            <li><a href="https://www.ubuntu.com/search">Search all Ubuntu sites</a></li>
+        </ul>
+    </div>
+    <div class="row col-4">
+        <img src="https://manager.assets.ubuntu.com/static/hex-what.svg" />
+    </div>
+</div>
+{% endblock content %}
