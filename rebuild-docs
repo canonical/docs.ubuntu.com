@@ -12,16 +12,12 @@ rm -rf ${core_dir} && git clone https://github.com/canonicalltd/ubuntu-core-docs
 rm -rf ${phone_dir} && git clone https://github.com/ubuntudesign/phone-docs.git ${phone_dir} || true
 #git clone https://github.com/canonicalltd/snapcraft-docs.git ${snapcraft_dir}
 
-# Build steps for Ubuntu Core docs
-mkdir -p $HOME/.bin/
-export PATH=$PATH:$HOME/.bin/repo
-curl https://storage.googleapis.com/git-repo-downloads/repo > $HOME/.bin/repo
-chmod a+x $HOME/.bin/repo
-cd ${core_dir}
-repo init -u git@github.com:CanonicalLtd/ubuntu-core-docs.git
-repo sync
-cd ..
-
+# Extra build steps for Ubuntu Core docs
+(
+  cd ${core_dir}
+  repo init -u git@github.com:CanonicalLtd/ubuntu-core-docs.git
+  repo sync
+)
 
 documentation-builder --base-directory ${maas_dir}  \
                       --site-root '/maas/'  \
