@@ -1,87 +1,233 @@
 {% extends 'includes/layout.html' %}
 
 {% block content %}
-<div class="p-strip--white">
-  <div class="row">
-    <div class="col-8">
-      <h1>Search this site</h1>
-      <form action="/search" class="search">
-        <label for="search-input" class="u-hidden">Search</label>
-        <input name="q" id="search-input" type="search" value="{{ query }}" placeholder="e.g. juju" class="search__field" />
-      </form>
-    </div>
-  </div>
+    <style>
+      /* p-navigation from docs-vanilla-theme */
+      .p-navigation::after,.u-clearfix::after{clear:both;content:'';display:block}.p-navigation{background-color:#333;position:relative;width:100%}@media (min-width:768px){.p-navigation{display:-ms-flexbox;display:flex}.p-navigation__toggle--close,.p-navigation__toggle--open{display:none}}.p-navigation__link:visited,.p-navigation__toggle--close:visited,.p-navigation__toggle--open:visited{color:#fff}.p-navigation__link:hover{text-decoration:underline}.p-navigation:target .p-navigation__toggle--open,.p-navigation__toggle--close{display:none}.p-navigation__toggle--close,.p-navigation__toggle--open{float:right;margin:1rem}@media (max-width:768px){.p-navigation:target .p-navigation__toggle--close{display:inline-block}}.p-navigation__logo{-ms-flex-align:center;align-items:center;display:-ms-flexbox;display:flex;float:left;font-size:1.2rem;margin:1rem}@media (min-width:768px){.p-navigation__logo{margin:0 1rem}.p-navigation__link{display:block;float:left;width:auto}}.p-navigation__link{border-bottom:0;display:block;color:#333;margin:0}.p-navigation__link>a{border-bottom:0}.p-navigation__link:last-child{margin-bottom:0}.p-navigation__links{background-color:#cdcdcd;clear:both;margin:0;padding:0}@media (min-width:768px){.p-navigation__links{background-color:transparent;clear:none;float:left}}.p-navigation__links .p-navigation__link{border-left:1px solid #fff;padding:1rem}.p-navigation__links .p-navigation__link:last-of-type{border-right:1px solid #fff}@media (max-width:768px){.p-navigation__links .p-navigation__link{background-color:#f7f7f7;border:0;border-bottom:1px solid #cdcdcd;color:#333;text-align:left}.p-navigation__links .p-navigation__link:last-of-type{border-bottom:0}}.p-navigation__nav{display:none}@media (min-width:768px){.p-navigation__nav{display:block}}.p-navigation:target .p-navigation__nav{display:block}.p-navigation{background:#fff;border-bottom:1px solid #cdcdcd;color:#333;line-height:32px;padding:7.5px 0}.p-navigation__link:visited{color:#333}.p-navigation__logo{color:#333;margin-bottom:0;margin-top:0}.p-navigation__image{display:block;float:left;height:32px;margin:0 1rem 0 0;vertical-align:middle}
+      .p-navigation__link {font-weight: 300;}
+      .p-navigation {
+        margin-bottom: 3rem;
+      }
+      .pagination ul {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+      }
+      .pagination__forward {
+        float: right;
+      }
+      .pagination__item {
+        float: left;
+        margin: .5em;
+      }
+      .pagination__forward :last-child {
+        margin-right: 0;
+      }
+      .pagination__back :first-child {
+        margin-left: 0;
+      }
+      .pagination__back {
+        float: left;
+      }
+      .search__field[type='search'] {
+        max-width: 480px;
+        padding: 6px 38px 6px 10px;
+        float: left;
+        margin-right: -36px;
+        display: block;
+        background-color: transparent;
+      }
+      @media (max-width: 767px) {
+        .search__button {
+          width: auto;
+        }
+      }
+      .search__button {
+        border: none;
+        display: block;
+        padding: 5px 5px 5px 5px;
+        margin: 0;
+        vertical-align: middle;
+        background-color: transparent;
+      }
+      .search__button:hover {
+        background-color: #eee;
+      }
+      .search__icon {
+        height: 25px;
+      }
+      .result-url {
+        display: block;
+      }
+    </style>
 
-  <div class="row">
-  {% if query %}
-    {% if error %}
-        <div class="col-8">
-          <label for="search-input" role="error" class="error-notification">
-            Failed to retrieve search results ({{ error }}). If you have time, please <a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">file a bug</a>.
-          </label>
+    <header class="p-navigation" role="banner">
+      {% if 'docs.ubuntu.com/core' in domains %}
+        <div class="p-navigation__logo">
+          <a class="p-navigation__link" href="/core/">
+            <img class="p-navigation__image" src="https://assets.ubuntu.com/v1/c5cb0f8e-picto-ubuntu.svg" alt="Ubuntu Core documentation logo">
+            Ubuntu Core documentation
+          </a>
+        </div>
+      {% elif 'docs.ubuntu.com/maas' in domains %}
+        <div class="p-navigation__logo">
+          <a class="p-navigation__link" href="/maas/">
+            <img class="p-navigation__image" src="https://assets.ubuntu.com/v1/5f3d3c45-maas-logo-cropped.svg" alt="MAAS documentation logo">
+            MAAS documentation
+          </a>
+        </div>
+      {% elif 'docs.ubuntu.com/phone' in domains %}
+        <div class="p-navigation__logo">
+          <a class="p-navigation__link" href="/phone/">
+            Ubuntu Phone documentation
+          </a>
+        </div>
+      {% else %}
+        <div class="p-navigation__logo">
+          <a class="p-navigation__link" href="/core/">
+            Ubuntu documentation
+          </a>
+        </div>
+      {% endif %}
+    </header>
+
+    <main id="main-content">
+      <div class="row">
+        <div class="col-9">
+          {% if query %}
+            <h1>Your search for {{ query }} returned {{ results.total }} results</h1>
+          {% else %}
+            {% if 'docs.ubuntu.com/core' in domains %}
+              <h1>Search Ubuntu Core documentation</h1>
+            {% elif 'docs.ubuntu.com/maas' in domains %}
+              <h1>Search MAAS documentation</h1>
+            {% elif 'docs.ubuntu.com/phone' in domains %}
+              <h1>Search Ubuntu Phone documentation</h1>
+            {% else %}
+              <h1>Search Ubuntu documentation</h1>
+            {% endif %}
+          {% endif %}
+
+          <form action="/search" class="search">
+            <label for="search-input" class="u-hidden">Search</label>
+            <input name="q" id="search-input" type="search" value="{{ query }}" placeholder="e.g. juju" class="search__field" />
+            <button class="search__button" type="submit"><img class="search__icon" src="https://assets.ubuntu.com/v1/19750a6d-search-black.svg" alt="search"></button>
+          </form>
         </div>
       </div>
-    {% else %}
-      {% if results.items %}
-        <h4>{{ results.total }} results for "{{ query }}"</h4>
 
-        <section id="search-results" class="no-margin-bottom list list-spaced">
-          <p class="result-line results-top">Results {{ results.start }} to {{ results.end }}</p>
+      <div class="row">
+        <div class="col-9">
+          {% if query %}
+            {% if error %}
+              <label for="search-input" role="error" class="error-notification">
+                Failed to retrieve search results ({{ error }}). If you have time, please <a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">file a bug</a>.
+              </label>
+            {% else %}
+              {% if results.items %}
+                <h4>{{ results.total }} results for "{{ query }}"</h4>
 
-          {% for item in results.items %}
-            <article class="search-result twelve-col">
-              <h4>
-                <a href="{{ item.url }}" class="title-main">{{ item.title | safe }}</a>
-                <small class="result-url">{{ item.url }}</small>
-              </h4>
-              <p>{{ item.summary | safe }}</p>
-            </article>
-          {% endfor %}
+                <section id="search-results" class="no-margin-bottom list list-spaced">
+                  <p class="result-line results-top">Results {{ results.start }} to {{ results.end }}</p>
 
-          <p class="bottom-results-total result-line">Results {{ results.start }} to {{ results.end }} of {{ results.total }}</p>
-        </section>
+                  {% for item in results.items %}
+                    <article class="search-result twelve-col">
+                      <h4>
+                        <a href="{{ item.url }}" class="title-main">{{ item.title | safe }}</a>
+                        <small class="result-url">{{ item.url }}</small>
+                      </h4>
+                      <p>{{ item.summary | safe }}</p>
+                    </article>
+                  {% endfor %}
 
-        {% if results.last_page > 1 %}
-          <nav class="pagination" id="page-nav">
-            {% if results.current_page > 1 %}
-              <ul class="pagination__back">
-                <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset=0">&#8249;&#8249; First</a></li>
-                {% if results.current_page > 2 %}
-                  <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.previous_offset }}">&#8249; Previous</a></li>
+                  <p class="bottom-results-total result-line">Results {{ results.start }} to {{ results.end }} of {{ results.total }}</p>
+                </section>
+
+                {% if results.last_page > 1 %}
+                  <nav class="pagination" id="page-nav">
+                    {% if results.current_page > 1 %}
+                      <ul class="pagination__back">
+                        <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset=0">&#8249;&#8249; First</a></li>
+                        {% if results.current_page > 2 %}
+                          <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.previous_offset }}">&#8249; Previous</a></li>
+                        {% endif %}
+                      </ul>
+                    {% endif %}
+
+                    {% if results.current_page != results.last_page %}
+                      <ul class="pagination__forward">
+                        {% if results.current_page < results.penultimate_page %}
+                          <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.next_offset }}&domain={{ domains | join:'&domain=' }}">Next &#8250;</a></li>
+                        {% endif %}
+                        <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.last_page_offset }}&domains={{ domains | join:'&domain=' }}">Last &#8250;&#8250;</a></li>
+                      </ul>
+                    {% endif %}
+                  </nav>
                 {% endif %}
-              </ul>
+              {% else %}
+                <h2>Sorry we couldn't find "{{ query }}"</h2>
+
+                <h3>Why not try widening your search? You can do this by:</h3>
+
+                <ul>
+                  <li>Adding alternative words or phrases</li>
+                  <li>Using individual words instead of phrases</li>
+                  <li>Trying a different spelling</li>
+                </ul>
+
+                <h2>Still no luck?</h2>
+
+                <ul>
+                  {% if 'docs.ubuntu.com/core' in domains %}
+                    <li><a href="/core">Visit the Ubuntu Core documentation homepage</a></li>
+                  {% elif 'docs.ubuntu.com/maas' in domains %}
+                    <li><a href="/maas">Visit the MAAS documentation homepage</a></li>
+                  {% elif 'docs.ubuntu.com/phone' in domains %}
+                    <li><a href="/phone">Visit the Ubuntu Phone documentation homepage</a></li>
+                  {% else %}
+                    <li><a href="/">Visit the Ubuntu Documentation homepage</a></li>
+                  {% endif %}
+                  <li><a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">Report an issue with the site</a></li>
+                </ul>
+              {% endif %} {# results.items #}
             {% endif %}
+          {% endif %} {# query #}
+        </div>
+      </div>
+    </main>
 
-            {% if results.current_page != results.last_page %}
-              <ul class="pagination__forward">
-                {% if results.current_page < results.penultimate_page %}
-                  <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.next_offset }}">Next &#8250;</a></li>
-                {% endif %}
-                <li class="pagination__item"><a href="/search?q={{ query }}&limit={{ limit }}&offset={{ results.last_page_offset }}">Last &#8250;&#8250;</a></li>
-              </ul>
-            {% endif %}
-          </nav>
-        {% endif %}
-      {% else %}
-        <h2>Sorry we couldn't find "{{ query }}"</h2>
+    <script>
+      /* Add classes to links */
+      var links = document.querySelectorAll('a');
+      links.forEach(function(link) {
+        if (link.hostname && link.hostname != location.hostname) {
+          link.className += ' p-link--external';
+        }
+      });
 
-        <h3>Why not try widening your search? You can do this by:</h3>
+      /* Setup sticky table of contents */
+      var aside = document.querySelector('#side-content');
+      if (aside) {
+        var asideOffset = aside.offsetTop;
+        var asideWidth = aside.offsetWidth;
+        var backToTop = document.querySelector('#back-to-top');
 
-        <ul>
-          <li>Adding alternative words or phrases</li>
-          <li>Using individual words instead of phrases</li>
-          <li>Trying a different spelling</li>
-        </ul>
+        window.addEventListener(
+          'scroll',
+          function(scrollEvent) {
+            var scrolled = window.innerWidth >= 768 && window.scrollY > asideOffset;
 
-        <h2>Still no luck?</h2>
+            aside.classList.toggle('fixed', scrolled);
 
-        <ul>
-          <li><a href="/">Visit the homepage</a></li>
-          <li><a href="https://github.com/ubuntudesign/docs.ubuntu.com/issues/new">Report an issue with the site</a></li>
-        </ul>
-      {% endif %} {# results.items #}
-    {% endif %}
-  {% endif %} {# query #}
-  </div>
-</div>
+            if (scrolled) {
+              aside.style.width = asideWidth + 'px';
+              backToTop.style.display = 'block';
+            } else {
+              aside.style.width = '';
+              backToTop.style.display = 'none';
+            }
+          }
+        );
+      }
+    </script>
 {% endblock content %}
