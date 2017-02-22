@@ -34,41 +34,58 @@
       .search__label {
         display: none;
       }
-
       .search--header {
         margin: 0;
         float: right;
         margin-left: auto;
         margin-right: 7.5px;
       }
-      .search__field, .search__field[type='search'] {
+      .search__field,
+      .search__field[type='search'] {
         max-width: 480px;
         padding: 6px 38px 6px 10px;
         float: left;
-        margin-right: -36px;
+        margin-right: -38px;
+        border-color: #cdcdcd;
         display: block;
         background-color: transparent;
         line-height: 24px;
         margin-bottom: 0;
+      }
+      .search--header .search__field {
+        width: 250px;
       }
       @media (max-width: 767px) {
         .search__button {
           width: auto;
         }
       }
-      .search__button {
+      .search__button,
+      .search__button:focus,
+      .search__button:active {
         border: none;
         display: block;
         padding: 6px;
         margin: 0;
         vertical-align: middle;
         background-color: transparent;
+        line-height: 0;
       }
       .search__button:hover {
-        background-color: #eee;
+        background-color: transparent;
+        border: none;
       }
-      .search__icon {
-        height: 25px;
+      .search__svg-frame {
+        stroke: #888
+      }
+      .search__button:hover .search__svg-frame {
+        stroke: #111;
+      }
+      .search__svg-handle {
+        fill: #888;
+      }
+      .search__button:hover .search__svg-handle {
+        fill: #111;
       }
 
       .result-url {
@@ -120,7 +137,14 @@
           <input type="hidden" name="domain" value="{{ domain }}" />
         {% endfor %}
         <button type="submit" class="search__button">
-          <img src="https://assets.ubuntu.com/v1/19750a6d-search-black.svg" class="search__icon" alt="Perform a search">
+          <svg xmlns="https://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 90 90">
+            <g color="#000">
+              <path fill="none" stroke-width="4" overflow="visible" enable-background="accumulate" d="M0 0h90v90H0z"></path>
+              <path class="search__svg-frame" d="M69 36.5a33 33.5 0 1 1-66 0 33 33.5 0 1 1 66 0z" transform="matrix(.636 0 0 .627 16.114 16.12)" fill="none" stroke="#fff" stroke-width="9.5" overflow="visible" enable-background="accumulate"></path>
+              <path class="search__svg-handle" style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Sans" d="M55.773 52.917L52.94 55.75l14 14 2.833-2.833-14-14z" font-size="xx-small" fill="#fff" stroke-width="6" overflow="visible" enable-background="accumulate" font-family="Sans"></path>
+              <path class="search__svg-handle" style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Sans" d="M60.972 57.03c-1.55.01-3.045 1.023-3.626 2.46-.58 1.436-.21 3.207.898 4.29l9.194 9.2c2.683 2.85 3.262 2.464 5.643.083 2.384-2.38 2.77-2.792-.08-5.646l-9.195-9.2c-.734-.753-1.78-1.192-2.83-1.188z" fill="#fff" stroke-width="11.804"></path>
+            </g>
+          </svg>
         </button>
       </form>
     </header>
@@ -128,8 +152,7 @@
     <main id="main-content">
       <div class="row">
         <div class="col-9">
-          <h1>{{ domains.count }}</h1>
-          {% if query %}
+          {% if query and not error %}
             <h1>Your search for '{{ query }}' returned {{ results.total }} results</h1>
           {% else %}
             {% if 'docs.ubuntu.com/core' in domains %}
@@ -157,7 +180,16 @@
             {% for domain in domains %}
               <input type="hidden" name="domain" value="{{ domain }}" />
             {% endfor %}
-            <button class="search__button" type="submit"><img class="search__icon" src="https://assets.ubuntu.com/v1/19750a6d-search-black.svg" alt="search"></button>
+            <button type="submit" class="search__button">
+              <svg xmlns="https://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 90 90">
+                <g color="#000">
+                  <path fill="none" stroke-width="4" overflow="visible" enable-background="accumulate" d="M0 0h90v90H0z"></path>
+                  <path class="search__svg-frame" d="M69 36.5a33 33.5 0 1 1-66 0 33 33.5 0 1 1 66 0z" transform="matrix(.636 0 0 .627 16.114 16.12)" fill="none" stroke="#fff" stroke-width="9.5" overflow="visible" enable-background="accumulate"></path>
+                  <path class="search__svg-handle" style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Sans" d="M55.773 52.917L52.94 55.75l14 14 2.833-2.833-14-14z" font-size="xx-small" fill="#fff" stroke-width="6" overflow="visible" enable-background="accumulate" font-family="Sans"></path>
+                  <path class="search__svg-handle" style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Sans" d="M60.972 57.03c-1.55.01-3.045 1.023-3.626 2.46-.58 1.436-.21 3.207.898 4.29l9.194 9.2c2.683 2.85 3.262 2.464 5.643.083 2.384-2.38 2.77-2.792-.08-5.646l-9.195-9.2c-.734-.753-1.78-1.192-2.83-1.188z" fill="#fff" stroke-width="11.804"></path>
+                </g>
+              </svg>
+            </button>
           </form>
         </div>
       </div>
