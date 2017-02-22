@@ -130,7 +130,7 @@
         <div class="col-9">
           <h1>{{ domains.count }}</h1>
           {% if query %}
-            <h1>Your search for {{ query }} returned {{ results.total }} results</h1>
+            <h1>Your search for '{{ query }}' returned {{ results.total }} results</h1>
           {% else %}
             {% if 'docs.ubuntu.com/core' in domains %}
               <h1>Search Ubuntu Core documentation</h1>
