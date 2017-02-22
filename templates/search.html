@@ -29,13 +29,27 @@
       .pagination__back {
         float: left;
       }
-      .search__field[type='search'] {
+
+      /* Header search styling - to be migrated into vanilla-docs-theme*/
+      .search__label {
+        display: none;
+      }
+
+      .search--header {
+        margin: 0;
+        float: right;
+        margin-left: auto;
+        margin-right: 7.5px;
+      }
+      .search__field, .search__field[type='search'] {
         max-width: 480px;
         padding: 6px 38px 6px 10px;
         float: left;
         margin-right: -36px;
         display: block;
         background-color: transparent;
+        line-height: 24px;
+        margin-bottom: 0;
       }
       @media (max-width: 767px) {
         .search__button {
@@ -45,7 +59,7 @@
       .search__button {
         border: none;
         display: block;
-        padding: 5px 5px 5px 5px;
+        padding: 6px;
         margin: 0;
         vertical-align: middle;
         background-color: transparent;
@@ -56,27 +70,28 @@
       .search__icon {
         height: 25px;
       }
+
       .result-url {
         display: block;
       }
     </style>
 
     <header class="p-navigation" role="banner">
-      {% if 'docs.ubuntu.com/core' in domains %}
+      {% if domains|length == 1 and 'docs.ubuntu.com/core' in domains %}
         <div class="p-navigation__logo">
           <a class="p-navigation__link" href="/core/">
             <img class="p-navigation__image" src="https://assets.ubuntu.com/v1/c5cb0f8e-picto-ubuntu.svg" alt="Ubuntu Core documentation logo">
             Ubuntu Core documentation
           </a>
         </div>
-      {% elif 'docs.ubuntu.com/maas' in domains %}
+      {% elif domains|length == 1 and 'docs.ubuntu.com/maas' in domains %}
         <div class="p-navigation__logo">
           <a class="p-navigation__link" href="/maas/">
             <img class="p-navigation__image" src="https://assets.ubuntu.com/v1/5f3d3c45-maas-logo-cropped.svg" alt="MAAS documentation logo">
             MAAS documentation
           </a>
         </div>
-      {% elif 'docs.ubuntu.com/phone' in domains %}
+      {% elif domains|length == 1 and 'docs.ubuntu.com/phone' in domains %}
         <div class="p-navigation__logo">
           <a class="p-navigation__link" href="/phone/">
             Ubuntu Phone documentation
@@ -89,11 +104,31 @@
           </a>
         </div>
       {% endif %}
+
+      <form id="search" action="/search" class="search--header">
+        <label for="edit-keys" class="search__label">Search</label>
+        {% if domains|length == 1 and 'docs.ubuntu.com/maas' in domains %}
+          <input class="search__field" type="search" name="q" id="search" placeholder="Search MAAS docs" />
+        {% elif domains|length == 1 and 'docs.ubuntu.com/core' in domains %}
+          <input class="search__field" type="search" name="q" id="search" placeholder="Search Core docs" />
+        {% elif domains|length == 1 and 'docs.ubuntu.com/phone' in domains %}
+          <input class="search__field" type="search" name="q" id="search" placeholder="Search Phone docs" />
+        {% else %}
+          <input class="search__field" type="search" name="q" id="search" placeholder="Search all docs" />
+        {% endif %}
+        {% for domain in domains %}
+          <input type="hidden" name="domain" value="{{ domain }}" />
+        {% endfor %}
+        <button type="submit" class="search__button">
+          <img src="https://assets.ubuntu.com/v1/19750a6d-search-black.svg" class="search__icon" alt="Perform a search">
+        </button>
+      </form>
     </header>
 
     <main id="main-content">
       <div class="row">
         <div class="col-9">
+          <h1>{{ domains.count }}</h1>
           {% if query %}
             <h1>Your search for {{ query }} returned {{ results.total }} results</h1>
           {% else %}
@@ -109,8 +144,19 @@
           {% endif %}
 
           <form action="/search" class="search">
-            <label for="search-input" class="u-hidden">Search</label>
-            <input name="q" id="search-input" type="search" value="{{ query }}" placeholder="e.g. juju" class="search__field" />
+            <label for="search-input" class="search__label">Search</label>
+            {% if domains|length == 1 and 'docs.ubuntu.com/maas' in domains %}
+              <input class="search__field" type="search" name="q" id="search" placeholder="Search MAAS docs" />
+            {% elif domains|length == 1 and 'docs.ubuntu.com/core' in domains %}
+              <input class="search__field" type="search" name="q" id="search" placeholder="Search Core docs" />
+            {% elif domains|length == 1 and 'docs.ubuntu.com/phone' in domains %}
+              <input class="search__field" type="search" name="q" id="search" placeholder="Search Phone docs" />
+            {% else %}
+              <input class="search__field" type="search" name="q" id="search" placeholder="Search all docs" />
+            {% endif %}
+            {% for domain in domains %}
+              <input type="hidden" name="domain" value="{{ domain }}" />
+            {% endfor %}
             <button class="search__button" type="submit"><img class="search__icon" src="https://assets.ubuntu.com/v1/19750a6d-search-black.svg" alt="search"></button>
           </form>
         </div>
