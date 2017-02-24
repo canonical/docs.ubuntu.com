@@ -1,51 +1,52 @@
 {% extends 'includes/layout.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="row col-8">
-        <h1>Ubuntu documentation</h1>
-        <p>
-            The home of Ubuntu documentation.
-        </p>
-    </div>
-    <div class="row col-4">
-        <img src="{{ ASSET_SERVER_URL }}b4438cf8-image-picto-projects-we-love-195.png" />
-    </div>
-</div>
+<main id="main-content">
+  <div class="row">
+      <div class="row col-8">
+          <h1>Ubuntu documentation</h1>
+          <p>
+              The home of Ubuntu documentation.
+          </p>
+      </div>
+      <div class="row col-4">
+          <img src="{{ ASSET_SERVER_URL }}b4438cf8-image-picto-projects-we-love-195.png" />
+      </div>
+  </div>
 
-<div class="row">
-    <h2>Featured documentation</h2>
-    <table>
-        <thead>
-            <tr><th>Project</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><a href="http://maas.io" class="p-link--external">MAAS</a></td>
-                <td>
-                    <p>Documentation for MAAS (Metal as a Service).</p>
-                    <p><a href="/maas/2.1/en/" class="p-link--external">Read the MAAS documentation&nbsp;&rsaquo;</a></p>
-                </td>
-            </tr>
-            <tr>
-                <td class="u-column-nowrap"><a href="https://developer.ubuntu.com/en/snappy/" class="p-link--external">Ubuntu Core</td>
-                <td>
-                    <p>Documentation for the next generation OS from Ubuntu for all your IoT devices.</p>
-                    <p><a href="/core/en">Read the Ubuntu Core documentation&nbsp;&rsaquo;</a></p>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="http://snapcraft.io" class="p-link--external">Snapcraft</a></td>
-                <td>
-                    <p>Developer documentation to learn how to snap your apps for easy cross platform distribution and updates that just work.</p>
-                    <p><a href="http://snapcraft.io/docs" class="p-link--external">Read the Snapcraft documentation</a></p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+  <div class="row">
+      <h2>Featured documentation</h2>
+      <table>
+          <thead>
+              <tr><th>Project</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td><a href="http://maas.io" class="p-link--external">MAAS</a></td>
+                  <td>
+                      <p>Documentation for MAAS (Metal as a Service).</p>
+                      <p><a href="/maas/2.1/en/">Read the MAAS documentation&nbsp;&rsaquo;</a></p>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="u-column-nowrap"><a href="https://developer.ubuntu.com/en/snappy/" class="p-link--external">Ubuntu Core</td>
+                  <td>
+                      <p>Documentation for the next generation OS from Ubuntu for all your IoT devices.</p>
+                      <p><a href="/core/en">Read the Ubuntu Core documentation&nbsp;&rsaquo;</a></p>
+                  </td>
+              </tr>
+              <tr>
+                  <td><a href="http://snapcraft.io" class="p-link--external">Snapcraft</a></td>
+                  <td>
+                      <p>Developer documentation to learn how to snap your apps for easy cross platform distribution and updates that just work.</p>
+                      <p><a href="http://snapcraft.io/docs" class="p-link--external">Read the Snapcraft documentation</a></p>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 
-<div class="row">
+  <div class="row">
     <h2>What is this site?</h2>
     <p>
         The Ubuntu documentation site is a service that makes it easy to publish product documentation from github or Launchpad
@@ -54,4 +55,5 @@
         If you are interested in moving your documentation to this service, please <a href="mailto:webteam@canonical.com">get in touch</a>.
     </p>
 </div>
+</main>
 {% endblock content %}
