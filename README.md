@@ -11,6 +11,7 @@ Basic usage
 To run the site locally:
 
 ``` bash
+snap install documentation-builder
 ./rebuild-docs # Gather and build documentation
 ./run # Download containers, run the dev server and watch for sass changes
 ```
