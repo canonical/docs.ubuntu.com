@@ -16,8 +16,8 @@ maas(/|/en/?|/2.1/?)?: /maas/2.1/en/
 # On 12/01/2017
 core/en/guides/build-device/assertions: /core/en/reference/assertions
 
-maas/2.1/en/installconfig-deploy-nodes: maas/2.1/en/installconfig-nodes-deploy
-maas/2.1/en/installconfig-gui: maas/2.1/en/installconfig-webui
-maas/2.1/en/installconfig-hwe-kernels: maas/2.1/en/installconfig-nodes-ubuntu-kernels
-maas/2.1/en/installconfig-kernel: maas/2.1/en/installconfig-nodes-kernel-boot-options
-maas/2.1/en/installconfig-server-iso: maas/2.1/en/installconfig-iso-install
+maas/2.1/en/installconfig-deploy-nodes: /maas/2.1/en/installconfig-nodes-deploy
+maas/2.1/en/installconfig-gui: /maas/2.1/en/installconfig-webui
+maas/2.1/en/installconfig-hwe-kernels: /maas/2.1/en/installconfig-nodes-ubuntu-kernels
+maas/2.1/en/installconfig-kernel: /maas/2.1/en/installconfig-nodes-kernel-boot-options
+maas/2.1/en/installconfig-server-iso: /maas/2.1/en/installconfig-iso-install
