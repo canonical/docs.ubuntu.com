@@ -54,3 +54,5 @@ node_modules/
 yarn.lock
 phone-docs
 templates/phone
+templates/documentation-builder/
+documentation-builder/
