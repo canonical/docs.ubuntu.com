@@ -4,9 +4,11 @@ set -euo pipefail
 
 maas_dir=maas-docs
 core_dir=ubuntu-core-docs
+builder=documentation-builder
 
 rm -rf ${maas_dir} && git clone https://github.com/canonicalltd/maas-docs.git ${maas_dir} || true
 rm -rf ${core_dir} && git clone https://github.com/canonicalltd/ubuntu-core-docs.git ${core_dir} || true
+rm -rf ${builder} && git clone https://github.com/canonicalltd/documentation-builder.git ${builder} || true
 
 # Extra build steps for Ubuntu Core docs
 (
@@ -37,6 +39,18 @@ documentation-builder --base-directory ${core_dir}  \
                       --search-domain 'docs.ubuntu.com/core'  \
                       --media-url '/static/media/core'  \
                       --tag-manager-code 'GTM-K92JCQ'  \
+                      --no-link-extensions \
+                      --force
+
+documentation-builder --base-directory ${builder}  \
+                      --source-folder docs  \
+                      --site-root '/documentation-builder/'  \
+                      --output-path templates/documentation-builder  \
+                      --output-media-path static/media/documentation-builder  \
+                      --search-url '/search'  \
+                      --search-placeholder 'Search Builder docs'  \
+                      --search-domain 'docs.ubuntu.com/documentation-builder'  \
+                      --media-url '/static/media/documentation-builder'  \
                       --no-link-extensions \
                       --force
 
