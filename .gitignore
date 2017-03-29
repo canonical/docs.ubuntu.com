@@ -56,3 +56,5 @@ phone-docs
 templates/phone
 templates/documentation-builder/
 documentation-builder/
+conjure-up-docs/
+templates/conjure-up/

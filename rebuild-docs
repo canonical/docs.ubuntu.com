@@ -4,10 +4,12 @@ set -euo pipefail
 
 maas_dir=maas-docs
 core_dir=ubuntu-core-docs
+conjureup_dir=conjure-up-docs
 builder=documentation-builder
 
 rm -rf ${maas_dir} && git clone https://github.com/canonicalltd/maas-docs.git ${maas_dir} || true
 rm -rf ${core_dir} && git clone https://github.com/canonicalltd/ubuntu-core-docs.git ${core_dir} || true
+rm -rf ${conjureup_dir} && git clone https://github.com/canonicalltd/docs-conjure-up.git ${conjureup_dir} || true
 rm -rf ${builder} && git clone https://github.com/canonicalltd/documentation-builder.git ${builder} || true
 
 # Extra build steps for Ubuntu Core docs
@@ -42,6 +44,18 @@ documentation-builder --base-directory ${core_dir}  \
                       --no-link-extensions \
                       --force
 
+documentation-builder --base-directory ${conjureup_dir}  \
+                      --site-root '/conjure-up/'  \
+                      --output-path templates/conjure-up  \
+                      --output-media-path static/media/conjure-up  \
+                      --search-url '/search'  \
+                      --search-placeholder 'Search Conjure-up docs'  \
+                      --search-domain 'docs.ubuntu.com/conjure-up'  \
+                      --media-url '/static/media/conjure-up'  \
+                      --tag-manager-code 'GTM-K92JCQ'  \
+                      --no-link-extensions \
+                      --force
+
 documentation-builder --base-directory ${builder}  \
                       --source-folder docs  \
                       --site-root '/documentation-builder/'  \
@@ -53,4 +67,3 @@ documentation-builder --base-directory ${builder}  \
                       --media-url '/static/media/documentation-builder'  \
                       --no-link-extensions \
                       --force
-
