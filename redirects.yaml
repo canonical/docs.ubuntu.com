@@ -1,5 +1,5 @@
 # Redirect project section roots to English language
-(?P<project>[^/]+)/?: /{project}/en/
+(?P<project>((?!search)[^/])+)/?: /{project}/en/
 maas(/|/en/?|/2.1/?)?: /maas/2.1/en/
 
 # Add slash to language and version folders, and remove "index"
