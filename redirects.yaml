@@ -14,9 +14,6 @@
 # On 12/01/2017
 core/en/guides/build-device/assertions: /core/en/reference/assertions
 
-# Landscape
-landscape/en/: /landscape/en/landscape-intro
-
 # MAAS
 maas(/|/en/?|/2.1/?)?: /maas/2.1/en/
 maas/2.1/en/installconfig-deploy-nodes: /maas/2.1/en/installconfig-nodes-deploy
