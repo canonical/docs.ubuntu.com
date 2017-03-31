@@ -1,18 +1,34 @@
-Ubuntu documentation service
-===
+# Ubuntu documentation service
 
 [![Build Status](https://travis-ci.org/ubuntudesign/docs.ubuntu.com.svg?branch=master)](https://travis-ci.org/ubuntudesign/docs.ubuntu.com)
 
 A central platform for hosting Ubuntu's various documentation portals.
 
-Basic usage
----
+## Local development
+
+### Dependencies
+
+First [install Docker](https://www.docker.com/community-edition#/download) and add your user to the `docker` group.
+
+Then install [git-repo](https://github.com/esrlabs/git-repo) and [documentation-builder](https://github.com/canonicalltd/documentation-builder). E.g.:
+
+`` bash
+sudo snap install git-repo documentation-builder
+```
+
+### Build the documentation HTML pages
+
+Whenever you want to build the latest documentation HTML from the various documentation repositories:
+
+``` bash
+./rebuild-docs  # Gather and build documentation
+```
+
+### Run the local development server
 
 To run the site locally:
 
 ``` bash
-snap install documentation-builder
-./rebuild-docs # Gather and build documentation
 ./run # Download containers, run the dev server and watch for sass changes
 ```
 
@@ -20,8 +36,7 @@ Now visit <http://127.0.0.1:8007>.
 
 To see what other `./run` commands are available, run `./run usage`.
 
-Licenses
----
+## Licenses
 
 The content of this project is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying code used to format and display that content is licensed under the [LGPLv3](http://opensource.org/licenses/lgpl-3.0.html) by [Canonical Ltd](http://www.canonical.com/).
 
