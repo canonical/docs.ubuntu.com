@@ -60,3 +60,15 @@ conjure-up-docs/
 templates/conjure-up/
 landscape-docs/
 templates/landscape/
+
+# Added by canonical-webteam generator
+.bundle/
+*.map
+*.bak
+*.sqlite
+*-cache/
+\#*\#
+*.*~
+.DS_store
+.docker-project
+env3/
