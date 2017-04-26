@@ -1,74 +1,50 @@
-# Python
-__pycache__/
-env/
+# OS files
+Desktop.ini
+Thumbs.db
+._*
+*.DS_Store
+*~
+\#*\#
+__*
+
+# Cache and backup
+*.bak
 *.pyc
+*-cache/
 
-# Django
-db.sqlite3
-
-# Sass
-.sass-cache/
-*.css
-*.css.map
-
-# Node
-.npm/
-npm-debug.log*
-
-# Runtime
+# Local data
+*.sql*
+*.log
+logs/
 pids
 *.pid
 *.seed
 
-# Common
-*.log
-logs/
+# Local dependencies
+.bundle/
+node_modules/
 
-# Windows
-Desktop.ini
-Thumbs.db
-
-# OSX
-._*
-*.DS_Store
-
-# Linux
-*~
-
-# Environment
-.python-version
+# Local environment settings
+.docker-project
 .envrc
+env/
+env3/
 
-# Project
-.compose-project-name
-static/css
-/.compose-project-name
-django-error.log
-npm-debug.log
+# Sass
+*.css
+*.css.map
+
+# Local project ignores
 templates/core/
 templates/maas/
+templates/phone/
 /static/media/*/
 maas-docs/
 ubuntu-core-docs/
-node_modules/
-yarn.lock
 phone-docs
-templates/phone
 templates/documentation-builder/
 documentation-builder/
 conjure-up-docs/
 templates/conjure-up/
 landscape-docs/
 templates/landscape/
-
-# Added by canonical-webteam generator
-.bundle/
-*.map
-*.bak
-*.sqlite
-*-cache/
-\#*\#
-*.*~
-.DS_store
-.docker-project
-env3/
