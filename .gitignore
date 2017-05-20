@@ -1,62 +1,50 @@
-# Python
-__pycache__/
-env/
+# OS & editor files
+Desktop.ini
+Thumbs.db
+._*
+*.DS_Store
+*~
+\#*\#
+__*
+.AppleDouble
+.LSOverride
+.spelling
+
+# Cache and backup
+*.bak
 *.pyc
+*-cache/
 
-# Django
-db.sqlite3
-
-# Sass
-.sass-cache/
-*.css
-*.css.map
-
-# Node
-.npm/
-npm-debug.log*
-
-# Runtime
+# Local data
+*.sqlite*
+*.log
+logs/
 pids
 *.pid
 *.seed
+.*-metadata
 
-# Common
-*.log
-logs/
-
-# Windows
-Desktop.ini
-Thumbs.db
-
-# OSX
-._*
-*.DS_Store
-
-# Linux
-*~
-
-# Environment
-.python-version
-.envrc
-
-# Project
-.compose-project-name
-static/css
-/.compose-project-name
-django-error.log
-npm-debug.log
-templates/core/
-templates/maas/
-/static/media/*/
-maas-docs/
-ubuntu-core-docs/
+# Local dependencies
+.bundle/
 node_modules/
-yarn.lock
-phone-docs
-templates/phone
-templates/documentation-builder/
-documentation-builder/
-conjure-up-docs/
-templates/conjure-up/
-landscape-docs/
-templates/landscape/
+bower_components/
+vendor/
+
+# Build files
+/build/
+_site/
+
+# Local environment settings
+.docker-project
+.envrc
+env/
+env3/
+
+# Sass
+*.css
+*.css.map
+
+# Project-specific ignores
+/static/media/*/
+templates/*/
+docs/
