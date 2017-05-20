@@ -8,20 +8,12 @@ A central platform for hosting Ubuntu's various documentation portals.
 
 ### Dependencies
 
-First [install Docker](https://www.docker.com/community-edition#/download) and add your user to the `docker` group.
+First [install Docker](https://www.docker.com/community-edition#/download). Linux users may need to add their use to the `docker` group.
 
 Then install [git-repo](https://github.com/esrlabs/git-repo) and [documentation-builder](https://github.com/canonicalltd/documentation-builder). E.g.:
 
 `` bash
 sudo snap install git-repo documentation-builder
-```
-
-### Build the documentation HTML pages
-
-Whenever you want to build the latest documentation HTML from the various documentation repositories:
-
-``` bash
-./rebuild-docs  # Gather and build documentation
 ```
 
 ### Run the local development server
@@ -31,6 +23,8 @@ To run the site locally:
 ``` bash
 ./run # Download containers, run the dev server and watch for sass changes
 ```
+
+The first time this will take along time as it downloads and builds the documentation.
 
 Now visit <http://127.0.0.1:8007>.
 
