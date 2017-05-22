@@ -236,15 +236,15 @@ build_docs () {
             if [ "$name" == "maas" ]; then versions="--build-version-branches"; fi
             if [ "$name" == "documentation-builder" ]; then source_folder="--source-folder docs"; fi
 
-            documentation-builder --base-directory docs/${name}  \
-                                  --site-root '/${name}/'  \
-                                  --output-path templates/${name}  \
-                                  --output-media-path static/media/${name}  \
-                                  --search-url '/search'  \
-                                  --search-placeholder 'Search ${upper_name} docs'  \
-                                  --search-domain 'docs.ubuntu.com/${name}'  \
-                                  --media-url '/static/media/${name}'  \
-                                  --tag-manager-code 'GTM-K92JCQ'  \
+            documentation-builder --base-directory "docs/${name}"  \
+                                  --site-root "/${name}/"  \
+                                  --output-path "templates/${name}"  \
+                                  --output-media-path "static/media/${name}"  \
+                                  --search-url "/search"  \
+                                  --search-placeholder "Search ${upper_name} docs"  \
+                                  --search-domain "docs.ubuntu.com/${name}"  \
+                                  --media-url "/static/media/${name}"  \
+                                  --tag-manager-code "GTM-K92JCQ"  \
                                   ${versions}  \
                                   ${source_folder}  \
                                   --no-link-extensions \
