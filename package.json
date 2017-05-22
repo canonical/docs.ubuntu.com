@@ -3,7 +3,7 @@
     "watch": "node-sass --include-path node_modules --source-map true --watch static/sass --output static/css",
     "build": "node-sass --include-path node_modules static/sass --output static/css",
     "test": "sass-lint static/**/*.scss --verbose --no-exit",
-    "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite docs/ templates/*/"
+    "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite docs/ templates/phone/ templates/landscape/ templates/documentation-builder/ templates/conjure-up/ templates/core/ templates/maas/2.*/"
   },
   "devDependencies": {
     "sass-lint": "^1.10.2",
