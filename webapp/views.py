@@ -1,13 +1,12 @@
 from django.http import HttpResponseNotFound, HttpResponseServerError
-from django.template import RequestContext, loader, Context
+from django.template import loader
 
 
 def custom_404(request):
     t = loader.get_template('404.html')
-    context = RequestContext(request, {'request_path': request.path})
-    return HttpResponseNotFound(t.render(context))
+    return HttpResponseNotFound(t.render({'request_path': request.path}))
 
 
 def custom_500(request):
     t = loader.get_template('500.html')
-    return HttpResponseServerError(t.render(Context({})))
+    return HttpResponseServerError(t.render({}))
