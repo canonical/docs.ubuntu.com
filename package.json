@@ -1,11 +1,14 @@
 {
-  "dependencies": {
-    "node-sass": "3.9.0",
+  "scripts": {
+    "watch": "node-sass --include-path node_modules --source-map true --watch static/sass --output static/css",
+    "build": "node-sass --include-path node_modules static/sass --output static/css",
+    "test": "sass-lint static/**/*.scss --verbose --no-exit",
+    "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite docs/ templates/phone/ templates/landscape/ templates/documentation-builder/ templates/conjure-up/ templates/core/ templates/maas/2.*/"
+  },
+  "devDependencies": {
+    "sass-lint": "^1.10.2",
+    "node-sass": "^4.5.3",
     "vanilla-framework": "1.1.7",
     "docs-vanilla-theme": "1.1.0"
-  },
-  "scripts": {
-    "watch": "node-sass --include-path ${OVERRIDES} --include-path ${APP_MODULES} static/sass --output static/css; node-sass --include-path ${OVERRIDES} --include-path ${APP_MODULES} --watch --source-map true --recursive --output static/css static/sass"
   }
 }
-

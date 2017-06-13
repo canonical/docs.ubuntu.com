@@ -1,3 +1,4 @@
+{% load versioned_static %}
 <!doctype html>
 <html lang="en">
     <head>
@@ -13,7 +14,7 @@
         <link rel="icon" href="{{ ASSET_SERVER_URL }}8d4630a6-pictogram-heart-mid-grey.svg">
         <title>Ubuntu documentation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/static/css/homepage.css" />
+        <link rel="stylesheet" href="{% versioned_static 'css/homepage.css' %}" />
     </head>
     <body class="theme">
         <!-- Google Tag Manager (noscript) -->

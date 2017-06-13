@@ -1,5 +1,10 @@
 """
-WSGI config for webapp project.
+WSGI config for docs.ubuntu.com.
+
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 
 import os
@@ -11,6 +16,6 @@ sys.path.append(BASE_DIR)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "webapp.settings")
 
 from django.core.wsgi import get_wsgi_application  # noqa: E402
-from dj_static import Cling                        # noqa: E402
+from whitenoise.django import DjangoWhiteNoise     # noqa: E402
 
-application = Cling(get_wsgi_application())
+application = DjangoWhiteNoise(get_wsgi_application())

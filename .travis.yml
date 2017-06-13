@@ -1,16 +1,7 @@
-language: python
-python:
-  - "2.7"
-before_install:
-  - nvm install 7.4.0
-  - nvm use 7.4.0
-install:
-  - pip install flake8==3.0.4
-  - pip install -r requirements.txt
-  - npm install
-before_script:
-  - node_modules/.bin/node-sass --include-path node_modules static/sass --output static/css
-script:
-  - flake8 webapp          # Check python code style
-  - python manage.py test  # Run unit tests
+sudo: required
 
+services:
+  - docker
+
+script:
+  - ./run test
