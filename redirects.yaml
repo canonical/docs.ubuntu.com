@@ -3,12 +3,20 @@
 
 # MAAS
 maas(/|/en/?|/2.1/?)?: /maas/2.1/en/
-maas/2.1/en/installconfig-deploy-nodes: /maas/2.1/en/installconfig-nodes-deploy
-maas/2.1/en/installconfig-gui: /maas/2.1/en/installconfig-webui
-maas/2.1/en/installconfig-hwe-kernels: /maas/2.1/en/installconfig-nodes-ubuntu-kernels
-maas/2.1/en/installconfig-kernel: /maas/2.1/en/installconfig-nodes-kernel-boot-options
-maas/2.1/en/installconfig-server-iso: /maas/2.1/en/installconfig-iso-install
+maas/devel/en/intel-rsd/?: /maas/devel/en/nodes-comp-hw
+maas/2.1/en/installconfig-deploy-nodes/?: /maas/2.1/en/installconfig-nodes-deploy
+maas/2.1/en/installconfig-gui/?: /maas/2.1/en/installconfig-webui
+maas/2.1/en/installconfig-hwe-kernels/?: /maas/2.1/en/installconfig-nodes-ubuntu-kernels
+maas/2.1/en/installconfig-kernel/?: /maas/2.1/en/installconfig-nodes-kernel-boot-options
+maas/2.1/en/installconfig-server-iso/?: /maas/2.1/en/installconfig-iso-install
+maas/2.1/en/installconfig-commisson-nodes/?: /maas/2.1/en/nodes-commission
+maas/2.1/en/installconfig-add-nodes/?: /maas/2.1/en/nodes-add
 maas/2.2/en/installconfig-nodes-hw-testing/?: /maas/2.2/en/nodes-hw-testing
+maas/2.2/en/installconfig-add-nodes/?: /maas/2.2/en/nodes-add
+maas/2.2/en/installconfig-commisson-nodes/?: /maas/2.2/en/nodes-commission
+maas/2.2/en/installconfig-nodes-deploy/?: /maas/2.2/en/nodes-deploy
+maas/2.2/en/installconfig-nodes-power-types/?: /maas/2.2/en/nodes-power-types
+maas/2.2/en/intel-rsd/?: /maas/2.2/en/nodes-comp-hw
 
 # Generic rules
 # ===
