@@ -18,6 +18,9 @@ maas/2.2/en/installconfig-nodes-deploy/?: /maas/2.2/en/nodes-deploy
 maas/2.2/en/installconfig-nodes-power-types/?: /maas/2.2/en/nodes-power-types
 maas/2.2/en/intel-rsd/?: /maas/2.2/en/nodes-comp-hw
 
+# conjure-up
+conjure-up(/|/en/?)?: /conjure-up/2.2.0/en/
+
 # Generic rules
 # ===
 
