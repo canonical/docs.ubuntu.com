@@ -8,7 +8,7 @@ A central platform for hosting Ubuntu's various documentation portals.
 
 ### Dependencies
 
-First [install Docker](https://www.docker.com/community-edition#/download). Linux users may need to add their use to the `docker` group.
+First [install Docker](https://www.docker.com/community-edition#/download). Linux users may need to add their user to the `docker` group.
 
 Then install [git-repo](https://github.com/esrlabs/git-repo) and [documentation-builder](https://github.com/canonicalltd/documentation-builder). E.g.:
 
