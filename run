@@ -233,8 +233,7 @@ build_docs () {
             versions=""
             source_folder=""
 
-            if [ "$name" == "maas" ]; then versions="--build-version-branches"; fi
-            if [ "$name" == "conjure-up" ]; then versions="--build-version-branches"; fi
+            if [ "$name" == "maas" ] || [ "$name" == "conjure-up" ] ; then versions="--build-version-branches"; fi
             if [ "$name" == "documentation-builder" ]; then source_folder="--source-folder docs"; fi
 
             documentation-builder --base-directory "docs/${name}"  \
