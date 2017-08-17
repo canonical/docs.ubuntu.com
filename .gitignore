@@ -48,3 +48,4 @@ env3/
 /static/media/*/
 templates/*/
 docs/
+env2/

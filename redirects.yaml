@@ -21,6 +21,10 @@ maas/2.2/en/intel-rsd/?: /maas/2.2/en/nodes-comp-hw
 # conjure-up
 conjure-up(/|/en/?)?: /conjure-up/2.2.0/en/
 
+# conjure-up
+conjure-up(/|/en/?|/2.2.0/?)?: /conjure-up/2.2.0/en/
+conjure-up/en/(?P<page>.+): /conjure-up/2.2.0/en/{page}
+
 # Generic rules
 # ===
 
