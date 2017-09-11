@@ -1,0 +1,32 @@
+# Use Python 2.7 because the repo command complains about Python 3
+FROM python:2.7-slim as repo-builder
+WORKDIR /src
+# repo (tool for git) not available in this apt
+RUN apt-get update && apt-get install --yes git curl
+RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/bin/repo \
+    && chmod +x /usr/bin/repo
+RUN git clone https://github.com/canonicalltd/ubuntu-core-docs.git /src
+RUN repo init -u https://github.com/canonicalltd/ubuntu-core-docs.git && repo sync
+
+# Build docs in a separate image
+FROM python:3.6-slim as docs-builder
+WORKDIR /src
+COPY --from=repo-builder /src /src
+
+RUN pip3 install ubuntudesign.documentation-builder
+RUN documentation-builder --base-directory "/src"  \
+    --site-root "/core/"  \
+    --output-path "/docs/core"  \
+    --output-media-path "static/media/core"  \
+    --search-url "/search"  \
+    --search-placeholder "Search Core docs"  \
+    --search-domain "docs.ubuntu.com/core"  \
+    --media-url "/static/media/core"  \
+    --tag-manager-code "GTM-K92JCQ"  \
+    --no-link-extensions \
+    --force
+
+
+# Build new image on top of base image, copying compiled files with no uneeded src files.
+FROM ubuntu-docs-test:base
+COPY --from=docs-builder /docs/core /srv/templates/core
