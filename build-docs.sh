@@ -29,11 +29,12 @@ up_to_date() {
   folder=$1
   repo_url=$2
 
-  if [ -d docs/${name}/.git ]; then
-    remote_commit=$(git ls-remote ${repo} | grep HEAD | awk '{print $1;}')
-    local_commit=$(git -C docs/${name}/.git rev-parse HEAD)
+  if [ -d ${folder}/.git ]; then
+    remote_commit=$(git ls-remote ${repo_url} | grep HEAD | awk '{print $1;}')
+    local_commit=$(git -C ${folder}/.git rev-parse HEAD)
 
-    if [ $remote_commit == $local_commit ]; then
+    if [ "${remote_commit}" == "${local_commit}" ]; then
+      echo "${folder} hasn't changed"
       return 0
     fi
   fi
