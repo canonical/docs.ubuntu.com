@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build'",
-    "build": "./build-docs.sh && node-sass --include-path node_modules static/sass --output static/css && postcss --use autoprefixer --replace static/css/**/*.css && postcss --use cssnano --dir static/css/minified static/css/**/*.css",
+    "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build-sass'",
+    "build-docs": "./build-docs.sh",
+    "build-sass": "node-sass --include-path node_modules static/sass --output static/css && postcss --use autoprefixer --replace static/css/**/*.css && postcss --use cssnano --dir static/css/minified static/css/**/*.css",
+    "build": "yarn run build-docs && yarn run build-sass",
     "test": "sass-lint static/**/*.scss --verbose --no-exit",
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle docs/ templates/phone/ templates/landscape/ templates/documentation-builder/ templates/conjure-up/ templates/core/ templates/maas/ static/media"
   },

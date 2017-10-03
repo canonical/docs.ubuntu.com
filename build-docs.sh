@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -exuo pipefail
+set -euo pipefail
 
 refresh_repo() {
   folder=$1
@@ -54,8 +54,10 @@ build_docs () {
 
       (
         cd ${folder}
-        ../../bin/repo init -u ${repo_url}
-        ../../bin/repo sync
+        git config --global user.email "noone@example.com"
+        git config --global user.name "Noone"
+        bash -c "yes || true" | ../../bin/repo init -q -u ${repo_url}
+        ../../bin/repo sync -q
       )
 
       documentation-builder --base-directory "${folder}"  \
