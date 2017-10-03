@@ -13,8 +13,7 @@ ENV LANG C.UTF-8
 RUN pip3 install --upgrade pip && pip3 install gunicorn -r requirements.txt
 
 # Set git commit ID
-ARG commit_id
-ENV COMMIT_ID=$commit_id
+ARG COMMIT_ID=""
 
 # Setup commands to run server
 EXPOSE 80
