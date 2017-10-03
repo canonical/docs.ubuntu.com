@@ -1,14 +1,18 @@
 {
   "scripts": {
-    "watch": "node-sass --include-path node_modules --source-map true --watch static/sass --output static/css",
-    "build": "node-sass --include-path node_modules static/sass --output static/css",
+    "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build'",
+    "build": "./build-docs.sh && node-sass --include-path node_modules static/sass --output static/css && postcss --use autoprefixer --replace static/css/**/*.css && postcss --use cssnano --dir static/css/minified static/css/**/*.css",
     "test": "sass-lint static/**/*.scss --verbose --no-exit",
-    "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite docs/ templates/phone/ templates/landscape/ templates/documentation-builder/ templates/conjure-up/ templates/core/ templates/maas/2.*/"
+    "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle docs/ templates/phone/ templates/landscape/ templates/documentation-builder/ templates/conjure-up/ templates/core/ templates/maas/ static/media"
   },
-  "devDependencies": {
+  "dependencies": {
     "sass-lint": "^1.10.2",
-    "node-sass": "^4.5.3",
     "vanilla-framework": "1.1.7",
-    "docs-vanilla-theme": "1.1.0"
+    "docs-vanilla-theme": "1.1.0",
+    "watch-cli": "^0.2.2",
+    "cssnano": "^3.10.0",
+    "postcss-cli": "^4.1.0",
+    "sass-lint": "^1.10.2",
+    "node-sass": "^4.5.3"
   }
 }
