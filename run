@@ -426,7 +426,7 @@ case $run_command in
         # Run flake8 (python syntax) checks
         if [ -f manage.py ] || [ -f app.py ] || [ -f tests.py ]; then
             echo "- Running flake8 tests"
-            python_run "" flake8 --exclude '*env*,node_modules' || test_error=true
+            python_run "" flake8 --exclude 'build,*env*,node_modules' || test_error=true
         fi
 
         # Report success or failure
