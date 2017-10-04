@@ -2,8 +2,8 @@
 # ===
 
 # MAAS
-maas(/|/en/?|/2.1/?)?: /maas/2.1/en/
-maas/(?P<version>[0-9-\._]+|devel)(/|/index): /maas/{version}/en/
+maas(/|/en/?)?: /maas/2.2/en/
+maas/(?P<version>[0-9-\._]+|devel)(/|/index)?: /maas/{version}/en/
 maas/(?P<version>[0-9-\._]+|devel)/(?P<language>[a-zA-Z]{2})(/index)?: /maas/{version}/{language}/
 maas/devel/en/intel-rsd/?: /maas/devel/en/nodes-comp-hw
 maas/2.1/en/installconfig-deploy-nodes/?: /maas/2.1/en/installconfig-nodes-deploy
