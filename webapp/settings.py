@@ -3,6 +3,8 @@ Django project settings
 """
 
 import os
+import socket
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # This will set the SECRET_KEY to "no_secret", unless the SECRET_KEY
@@ -51,6 +53,11 @@ WHITENOISE_ALLOW_ALL_ORIGINS = False
 
 ASSET_SERVER_URL = 'https://assets.ubuntu.com/v1/'
 
+CUSTOM_HEADERS = {
+    'X-commit-ID': os.getenv('COMMIT_ID'),
+    'X-Hostname': socket.gethostname()
+}
+
 # See https://docs.djangoproject.com/en/dev/ref/contrib/
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
@@ -58,6 +65,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'canonicalwebteam.custom_response_headers.Middleware',
     'unslashed.middleware.RemoveSlashMiddleware',
 ]
 
