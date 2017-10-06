@@ -14,6 +14,7 @@ RUN pip3 install --upgrade pip && pip3 install gunicorn -r requirements.txt
 
 # Set git commit ID
 ARG COMMIT_ID
+ENV COMMIT_ID=${COMMIT_ID}
 RUN test -n "${COMMIT_ID}"
 
 # Setup commands to run server
