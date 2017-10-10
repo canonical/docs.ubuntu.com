@@ -88,6 +88,7 @@ build_docs () {
                             --search-url "/search"  \
                             --search-placeholder "Search ${name} docs"  \
                             --search-domain "docs.ubuntu.com/${name}"  \
+                            --build-version-branches  \
                             --media-url "/static/media/${name}"  \
                             --tag-manager-code "GTM-K92JCQ"  \
                             --no-link-extensions 
