@@ -31,13 +31,13 @@ conjure-up/en/(?P<page>.+): /conjure-up/2.2.0/en/{page}
 # ===
 
 # Redirect project section roots to English language
-(?P<project>(conjure-up|core|documentation-builder|landscape|phone))/?: /{project}/en/
+(?P<project>(conjure-up|core|documentation-builder|landscape))/?: /{project}/en/
 
 # Add slash to language and version folders, and remove "index"
-(?P<project>(conjure-up|core|documentation-builder|landscape|phone))/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
+(?P<project>(conjure-up|core|documentation-builder|landscape))/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
 
 # Remove trailing slash or .html from document URLs
-(?P<project>(maas|conjure-up|core|documentation-builder|landscape|phone))/(?P<version>[a-zA-Z0-9-\._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
+(?P<project>(maas|conjure-up|core|documentation-builder|landscape))/(?P<version>[a-zA-Z0-9-\._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
 
 # Pages redirects:
 # On 12/01/2017
