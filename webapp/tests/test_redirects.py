@@ -34,22 +34,6 @@ class RedirectCoreTestCase(RedirectTestCase):
         self._assertRedirect('/core/en/test/index.html', self.test_index)
 
 
-class RedirectPhoneTestCase(RedirectTestCase):
-    home = '/phone/en/'
-    test_page = '/phone/en/test'
-    test_index = '/phone/en/test/index'
-
-    def test_redirect_phone_to_en(self):
-        self._assertRedirect('/phone', self.home)
-        self._assertRedirect('/phone/', self.home)
-        self._assertRedirect('/phone/en', self.home)
-        self._assertDoesNotRedirect(self.home)
-
-    def test_redirect_phone_simple_path(self):
-        self._assertRedirect('/phone/en/test/', self.test_page)
-        self._assertRedirect('/phone/en/test/index.html', self.test_index)
-
-
 class RedirectMAASTestCase(RedirectTestCase):
     home = '/maas/2.2/en/'
     test_page = '/maas/2.1/en/test'
