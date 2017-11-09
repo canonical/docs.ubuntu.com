@@ -61,7 +61,7 @@ build_docs () {
         ../../bin/repo sync -q
       )
 
-      documentation-builder --base-directory "${folder}"  \
+      documentation-builder --base-directory "${folder}/docs"  \
                             --site-root "/${name}/"  \
                             --output-path "templates/${name}"  \
                             --output-media-path "static/media/${name}"  \
