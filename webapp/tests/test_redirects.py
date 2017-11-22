@@ -35,9 +35,9 @@ class RedirectCoreTestCase(RedirectTestCase):
 
 
 class RedirectMAASTestCase(RedirectTestCase):
-    home = '/maas/2.2/en/'
+    home = '/maas/2.3/en/'
     test_page = '/maas/2.1/en/test'
-    test_index = '/maas/2.2/en/test/index'
+    test_index = '/maas/2.3/en/test/index'
 
     def test_does_not_redirect_maas_root_path(self):
         self._assertDoesNotRedirect(self.home)
@@ -45,9 +45,9 @@ class RedirectMAASTestCase(RedirectTestCase):
     def test_redirect_maas_to_en_with_version(self):
         self._assertRedirect('/maas', self.home)
         self._assertRedirect('/maas/', self.home)
-        self._assertRedirect('/maas/2.2', self.home)
-        self._assertRedirect('/maas/2.2/', self.home)
-        self._assertRedirect('/maas/2.2/en', self.home)
+        self._assertRedirect('/maas/2.3', self.home)
+        self._assertRedirect('/maas/2.3/', self.home)
+        self._assertRedirect('/maas/2.3/en', self.home)
         self._assertRedirect('/maas/en', self.home)
         self._assertRedirect('/maas/en/', self.home)
 
@@ -57,4 +57,4 @@ class RedirectMAASTestCase(RedirectTestCase):
 
     def test_redirect_maas_simple_path(self):
         self._assertRedirect('/maas/2.1/en/test/', self.test_page)
-        self._assertRedirect('/maas/2.2/en/test/index.html', self.test_index)
+        self._assertRedirect('/maas/2.3/en/test/index.html', self.test_index)

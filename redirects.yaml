@@ -2,7 +2,8 @@
 # ===
 
 # MAAS
-maas(/|/en/?)?: /maas/2.2/en/
+maas(/|/en/?|/2.4.0/?)?: /maas/2.3/en/
+maas/en/(?P<page>.+): /maas/2.3/en/{page}
 maas/(?P<version>[0-9-\._]+|devel)(/|/index)?: /maas/{version}/en/
 maas/(?P<version>[0-9-\._]+|devel)/(?P<language>[a-zA-Z]{2})(/index)?: /maas/{version}/{language}/
 maas/devel/en/intel-rsd/?: /maas/devel/en/nodes-comp-hw
@@ -19,9 +20,6 @@ maas/2.2/en/installconfig-commisson-nodes/?: /maas/2.2/en/nodes-commission
 maas/2.2/en/installconfig-nodes-deploy/?: /maas/2.2/en/nodes-deploy
 maas/2.2/en/installconfig-nodes-power-types/?: /maas/2.2/en/nodes-power-types
 maas/2.2/en/intel-rsd/?: /maas/2.2/en/nodes-comp-hw
-
-# conjure-up
-conjure-up(/|/en/?)?: /conjure-up/2.4.0/en/
 
 # conjure-up
 conjure-up(/|/en/?|/2.4.0/?)?: /conjure-up/2.4.0/en/
