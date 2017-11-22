@@ -14,26 +14,6 @@ class RedirectTestCase(SimpleTestCase):
         self.assertTrue(response.status_code not in [301, 302])
 
 
-class RedirectCoreTestCase(RedirectTestCase):
-    home = '/core/en/'
-    test_page = '/core/en/test'
-    test_index = '/core/en/test/index'
-
-    def test_redirect_core_to_en(self):
-        self._assertRedirect('/core', self.home)
-        self._assertRedirect('/core/', self.home)
-        self._assertRedirect('/core/en', self.home)
-        self._assertDoesNotRedirect(self.home)
-
-    def test_does_not_redirect_maas_simple_path(self):
-        self._assertDoesNotRedirect(self.test_page)
-        self._assertDoesNotRedirect(self.test_index)
-
-    def test_redirect_core_simple_path(self):
-        self._assertRedirect('/core/en/test/', self.test_page)
-        self._assertRedirect('/core/en/test/index.html', self.test_index)
-
-
 class RedirectMAASTestCase(RedirectTestCase):
     home = '/maas/2.2/en/'
     test_page = '/maas/2.1/en/test'
