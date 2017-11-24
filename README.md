@@ -10,12 +10,6 @@ A central platform for hosting Ubuntu's various documentation portals.
 
 First [install Docker](https://www.docker.com/community-edition#/download). Linux users may need to add their user to the `docker` group.
 
-Then install [documentation-builder](https://github.com/canonicalltd/documentation-builder). E.g.:
-
-`` bash
-sudo snap install documentation-builder
-```
-
 ### Run the local development server
 
 To run the site locally:
