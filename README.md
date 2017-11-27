@@ -10,12 +10,6 @@ A central platform for hosting Ubuntu's various documentation portals.
 
 First [install Docker](https://www.docker.com/community-edition#/download). Linux users may need to add their user to the `docker` group.
 
-Then install [git-repo](https://github.com/esrlabs/git-repo) and [documentation-builder](https://github.com/canonicalltd/documentation-builder). E.g.:
-
-`` bash
-sudo snap install git-repo documentation-builder
-```
-
 ### Run the local development server
 
 To run the site locally:

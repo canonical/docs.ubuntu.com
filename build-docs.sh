@@ -45,34 +45,6 @@ up_to_date() {
 build_docs () {
     mkdir -p build
 
-    # Core docs
-    folder="build/core"
-    name="core"
-    repo_url="https://github.com/canonicalltd/ubuntu-core-docs.git"
-
-    if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} master
-
-      (
-        cd ${folder}
-        git config --global user.email "noone@example.com"
-        git config --global user.name "Noone"
-        bash -c "yes || true" | ../../bin/repo init -q -u ${repo_url}
-        ../../bin/repo sync -q
-      )
-
-      documentation-builder --base-directory "${folder}/docs"  \
-                            --site-root "/${name}/"  \
-                            --output-path "templates/${name}"  \
-                            --output-media-path "static/media/${name}"  \
-                            --search-url "/search"  \
-                            --search-placeholder "Search Core docs"  \
-                            --search-domain "docs.ubuntu.com/${name}"  \
-                            --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions
-    fi
-
     # Conjure-up docs
     folder="build/conjure-up"
     name="conjure-up"
@@ -91,7 +63,7 @@ build_docs () {
                             --build-version-branches  \
                             --media-url "/static/media/${name}"  \
                             --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions 
+                            --no-link-extensions
     fi
 
     # Documentation-builder
@@ -112,9 +84,9 @@ build_docs () {
                             --source-folder docs  \
                             --media-url "/static/media/${name}"  \
                             --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions 
+                            --no-link-extensions
     fi
-      
+
     # MAAS docs
     folder="build/maas"
     name="maas"
@@ -133,7 +105,7 @@ build_docs () {
                             --build-version-branches  \
                             --media-url "/static/media/${name}"  \
                             --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions 
+                            --no-link-extensions
     fi
 
     # Landscape docs
@@ -153,7 +125,7 @@ build_docs () {
                             --search-domain "docs.ubuntu.com/${name}"  \
                             --media-url "/static/media/${name}"  \
                             --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions 
+                            --no-link-extensions
     fi
 }
 
