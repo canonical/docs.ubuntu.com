@@ -87,27 +87,6 @@ build_docs () {
                             --no-link-extensions
     fi
 
-    # MAAS docs
-    folder="build/maas"
-    name="maas"
-    repo_url="https://github.com/canonicalltd/maas-docs.git"
-
-    if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} master
-
-      documentation-builder --base-directory "${folder}"  \
-                            --site-root "/${name}/"  \
-                            --output-path "templates/${name}"  \
-                            --output-media-path "static/media/${name}"  \
-                            --search-url "/search"  \
-                            --search-placeholder "Search MAAS docs"  \
-                            --search-domain "docs.ubuntu.com/${name}"  \
-                            --build-version-branches  \
-                            --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions
-    fi
-
     # Style Guide docs
     folder="build/styleguide"
     name="styleguide"
