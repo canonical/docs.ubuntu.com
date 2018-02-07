@@ -45,27 +45,6 @@ up_to_date() {
 build_docs () {
     mkdir -p build
 
-    # Conjure-up docs
-    folder="build/conjure-up"
-    name="conjure-up"
-    repo_url="https://github.com/canonicalltd/docs-conjure-up.git"
-
-    if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} master
-
-      documentation-builder --base-directory "${folder}"  \
-                            --site-root "/${name}/"  \
-                            --output-path "templates/${name}"  \
-                            --output-media-path "static/media/${name}"  \
-                            --search-url "/search"  \
-                            --search-placeholder "Search ${name} docs"  \
-                            --search-domain "docs.ubuntu.com/${name}"  \
-                            --build-version-branches  \
-                            --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions
-    fi
-
     # Documentation-builder
     folder="build/documentation-builder"
     name="documentation-builder"
