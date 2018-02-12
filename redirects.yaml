@@ -2,37 +2,21 @@
 # ===
 
 # MAAS
-maas(/|/en/?|/2.4.0/?)?: /maas/2.3/en/
-maas/en/(?P<page>.+): /maas/2.3/en/{page}
-maas/(?P<version>[0-9-\._]+|devel)(/|/index)?: /maas/{version}/en/
-maas/(?P<version>[0-9-\._]+|devel)/(?P<language>[a-zA-Z]{2})(/index)?: /maas/{version}/{language}/
-maas/devel/en/intel-rsd/?: /maas/devel/en/nodes-comp-hw
-maas/2.1/en/installconfig-deploy-nodes/?: /maas/2.1/en/installconfig-nodes-deploy
-maas/2.1/en/installconfig-gui/?: /maas/2.1/en/installconfig-webui
-maas/2.1/en/installconfig-hwe-kernels/?: /maas/2.1/en/installconfig-nodes-ubuntu-kernels
-maas/2.1/en/installconfig-kernel/?: /maas/2.1/en/installconfig-nodes-kernel-boot-options
-maas/2.1/en/installconfig-server-iso/?: /maas/2.1/en/installconfig-iso-install
-maas/2.1/en/installconfig-commisson-nodes/?: /maas/2.1/en/nodes-commission
-maas/2.1/en/installconfig-add-nodes/?: /maas/2.1/en/nodes-add
-maas/2.2/en/installconfig-nodes-hw-testing/?: /maas/2.2/en/nodes-hw-testing
-maas/2.2/en/installconfig-add-nodes/?: /maas/2.2/en/nodes-add
-maas/2.2/en/installconfig-commisson-nodes/?: /maas/2.2/en/nodes-commission
-maas/2.2/en/installconfig-nodes-deploy/?: /maas/2.2/en/nodes-deploy
-maas/2.2/en/installconfig-nodes-power-types/?: /maas/2.2/en/nodes-power-types
-maas/2.2/en/intel-rsd/?: /maas/2.2/en/nodes-comp-hw
+maas: https://docs.maas.io/
+maas/(?P<page>.+): https://docs.maas.io/{page}
 
 # conjure-up
-conjure-up(/|/en/?|/2.4.0/?)?: /conjure-up/2.4.0/en/
-conjure-up/en/(?P<page>.+): /conjure-up/2.4.0/en/{page}
+conjure-up: https://docs.conjure-up.io/
+conjure-up/(?P<page>.+): https://docs.conjure-up.io/{page}
 
 # Generic rules
 # ===
 
 # Redirect project section roots to English language
-(?P<project>(conjure-up|documentation-builder|landscape))/?: /{project}/en/
+(?P<project>(documentation-builder|landscape))/?: /{project}/en/
 
 # Add slash to language and version folders, and remove "index"
-(?P<project>(conjure-up|documentation-builder|landscape))/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
+(?P<project>(documentation-builder|landscape))/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
 
 # Remove trailing slash or .html from document URLs
-(?P<project>(maas|conjure-up|documentation-builder|landscape))/(?P<version>[a-zA-Z0-9-\._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
+(?P<project>(documentation-builder|landscape))/(?P<version>[a-zA-Z0-9-\._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
