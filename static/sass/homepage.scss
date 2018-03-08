@@ -1,11 +1,8 @@
+$color-navigation-background: #e95420;
+
 @import 'vanilla-framework/scss/vanilla';
 @include vanilla;
 
-.row {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-
-.u-column-nowrap {
-  white-space: nowrap;
+td {
+  vertical-align: top;
 }
