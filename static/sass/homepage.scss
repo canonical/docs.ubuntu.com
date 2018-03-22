@@ -1,9 +1,12 @@
 $color-navigation-background: #e95420;
 
 @import 'vanilla-framework/scss/vanilla';
+@import 'patterns/_pattern_footer';
+@import 'patterns/_pattern_lists';
 @include vanilla;
+@include ubuntu-p-footer;
+@include ubuntu-p-lists;
 
 td {
   vertical-align: top;
 }
-
