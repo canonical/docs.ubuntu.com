@@ -1,7 +1,9 @@
 $color-navigation-background: #e95420;
 
 @import 'vanilla-framework/scss/vanilla';
+@import 'patterns_social-icons';
 @include vanilla;
+@include p-social-icons;
 
 td {
   vertical-align: top;
