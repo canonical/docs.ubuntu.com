@@ -1,0 +1,12 @@
+@import 'settings_colors';
+
+@import 'vanilla-framework/scss/vanilla';
+@include vanilla;
+
+@import 'patterns_navigation';
+
+@include docs-p-navigation;
+
+td {
+  vertical-align: top;
+}
