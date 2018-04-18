@@ -1,0 +1,16 @@
+@mixin docs-p-navigation {
+  .p-navigation {
+    // Remove the external link being added to the site title
+    &__link {
+      &.p-link--external::after {
+        display: none;
+      }
+    }
+
+    // Slightly align the search box as there are no navigation items
+    .p-search-box {
+      top: 3px;
+      right: 3px;
+    }
+  }
+}
