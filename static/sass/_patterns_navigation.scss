@@ -2,7 +2,7 @@
   .p-navigation {
     // Remove the external link being added to the site title
     &__link {
-      &.p-link--external:after {
+      &.p-link--external::after {
         display: none;
       }
     }
