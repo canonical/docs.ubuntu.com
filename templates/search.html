@@ -20,8 +20,19 @@
       .pagination__back :first-child {
         margin-left: 0;
       }
-      .pagination__back {
+      .pagination__back {pagination
         float: left;
+      }
+
+      .p-navigation {
+        background-color: #fff;
+      }
+      .p-navigation .p-navigation__link {
+        color: #333 !important;
+      }
+
+      #search-results article b {
+        margin-top: 0;
       }
     </style>
 
@@ -124,7 +135,7 @@
 
       <div class="p-strip">
         <div class="row">
-          <div class="col-9">
+          <div class="col-19">
             {% if query %}
               {% if error %}
                 <label for="search-input" role="error" class="error-notification">
@@ -138,12 +149,12 @@
                     <p>Results {{ results.start }} to {{ results.end }}</p>
 
                     {% for item in results.items %}
-                      <article>
+                      <article class="p-strip is-shallow is-bordered">
                         <h4>
                           <a href="{{ item.url }}">{{ item.title | safe }}</a>
-                          <small>{{ item.url }}</small>
                         </h4>
-                        <p>{{ item.summary | safe }}</p>
+                        <p><small>{{ item.url }}</small></p>
+                        <p class="u-no-margin--top">{{ item.summary | safe }}</p>
                       </article>
                     {% endfor %}
 
