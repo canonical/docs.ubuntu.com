@@ -2,7 +2,7 @@
 from django.conf.urls import url
 from django_yaml_redirects import load_redirects
 from django_template_finder_view import TemplateFinder
-from ubuntudesign.gsa.views import SearchView
+from canonicalwebteam.gsa.views import SearchView
 
 # Local
 from webapp.views import custom_404, custom_500
