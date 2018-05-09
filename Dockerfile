@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install --yes python3-pip
 
 # Python dependencies
 ENV LANG C.UTF-8
-RUN pip3 install --upgrade pip && pip3 install gunicorn -r requirements.txt
+RUN pip3 install gunicorn -r requirements.txt
 
 # Set git commit ID
 ARG COMMIT_ID
@@ -19,5 +19,5 @@ RUN test -n "${COMMIT_ID}"
 
 # Setup commands to run server
 EXPOSE 80
-ENTRYPOINT ["gunicorn", "webapp.wsgi", "-b"]
+ENTRYPOINT ["talisker.gunicorn", "webapp.wsgi", "--access-logfile", "-", "--error-logfile", "-", "--bind"]
 CMD ["0.0.0.0:80"]
