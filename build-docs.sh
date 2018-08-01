@@ -106,9 +106,9 @@ build_docs () {
                             --no-link-extensions
     fi
 
-    # Snap Enterprise Proxy docs
-    folder="build/snap-enterprise-proxy"
-    name="snap-enterprise-proxy"
+    # Snap Store Proxy docs
+    folder="build/snap-store-proxy"
+    name="snap-store-proxy"
     repo_url="https://github.com/canonical-ols/snapstore-snap-docs.git"
 
     if ! up_to_date ${folder} ${repo_url}; then
@@ -119,7 +119,7 @@ build_docs () {
                             --output-path "templates/${name}"  \
                             --output-media-path "static/media/${name}"  \
                             --search-url "/search"  \
-                            --search-placeholder "Search Snap Enterprise Proxy docs"  \
+                            --search-placeholder "Search Snap Store Proxy docs"  \
                             --search-domain "docs.ubuntu.com/${name}"  \
                             --media-url "/static/media/${name}"  \
                             --tag-manager-code "GTM-K92JCQ"  \

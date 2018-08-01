@@ -9,14 +9,18 @@ maas/(?P<page>.+): https://docs.maas.io/{page}
 conjure-up: https://docs.conjure-up.io/
 conjure-up/(?P<page>.+): https://docs.conjure-up.io/{page}
 
+# snap-store-proxy
+snap-enterprise-proxy: /snap-store-proxy
+snap-enterprise-proxy/(?P<page>.+): /snap-store-proxy/{page}
+
 # Generic rules
 # ===
 
 # Redirect project section roots to English language
-(?P<project>(documentation-builder|landscape|snap-enterprise-proxy))/?: /{project}/en/
+(?P<project>(documentation-builder|landscape|snap-store-proxy))/?: /{project}/en/
 
 # Add slash to language and version folders, and remove "index"
-(?P<project>(documentation-builder|landscape|snap-enterprise-proxy))/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
+(?P<project>(documentation-builder|landscape|snap-store-proxy))/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
 
 # Remove trailing slash or .html from document URLs
-(?P<project>(documentation-builder|landscape|snap-enterprise-proxy))/(?P<version>[a-zA-Z0-9-\._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
+(?P<project>(documentation-builder|landscape|snap-store-proxy))/(?P<version>[a-zA-Z0-9-\._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
