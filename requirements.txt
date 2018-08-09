@@ -7,6 +7,7 @@ django-template-finder-view==0.2
 django-unslashed==0.3.0
 django-yaml-redirects==0.5.4
 canonicalwebteam.gsa==2.0.1
-talisker==0.9.7
+talisker==0.9.13
+gunicorn[gevent]
 whitenoise==3.3.0
 ubuntudesign.documentation-builder==1.5.1
