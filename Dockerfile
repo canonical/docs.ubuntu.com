@@ -1,5 +1,5 @@
 # Build final image
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
 # Import code, install code dependencies
 WORKDIR /srv
@@ -10,14 +10,14 @@ RUN apt-get update && apt-get install --yes python3-pip
 
 # Python dependencies
 ENV LANG C.UTF-8
-RUN pip3 install gunicorn -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 # Set git commit ID
 ARG COMMIT_ID
-ENV COMMIT_ID=${COMMIT_ID}
 RUN test -n "${COMMIT_ID}"
+RUN echo "${COMMIT_ID}" > version-info.txt
 
 # Setup commands to run server
 EXPOSE 80
-ENTRYPOINT ["talisker.gunicorn", "webapp.wsgi", "--access-logfile", "-", "--error-logfile", "-", "--bind"]
+ENTRYPOINT ["./entrypoint"]
 CMD ["0.0.0.0:80"]
