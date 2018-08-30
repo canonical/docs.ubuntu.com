@@ -5,7 +5,7 @@ ENV LANG C.UTF-8
 WORKDIR /srv
 
 # System dependencies
-RUN apt-get update && apt-get install --yes python3-pip
+RUN apt-get update && apt-get install --yes python3-pip net-tools
 
 # Import code, install code dependencies
 ADD . .
