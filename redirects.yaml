@@ -24,3 +24,6 @@ snap-enterprise-proxy/(?P<page>.*): /snap-store-proxy/{page}
 
 # Remove trailing slash or .html from document URLs
 (?P<project>(documentation-builder|landscape|snap-store-proxy))/(?P<version>[a-zA-Z0-9-\._]+/)?(?P<language>[a-zA-Z]{2})/(?P<document>.*)(/|.html): /{project}/{version}{language}/{document}
+
+# Redirect to www.ubuntu.com search
+search/?$: https://www.ubuntu.com/search
