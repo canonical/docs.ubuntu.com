@@ -1,5 +1,17 @@
 @mixin docs-p-navigation {
   .p-navigation {
+    // Site title align to baseline of lockup
+    @media screen and (min-width: $breakpoint-medium) and (max-width: $breakpoint-large) {
+      .h4  {
+        margin-bottom: -.8rem;
+      }
+      @media screen and (min-width: $breakpoint-small) {
+        .h4  {
+          margin-top: 6rem;
+        }
+      }
+    }
+
     // Remove the external link being added to the site title
     &__link {
       &.p-link--external::after {
@@ -9,8 +21,8 @@
 
     // Slightly align the search box as there are no navigation items
     .p-search-box {
-      top: 3px;
       right: 3px;
+      top: 3px;
     }
   }
 }
