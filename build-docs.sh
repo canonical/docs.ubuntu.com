@@ -45,27 +45,6 @@ up_to_date() {
 build_docs () {
     mkdir -p build
 
-    # Documentation-builder
-    folder="build/documentation-builder"
-    name="documentation-builder"
-    repo_url="https://github.com/canonical-webteam/documentation-builder.git"
-
-    if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} master
-
-      documentation-builder --base-directory "${folder}"  \
-                            --site-root "/${name}/"  \
-                            --output-path "templates/${name}"  \
-                            --output-media-path "static/media/${name}"  \
-                            --search-url "/search"  \
-                            --search-placeholder "Search Builder docs"  \
-                            --search-domain "docs.ubuntu.com/${name}"  \
-                            --source-folder docs  \
-                            --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-K92JCQ"  \
-                            --no-link-extensions
-    fi
-
     # Style Guide docs
     folder="build/styleguide"
     name="styleguide"
