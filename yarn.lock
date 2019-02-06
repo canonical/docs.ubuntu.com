@@ -2919,9 +2919,9 @@ vanilla-framework@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-1.0.0.tgz#cd45e3f10f9516d61370420fa7248e8e8b2097e6"
 
-vanilla-framework@1.6.7:
-  version "1.6.7"
-  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-1.6.7.tgz#c4fb65674e709abbf7e75a4f14152aa90c99c30f"
+vanilla-framework@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-1.8.0.tgz#b5aacc3ce60a521b8de8f160cb505807aadc7869"
 
 vendors@^1.0.0:
   version "1.0.1"
