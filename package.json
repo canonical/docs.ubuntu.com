@@ -2,18 +2,17 @@
   "scripts": {
     "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build-sass'",
     "build-docs": "./build-docs.sh",
-    "build-sass": "node-sass --include-path node_modules static/sass --output static/css && postcss --use autoprefixer --replace static/css/**/*.css && postcss --use cssnano --dir static/css/minified static/css/**/*.css",
+    "build-sass": "node-sass --include-path node_modules static/sass --source-map false --output-style compressed --output static/css && postcss --use autoprefixer --map false --replace 'static/css/**/*.css'",
     "build": "yarn run build-docs && yarn run build-sass",
     "serve": "./entrypoint 0.0.0.0:${PORT}",
     "test": "sass-lint static/**/*.scss --verbose --no-exit",
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle docs/ templates/landscape/ templates/documentation-builder/ static/media"
   },
   "dependencies": {
+    "autoprefixer": "9.4.7",
     "sass-lint": "1.10.2",
-    "vanilla-framework": "1.8.0",
-    "docs-vanilla-theme": "1.1.0",
+    "vanilla-framework": "1.8.1",
     "watch-cli": "0.2.2",
-    "cssnano": "4.1.9",
     "postcss-cli": "6.1.1",
     "node-sass": "4.5.3"
   }
