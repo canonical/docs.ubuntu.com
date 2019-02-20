@@ -13,6 +13,9 @@ conjure-up/(?P<page>.*): https://docs.conjure-up.io/{page}
 snap-enterprise-proxy: /snap-store-proxy/en/
 snap-enterprise-proxy/(?P<page>.*): /snap-store-proxy/{page}
 
+# Landsacpe
+landscape/en/landscape-api/?: /landscape/en/api
+
 # Documentation-builder
 documentation-builder/?: https://github.com/canonical-webteam/documentation-builder/tree/master/docs
 documentation-builder/(?P<page>.*)/: https://github.com/canonical-webteam/documentation-builder/tree/master/docs/{page}
