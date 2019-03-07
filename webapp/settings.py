@@ -60,13 +60,13 @@ CUSTOM_HEADERS = {
 
 # See https://docs.djangoproject.com/en/dev/ref/contrib/
 INSTALLED_APPS = [
-    'django.contrib.staticfiles',
-    'canonicalwebteam'
+    "whitenoise.runserver_nostatic",
+    "django.contrib.staticfiles",
+    "canonicalwebteam",
 ]
-
-MIDDLEWARE_CLASSES = [
-    'canonicalwebteam.custom_response_headers.Middleware',
-    'unslashed.middleware.RemoveSlashMiddleware',
+MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "canonicalwebteam.custom_response_headers.Middleware",
 ]
 
 STATICFILES_FINDERS = [
