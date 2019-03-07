@@ -1,15 +1,19 @@
-{% load versioned_static %}
-<!doctype html>
+{% extends 'includes/layout.html' %}
 
-<html>
-    <head>
-        <title>500 - Server error</title>
-
-        <link rel="stylesheet" href="{% versioned_static 'css/main.css' %}" />
-    </head>
-
-    <body>
-        <h1>500 - Server error</h1>
-        <p>There has been an error with the site.</p>
-    </body>
-</html>
+{% block content %}
+<div class="row">
+    <div class="row col-8">
+        <h1>Ubuntu documentation</h1>
+        <h2>Server error (500)</h2>
+        <p>We encountered an error trying to serve this page. If you have time, please <a href="https://github.com/canonical-websites/docs.ubuntu.com/issues/new">file an issue</a> about the problem.</p>
+        <p>To find what you're looking for you could try:</p>
+        <ul>
+            <li>Viewing <a href="/">all documentation</a></li>
+            <li><a href="https://www.ubuntu.com/search">Searching all Ubuntu sites</a></li>
+        </ul>
+    </div>
+    <div class="row col-4">
+        <img src="https://assets.ubuntu.com/v1/bcdcf2c8-image-404.svg?w=442" />
+    </div>
+</div>
+{% endblock content %}
