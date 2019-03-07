@@ -15,6 +15,7 @@ snap-enterprise-proxy/(?P<page>.*): /snap-store-proxy/{page}
 
 # Landsacpe
 landscape/en/landscape-api/?: /landscape/en/api
+landscape/en/onprem-overview/?: /landscape/en/onprem
 
 # Documentation-builder
 documentation-builder/?: https://github.com/canonical-webteam/documentation-builder/tree/master/docs
