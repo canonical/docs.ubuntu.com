@@ -4,11 +4,11 @@ canonicalwebteam.versioned-static==1.0.2
 canonicalwebteam.yaml-responses==1.1.0
 django-static-root-finder==0.3.1
 django-asset-server-url==0.1
-django-template-finder-view==0.2
+django-template-finder-view==0.3
 django-yaml-redirects==0.5.4
-statsd==3.2.2
-prometheus_client==0.3.1
-talisker==0.9.16
+statsd==3.3.0
+prometheus_client==0.6.0
+talisker==0.13.0
 gunicorn[gevent]
 whitenoise==4.1.2
-ubuntudesign.documentation-builder==1.6.0
+ubuntudesign.documentation-builder==1.6.2
