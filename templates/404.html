@@ -5,19 +5,14 @@
     <div class="row col-8">
         <h1>Ubuntu documentation</h1>
         <h2>Page not found (404)</h2>
-        <p>There is no page at this URL. How would you like to proceed?</p>
+        <p>To find what you're looking for you could try:</p>
         <ul>
-            {% if '/maas/' in request_path %}
-                <li>Visit the <a href="/maas">the MAAS documentation homepage</a></li>
-            {% elif '/core/' in request_path %}
-                <li>Visit the <a href="/core">the Ubuntu Core documentation homepage</a></li>
-            {% endif %}
-            <li>View <a href="/">all documentation</a></li>
-            <li><a href="https://www.ubuntu.com/search">Search all Ubuntu sites</a></li>
+            <li>Viewing <a href="/">all documentation</a></li>
+            <li><a href="https://www.ubuntu.com/search">Searching all Ubuntu sites</a></li>
         </ul>
     </div>
     <div class="row col-4">
-        <img src="https://manager.assets.ubuntu.com/static/hex-what.svg" />
+        <img src="https://assets.ubuntu.com/v1/bcdcf2c8-image-404.svg?w=442" />
     </div>
 </div>
 {% endblock content %}
