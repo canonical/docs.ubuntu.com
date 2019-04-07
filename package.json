@@ -9,7 +9,7 @@
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle docs/ templates/landscape/ templates/documentation-builder/ static/media"
   },
   "dependencies": {
-    "autoprefixer": "9.4.10",
+    "autoprefixer": "9.5.1",
     "sass-lint": "1.12.1",
     "vanilla-framework": "1.8.1",
     "watch-cli": "0.2.3",
