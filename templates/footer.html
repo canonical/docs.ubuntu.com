@@ -1,66 +1,58 @@
 {% block footer %}
-<footer class="p-footer u-no-margin--top u-clearfix">
-  <div class="row p-footer__container">
-    <p class="u-hide--medium u-hide--large link-to-top"><a href="#"><small>Back to top</small></a></p>
-    <div class="p-footer--secondary">
-      <div class="col-8">
-        <nav>
-          <ul class="p-inline-list">
-            <li class="u-hide--small p-inline-list__item">
-              <a class="p-button--neutral is-compact" href="https://www.ubuntu.com/contact-us"><small>Contact us</small></a>
-            </li>
-            <li class="u-hide--medium is-compact u-hide--large p-inline-list__item">
-              <a class="p-link--soft" href="https://www.ubuntu.com/contact-us"><small>Contact us</small></a>
-            </li>
-            <li class="p-inline-list__item">
-              <a class="p-link--soft" href="https://www.ubuntu.com/about"><small>About us</small></a>
-            </li>
-            <li class="p-inline-list__item">
-              <a class="p-link--soft" href="https://www.ubuntu.com/community"><small>Community</small></a>
-            </li>
-            <li class="p-inline-list__item">
-              <a class="p-link--soft" href="http://www.canonical.com/careers"><small>Careers</small></a>
-            </li>
-            <li class="p-inline-list__item">
-              <a class="p-link--soft" href="https://insights.ubuntu.com/press-centre/"><small>Press centre</small></a>
-            </li>
-          </ul>
-        </nav>
+<div class="p-strip is-shallow">
+  <div class="row">
+    <p class="u-hide--medium u-hide--large link-to-top"><a href="#">Back to top</a></p>
+    <div class="col-8">
+      <ul class="p-inline-list">
+        <li class="u-hide--small p-inline-list__item">
+          <a class="p-button--neutral" href="https://www.ubuntu.com/contact-us">Contact us</a>
+        </li>
+        <li class="u-hide--medium u-hide--large p-inline-list__item">
+          <a class="p-link--soft" href="https://www.ubuntu.com/contact-us">Contact us</a>
+        </li>
+        <li class="p-inline-list__item">
+          <a class="p-link--soft" href="https://www.ubuntu.com/about">About us</a>
+        </li>
+        <li class="p-inline-list__item">
+          <a class="p-link--soft" href="https://www.ubuntu.com/community">Community</a>
+        </li>
+        <li class="p-inline-list__item">
+          <a class="p-link--soft" href="http://www.canonical.com/careers">Careers</a>
+        </li>
+        <li class="p-inline-list__item">
+          <a class="p-link--soft" href="https://insights.ubuntu.com/press-centre/">Press centre</a>
+        </li>
+      </ul>
 
-        <p class="p-footer--secondary__content"><small>&copy; {% now "Y" %} Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</small></p>
-        <nav>
-          <ul class="p-inline-list--middot u-no-margin--bottom">
-            <li class="p-inline-list__item">
-              <a class="p-link--soft" accesskey="8" href="https://www.ubuntu.com/legal"><small>Legal information</small></a>
-            </li>
-            <li class="p-inline-list__item">
-              <a class="p-link--soft" accesskey="9" href="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"><small>Cookie policy</small></a>
-            </li>
-            <li class="p-inline-list__item">
-              <a class="p-link--soft" href="https://github.com/canonical-websites/docs.ubuntu.com/issues/new" id="report-a-bug"><small>Report a bug on this site</small></a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-4">
-        <ul class="p-inline-list u-align--center u-no-margin--top">
-          <li class="p-inline-list__item">
-            <a href="https://twitter.com/ubuntu" title="Share on Twitter"><i class="p-icon--twitter"></i></a>
-          </li>
-          <li class="p-inline-list__item">
-            <a href="https://www.facebook.com/ubuntulinux/" title="Share on Facebook"><i class="p-icon--facebook"></i></a>
-          </li>
-          <li class="p-inline-list__item">
-            <a href="https://www.linkedin.com/company-beta/234280/?pathWildcard=234280" title="Share on LinkedIn"><i class="p-icon--linkedin"></i></a>
-          </li>
-          <li class="p-inline-list__item">
-            <a href="https://twitter.com/ubuntu" title="Share on Twitter"><i class="p-icon--google"></i></a>
-          </li>
-        </ul>
-      </div>
+      <p>&copy; {% now "Y" %} Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <ul class="p-inline-list--middot">
+        <li class="p-inline-list__item">
+          <a class="p-link--soft" accesskey="8" href="https://www.ubuntu.com/legal">Legal information</a>
+        </li>
+        <li class="p-inline-list__item">
+          <a class="p-link--soft" accesskey="9" href="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy">Cookie policy</a>
+        </li>
+        <li class="p-inline-list__item">
+          <a class="p-link--soft" href="https://github.com/canonical-websites/docs.ubuntu.com/issues/new" id="report-a-bug">Report a bug on this site</a>
+        </li>
+      </ul>
     </div>
-
-    <span class="u-off-screen"><a href="#">Go to the top of the page</a></span>
+    <div class="col-4">
+      <ul class="p-inline-list u-align--center u-no-margin--top">
+        <li class="p-inline-list__item">
+          <a href="https://twitter.com/ubuntu" title="Share on Twitter"><i class="p-icon--twitter"></i></a>
+        </li>
+        <li class="p-inline-list__item">
+          <a href="https://www.facebook.com/ubuntulinux/" title="Share on Facebook"><i class="p-icon--facebook"></i></a>
+        </li>
+        <li class="p-inline-list__item">
+          <a href="https://www.linkedin.com/company-beta/234280/?pathWildcard=234280" title="Share on LinkedIn"><i class="p-icon--linkedin"></i></a>
+        </li>
+      </ul>
+    </div>
   </div>
-</footer>
+</div>
+<div>
+  <span class="u-off-screen"><a href="#">Go to the top of the page</a></span>
+</div>
 {% endblock footer %}
