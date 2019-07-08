@@ -1,6 +1,6 @@
 # Ubuntu documentation service
 
-[![Build Status](https://travis-ci.org/ubuntudesign/docs.ubuntu.com.svg?branch=master)](https://travis-ci.org/ubuntudesign/docs.ubuntu.com)
+[![Build Status](https://travis-ci.org/ubuntudesign/docs.ubuntu.com.svg?branch=master)](https://travis-ci.org/ubuntudesign/docs.ubuntu.com) [![CircleCI build status](https://circleci.com/gh/canonical-web-and-design/docs.ubuntu.com.svg?style=shield)](https://circleci.com/gh/canonical-web-and-design/docs.ubuntu.com) [![Code coverage](https://codecov.io/gh/canonical-web-and-design/docs.ubuntu.com/branch/master/graph/badge.svg)](https://codecov.io/gh/canonical-web-and-design/docs.ubuntu.com)
 
 A central platform for hosting Ubuntu's various documentation portals.
 
