@@ -44,14 +44,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Yarn install
-          command: yarn install
+          name: Install dependencies
+          command: yarn && pip3 install -r requirements.txt
       - run:
           name: Yarn build
           command: yarn build
-      - run:
-          name: Install requirements
-          command: pip3 install -r requirements.txt
       - run:
           name: Install dependencies
           command: pip3 install coverage
@@ -65,7 +62,6 @@ workflows:
   build:
     jobs:
       - test-site
-      - linkchecker
       - lint-scss
       - lint-python
       - test-python
