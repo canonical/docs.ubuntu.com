@@ -5,7 +5,10 @@
     "build-sass": "node-sass --include-path node_modules static/sass --source-map false --output-style compressed --output static/css && postcss --use autoprefixer --map false --replace 'static/css/**/*.css'",
     "build": "yarn run build-docs && yarn run build-sass",
     "serve": "./entrypoint 0.0.0.0:${PORT}",
-    "test": "sass-lint static/**/*.scss --verbose --no-exit",
+    "test": "yarn run lint-scss && yarn run lint-python && yarn run test-python",
+    "test-python": "python3 -m unittest discover tests",
+    "lint-python": "flake8 webapp && black --check --line-length 79 webapp",
+    "lint-scss": "sass-lint 'static/sass/**/*.scss' --verbose --no-exit --max-warnings=0",
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle docs/ templates/landscape/ templates/documentation-builder/ static/media"
   },
   "dependencies": {
