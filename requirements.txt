@@ -7,8 +7,7 @@ django-asset-server-url==0.1
 django-template-finder-view==0.3
 django-yaml-redirects==0.5.4
 statsd==3.3.0
-prometheus_client==0.7.1
-talisker==0.14.3
-gunicorn[gevent]
+gevent==1.4.0
+talisker[gunicorn]==0.14.3
 whitenoise==4.1.3
 ubuntudesign.documentation-builder==1.6.2
