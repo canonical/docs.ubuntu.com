@@ -7,6 +7,13 @@ RUN apt update && apt install --no-install-recommends --yes python3 python3-pip 
 ADD requirements.txt /tmp/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement /tmp/requirements.txt
 
+
+# Build stage: Run "yarn run build-css"
+# ===
+FROM yarn-dependencies AS build-css
+ADD static/sass static/sass
+RUN yarn run build-css
+
 # # Build the production image
 # # ===
 FROM ubuntu:bionic
