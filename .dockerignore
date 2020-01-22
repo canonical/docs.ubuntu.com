@@ -85,6 +85,7 @@ yarn.lock
 
 # Git, travis, docker
 .git
+!.git/index
 .gitignore
 .travis.yml
 docker-compose.yml
