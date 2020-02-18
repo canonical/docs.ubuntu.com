@@ -11,3 +11,4 @@ gevent==1.4.0
 talisker[gunicorn]==0.15.0
 whitenoise==5.0.1
 ubuntudesign.documentation-builder==1.6.2
+gitdb2==3.0.1

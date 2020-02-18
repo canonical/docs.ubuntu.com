@@ -10,7 +10,7 @@ RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement
 
 # Build stage: Install yarn dependencies
 # ===
-FROM node:10-slim AS yarn-dependencies
+FROM node:12-slim AS yarn-dependencies
 WORKDIR /srv
 ADD package.json .
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
@@ -21,7 +21,7 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
 FROM ubuntu:bionic AS build-documentation
 WORKDIR /srv
 RUN apt-get update && apt-get install --no-install-recommends --yes git ca-certificates python3 python3-pip python3-setuptools
-RUN pip3 install ubuntudesign.documentation-builder
+RUN pip3 install ubuntudesign.documentation-builder gitdb2==3.0.1
 ADD build-docs.sh build-docs.sh
 ADD .git/index /dev/null
 RUN ./build-docs.sh
