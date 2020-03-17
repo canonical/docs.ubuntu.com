@@ -2268,9 +2268,9 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
-vanilla-framework@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-2.6.0.tgz#67077333993824c2aec3578d44269b37ff862923"
+vanilla-framework@2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-2.8.0.tgz#ec20ed3bf4fc2f1ce2d42075edb7a58c26f56982"
 
 verbalize@^0.1.2:
   version "0.1.2"
