@@ -9,5 +9,6 @@
       "depTypeList": ["devDependencies"],
       "extends": [":automergeMinor"]
     }
-  ]
+  ],
+  "ignoreDeps": ["gitdb2"]
 }
