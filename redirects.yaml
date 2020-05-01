@@ -17,6 +17,9 @@ snap-enterprise-proxy/(?P<page>.*): /snap-store-proxy/{page}
 landscape/en/landscape-api/?: /landscape/en/api
 landscape/en/onprem-overview/?: /landscape/en/onprem
 
+# security-certs
+security-certs/en/fips-16/?: /security-certs/en/fips
+
 # Documentation-builder
 documentation-builder/?: https://github.com/canonical-webteam/documentation-builder/tree/master/docs
 documentation-builder/(?P<page>.*)/: https://github.com/canonical-webteam/documentation-builder/tree/master/docs/{page}
