@@ -62,3 +62,7 @@ env[23]/
 /static/media/*/
 templates/*/
 build/
+
+# dotrun
+.dotrun.json
+.venv

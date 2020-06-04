@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "yarn run build && concurrently --kill-others --raw 'yarn run watch' 'yarn run serve'",
     "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build-sass'",
     "build-docs": "./build-docs.sh",
     "build-sass": "node-sass --include-path node_modules static/sass --source-map false --output-style compressed --output static/css && postcss --use autoprefixer --map false --replace 'static/css/**/*.css'",
@@ -13,10 +14,11 @@
   },
   "dependencies": {
     "autoprefixer": "9.8.0",
+    "concurrently": "5.2.0",
+    "node-sass": "4.14.1",
+    "postcss-cli": "7.1.1",
     "sass-lint": "1.13.1",
     "vanilla-framework": "2.12.1",
-    "watch-cli": "0.2.3",
-    "postcss-cli": "7.1.1",
-    "node-sass": "4.14.1"
+    "watch-cli": "0.2.3"
   }
 }
