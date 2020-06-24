@@ -33,7 +33,7 @@ jobs:
 
       - name: Build assets
         run: |
-          sudo chown root:root /etc/gitconfig
+          sudo rm /etc/gitconfig
           dotrun build
 
       - name: Test site
@@ -92,4 +92,3 @@ jobs:
         run: |
           SECRET_KEY=insecure_secret_key coverage run  --source=. -m unittest discover tests
           bash <(curl -s https://codecov.io/bash) -cF python
-
