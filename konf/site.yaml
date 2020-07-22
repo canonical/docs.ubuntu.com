@@ -2,33 +2,11 @@ domain: docs.ubuntu.com
 
 image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com
 
-useProxy: false
-
 readinessPath: "/"
 
 # Overrides for production
 production:
   replicas: 5
-
-  routes:
-    - paths: [/core]
-      name: docs-ubuntu-com-core
-      app_name: docs.ubuntu.com-core
-      image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com-core
-      replicas: 5
-      readinessPath: "/"
-    - paths: [/phone]
-      name: docs-ubuntu-com-phone
-      app_name: docs.ubuntu.com-phone
-      image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com-phone
-      replicas: 5
-      readinessPath: "/"
-    - paths: [/security-certs]
-      name: docs-ubuntu-com-security-certs
-      app_name: docs.ubuntu.com-security-certs
-      image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com-security-certs
-      replicas: 5
-      readinessPath: "/"
 
   nginxConfigurationSnippet: |
     more_set_headers "Link: <https://assets.ubuntu.com>; rel=preconnect; crossorigin, <https://assets.ubuntu.com>; rel=preconnect";
@@ -36,26 +14,6 @@ production:
 # Overrides for staging
 staging:
   replicas: 3
-
-  routes:
-    - paths: [/core]
-      name: docs-ubuntu-com-core
-      app_name: docs.ubuntu.com-core
-      image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com-core
-      replicas: 3
-      readinessPath: "/"
-    - paths: [/phone]
-      name: docs-ubuntu-com-phone
-      app_name: docs.ubuntu.com-phone
-      image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com-phone
-      replicas: 3
-      readinessPath: "/"
-    - paths: [/security-certs]
-      name: docs-ubuntu-com-security-certs
-      app_name: docs.ubuntu.com-security-certs
-      image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com-security-certs
-      replicas: 3
-      readinessPath: "/"
 
   nginxConfigurationSnippet: |
     more_set_headers "X-Robots-Tag: noindex";
