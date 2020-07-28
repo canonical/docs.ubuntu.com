@@ -2,6 +2,12 @@ domain: docs.ubuntu.com
 
 image: prod-comms.docker-registry.canonical.com/docs.ubuntu.com
 
+env:
+  - name: SENTRY_DSN
+    value: https://02a19f51f9eb4db6ab3d1da5f07be823@sentry.is.canonical.com//38
+
+useProxy: false
+
 readinessPath: "/"
 
 # Overrides for production
