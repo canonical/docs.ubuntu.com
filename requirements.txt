@@ -1,4 +1,4 @@
-Django==3.0.8
+Django==3.1
 canonicalwebteam.custom_response_headers==0.2.0
 canonicalwebteam.versioned-static==1.0.2
 canonicalwebteam.yaml-responses==1.1.1
@@ -7,6 +7,6 @@ django-asset-server-url==0.1
 django-template-finder-view==0.3
 django-yaml-redirects==0.5.4
 talisker[gunicorn,gevent]==0.18.0
-whitenoise==5.1.0
+whitenoise==5.2.0
 ubuntudesign.documentation-builder==1.6.2
 gitdb2==3.0.1
