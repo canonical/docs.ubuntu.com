@@ -61,7 +61,7 @@ build_docs () {
                             --search-placeholder "Search Style Guide docs"  \
                             --search-domain "docs.ubuntu.com/${name}"  \
                             --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-K92JCQ"  \
+                            --tag-manager-code "GTM-KNX3CJC"  \
                             --no-link-extensions
     fi
 
@@ -81,7 +81,7 @@ build_docs () {
                             --search-placeholder "Search Landscape docs"  \
                             --search-domain "docs.ubuntu.com/${name}"  \
                             --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-K92JCQ"  \
+                            --tag-manager-code "GTM-KNX3CJC"  \
                             --no-link-extensions
     fi
 
@@ -101,7 +101,7 @@ build_docs () {
                             --search-placeholder "Search Snap Store Proxy docs"  \
                             --search-domain "docs.ubuntu.com/${name}"  \
                             --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-K92JCQ"  \
+                            --tag-manager-code "GTM-KNX3CJC"  \
                             --no-link-extensions
     fi
 }
