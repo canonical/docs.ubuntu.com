@@ -16,7 +16,7 @@ ADD package.json .
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
 
 
-# Build stage: 
+# Build stage:
 # ===
 FROM ubuntu:bionic AS build-documentation
 WORKDIR /srv
@@ -54,6 +54,7 @@ ENV PATH="/root/.local/bin:${PATH}"
 ADD . .
 RUN rm -rf package.json yarn.lock .babelrc webpack.config.js .git
 COPY --from=build-css /srv/static/css static/css
+COPY --from=build-js /srv/static/js static/js
 COPY --from=build-documentation /srv/templates/* templates/.
 COPY --from=build-documentation /srv/static/media/* static/media/.
 
