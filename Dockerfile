@@ -26,13 +26,16 @@ ADD build-docs.sh build-docs.sh
 ADD .git/index /dev/null
 RUN ./build-docs.sh
 
-
 # Build stage: Build CSS
 # ===
 FROM yarn-dependencies AS build-css
 ADD static/sass static/sass
 RUN yarn run build-sass
 
+# Build stage: Run "yarn run build-js"
+# ===
+FROM yarn-dependencies AS build-js
+RUN yarn run build-js
 
 # Build the production image
 # ===
