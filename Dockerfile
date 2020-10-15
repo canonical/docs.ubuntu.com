@@ -4,7 +4,7 @@
 # ===
 FROM ubuntu:focal AS python-dependencies
 RUN apt update && apt install --no-install-recommends --yes python3 python3-pip python3-setuptools
-ADD requirements.txt /tmp/requirements.txt
+COPY requirements.txt /tmp/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement /tmp/requirements.txt
 
 
@@ -12,11 +12,11 @@ RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement
 # ===
 FROM node:12-slim AS yarn-dependencies
 WORKDIR /srv
-ADD package.json .
+COPY . .
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
 
 
-# Build stage: 
+# Build stage:
 # ===
 FROM ubuntu:bionic AS build-documentation
 WORKDIR /srv
@@ -26,13 +26,16 @@ ADD build-docs.sh build-docs.sh
 ADD .git/index /dev/null
 RUN ./build-docs.sh
 
-
 # Build stage: Build CSS
 # ===
 FROM yarn-dependencies AS build-css
 ADD static/sass static/sass
 RUN yarn run build-sass
 
+# Build stage: Run "yarn run build-js"
+# ===
+FROM yarn-dependencies AS build-js
+RUN yarn run build-js
 
 # Build the production image
 # ===
@@ -51,6 +54,7 @@ ENV PATH="/root/.local/bin:${PATH}"
 ADD . .
 RUN rm -rf package.json yarn.lock .babelrc webpack.config.js .git
 COPY --from=build-css /srv/static/css static/css
+COPY --from=build-js /srv/static/js static/js
 COPY --from=build-documentation /srv/templates/* templates/.
 COPY --from=build-documentation /srv/static/media/* static/media/.
 

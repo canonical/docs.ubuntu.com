@@ -3,6 +3,10 @@
 @import 'vanilla-framework/scss/vanilla';
 @include vanilla;
 
+// import cookie policy
+@import "@canonical/cookie-policy/build/css/cookie-policy";
+
+
 td {
   vertical-align: top;
 }

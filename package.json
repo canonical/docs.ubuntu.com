@@ -3,7 +3,8 @@
     "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build-sass'",
     "build-docs": "./build-docs.sh",
     "build-sass": "node-sass --include-path node_modules static/sass --source-map false --output-style compressed --output static/css && postcss --use autoprefixer --map false --replace 'static/css/**/*.css'",
-    "build": "yarn run build-docs && yarn run build-sass",
+    "build": "yarn run build-docs && yarn run build-sass && yarn run build-js",
+    "build-js": "webpack",
     "serve": "./entrypoint 0.0.0.0:${PORT}",
     "test": "yarn run lint-scss && yarn run lint-python && yarn run test-python",
     "test-python": "python3 -m unittest discover tests",
@@ -12,11 +13,21 @@
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle docs/ templates/landscape/ templates/documentation-builder/ static/media"
   },
   "dependencies": {
+    "@canonical/cookie-policy": "3.0.4",
+    "@canonical/global-nav": "2.4.3",
     "autoprefixer": "9.8.6",
     "sass-lint": "1.13.1",
     "vanilla-framework": "2.17.0",
     "watch-cli": "0.2.3",
     "postcss-cli": "7.1.2",
-    "node-sass": "4.14.1"
+    "node-sass": "4.14.1",
+    "webpack": "5.1.0",
+    "webpack-cli": "4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@babel/preset-env": "7.11.5",
+    "babel-loader": "8.1.0",
+    "terser-webpack-plugin": "4.2.3"
   }
 }
