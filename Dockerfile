@@ -4,7 +4,7 @@
 # ===
 FROM ubuntu:focal AS python-dependencies
 RUN apt update && apt install --no-install-recommends --yes python3 python3-pip python3-setuptools
-ADD requirements.txt /tmp/requirements.txt
+COPY requirements.txt /tmp/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement /tmp/requirements.txt
 
 
@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement
 # ===
 FROM node:12-slim AS yarn-dependencies
 WORKDIR /srv
-ADD package.json .
+COPY . .
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
 
 
