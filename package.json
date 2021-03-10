@@ -2,7 +2,7 @@
   "scripts": {
     "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build-sass'",
     "build-docs": "./build-docs.sh",
-    "build-sass": "node-sass --include-path node_modules static/sass --source-map false --output-style compressed --output static/css && postcss --use autoprefixer --map false --replace 'static/css/**/*.css'",
+    "build-sass": "sass static/sass/main.scss static/css/main.css --load-path=node_modules --style=compressed && postcss --use autoprefixer --map false --replace 'static/css/**/*.css'",
     "build": "yarn run build-docs && yarn run build-sass && yarn run build-js",
     "build-js": "webpack",
     "serve": "./entrypoint 0.0.0.0:${PORT}",
@@ -21,7 +21,7 @@
     "watch-cli": "0.2.3",
     "postcss": "8.2.4",
     "postcss-cli": "8.3.1",
-    "node-sass": "5.0.0",
+    "sass": "1.32.6",
     "webpack": "5.19.0",
     "webpack-cli": "4.4.0"
   },
