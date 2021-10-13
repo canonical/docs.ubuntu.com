@@ -1,7 +1,7 @@
 # Ubuntu documentation service
 
 [![CircleCI build status](https://circleci.com/gh/canonical-web-and-design/docs.ubuntu.com.svg?style=shield)](https://circleci.com/gh/canonical-web-and-design/docs.ubuntu.com)
-[![Code coverage](https://codecov.io/gh/canonical-web-and-design/docs.ubuntu.com/branch/master/graph/badge.svg)](https://codecov.io/gh/canonical-web-and-design/docs.ubuntu.com)
+[![Code coverage](https://codecov.io/gh/canonical-web-and-design/docs.ubuntu.com/branch/main/graph/badge.svg)](https://codecov.io/gh/canonical-web-and-design/docs.ubuntu.com)
 
 A central platform for hosting Ubuntu's various documentation portals.
 

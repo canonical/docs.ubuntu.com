@@ -51,7 +51,7 @@ build_docs () {
     repo_url="https://github.com/canonical-docs/praecepta.git"
 
     if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} master
+      refresh_repo ${folder} ${repo_url} main
 
       documentation-builder --base-directory "${folder}"  \
                             --site-root "/${name}/"  \
@@ -71,7 +71,7 @@ build_docs () {
     repo_url="https://github.com/canonicalltd/docs-landscape.git"
 
     if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} master
+      refresh_repo ${folder} ${repo_url} main
 
       documentation-builder --base-directory "${folder}"  \
                             --site-root "/${name}/"  \
@@ -91,7 +91,7 @@ build_docs () {
     repo_url="https://github.com/canonical-ols/snapstore-snap-docs.git"
 
     if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} master
+      refresh_repo ${folder} ${repo_url} main
 
       documentation-builder --base-directory "${folder}"  \
                             --site-root "/${name}/"  \
