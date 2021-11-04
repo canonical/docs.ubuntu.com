@@ -39,3 +39,6 @@ search/?$: https://www.ubuntu.com/search
 
 # core, phone and security-certs subdomains
 (?P<project>(core|phone|security-certs))(/en)?/?(?P<path>.*): https://{project}.docs.ubuntu.com/en/{path}
+
+# Fix styleguide homepage URL
+styleguide/?: /styleguide/en
