@@ -26,7 +26,7 @@ documentation-builder/(?P<page>.*[^/])?(.html)?: https://github.com/canonical-we
 # ===
 
 # Redirect project section roots to English language
-(?P<project>(landscape|snap-store-proxy))/?: /{project}/en/
+(?P<project>(landscape|snap-store-proxy|styleguide))/?: /{project}/en/
 
 # Add slash to language and version folders, and remove "index"
 (?P<project>(landscape|snap-store-proxy))/(?P<language>[a-zA-Z]{2})(/index)?: /{project}/{language}/
@@ -37,8 +37,5 @@ documentation-builder/(?P<page>.*[^/])?(.html)?: https://github.com/canonical-we
 # Redirect to www.ubuntu.com search
 search/?$: https://www.ubuntu.com/search
 
-# core, phone and security-certs subdomains
-(?P<project>(core|phone|security-certs))(/en)?/?(?P<path>.*): https://{project}.docs.ubuntu.com/en/{path}
-
-# Fix styleguide homepage URL
-styleguide/?: /styleguide/en
+# core, phone subdomains
+(?P<project>(core|phone))(/en)?/?(?P<path>.*): https://{project}.docs.ubuntu.com/en/{path}
