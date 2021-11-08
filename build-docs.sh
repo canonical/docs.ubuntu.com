@@ -57,9 +57,6 @@ build_docs () {
                             --site-root "/${name}/"  \
                             --output-path "templates/${name}"  \
                             --output-media-path "static/media/${name}"  \
-                            --search-url "/search"  \
-                            --search-placeholder "Search Style Guide docs"  \
-                            --search-domain "docs.ubuntu.com/${name}"  \
                             --media-url "/static/media/${name}"  \
                             --tag-manager-code "GTM-KNX3CJC"  \
                             --no-link-extensions
