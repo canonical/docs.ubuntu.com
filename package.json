@@ -17,7 +17,7 @@
     "@canonical/global-nav": "2.5.0",
     "autoprefixer": "10.4.1",
     "sass-lint": "1.13.1",
-    "vanilla-framework": "2.37.1",
+    "vanilla-framework": "3.0.1",
     "watch-cli": "0.2.3",
     "postcss": "8.4.5",
     "postcss-cli": "8.3.1",
