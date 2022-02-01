@@ -218,14 +218,6 @@
     </main>
 
     <script>
-      /* Add classes to links */
-      var links = document.querySelectorAll('a');
-      links.forEach(function(link) {
-        if (link.hostname && link.hostname != location.hostname) {
-          link.className += ' p-link--external';
-        }
-      });
-
       /* Setup sticky table of contents */
       var aside = document.querySelector('#side-content');
       if (aside) {
