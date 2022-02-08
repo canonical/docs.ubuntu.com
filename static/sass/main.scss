@@ -1,6 +1,6 @@
-@import 'settings_colors';
+@import 'settings_themes';
 
-@import 'vanilla-framework/scss/vanilla';
+@import 'vanilla-framework';
 @include vanilla;
 
 // import cookie policy
@@ -9,4 +9,8 @@
 
 td {
   vertical-align: top;
+}
+
+is-dark {
+  background-color: $theme-default-nav;
 }
