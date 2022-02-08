@@ -1,0 +1,173 @@
+name: PR checks
+on: [push, pull_request]
+env:
+  SECRET_KEY: insecure_test_key
+  DATABASE_URL: postgres://postgres:pw@localhost:5432/postgres
+
+jobs:
+  run-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: DOCKER_BUILDKIT=1 docker build --tag docs.ubuntu.com .
+
+      - name: Run image
+        run: |
+          docker run --detach --env SECRET_KEY=insecure_secret_key --network host docs.ubuntu.com
+          sleep 1
+          curl --head --fail --retry-delay 1 --retry 30 --retry-connrefused http://localhost
+
+  run-dotrun:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: pw
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dotrun
+        uses: canonical/install-dotrun@main
+
+      - name: Install dependencies
+        run: /snap/bin/dotrun install
+
+      - name: Build assets
+        run: /snap/bin/dotrun build
+
+      - name: Run dotrun
+        run: |
+          /snap/bin/dotrun &
+          curl --head --fail --retry-delay 1 --retry 30 --retry-connrefused http://localhost:8001
+
+  lint-scss:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint scss
+        run: yarn lint-scss
+
+
+  lint-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install node dependencies
+        run: yarn install --immutable
+
+      - name: Install python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          sudo pip3 install flake8 black
+
+      - name: Lint python
+        run: yarn lint-python
+
+  test-python:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: pw
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install requirements
+        run: |
+          sudo apt-get update && sudo apt-get install --yes python3-setuptools
+          sudo pip3 install -r requirements.txt
+
+      - name: Install dotrun
+        uses: canonical/install-dotrun@main
+
+      - name: Install node dependencies
+        run: /snap/bin/dotrun install
+
+      - name: Install dependencies
+        run: /snap/bin/dotrun exec pip3 install coverage
+
+      - name: Build resources
+        run: /snap/bin/dotrun build
+
+      - name: Run tests with coverage
+        run: /snap/bin/dotrun --env SEARCH_API_KEY=fake-key exec coverage run --source=. -m unittest discover tests
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          flags: python
+
+  test-js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Test JS
+        run: |
+          yarn test-js --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          flags: javascript
+
+  lint-js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint JS
+        run: |
+          yarn lint-js
+
+  Inclusive-naming-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: woke
+        uses: canonical-web-and-design/inclusive-naming@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check
+          fail-on-error: false
