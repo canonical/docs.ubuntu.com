@@ -1,0 +1,93 @@
+name: PR checks
+on: [pull_request]
+env:
+  SECRET_KEY: insecure_test_key
+  DATABASE_URL: postgres://postgres:pw@localhost:5432/postgres
+
+jobs:
+  run-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: DOCKER_BUILDKIT=1 docker build --tag docs.ubuntu.com .
+
+      - name: Run image
+        run: |
+          docker run --detach --env SECRET_KEY=insecure_secret_key --network host docs.ubuntu.com
+          sleep 1
+          curl --head --fail --retry-delay 1 --retry 30 --retry-connrefused http://localhost
+
+  lint-scss:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint scss
+        run: yarn lint-scss
+
+
+  lint-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install node dependencies
+        run: yarn install --immutable
+
+      - name: Install python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          sudo pip3 install flake8 black
+
+      - name: Lint python
+        run: yarn lint-python
+
+  test-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install requirements
+        run: |
+          sudo apt-get update && sudo apt-get install --yes python3-setuptools
+          sudo pip3 install -r requirements.txt
+
+      - name: Install node dependencies
+        run: yarn install
+
+      - name: Install dependencies
+        run: pip3 install coverage
+
+      - name: Build resources
+        run: yarn build
+
+      - name: Run tests with coverage
+        run: coverage run --source=. -m unittest discover tests
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          flags: python
+
+  Inclusive-naming-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: woke
+        uses: canonical-web-and-design/inclusive-naming@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check
+          fail-on-error: false
