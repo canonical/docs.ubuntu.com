@@ -1,4 +1,5 @@
-Django==3.2.11
+Django==3.2.12
+markupsafe==2.0.1
 canonicalwebteam.custom_response_headers==0.2.0
 canonicalwebteam.versioned-static==1.0.2
 canonicalwebteam.yaml-responses==1.2.0
@@ -8,5 +9,5 @@ django-template-finder-view==0.3
 django-yaml-redirects==0.5.4
 talisker[gunicorn,gevent]==0.19.0
 whitenoise==5.3.0
-ubuntudesign.documentation-builder==1.6.5
+git+https://github.com/canonical-web-and-design/documentation-builder@dependency-updates#egg=ubuntudesign.documentation-builder
 gitdb2==3.0.3.post1
