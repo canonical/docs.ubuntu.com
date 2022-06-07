@@ -55,8 +55,8 @@ ADD . .
 RUN rm -rf package.json yarn.lock .babelrc webpack.config.js .git
 COPY --from=build-css /srv/static/css static/css
 COPY --from=build-js /srv/static/js static/js
-COPY --from=build-documentation /srv/templates/* templates/.
-COPY --from=build-documentation /srv/static/media/* static/media/.
+COPY --from=build-documentation /srv/templates templates
+COPY --from=build-documentation /srv/static/media static/media
 
 # Set build id (standardized)
 ARG BUILD_ID
