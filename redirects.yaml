@@ -39,3 +39,5 @@ search/?$: https://www.ubuntu.com/search
 
 # core, phone subdomains
 (?P<project>(core|phone))(/en)?/?(?P<path>.*): https://{project}.docs.ubuntu.com/en/{path}
+
+landscape/en/?: https://www.ubuntu.com/landscape/docs
