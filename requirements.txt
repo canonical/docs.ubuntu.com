@@ -8,6 +8,6 @@ django-template-finder-view==0.3
 django-yaml-redirects==0.5.4
 talisker[gunicorn,gevent]==0.19.0
 whitenoise==5.3.0
-ubuntudesign.documentation-builder==1.6.5
+git+https://github.com/canonical/documentation-builder@python-3.10-updates#egg=ubuntudesign.documentation-builder
 gitdb2==3.0.3.post1
 MarkupSafe==2.0.1
