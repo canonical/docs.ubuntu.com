@@ -13,8 +13,10 @@ conjure-up/(?P<page>.*): https://docs.conjure-up.io/{page}
 snap-enterprise-proxy: /snap-store-proxy/en/
 snap-enterprise-proxy/(?P<page>.*): /snap-store-proxy/{page}
 
-# Landsacpe
+# Landscape
 landscape/en/?: https://ubuntu.com/landscape/docs
+landscape/en/landscape-api/?: /landscape/en/api
+landscape/en/onprem-overview/?: /landscape/en/onprem
 
 # Documentation-builder
 documentation-builder/?: https://github.com/canonical-webteam/documentation-builder/tree/master/docs
