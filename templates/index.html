@@ -1,4 +1,8 @@
-{% extends 'includes/layout.html' %} {% block content %}
+{% extends 'includes/layout.html' %} 
+
+{% block meta_description %}The docs directory for all Ubuntu operating systems and products.{% endblock %}
+
+{% block content %}
 
 <header class="p-navigation is-dark">
   <div class="p-navigation__row u-fixed-width">
@@ -68,9 +72,9 @@
         <li class="p-matrix__item">
           <img class="p-matrix__img" src="https://assets.ubuntu.com/v1/425efe3a-lxd.svg" alt="LXD">
           <div class="p-matrix__content">
-            <h3 class="p-matrix__title"><a class="p-link" href="https://linuxcontainers.org/lxd/docs/master/">LXD&nbsp;</a></h3>
+            <h3 class="p-matrix__title"><a class="p-link" href="https://documentation.ubuntu.com/lxd">LXD&nbsp;</a></h3>
             <div class="p-matrix__desc">
-              <p>A pure-container hypervisor. Replace legacy app VMs with containers for speed and density</p>
+              <p>Fast, dense, and secure container and VM management at any scale</p>
             </div>
           </div>
         </li>
@@ -170,6 +174,15 @@
             <h3 class="p-matrix__title"><a class="p-link" href="https://microstack.run/docs">MicroStack&nbsp;</a></h3>
             <div class="p-matrix__desc">
               <p>Multi-node OpenStack for the edge, micro clouds and developers.</p>
+            </div>
+          </div>
+        </li>
+        <li class="p-matrix__item">
+          <img class="p-matrix__img" src="https://assets.ubuntu.com/v1/c5cb0f8e-picto-ubuntu.svg" alt="Anbox Cloud">
+          <div class="p-matrix__content">
+            <h3 class="p-matrix__title"><a class="p-link" href="https://anbox-cloud.io/docs">Anbox Cloud&nbsp;</a></h3>
+            <div class="p-matrix__desc">
+              <p>Enables running Android apps on any cloud platform at scale</p>
             </div>
           </div>
         </li>
