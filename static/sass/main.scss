@@ -15,8 +15,11 @@ is-dark {
   background-color: $theme-default-nav;
 }
 
-.is-last {
-  @media (min-width: $breakpoint-large){
+// XXX: MPT - 07/12/23
+// Retains width when there are less than 3 matrix items in a row.
+// Can be removed if upstreamed.
+.p-matrix__item:last-of-type:nth-of-type(3n + 1) {
+  @media (min-width: $breakpoint-large) {
     max-width: 33.34%;
   }
 }
