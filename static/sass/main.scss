@@ -14,3 +14,9 @@ td {
 is-dark {
   background-color: $theme-default-nav;
 }
+
+.is-last {
+  @media (min-width: $breakpoint-large){
+    max-width: 33.34%;
+  }
+}
