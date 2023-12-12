@@ -62,25 +62,6 @@ build_docs () {
                             --no-link-extensions
     fi
 
-    # Landscape docs
-    folder="build/landscape"
-    name="landscape"
-    repo_url="https://github.com/canonicalltd/docs-landscape.git"
-
-    if ! up_to_date ${folder} ${repo_url}; then
-      refresh_repo ${folder} ${repo_url} main
-
-      documentation-builder --base-directory "${folder}"  \
-                            --site-root "/${name}/"  \
-                            --output-path "templates/${name}"  \
-                            --output-media-path "static/media/${name}"  \
-                            --search-url "/search"  \
-                            --search-placeholder "Search Landscape docs"  \
-                            --search-domain "docs.ubuntu.com/${name}"  \
-                            --media-url "/static/media/${name}"  \
-                            --tag-manager-code "GTM-KNX3CJC"  \
-                            --no-link-extensions
-    fi
 
     # Snap Store Proxy docs
     folder="build/snap-store-proxy"
