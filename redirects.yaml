@@ -10,10 +10,11 @@ conjure-up: https://docs.conjure-up.io/
 conjure-up/(?P<page>.*): https://docs.conjure-up.io/{page}
 
 # snap-store-proxy
-snap-enterprise-proxy: https://canonical-snap-store-proxy.readthedocs-hosted.com/
-snap-enterprise-proxy/(?P<page>.*): https://canonical-snap-store-proxy.readthedocs-hosted.com/
-snap-store-proxy: https://canonical-snap-store-proxy.readthedocs-hosted.com/
-snap-store-proxy/(?P<page>.*): https://canonical-snap-store-proxy.readthedocs-hosted.com/
+snap-enterprise-proxy: https://documentation.ubuntu.com/snap-store-proxy
+snap-enterprise-proxy/(?P<page>.*): https://documentation.ubuntu.com/snap-store-proxy
+snap-store-proxy: https://documentation.ubuntu.com/snap-store-proxy
+snap-store-proxy/en/: https://documentation.ubuntu.com/snap-store-proxy
+snap-store-proxy/(?P<page>.*): https://documentation.ubuntu.com/snap-store-proxy
 
 
 # Landscape
