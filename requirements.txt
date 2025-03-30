@@ -1,4 +1,4 @@
-Django==3.2.14
+Django==3.2.18
 canonicalwebteam.custom_response_headers==0.2.0
 canonicalwebteam.versioned-static==1.0.2
 canonicalwebteam.yaml-responses==1.2.0
