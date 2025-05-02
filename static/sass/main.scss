@@ -11,8 +11,9 @@ td {
   vertical-align: top;
 }
 
-is-dark {
-  background-color: $theme-default-nav;
+.p-navigation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 // XXX: MPT - 07/12/23

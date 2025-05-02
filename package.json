@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@canonical/cookie-policy": "^3.6.4",
-    "@canonical/global-nav": "2.7.0",
     "autoprefixer": "10.4.1",
     "sass-lint": "1.13.1",
     "vanilla-framework": "3.6.1",
