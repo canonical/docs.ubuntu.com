@@ -6,8 +6,8 @@ django-static-root-finder==0.3.1
 django-asset-server-url==0.1
 django-template-finder-view==0.3
 django-yaml-redirects==0.5.4
-talisker[gunicorn,gevent]==0.19.0
+talisker[gunicorn,gevent]==0.22.0
 whitenoise==5.3.0
 ubuntudesign.documentation-builder==1.7.0
 gitdb2==3.0.3.post1
-MarkupSafe==2.0.1
+MarkupSafe==2.1.5
