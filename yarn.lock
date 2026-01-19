@@ -881,13 +881,13 @@
     to-fast-properties "^2.0.0"
 
 "@canonical/cookie-policy@^3.6.4":
-  version "3.6.4"
-  resolved "https://registry.npmjs.org/@canonical/cookie-policy/-/cookie-policy-3.6.4.tgz"
-  integrity sha512-kfwamTpAaBhtH5TzlMb8wE814a8lIbONUuSYnS7VPiHDfcdmw4NoBPNpldmNY1j3CAT5vMKOx5kulRTWpEXpag==
+  version "3.8.4"
+  resolved "https://registry.yarnpkg.com/@canonical/cookie-policy/-/cookie-policy-3.8.4.tgz#38fd82f35d98ab0476bc106b0d813a2719bae26c"
+  integrity sha512-mCPcaqscSt/6gbT9Pmf/VDhTmyGC192xz7N+xLs18hpJuFSrNK44vT9jGwnOS5WsdDW2B7tRc78KioTtATPk2g==
 
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.7"
-  resolved "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"
+  resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
 "@jridgewell/gen-mapping@^0.3.0":
@@ -932,7 +932,7 @@
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
-  resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
+  resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
   integrity sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==
   dependencies:
     "@nodelib/fs.stat" "2.0.5"
