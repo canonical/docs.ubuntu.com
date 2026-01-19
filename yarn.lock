@@ -3146,9 +3146,9 @@ semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
 serialize-javascript@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/serialize-javascript/-/serialize-javascript-6.0.0.tgz"
-  integrity sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-6.0.2.tgz#defa1e055c83bf6d59ea805d8da862254eb6a6c2"
+  integrity sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==
   dependencies:
     randombytes "^2.1.0"
 
@@ -3218,11 +3218,6 @@ source-map@^0.6.0, source-map@^0.6.1:
   version "0.6.1"
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-
-source-map@~0.7.2:
-  version "0.7.3"
-  resolved "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz"
-  integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
