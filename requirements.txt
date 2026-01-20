@@ -1,3 +1,4 @@
+setuptools<70
 Django==4.2.27
 canonicalwebteam.custom_response_headers==0.2.0
 canonicalwebteam.versioned-static==1.0.2
