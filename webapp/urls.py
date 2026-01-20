@@ -1,9 +1,7 @@
 # Modules
 from django.conf.urls import url
 from django_template_finder_view import TemplateFinder
-from canonicalwebteam.yaml_responses.django_helpers import (
-    create_redirect_views,
-)
+from canonicalwebteam.yaml_responses.django_helpers import (create_redirect_viewsgi)
 
 
 # Match any redirects first
