@@ -21,7 +21,8 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
 FROM ubuntu:noble AS build-documentation
 WORKDIR /srv
 RUN apt-get update && apt-get install --no-install-recommends --yes git ca-certificates python3 python3-pip python3-setuptools
-RUN pip3 install --break-system-packages ubuntudesign.documentation-builder gitdb2==3.0.1 MarkupSafe==2.0.1
+RUN pip3 install --break-system-packages "setuptools<72" "Cython<3.1" && \
+    pip3 install --break-system-packages ubuntudesign.documentation-builder gitdb2==3.0.1 MarkupSafe==2.0.1
 ADD build-docs.sh build-docs.sh
 ADD .git/index /dev/null
 RUN ./build-docs.sh
