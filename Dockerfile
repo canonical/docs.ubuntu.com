@@ -5,7 +5,7 @@
 FROM ubuntu:noble AS python-dependencies
 RUN apt update && apt install --no-install-recommends --yes python3 python3-pip python3-setuptools
 COPY requirements.txt /tmp/requirements.txt
-RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement /tmp/requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip pip3 install --break-system-packages --user --requirement /tmp/requirements.txt
 
 
 # Build stage: Install yarn dependencies
