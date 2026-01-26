@@ -1,4 +1,4 @@
-setuptools<72
+setuptools>=65.5.1,<72
 Django==4.2.27
 canonicalwebteam.custom_response_headers==0.2.0
 canonicalwebteam.versioned-static==1.0.2
@@ -12,4 +12,4 @@ whitenoise==6.7.0
 ubuntudesign.documentation-builder==1.7.0
 gitdb2==4.0.2
 MarkupSafe==2.1.5
-Cython<3.1
+Cython==3.0.10
