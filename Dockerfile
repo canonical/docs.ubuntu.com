@@ -2,15 +2,15 @@
 
 # Build stage: Install python dependencies
 # ===
-FROM ubuntu:focal AS python-dependencies
+FROM ubuntu:noble AS python-dependencies
 RUN apt update && apt install --no-install-recommends --yes python3 python3-pip python3-setuptools
 COPY requirements.txt /tmp/requirements.txt
-RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement /tmp/requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip pip3 install --break-system-packages --user --requirement /tmp/requirements.txt
 
 
 # Build stage: Install yarn dependencies
 # ===
-FROM node:16 AS yarn-dependencies
+FROM node:25 AS yarn-dependencies
 WORKDIR /srv
 COPY . .
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
@@ -18,10 +18,11 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
 
 # Build stage:
 # ===
-FROM ubuntu:focal AS build-documentation
+FROM ubuntu:noble AS build-documentation
 WORKDIR /srv
 RUN apt-get update && apt-get install --no-install-recommends --yes git ca-certificates python3 python3-pip python3-setuptools
-RUN pip3 install ubuntudesign.documentation-builder gitdb2==3.0.1 MarkupSafe==2.0.1
+RUN pip3 install --break-system-packages "setuptools<72" "Cython<3.1" && \
+    pip3 install --break-system-packages ubuntudesign.documentation-builder gitdb2==3.0.1 MarkupSafe==2.0.1
 ADD build-docs.sh build-docs.sh
 ADD .git/index /dev/null
 RUN ./build-docs.sh
@@ -39,7 +40,7 @@ RUN yarn run build-js
 
 # Build the production image
 # ===
-FROM ubuntu:focal
+FROM ubuntu:noble
 
 # Set up environment
 ENV LANG C.UTF-8

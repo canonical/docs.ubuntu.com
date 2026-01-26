@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - name: Build image
         run: DOCKER_BUILDKIT=1 docker build --tag docs.ubuntu.com .
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - name: Install node dependencies
         run: yarn install --immutable
@@ -51,14 +51,16 @@ jobs:
         run: yarn lint-python
 
   test-python:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - name: Install requirements
         run: |
           sudo apt-get update && sudo apt-get install --yes python3-setuptools
+          sudo pip3 install --upgrade pip setuptools wheel
+          sudo pip3 install "setuptools<72" "Cython<3.1"
           sudo pip3 install -r requirements.txt
 
       - name: Install node dependencies
@@ -74,7 +76,7 @@ jobs:
         run: coverage run --source=. -m unittest discover tests
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v5
         with:
           flags: python
 
@@ -83,7 +85,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
 
       - name: woke
         uses: canonical-web-and-design/inclusive-naming@main
