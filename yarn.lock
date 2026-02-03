@@ -3219,11 +3219,6 @@ source-map@^0.6.0, source-map@^0.6.1:
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-source-map@~0.7.2:
-  version "0.7.3"
-  resolved "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz"
-  integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
-
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"
@@ -3482,10 +3477,10 @@ util@^0.10.3:
   dependencies:
     inherits "2.0.3"
 
-vanilla-framework@4.39.0:
-  version "4.39.0"
-  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-4.39.0.tgz#d0c62c6cff11576cf4e1e950152559b6149e85ed"
-  integrity sha512-6j3k88OjxgNLWDG4GPumMvEy56ZwpVunKcZmglX2NdM6n+SjYNDd7o2ldVy2wEqeYMy8jUPo88Yq+LrruDNM+g==
+vanilla-framework@4.44.0:
+  version "4.44.0"
+  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-4.44.0.tgz#0e8c495207b7abdadd6764258712b48f37964134"
+  integrity sha512-+TKWpSsWDMbbO/pUTEImeDOhe2pIztx/lseg79vIoVbnluxJ8u2+EbE8A1q4MrGMGjQcpTVwXoudJEgIkdMHTw==
 
 verbalize@^0.1.2:
   version "0.1.2"
