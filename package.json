@@ -14,19 +14,19 @@
   },
   "dependencies": {
     "@canonical/cookie-policy": "^3.6.4",
-    "autoprefixer": "10.4.1",
+    "autoprefixer": "10.5.0",
     "sass-lint": "1.13.1",
     "vanilla-framework": "4.39.0",
     "watch-cli": "0.2.3",
-    "postcss": "8.4.31",
-    "postcss-cli": "8.3.1",
-    "sass": "1.93.2",
-    "webpack": "5.104.1",
-    "webpack-cli": "4.9.1"
+    "postcss": "8.5.9",
+    "postcss-cli": "11.0.1",
+    "sass": "1.99.0",
+    "webpack": "5.106.1",
+    "webpack-cli": "7.0.2"
   },
   "devDependencies": {
-    "@babel/core": "7.16.7",
-    "@babel/preset-env": "7.16.7",
-    "babel-loader": "8.2.3"
+    "@babel/core": "7.29.0",
+    "@babel/preset-env": "7.29.2",
+    "babel-loader": "10.1.1"
   }
 }
