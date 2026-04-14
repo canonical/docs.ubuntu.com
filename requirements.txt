@@ -8,7 +8,7 @@ django-asset-server-url==0.1
 django-template-finder-view==0.3
 django-yaml-redirects==0.5.4
 talisker[gunicorn,gevent]==0.19.0
-gevent==26.4.0
+gevent==24.2.1
 whitenoise==6.12.0
 ubuntudesign.documentation-builder==1.7.0
 gitdb2==4.0.2
