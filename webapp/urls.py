@@ -4,7 +4,6 @@ from canonicalwebteam.yaml_responses.django_helpers import (
     create_redirect_views,
 )
 
-
 # Match any redirects first
 urlpatterns = create_redirect_views()
 
