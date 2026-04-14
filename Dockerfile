@@ -3,9 +3,9 @@
 # Build stage: Install python dependencies
 # ===
 FROM ubuntu:focal AS python-dependencies
-RUN apt update && apt install --no-install-recommends --yes python3 python3-pip python3-setuptools
+RUN apt update && apt install --no-install-recommends --yes build-essential python3 python3-dev python3-pip python3-setuptools
 COPY requirements.txt /tmp/requirements.txt
-RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement /tmp/requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user Cython==0.29.37 && pip3 install --user --no-build-isolation --requirement /tmp/requirements.txt
 
 
 # Build stage: Install yarn dependencies
@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install --no-install-recommends --yes git ca-certi
 RUN pip3 install ubuntudesign.documentation-builder gitdb2==3.0.1 MarkupSafe==2.0.1
 ADD build-docs.sh build-docs.sh
 ADD .git/index /dev/null
-RUN ./build-docs.sh
+RUN mkdir -p /srv/static/media && ./build-docs.sh
 
 # Build stage: Build CSS
 # ===
