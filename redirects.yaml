@@ -29,6 +29,9 @@ documentation-builder/?: https://github.com/canonical-webteam/documentation-buil
 documentation-builder/(?P<page>.*)/: https://github.com/canonical-webteam/documentation-builder/tree/master/docs/{page}
 documentation-builder/(?P<page>.*[^/])?(.html)?: https://github.com/canonical-webteam/documentation-builder/tree/master/docs/{page}.md
 
+# Style Guide
+styleguide/en/: https://documentation.ubuntu.com/style-guide
+
 # Generic rules
 # ===
 
