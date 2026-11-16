@@ -13,7 +13,7 @@
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle docs/ templates/landscape/ templates/documentation-builder/ static/media"
   },
   "dependencies": {
-    "@canonical/cookie-policy": "^3.6.4",
+    "@canonical/cookie-policy": "^4.0.0",
     "autoprefixer": "10.5.0",
     "sass-lint": "1.13.1",
     "vanilla-framework": "4.39.0",
